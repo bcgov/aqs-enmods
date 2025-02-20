@@ -1,2 +1,7 @@
 .Renviron
 utils/config/.Rhistory
+.Rhistory
+/.Rproj.user
+aqs-api.Rproj
+*.Rproj
+*.Rproj
