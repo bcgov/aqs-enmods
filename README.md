@@ -1,5 +1,12 @@
 # aqs-api
- A collection of useful functions to manage the BC Government's instance of Aquatic Informatics Samples.
+<!-- badges: start -->
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/license/apache-2-0)
+<!--[![R-CMD-check](https://github.com/bcgov/bcdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/bcdata/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/bcgov/bcdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/bcgov/bcdata?branch=main)-->
+<!-- badges: end -->
+ A collection of useful functions and tests to manage the BC Government's instance of Aquatic Informatics Samples. An API token is required.
 
 ### Getting Help or Reporting an Issue
 
