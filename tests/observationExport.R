@@ -74,3 +74,6 @@ if (total > 1000) { #if there are more than 10000 records loop
   data <- fromJSON(rawToChar(x$content))$domainObjects
   
 }
+
+
+
