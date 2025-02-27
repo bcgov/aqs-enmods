@@ -8,7 +8,7 @@ library(readxl)
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-token <- Sys.getenv("api_prod_token")
+token <- Sys.getenv("api_test_token")
 
 ### Missing sampling context tags
 url <- "https://bcenv-enmods.aqsamples.ca/api/v1/activities/c9fc36cf-2824-4eec-ad81-a2b988ebfce1"
@@ -58,3 +58,9 @@ print(obs$specimen$extendedAttributes$dropDownListItem$customId
       [!is.na(obs$specimen$extendedAttributes$dropDownListItem$id == 'e145e029-af8b-4dda-be82-627c16ecd884')])
 
 #not missing
+
+### Location change detection date
+ChangeAfterDate <- "2025-01-01T00:00:00-08:00"
+url <- paste0("https://bcenv-enmods-test.aqsamples.ca/api/v1/samplinglocations?startModificationTime=", ChangeAfterDate)
+x<-GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+locs <- fromJSON(rawToChar(x$content))$domainObjects
