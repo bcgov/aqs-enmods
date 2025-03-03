@@ -9,7 +9,7 @@ library(readxl)
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-token <- Sys.getenv("api_token")
+token <- Sys.getenv("api_test_oken")
 base_url = 'https://bcenv-enmods-test.aqsamples.ca/api/'
 
 #read the sheet with the saved filters you want to upload
