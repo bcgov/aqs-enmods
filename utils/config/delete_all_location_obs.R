@@ -486,6 +486,65 @@ delete_location_group <- function(base_url, token, customId){
   
 }
 
+delete_locations_wo_obs <- function(base_url, token) {
+  
+  #Get all location IDs in the system
+  url <- paste0(base_url, "v1/samplinglocations?limit=1000")
+  data_body <- list()
+  x<-GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+  total = fromJSON(rawToChar(x$content))$totalCount
+  
+  #if there are more than 1000 records loop to get all locations from the instance
+  if (total > 1000) {
+    
+    element <- fromJSON(rawToChar(x$content))$domainObjects %>% 
+      unnest(cols = c(type), names_sep = "_") %>%
+      select(id, customId, name, type_customId, description, latitude, longitude, auditAttributes)
+    
+    number_loops = ceiling(total/1000)
+    
+    for (i in seq(2,number_loops)) {
+      cursor = fromJSON(rawToChar(x$content))$cursor
+      
+      tempURL = paste0(url, "&cursor=", cursor)
+      
+      x<-GET(tempURL, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+      
+      temp_element <- fromJSON(rawToChar(x$content))$domainObjects %>% 
+        unnest(cols = c(type), names_sep = "_") %>%
+        select(id, customId, name, type_customId, description, latitude, longitude, auditAttributes)
+      
+      element <- rbind(element, temp_element)
+      
+      print(paste("Getting location records:", i*1000)) #for every 1000s locations
+    }
+    
+  } else {
+    
+    element <- fromJSON(rawToChar(x$content))$domainObjects
+    
+  }
+  
+  all_locations <- element
+  
+  #now start deleting them, this only works if none of them have obs it's faster
+  total_no_locations <- length(unique(all_locations$id))
+  
+  print(paste("Total Locations to be deleted:", total_no_locations))
+  
+  location_ids <- unique(all_locations$id)
+  
+  for (i in seq(1, length(location_ids))) {
+    
+    url <- paste0(base_url, 'v1/samplinglocations/', location_ids[i])
+    data_body <- list()
+    DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+    
+    print(paste0("Deleted: ", all_locations$customId[i], " ", all_locations$name[i]))
+  }
+  
+ }
+
 delete_all_location_groups <- function(base_url, token) {
   #write function to delete all location groups but keep location records
   
