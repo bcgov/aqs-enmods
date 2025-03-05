@@ -2,7 +2,7 @@
 #record. This could be made into a function and used for loop through multiple locations
 #there might be errors to do with attachments it hasn't been fully tested.
 
-#this script is delete evryting from a given location
+#this script is delete everyting from a given location
 
 library(httr)
 library(jsonlite)
