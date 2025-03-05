@@ -400,6 +400,14 @@ delete_all_records <- function(base_url, token) {
       #get the id of the activities to delete
       field_visit_id <- fromJSON(rawToChar(x$content))$domainObjects$id
       
+      #loop through each field visit and delete all field results this must be done
+      #one by one for some reason
+      for (h in seq(1, length(field_visit_id))) {
+        url <- paste0(base_url, 'v2/observations?fieldVisitId=', field_visit_id[h])
+        DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+      }
+      
+      
       #delete the activities in calls of 200 each
       ix = seq(0, total_no_field_visits, 200)
       
@@ -417,9 +425,6 @@ delete_all_records <- function(base_url, token) {
       
       for (i in seq(1,length(ix)-1)) { #loop ends at five as only 1000 in total then go to higher level loop
         
-        #in the case where there is an field result it needs to be deleted before the visit can be deleted or maybe not,,,?
-        url <- paste0(base_url, 'v2/observations?fieldVisitId=', paste(field_visit_id[seq(ix[i], ix[i+1])], collapse = ","))
-        x<-DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
         
         #delete any attachments this is hard
         
