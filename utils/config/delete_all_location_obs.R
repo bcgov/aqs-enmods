@@ -1,6 +1,5 @@
-#This function removes all observations, specimens, activities, and field visits
-#from a given location, identified using it's custom ID.
-#
+#This series of functions are used to delete location and location related
+#records like saved filters and location groups.
 
 delete_location_obs <- function(base_url, loc_id, token) { 
   #Start by deleting all observations using the location ID as the anchor. Get all location IDs
