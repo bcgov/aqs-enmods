@@ -10,8 +10,7 @@ library(jsonlite)
 #Get the api token and set the url
 readRenviron(paste0(getwd(), "./.Renviron"))
 token <- Sys.getenv("api_test_token")
-base_url = 'https://bcenv-enmods-test.aqsamples.ca/api/'
-
+base_url = Sys.getenv("url_test")
 #the custom ID of the location to remove everything from
 loc_id <- "E273483"
 

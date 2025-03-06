@@ -10,7 +10,7 @@ library(readxl)
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
 token <- Sys.getenv("api_test_oken")
-base_url = 'https://bcenv-enmods-test.aqsamples.ca/api/'
+base_url = Sys.getenv("url_test")
 
 #read the sheet with the saved filters you want to upload
 monitoring_groups <- read.csv("Monitoring_location_Groups_Saved_Filters_2024_11_06.csv", stringsAsFactors = F)
