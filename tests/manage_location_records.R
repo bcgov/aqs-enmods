@@ -1,8 +1,5 @@
-#Use this script to delete everything from a given location but keep the location
-#record. This could be made into a function and used for loop through multiple locations
-#there might be errors to do with attachments it hasn't been fully tested.
-
-#this script is delete everyting from a given location
+#A series of function calls used to manage location records and their childern
+#observations in AQS.
 
 library(httr)
 library(jsonlite)
@@ -11,7 +8,7 @@ library(tidyr)
 #Get the api token and set the url
 readRenviron(paste0(getwd(), "./.Renviron"))
 token <- Sys.getenv("api_test_token")
-base_url = 'https://bcenv-enmods-test.aqsamples.ca/api/'
+base_url = Sys.getenv("url_test")
 
 #the custom ID of the location to remove everything from
 loc_id <- "E328304"
