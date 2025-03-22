@@ -9,11 +9,11 @@ library(readxl)
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-token <- Sys.getenv("api_test_oken")
+token <- Sys.getenv("api_test_token")
 base_url = Sys.getenv("url_test")
 
 #read the sheet with the saved filters you want to upload
-monitoring_groups <- read.csv("Monitoring_location_Groups_Saved_Filters_2024_11_06.csv", stringsAsFactors = F)
+monitoring_groups <- read.csv("./data/EMS_Monitoring_Groups_March_21_2025.csv", stringsAsFactors = F)
 
 #get guids for all locations
 #maximum request is for 1000 locations at a time
@@ -56,13 +56,15 @@ if (total_locations > 1000) { #if there are more than 10000 records loop
 locations_w_guids <- data.frame("customId" = element_customId, "GUID" = element_id) #31,029 in total check against EnMoDS count
 
 #join the monitoring groups with the location guids and drop locations that do not exist in enmods
-monitoring_groups <-  merge(monitoring_groups, locations_w_guids, by.x = 'MON_LOCN_ID', by.y = 'customId', all.x = T) #13,287 
+monitoring_groups <-  merge(monitoring_groups, locations_w_guids, by.x = 'Location.ID', by.y = 'customId', all.x = T) #11,052
 
+#locations with no join (not in EnMoDS) - D* P* type codes
+locations_not_in_EnMoDS <- monitoring_groups %>% filter(is.na(GUID))
 
 #filter out any that don't have a guid 
-monitoring_groups <- monitoring_groups %>% filter(!is.na(GUID)) #11,716 so dropped 1,571 locations that are not in EnMoDS because they are old or we
+monitoring_groups <- monitoring_groups %>% filter(!is.na(GUID)) #10,602 
 
-#now have fun with lists in lists
+#nget the list of saved filters 
 list_of_filter <- unique(monitoring_groups$NAME)
 
 #make a saved filter for each monitoring group from EMS
@@ -83,5 +85,5 @@ for (i in seq(1, length(list_of_filter))) {
   
   fromJSON(rawToChar(y$content))
   
-  print(i)
+  print(paste("uploading saved filter", i))
 }
