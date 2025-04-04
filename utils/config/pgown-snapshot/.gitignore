@@ -1,0 +1,14 @@
+# History files
+.Rhistory
+.Renviron
+.Rapp.history
+*.Rproj
+
+# Session Data files
+.RData
+.RDataTmp
+.user
+
+# time series client code from AQI
+2025Feb/coding_flow/rcode/timeseries_client.R
+.Rproj.user

@@ -1,0 +1,15 @@
+report_folder: /2025Feb
+snapshot_name: Feb 2025
+date_of_current_report: '2025-02-04'
+date_of_previous_report: '2024-07-04'
+date_of_data_gap_start: '2024-01-01'
+date_of_data_gap_end: '2024-06-30'
+target_data_default: '90'
+target_data_approval: '90'
+target_data_approval_year: '2024'
+target_data_graded_year: '2024'
+target_data_gap_percent: '15'
+target_data_gap_year: '2024'
+target_days_telemetry: '30'
+target_telemetry_stn_offline: '10'
+target_days_telemetry_year: '2024'

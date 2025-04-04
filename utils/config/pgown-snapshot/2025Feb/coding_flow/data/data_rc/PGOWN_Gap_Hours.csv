@@ -1,0 +1,238 @@
+,ObsWell,GapHours,Region
+0,OW002,1.0,South Coast
+1,OW008,2.0,South Coast
+2,OW035,0.0,Thompson-Cariboo
+3,OW045,795.0,Thompson-Cariboo
+4,OW047,0.0,Okanagan-Kootenay
+5,OW058,1.0,West Coast
+6,OW060,0.0,West Coast
+7,OW071,0.0,West Coast
+8,OW074,0.0,Okanagan-Kootenay
+9,OW075,0.21666666666666679,Okanagan-Kootenay
+10,OW080,1.0,Thompson-Cariboo
+11,OW081,0.0,Thompson-Cariboo
+12,OW082,0.0,Thompson-Cariboo
+13,OW088,0.0,Thompson-Cariboo
+14,OW115,1.0,Okanagan-Kootenay
+15,OW117,3.0,Okanagan-Kootenay
+16,OW118,1.7000000000000002,Okanagan-Kootenay
+17,OW122,0.0,Okanagan-Kootenay
+18,OW124,7.0,Northeast
+19,OW125,0.0,West Coast
+20,OW128,0.0,West Coast
+21,OW154,2540.0,Okanagan-Kootenay
+22,OW172,2.166666666666667,Okanagan-Kootenay
+23,OW180,402.0,Okanagan-Kootenay
+24,OW185,0.0,Thompson-Cariboo
+25,OW196,0.0,West Coast
+26,OW197,0.0,West Coast
+27,OW200,0.0,Skeena
+28,OW201,3.0,West Coast
+29,OW203,1.35,Okanagan-Kootenay
+30,OW204,0.0,West Coast
+31,OW211,0.0,West Coast
+32,OW217,1.0,Okanagan-Kootenay
+33,OW232,1.0,West Coast
+34,OW233,0.0,West Coast
+35,OW236,191.26666666666668,Okanagan-Kootenay
+36,OW240,0.0,West Coast
+37,OW255,1.0,South Coast
+38,OW258,0.0,West Coast
+39,OW259,105.0,South Coast
+40,OW260,0.0,Thompson-Cariboo
+41,OW261,1311.0,Thompson-Cariboo
+42,OW262,2.0,Okanagan-Kootenay
+43,OW264,3597.0,Okanagan-Kootenay
+44,OW265,0.0,West Coast
+45,OW268,0.0,West Coast
+46,OW272,0.0,South Coast
+47,OW275,1.0,South Coast
+48,OW281,0.0,West Coast
+49,OW282,0.0,Okanagan-Kootenay
+50,OW283,72.0,West Coast
+51,OW286,0.0,Northeast
+52,OW287,0.0,West Coast
+53,OW288,68.0,West Coast
+54,OW289,0.0,Thompson-Cariboo
+55,OW290,0.0,West Coast
+56,OW291,2.35,Okanagan-Kootenay
+57,OW292,0.0,South Coast
+58,OW293,67.0,Omineca
+59,OW294,2.1166666666666667,Okanagan-Kootenay
+60,OW295,0.0,West Coast
+61,OW296,1.0,Thompson-Cariboo
+62,OW299,1.0,South Coast
+63,OW301,0.0,South Coast
+64,OW302,3.0,Thompson-Cariboo
+65,OW303,1.0,West Coast
+66,OW304,0.0,West Coast
+67,OW306,0.0,Okanagan-Kootenay
+68,OW309,0.0,Okanagan-Kootenay
+69,OW310,0.0,West Coast
+70,OW311,8.0,Okanagan-Kootenay
+71,OW312,2.0,West Coast
+72,OW314,15.0,West Coast
+73,OW316,0.0,West Coast
+74,OW319,1.0,West Coast
+75,OW320,0.0,West Coast
+76,OW321,0.0,West Coast
+77,OW327,0.0,West Coast
+78,OW329,0.0,West Coast
+79,OW332,0.0,Okanagan-Kootenay
+80,OW337,4264.0,West Coast
+81,OW338,0.0,West Coast
+82,OW340,0.0,West Coast
+83,OW343,0.0,West Coast
+84,OW344,0.0,Thompson-Cariboo
+85,OW345,0.0,West Coast
+86,OW349,0.0,South Coast
+87,OW351,0.0,West Coast
+88,OW353,0.0,South Coast
+89,OW354,0.0,South Coast
+90,OW355,0.0,West Coast
+91,OW356,0.0,Okanagan-Kootenay
+92,OW357,0.0,South Coast
+93,OW360,2.0,South Coast
+94,OW361,4.0,South Coast
+95,OW362,0.0,Okanagan-Kootenay
+96,OW363,0.0,Okanagan-Kootenay
+97,OW364,0.0,Thompson-Cariboo
+98,OW365,0.0,Thompson-Cariboo
+99,OW369,0.0,West Coast
+100,OW371,0.0,West Coast
+101,OW372,0.0,West Coast
+102,OW373,0.0,West Coast
+103,OW374,0.0,Thompson-Cariboo
+104,OW375,1.0,Thompson-Cariboo
+105,OW376,0.0,Thompson-Cariboo
+106,OW377,0.0,Skeena
+107,OW378,0.0,Omineca
+108,OW381,0.0,Thompson-Cariboo
+109,OW383,1.0,West Coast
+110,OW384,0.0,Okanagan-Kootenay
+111,OW385,0.0,West Coast
+112,OW386,0.0,Skeena
+113,OW387,0.0,Okanagan-Kootenay
+114,OW388,0.0,West Coast
+115,OW389,1.0,West Coast
+116,OW390,688.0,West Coast
+117,OW391,0.0,West Coast
+118,OW392,548.0,West Coast
+119,OW393,2.0,West Coast
+120,OW394,0.0,West Coast
+121,OW395,0.0,West Coast
+122,OW396,0.0,West Coast
+123,OW397,14.0,West Coast
+124,OW398,0.0,West Coast
+125,OW399,0.0,Thompson-Cariboo
+126,OW400,0.0,Thompson-Cariboo
+127,OW401,0.7333333333333334,Okanagan-Kootenay
+128,OW402,408.0,Okanagan-Kootenay
+129,OW403,0.0,Okanagan-Kootenay
+130,OW404,0.0,Okanagan-Kootenay
+131,OW405,2.5,Okanagan-Kootenay
+132,OW406,1.0,South Coast
+133,OW407,3.0,Okanagan-Kootenay
+134,OW408,1.0,South Coast
+135,OW409,1.0,Okanagan-Kootenay
+136,OW410,0.0,Okanagan-Kootenay
+137,OW411,0.0,Okanagan-Kootenay
+138,OW412,0.0,Okanagan-Kootenay
+139,OW413,0.10000000000000009,Okanagan-Kootenay
+140,OW414,0.0,South Coast
+141,OW415,0.0,South Coast
+142,OW416,72.0,Northeast
+143,OW417,52.0,Northeast
+144,OW418,7.0,Northeast
+145,OW420,26.0,Northeast
+146,OW422,0.0,Thompson-Cariboo
+147,OW423,4.0,Thompson-Cariboo
+148,OW424,0.0,West Coast
+149,OW425,0.0,West Coast
+150,OW426,2563.0,West Coast
+151,OW427,0.0,West Coast
+152,OW428,0.0,West Coast
+153,OW429,0.0,West Coast
+154,OW430,0.0,West Coast
+155,OW431,0.0,West Coast
+156,OW432,0.0,West Coast
+157,OW433,0.0,West Coast
+158,OW434,0.0,West Coast
+159,OW435,0.0,West Coast
+160,OW436,4.0,West Coast
+161,OW437,2.0,West Coast
+162,OW438,0.0,West Coast
+163,OW439,0.0,West Coast
+164,OW440,2.0,South Coast
+165,OW441,7.0,South Coast
+166,OW442,0.0,Okanagan-Kootenay
+167,OW443,0.0,West Coast
+168,OW444,0.31666666666666665,Okanagan-Kootenay
+169,OW445,24.0,Northeast
+170,OW446,0.0,South Coast
+171,OW447,1.0,South Coast
+172,OW448,0.0,South Coast
+173,OW449,0.0,South Coast
+174,OW450,0.0,South Coast
+175,OW451,0.0,South Coast
+176,OW452,0.0,South Coast
+177,OW453,0.0,South Coast
+178,OW454,1.0,South Coast
+179,OW455,16.0,Omineca
+180,OW456,102.0,South Coast
+181,OW457,0.0,South Coast
+182,OW458,0.0,South Coast
+183,OW459,0.0,South Coast
+184,OW460,1.0,South Coast
+185,OW461,0.0,South Coast
+186,OW462,0.0,South Coast
+187,OW463,0.0,South Coast
+188,OW464,0.0,Thompson-Cariboo
+189,OW467,0.0,Okanagan-Kootenay
+190,OW468,2.283333333333333,Okanagan-Kootenay
+191,OW469,0.0,West Coast
+192,OW470,3.0,West Coast
+193,OW471,0.0,South Coast
+194,OW473,0.0,South Coast
+195,OW474,0.0,South Coast
+196,OW475,8.0,South Coast
+197,OW476,765.0,South Coast
+198,OW477,0.0,South Coast
+199,OW478,1.0,South Coast
+200,OW479,0.0,South Coast
+201,OW480,0.0,South Coast
+202,OW481,0.0,Northeast
+203,OW482,4.0,Northeast
+204,OW483,0.0,South Coast
+205,OW484,0.0,West Coast
+206,OW485,0.0,South Coast
+207,OW486,0.0,South Coast
+208,OW487,0.0,Okanagan-Kootenay
+209,OW488,0.0,West Coast
+210,OW489,1.0,West Coast
+211,OW490,0.0,South Coast
+212,OW491,0.0,South Coast
+213,OW492,0.0,South Coast
+214,OW493,0.0,West Coast
+215,OW494,1.0,Thompson-Cariboo
+216,OW495,0.0,South Coast
+217,OW496,0.0,Northeast
+218,OW497,0.0,South Coast
+219,OW498,0.0,South Coast
+220,OW499,0.0,South Coast
+221,OW501,0.0,Skeena
+222,OW502,0.5,Omineca
+223,OW503,75.0,South Coast
+224,OW504,267.0,South Coast
+225,OW506,0.0,Okanagan-Kootenay
+226,OW507,43.0,West Coast
+227,OW508,0.0,Okanagan-Kootenay
+228,OW509,828.0,Okanagan-Kootenay
+229,OW510,0.0,Okanagan-Kootenay
+230,OW511,2.0,South Coast
+231,OW512,0.0,Okanagan-Kootenay
+232,OW513,0.0,Skeena
+233,OW514,13.0,Thompson-Cariboo
+234,OW515,13.0,Thompson-Cariboo
+235,OW516,1.0,Omineca
+236,OW517,2.0,Omineca
