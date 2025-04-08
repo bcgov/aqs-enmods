@@ -2,7 +2,7 @@
 #record. This could be made into a function and used for loop through multiple locations
 #there might be errors to do with attachments it hasn't been fully tested.
 
-#this script is delete everyting from a given location
+#this script is delete everything from a given location
 
 library(httr)
 library(jsonlite)
@@ -12,7 +12,7 @@ readRenviron(paste0(getwd(), "./.Renviron"))
 token <- Sys.getenv("api_test_token")
 base_url = Sys.getenv("url_test")
 #the custom ID of the location to remove everything from
-loc_id <- "E273483"
+loc_id <- "0160103"
 
 #Start by deleting all observations using the location ID as the anchor. Get all location IDs
 
@@ -74,7 +74,7 @@ while(total_no_specimens > 0) {
   }
   
   #update the total number of specimens remaining
-  url <- paste0('https://bcenv-training.aqsamples.com/api/v1/specimens?samplingLocationIds=', loc_id, '&limit=1000')
+  url <-paste0(base_url, 'v1/specimens?samplingLocationIds=', loc_id, '&limit=1000')
   x <- GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
   total_no_specimens <- fromJSON(rawToChar(x$content))$total
   
