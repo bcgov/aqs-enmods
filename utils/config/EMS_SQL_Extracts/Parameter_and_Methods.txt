@@ -1,0 +1,30 @@
+select d.parm_cd "Parm Code", p.description "Parameter", d.anal_method_cd "Method Code", a.short_name "Method",-- a.description,
+d.method_detect_limit "MDL", u.short_name "Unit",
+--count(distinct s.id) "Samples", 
+count(distinct r.id) "Results", 
+min(s.collection_start_date) "First Used", 
+max(s.collection_start_date) "Last Used",
+d.when_created, d.who_created, d.when_updated, d.who_updated, d.field_test_ind, d.ministry_approved_ind, d.active_ind
+from ems_samples s, 
+ems_results r, ems_parameters p, ems_parm_dicts d, ems_anal_methods a, ems_measurment_units u
+where r.smpl_id=s.id(+)  -- open join on Samples and Results to include combinations not (yet) used
+-- since dictionary is open joined to results, samples needs further open join from result table
+and r.parm_cd(+)=d.parm_cd
+and r.anal_method_cd(+)=d.anal_method_cd
+
+and u.code=d.meas_unit_cd
+and a.code=d.anal_method_cd
+and p.code=d.parm_cd
+
+--and (p.description like '%LC%' or p.description like '%LD%')
+--and d.active_ind='Y'  -- Active / valid Parameter Dictionary entries, exclude inactive
+--and p.active_ind='Y'  -- Active / valid Parameters, exclude those marked inactive
+--and a.active_ind='Y'  -- Active / valid Analytical Methods, exclude those marked inactive
+--and s.collection_start_date > to_date('2006-01-01','YYYY-MM-DD')
+--and s.collection_start_date < to_date('2024-01-01','YYYY-MM-DD')
+
+group by d.parm_cd, p.description, d.anal_method_cd, a.short_name,
+d.when_created, d.who_created, d.when_updated, d.who_updated, d.field_test_ind, d.ministry_approved_ind, d.active_ind,-- a.description, 
+d.method_detect_limit, u.short_name
+--having count(distinct r.id)= 0
+order by d.parm_cd, 'Results' desc

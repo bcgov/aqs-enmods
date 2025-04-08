@@ -1,0 +1,48 @@
+select * from 
+(
+
+select count(s.id) "Samples",  cl.when_created, t.description "Type", 
+cl.short_name, cl.name,  cl.active_ind, cl.address_1, cl.city, 
+cl.contact_name, cl.e_mail_addr, cl.phone_number, 
+cl.who_created, cl.when_updated, cl.who_updated,
+
+min(s.collection_start_date) "First",
+max(s.collection_start_date) "Last"
+
+from ems_client_locations cl, ems_clients c, ems_client_types t, ems_samples s
+where cl.client_id=c.id
+and c.client_typ_cd=t.code
+and --(s.cliloc_id_smpl_by=cl.id or 
+s.cliloc_id_anal_by(+)=cl.id --- cannot open join an OR statement
+group by cl.name, cl.short_name, cl.active_ind, cl.address_1, cl.city, 
+cl.contact_name, cl.e_mail_addr, cl.phone_number, t.description, 
+cl.when_created, cl.who_created, cl.when_updated, cl.who_updated
+--order by count(s.id) desc, cl.when_created desc
+)
+minus
+(
+select * from
+   (
+select count(s.id) "Samples",  cl.when_created, t.description "Type", 
+cl.short_name, cl.name,  cl.active_ind, cl.address_1, cl.city, 
+cl.contact_name, cl.e_mail_addr, cl.phone_number, 
+cl.who_created, cl.when_updated, cl.who_updated,
+
+min(s.collection_start_date) "First",
+max(s.collection_start_date) "Last"
+
+from ems_client_locations cl, ems_clients c, ems_client_types t, ems_samples s
+where cl.client_id=c.id
+and c.client_typ_cd=t.code
+and cl.when_created<to_date('2010-01-01','YYYY-MM-DD')
+and --(s.cliloc_id_smpl_by=cl.id or 
+s.cliloc_id_anal_by(+)=cl.id --- cannot open join an OR statement
+group by cl.name, cl.short_name, cl.active_ind, cl.address_1, cl.city, 
+cl.contact_name, cl.e_mail_addr, cl.phone_number, t.description, 
+cl.when_created, cl.who_created, cl.when_updated, cl.who_updated
+--having 'Samples'='0'
+) old
+where old."Samples" = '0'
+
+)
+--order by 1 desc,  cl.when_created desc
