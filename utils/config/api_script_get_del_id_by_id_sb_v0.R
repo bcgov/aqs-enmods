@@ -35,6 +35,59 @@ if(data_access == "test"){
 # universal functions -----------------------------------------------------
 # getting a complete list of IDs ------------------------------
 
+get_profiles_for_url <- function(url){
+  
+  data_body <- list()
+  
+  x_temp <- GET(url, config = c(add_headers(.headers = c('Authorization' = token))), 
+                body = data_body, encode = 'json')
+  
+  total = fromJSON(rawToChar(x_temp$content))$totalCount
+  
+  if (total > 1000) { #if there are more than 1000 records loop
+    
+    temp <- fromJSON(rawToChar(x_temp$content))$domainObjects
+    
+    number_loops = ceiling(total/1000)
+    
+    #i = 2
+    
+    for (i in seq(2,number_loops)) {
+      
+      cursor = fromJSON(rawToChar(x_temp$content))$cursor
+      
+      tempURL = paste0(url, "&cursor=", cursor)
+      
+      x_temp <- GET(tempURL, config = c(add_headers(.headers = 
+                                                      c('Authorization' = token))), body = data_body, encode = 'json')
+      
+      temp_element <- fromJSON(rawToChar(x_temp$content))$domainObjects
+      
+      rownames(temp_element) <- NULL
+      
+      rownames(temp) <- NULL
+      
+      temp_ids <- bind_rows(temp, temp_element)
+      
+      print(i)
+      
+    }
+    
+  } else {
+    
+    temp <- fromJSON(rawToChar(x_temp$content))$domainObjects
+    
+  }
+  
+  return(temp)  
+  
+}
+
+url <- str_c(base_url, "v2/observations?limit=1000")
+
+test_get_obs <- get_profiles_for_url(url)
+
+
 get_ids_for_url <- function(url){
   
   
@@ -267,9 +320,13 @@ get_ids <- function(data_type){
   
   temp_ids <- get_ids_for_url(url)
   
+  return(temp_ids)
+  
 }
 
 spcmns_ids <- get_ids("specimens")
+
+spcmns_ids_old <- spcmns_ids
 
 obs_ids <- get_ids("observations")
 
@@ -299,6 +356,10 @@ extendedattrbts_ids <- get_ids("extendedattributes")
 # Function to make an API request
 make_api_request <- function(id, data_type) {
   
+  # id <- mediums_ids[1]
+  # 
+  # data_type <- "mediums"
+  
   if (data_type == "activities") {
     
     url <- str_c(base_url, "v1/activities/", id)
@@ -309,11 +370,11 @@ make_api_request <- function(id, data_type) {
     
   } else if (data_type == "collectionmethods") {
     
-    url <- str_c(base_url, "v1/collectionmethods", id)
+    url <- str_c(base_url, "v1/collectionmethods/", id)
     
   } else if (data_type == "extendedattributes") {
     
-    url <- str_c(base_url, "v1/extendedattributes", id)
+    url <- str_c(base_url, "v1/extendedattributes/", id)
     
   } else if (data_type == "fieldvisits") {
     
@@ -325,12 +386,12 @@ make_api_request <- function(id, data_type) {
     
   } else if (data_type == "laboratories") {
     
-    url <- str_c(base_url, "v1/laboratories", id)
+    url <- str_c(base_url, "v1/laboratories/", id)
     
   } else if(data_type == "mediums"){
     
     #get all observation IDs out (for editing)
-    url <- str_c(base_url, "v1/mediums", id)
+    url <- str_c(base_url, "v1/mediums/")
     
   } else if (data_type == "observations"){
     
@@ -339,6 +400,12 @@ make_api_request <- function(id, data_type) {
   } else if (data_type == "projects") {
     
     url <- str_c(base_url, "v1/projects/", id)
+    
+  } else if (data_type == "samplingagency") {
+    
+    id <- "65d94fac-aac5-498f-bc73-b63a322ce350"
+    
+    url <- str_c(base_url, "v1/extendedattributes/", id, "/dropdownlistitems")
     
   } else if (data_type == "samplinglocations") {
     
@@ -386,6 +453,12 @@ make_api_request <- function(id, data_type) {
   # # Delete the temporary file
   # unlink(temp_file)
   
+  if(data_type %in% c("mediums", "samplingagency")){
+    
+    data <- data$domainObjects
+    
+  }
+  
   return(data)
 }
 
@@ -409,11 +482,13 @@ fltrs_sample <- make_api_request(fltrs_ids[1], "filters")
 
 labs_sample <- make_api_request(labs_ids[1], "laboratories")
 
-mediums_sample <- make_api_request(mediums_ids[1], "mediums")
+mediums_sample <- make_api_request("", "mediums")
 
 collectionmthds_sample <- make_api_request(collectionmthds_ids[1], "collectionmethods")
 
-extendedattrbts_sample <- make_api_request(extendedattrbts[1], "extendedattributes")
+extendedattrbts_sample <- make_api_request(extendedattrbts_ids[1], "extendedattributes")
+
+samplingagency_sample <- make_api_request("65d94fac-aac5-498f-bc73-b63a322ce350", "samplingagency")
 
 # making one API history request by id and data type ------------------------------
 # Function to make an API request for data history
@@ -427,6 +502,14 @@ make_api_request_history <- function(id, data_type) {
     
     url <- str_c(base_url, "v1/analyticalgroups/", id, "/history")
     
+  } else if (data_type == "collectionmethods") {
+    
+    url <- str_c(base_url, "v1/collectionmethods/", id, "/history")
+    
+  } else if (data_type == "extendedattributes") {
+    
+    url <- str_c(base_url, "v1/extendedattributes/", id, "/history")
+    
   } else if (data_type == "filters"){
     
     url <- str_c(base_url, "v1/filters/", id, "/history")
@@ -434,6 +517,15 @@ make_api_request_history <- function(id, data_type) {
   } else if (data_type == "fieldvisits") {
     
     url <- str_c(base_url, "v1/fieldvisits/", id, "/history")
+    
+  } else if (data_type == "laboratories") {
+    
+    url <- str_c(base_url, "v1/laboratories/", id, "/history")
+    
+  } else if(data_type == "mediums"){
+    
+    #get all observation IDs out (for editing)
+    url <- str_c(base_url, "v1/mediums/", id, "/history")
     
   } else if (data_type == "observations"){
     
@@ -475,7 +567,7 @@ make_api_request_history <- function(id, data_type) {
   # data <- fromJSON(content)
   # return(content)
   
-  data <- fromJSON(rawToChar(response$content)) #%>% unnest_wider(auditAttributes, names_repair = "universal")
+  data <- fromJSON(rawToChar(response$content))$domainObjects #%>% unnest_wider(auditAttributes, names_repair = "universal")
   
   # # Write the raw JSON content to a temporary file
   # temp_file <- tempfile()
@@ -502,7 +594,12 @@ vsts_sample_history <- make_api_request_history(vsts_ids[1], "fieldvisits")
 
 locs_sample_history_old <- locs_sample_history
 
-locs_sample_history <- make_api_request_history(locs_ids[1], "samplinglocations")
+#Deleted on Apr 7 2025 at 12 pm
+#Have to keep track of how long this stays deleted
+#Still available on Apr 9 2025 at 12 pm
+sahil_test_location <- "2e85c760-d78e-42c7-9cee-59b4197fa3a2"
+
+locs_sample_history <- make_api_request_history(sahil_test_location, "samplinglocations")
 
 locgrps_sample_history <- make_api_request_history(locgrps_ids[1], "samplinglocationgroups")
 
@@ -518,8 +615,8 @@ mediums_sample_history <- make_api_request_history(mediums_ids[1], "mediums")
 
 collectionmthds_sample_history <- make_api_request_history(collectionmthds_ids[1], "collectionmethods")
 
-extendedattrbts_sample_history <- make_api_request_history(extendedattrbts[1], "extendedattributes")
-
+#NOT WORKING
+extendedattrbts_sample_history <- make_api_request_history(extendedattrbts_ids[1], "extendedattributes")
 
 # making one API request for location summary info ------------------------
 # Function to make an API request for data history
@@ -550,8 +647,6 @@ make_api_request_summary <- function(id, data_type) {
 
 loc_summary <- make_api_request_summary(locs_ids[2], "samplinglocations")
 #loc_summary <- make_api_request_summary("4e2db011-1813-40c5-a5d3-a08ed346abe9", "samplinglocations")
-
-
 
 # getting relevant parameters (other than id) to download for given variable --------
 gen_list_rel_var <- function(data_type){
@@ -615,9 +710,9 @@ gen_list_rel_var <- function(data_type){
 # using API on a list of ids to get id relationship with relevant variable------------------------------
 get_var_profile_by_id <- function(data_type, ids) {
   
-  # data_type <- "samplinglocations"
-  # 
-  # ids <- locs_ids[1]
+  # data_type <- "mediums"
+  # # 
+  # ids <- "all"
   # 
   rel_var <- gen_list_rel_var(data_type)
   
@@ -637,6 +732,10 @@ get_var_profile_by_id <- function(data_type, ids) {
   for (id in ids){
     
     #id <- locs_ids[23] 
+    
+    if(data_type == "mediums"){
+      break
+    }
     
     temp_tibble <- make_api_request(id, data_type) %>% unlist() %>%
       keep(names(.) %in% c("id", rel_var))
@@ -706,6 +805,13 @@ get_var_profile_by_id <- function(data_type, ids) {
     
   }
   
+  if(data_type == "mediums"){
+  
+    data_full <- make_api_request("", data_type) %>%
+      keep(names(.) %in% c("id", rel_var))
+  
+  }
+  
   return(data_full) 
   
 }
@@ -731,6 +837,19 @@ mediums_var_profiles_by_id <- get_var_profile_by_id("mediums", "all")
 collectionmthds_var_profiles_by_id <- get_var_profile_by_id("collectionmethods", "all")
 
 extendedattrbts_var_profiles_by_id <- get_var_profile_by_id("extendedattributes", "all")
+
+dropdownlist_extendedattrbts <- function(data_type){
+  
+  id_data_type <- get_var_profile_by_id("extendedattributes", "all") %>%
+    dplyr::filter(customId == data_type) %>% dplyr::select(id) %>% unlist()
+ 
+  data_dropdown <- make_api_request(id_data_type, data_type)  
+  
+  return(data_dropdown)
+  
+}
+
+samplingagency_var_profiles_by_id <- dropdownlist_extendedattrbts("samplingagency")
 
 analyticalgrps_var_profiles_by_id <- get_var_profile_by_id("analyticalgroups", "all")
 
@@ -833,6 +952,8 @@ update_var <- function(data_type, ref_file) {
   updated_var <- ref_file %>%
     anti_join(mdfd_var_profile, by = "id") %>%  # Remove matching IDs
     bind_rows(mdfd_var_profile)
+  
+  return(updated_var)
 }
 
 # #reminding the code when the pipeline output was last saved
@@ -1486,6 +1607,142 @@ x_usr_del <- del_data_by_user("Sahil", "Bhandari")
 
 usr_del <- fromJSON(rawToChar(x_usr_del$content))
 
+
+# Using the Export feature in Swagger -------------------------------------
+start_time <- proc.time()
+
+obs_ids <- get_ids("observations")
+
+obs_test_data <- list()
+
+j <- 1
+
+j_max <- ceiling(length(obs_ids)/197)
+
+for(j in 1:j_max){
+  
+  obs_test_data[[j]] <- obs_ids[(j-1)*197+1]
+  
+  i <- 2
+  
+  while(i <= 197) {
+    
+    obs_test_data[[j]] <- str_c(obs_test_data[[j]], ",", obs_ids[(j-1)*197+i])
+    
+    i = i + 1
+    
+  }
+  
+  j = j + 1
+  
+  #print(j)
+  
+}
+
+temp_data <- tibble() 
+
+for(i in 1:length(obs_test_data)){#length(obs_test_data)
+
+#export_obs_data <- function(){
+  
+url <- str_c(base_url, "v2/services/export/observations?ids=", obs_test_data[[i]])
+#str_c(obs_ids[1], ",", obs_ids[2])
+
+data_body <- list()
+
+x_observations <- GET(url, config = c(add_headers(.headers = c('Authorization' = token))), 
+              body = data_body, encode = "json")
+
+#mdfd_var <- fromJSON(rawToChar(x_mdfd$content))$domainObjects
+
+#mdfd_var_ids <- mdfd_var$id
+
+temp_data <- bind_rows(temp_data, read_csv(rawToChar(x_observations$content), show_col_types = FALSE, col_types = cols(`Activity Name` = col_character())))
+
+#str(temp_data)
+
+#print(temp_data)
+
+#print(i)
+
+}
+
+end_time <- proc.time()
+
+elapsed_time <- end_time - start_time
+
+print(elapsed_time)
+
+# total = fromJSON(rawToChar(x_observations$content))$totalCount
+# 
+# print(total)
+# 
+# if (total > 1000) { #if there are more than 1000 records loop
+#   
+#   # locs <- fromJSON(rawToChar(x_mdfd$content))$domainObjects %>%
+#   #   tibble::rownames_to_column("original_row_name") %>% as_tibble()
+#   #mdfd_var <- fromJSON(rawToChar(x_mdfd$content))$domainObjects %>% as_tibble() #%>% 
+#   #dplyr::select(id, customId, name, auditAttributes, type, latitude, 
+#   #              longitude, horizontalCollectionMethod, description) %>% 
+#   #unnest_wider(type, names_repair = "universal") %>% 
+#   #unnest_wider(auditAttributes, names_repair = "universal")
+#   
+#   var_ids <- fromJSON(rawToChar(x_observations$content))$domainObjects$id
+#   
+#   number_loops = ceiling(total/1000)
+#   
+#   #i = 2
+#   
+#   for (i in seq(2,number_loops)) {
+#     cursor = fromJSON(rawToChar(x_observations$content))$cursor
+#     tempURL = paste0(url, "&cursor=", cursor)
+#     
+#     x_observations <- GET(tempURL, config = c(add_headers(.headers = c('Authorization' = token))), 
+#                   body = data_body, encode = 'json')
+#     
+#     temp_var_ids <- fromJSON(rawToChar(x_observations$content))$domainObjects$id 
+#     
+#     # #temp_locs <- fromJSON(rawToChar(x_mdfd$content))$domainObjects %>%
+#     # #  tibble::rownames_to_column("original_row_name") %>% as_tibble()
+#     # temp_mdfd_var <- fromJSON(rawToChar(x_mdfd$content))$domainObjects %>% 
+#     #   as_tibble() #%>% dplyr::select(id, customId, name, auditAttributes, 
+#     # type, latitude, longitude, horizontalCollectionMethod, description) %>% 
+#     #   #unnest_wider(type, names_repair = "universal") %>% 
+#     #   #unnest_wider(auditAttributes, names_repair = "universal")
+#     
+#     var_ids <- append(var_ids, temp_var_ids)
+#     
+#     #rownames(temp_mdfd_var) <- NULL
+#     
+#     #rownames(mdfd_var) <- NULL
+#     
+#     #mdfd_var <- bind_rows(mdfd_var, temp_mdfd_var)
+#     
+#     print(i)
+#   }
+#   
+# } else {
+#   
+#   #mdfd_var <- fromJSON(rawToChar(x_mdfd$content))$domainObjects %>% as_tibble() #%>% 
+#   #dplyr::select(id, customId, name, auditAttributes, type, latitude, longitude,   horizontalCollectionMethod, description) %>% 
+#   #unnest_wider(type, names_repair = "universal") %>% 
+#   #unnest_wider(auditAttributes, names_repair = "universal")
+#   
+#   var_ids <- fromJSON(rawToChar(x_observations$content))$domainObjects$id
+#   
+# }
+# 
+# return(var_ids)
+# 
+# }
+# 
+# obs_ids_exported <- export_obs_data()
+# 
+# end_time <- proc.time()
+# 
+# elapsed_time <- end_time - start_time
+# print(elapsed_time)
+
 # bringing in watershed group data--------
 # bcdc_search("Freshwater atlas watershed groups") 
 # bcdc_get_record("51f20b1a-ab75-42de-809d-bf415a0f9c62")
@@ -1628,7 +1885,7 @@ test_locs_var_profiles_by_id_vB <- test_locs_var_profiles_by_id_vB %>%
   dplyr::filter(!(str_detect(`customId`, "Sahil")|str_detect(`customId`, "Manawat")|str_detect(`customId`, "Krogh"))) %>%
   dplyr::filter(!(is.na(latitude)|is.na(longitude))) %>%
   dplyr::filter(!(latitude == ""|longitude == "")) %>%
-  dplyr::select(-attachments.attachment.comment) %>%
+  #dplyr::select(-attachments.attachment.comment) %>%
   mutate(type.customId = stringr::str_to_title(type.customId)) %>%
   mutate(type.customId = str_replace_all(type.customId, "\\b(And|Or)\\b", function(x) tolower(x))) %>%
   mutate(description = stringr::str_to_title(description)) %>%
@@ -2148,13 +2405,14 @@ library(jsonlite)
 #write(json_data_test, file = "data_test.json")
 
 #getting a test location data in the JSON format expectation
-json_locs_data <- test_locs_var_profiles_by_id_vB %>%
+json_locs_data <- locs_var_profiles_by_id %>%
+  dplyr::select(customId, name) %>%
   #dplyr::filter(`Location Identifier` == "E273048") %>%
   #mutate(is_sampled_recent = ...) %>% 
   #mutate(is_new = ) %>%
   #dplyr::filter(is_new|is_recent) %>%
-  rename(disp_name = `Location Identifier`) %>%
-  mutate(disp_name = str_c(disp_name, " - ", `Location Name`)) %>%
+  rename(disp_name = name) %>%
+  mutate(disp_name = str_c(customId, " - ", disp_name)) %>%
   dplyr::select(disp_name)
 
 #added the items keyword to store variables in an array
@@ -2172,9 +2430,9 @@ json_data_test <- toJSON(list(items = json_labs_data), pretty = TRUE)
 write(json_data_test, file = "test_labs_data.json")
 
 #sampling agency
-json_samplingagncy_data <- extendedattrbts_var_profiles_by_id %>%
+json_samplingagncy_data <- samplingagency_var_profiles_by_id# %>%
   #dplyr::filter(description == "") %>%
-  dplyr::select(id, customId)
+  #dplyr::select(id, customId)
 
 json_data_test <- toJSON(list(items = json_samplingagncy_data), pretty = TRUE)
 
@@ -2190,14 +2448,14 @@ json_data_test <- toJSON(list(items = json_collectionmthds_data), pretty = TRUE)
 write(json_data_test, file = "test_collectionmthds_data.json")
 
 #projects
-json_proj_data <- prjcts %>% #proj_var_profiles_by_id
+json_proj_data <- proj_var_profiles_by_id %>%
   dplyr::select(id, customId, name, description, type) %>%
   dplyr::filter(type!="ROUTINE_MONITORING")
 
 json_data_test <- toJSON(list(items = json_proj_data), pretty = TRUE)
 
 #writing the created JSON file
-write(json_data_test, file = "test_proj.json")
+write(json_data_test, file = "test_proj_data.json")
 
 #mediums
 json_mediums_data <- mediums_var_profiles_by_id
@@ -2205,7 +2463,7 @@ json_mediums_data <- mediums_var_profiles_by_id
 json_data_test <- toJSON(list(items = json_mediums_data), pretty = TRUE)
 
 #writing the created JSON file
-write(json_data_test, file = "test_collectionmthds.json")
+write(json_data_test, file = "test_mediums_data.json")
 
 # Spreadsheet to JSON -----------------------------------------------------
 json_analysisPackagesCoC_data <- read_csv("../COC_form/json_list_extracts/analysisPackagesCoC - April-3-2025(Sheet1).csv", col_types = cols(preservative.name = col_character(), comments = col_character(), ...9 = col_skip())) 
@@ -2223,9 +2481,9 @@ json_analysisPackagesCoC_data <- json_analysisPackagesCoC_data %>%
   ungroup() %>%
   dplyr::select(-c(items.analysisGroup, test.label)) %>% unique()
 
-
 json_data_test <- toJSON(list(items = json_analysisPackagesCoC_data), pretty = TRUE)
 
 #writing the created JSON file
-write(json_data_test, file = "test_analysisPackages.json")
+write(json_data_test, file = "test_analysisPackages_data.json")
+
 
