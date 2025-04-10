@@ -67,9 +67,13 @@ get_profiles_for_url <- function(url){
       
       rownames(temp) <- NULL
       
-      temp_ids <- bind_rows(temp, temp_element)
+      temp <- bind_rows(temp, temp_element)
       
       print(i)
+      
+      # if(i==3){
+      #   break
+      # }
       
     }
     
@@ -83,10 +87,19 @@ get_profiles_for_url <- function(url){
   
 }
 
+start_time <- proc.time()
+
 url <- str_c(base_url, "v2/observations?limit=1000")
 
 test_get_obs <- get_profiles_for_url(url)
 
+end_time <- proc.time()
+
+elapsed_time <- end_time - start_time
+
+print(elapsed_time)
+
+test_get_obs_unnested <- unnest_wider(test_get_obs, activity)
 
 get_ids_for_url <- function(url){
   
@@ -1758,6 +1771,15 @@ print(elapsed_time)
 #   ggtitle("WATERSHED GROUPS")
 # 
 # ggsave("./plots/watershed_groups.png", p2, width = 4, height = 6, units = "in")
+
+# url <- str_c(base_url, "v2/services/export/observations?cursor=1&limit=100")
+# 
+# data_body <- list()
+# 
+# x_observations <- GET(url, config = c(add_headers(.headers = c('Authorization' = token))), 
+#                       body = data_body, encode = "json")
+# 
+# temp_data <- fromJSON(rawToChar(x_observations$content))
 
 # preparing location data frame vA for ENMODS mapping------------
 test_locs_var_profiles_by_id <- locs_var_profiles_by_id
