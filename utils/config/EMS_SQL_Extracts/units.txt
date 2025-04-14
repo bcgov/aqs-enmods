@@ -1,0 +1,5 @@
+select u.code, u.short_name, u.description, u.active_ind, u.meas_unit_cd, u.conversion_factor,
+count(r.id) "Results"
+from ems_measurment_units u, ems_results r
+where r.meas_unit_cd=u.code
+group by u.code, u.short_name, u.description, u.active_ind, u.meas_unit_cd, u.conversion_factor
