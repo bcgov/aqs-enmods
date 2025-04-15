@@ -18,24 +18,40 @@ prod_token <- Sys.getenv("prod_token")
 test_url <- Sys.getenv("test_url")
 prod_url <- Sys.getenv("prod_url")
 
-data_access = "test"
+#data_access = "test"
 
-if(data_access == "test"){
+update_base_url_token <- function(env){
   
-  base_url <- test_url
-  token <- test_token
+  if(env == "prod"){
+    
+    base_url <- prod_url
+    token <- prod_token
+    
+  } else {
+    
+    base_url <- test_url
+    token <- test_token
+    
+  }
   
-} else {
+  url_parameters <- list(base_url, token)
   
-  base_url <- prod_url
-  token <- prod_token
+  return(url_parameters)
   
 }
+
+url_parameters <- update_base_url_token("test")
+base_url <- url_parameters[[1]]
+token <- url_parameters[[2]]
 
 # universal functions -----------------------------------------------------
 # getting a complete list of IDs ------------------------------
 
-get_profiles_for_url <- function(url){
+get_profiles_for_url <- function(env, url){
+  
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
   
   data_body <- list()
   
@@ -99,7 +115,236 @@ elapsed_time <- end_time - start_time
 
 print(elapsed_time)
 
-test_get_obs_unnested <- unnest_wider(test_get_obs, activity)
+#test_get_obs_unnested <- unnest_wider(test_get_obs, activity)
+
+get_profiles <- function(env, data_type){
+  
+  #env <- "test"
+  
+  #default is "test" and for prod env, use the function parameter "prod"
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
+  
+  #data_type <- "unitgroups"
+  
+  if(data_type == "units"){
+    
+    url <- str_c(base_url, "v1/units")
+    
+    temp_profiles <- get_profiles_for_url(env, url)
+    
+  } else if(data_type == "unitgroups"){
+    
+    url <- str_c(base_url, "v1/unitgroups")
+    
+    temp_profiles <- get_profiles_for_url(env, url)
+    
+  }
+  
+  return(temp_profiles)
+  
+}
+
+post_profiles_for_url <- function(env, data_type, profile){
+  
+  # env = "prod"
+  # 
+  # data_type = "units"
+  # 
+  # profile <- units_profiles %>%
+  #   dplyr::filter(customId == "ppt")
+
+  #default is "test" and for prod env, use the function parameter "prod"
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
+  
+  profile <- profile %>% 
+    mutate(across(everything(), ~ replace(., is.na(.), "")))
+  
+  if(data_type == "unitgroups"){
+    
+      url <- paste0(base_url, "v1/unitgroups")
+      
+      rel_var <- c("customId", "supportsConversion")
+      
+      } else if(data_type == "units"){
+    
+      url <- paste0(base_url, "v1/units")
+      
+      rel_var <- c("customId", "name", "baseMultiplier",
+                   "baseOffset", "unitGroup.id", 
+                   "unitGroup.supportsConversion")
+      }
+  
+  #post_check_temp <- character(dim(profile)[1])
+  
+  #print(length(post_check_temp))
+  
+  for(j in 1:dim(profile)[1]){
+    
+    #j <- 1
+      
+    temp_profile <- profile %>% 
+        keep(names(.) %in% rel_var) %>%
+        slice(j) %>%
+        as.list()
+    
+    data_body <- temp_profile
+    
+    if(data_type == "units"){
+      
+      #loop to put all the units in the group
+        
+        #If the unit group supports conversion provide conversion factors
+        if (temp_profile$unitGroup.supportsConversion == TRUE) {
+          
+          data_body <- list(
+            customId = temp_profile$customId,
+            "name" = temp_profile$name,
+            "baseMultiplier" = temp_profile$baseMultiplier,
+            "baseOffset" = temp_profile$baseOffset,
+            "unitGroup" = list("id" = temp_profile$unitGroup.id))
+          
+        } else { 
+          
+          data_body <- list(
+            customId = temp_profile$customId,
+            "name" = temp_profile$name,
+            "unitGroup" = list("id" = temp_profile$unitGroup.id))
+          
+        }
+        
+      }
+      
+      #Post the configuration
+      x<-POST(url, config = c(add_headers(.headers = 
+        c('Authorization' = token))), body = data_body, 
+        encode = 'json')
+      
+      message <- fromJSON(rawToChar(x$content))
+      
+      print(j)
+      
+      # Add a sleep to avoid hitting the rate limit
+      # Sys.sleep(5)
+      
+    }
+    
+  #}
+  
+  
+  # if(status_code(x)!=200){
+  #   
+  #   print(i)
+  #   
+  #   next
+  #} else {
+  #   
+  #   post_check_temp[i] <- fromJSON(rawToChar(x$content))$message
+  #   
+  #}
+  
+  #}
+
+#return(post_check_temp)
+
+return(message)
+
+}
+
+#get unit group data to post
+unitgroups_profiles <- get_profiles("test", "unitgroups")
+
+#post unit group data
+post_check <- post_profiles_for_url("prod", "unitgroups", unitgroups_profiles)
+
+#get posted unit group data
+unitgroups_profiles <- get_profiles("prod", "unitgroups")
+
+#get unit data
+units_profiles <- get_profiles("test", "units")
+
+#update unit data to account for posted unit groups
+units_profiles <- units_profiles %>%
+  unnest_wider(unitGroup, names_sep = ".") %>% 
+  dplyr::select(-c(unitGroup.id)) %>% 
+  left_join(unitgroups_profiles %>% 
+              dplyr::select(id, customId) %>%
+              rename(unitGroup.id = id), 
+            by = join_by(unitGroup.customId == customId), 
+            keep = FALSE) %>%
+  dplyr::filter(!(is.na(unitGroup.customId))) %>%
+  dplyr::select(id, customId, name, baseMultiplier,
+                baseOffset, unitGroup.id, everything())
+
+#post unit data
+post_check <- post_profiles_for_url("prod", "units", units_profiles)
+
+del_profiles_for_url <- function(env, data_type){
+
+  # env <- "prod"
+  # 
+  # data_type <- "unitgroups"
+  
+  temp_profile <- get_profiles(env, data_type)
+  
+  #default is "test" and for prod env, use the function parameter "prod"
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
+  
+  if(data_type == "unitgroups"){
+    
+    base_url <- str_c(base_url, "v1/unitgroups/")
+    
+  } else if(data_type == "units"){
+    
+    base_url <- str_c(base_url, "v1/units/")
+    
+  }
+  
+  del_ids <- temp_profile$id
+  
+  for(id in del_ids){
+    
+    #id <- del_ids
+    
+    data_body <- list()
+    
+    url <- str_c(base_url, id)
+    
+    #Make the unit group
+    x<-DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), 
+            body = data_body, encode = 'json')
+    
+    #response_check <- fromJSON(rawToChar(x$content))$message
+    
+    # Add a sleep to avoid hitting the rate limit
+    #Sys.sleep(5)
+    
+    # if(status_code(x)!=200){
+    #   
+    #   print(id)
+    #   
+    #   next
+    #} # else {
+    #   
+    #   post_check_temp[i] <- fromJSON(rawToChar(x$content))$message
+    #   
+    # }
+    
+  }
+  
+  #return(response_check)
+  return()
+  
+}
+
+del_check <- del_profiles_for_url("prod", "units")
+
+del_check <- del_profiles_for_url("prod", "unitgroups")
 
 get_ids_for_url <- function(url){
   
@@ -273,6 +518,14 @@ get_ids <- function(data_type){
     
     url <- str_c(base_url, "v1/specimens?limit=1000")
     
+  } else if (data_type == "units") {
+    
+    url <- str_c(base_url, "v1/units")
+    
+  } else if (data_type == "unitgroups") {
+    
+    url <- str_c(base_url, "v1/unitgroups?limit=1000")
+    
   } else {
     
     return("The coding pipeline has been developed only for observations, field visits, and samplinglocations.")
@@ -364,6 +617,10 @@ mediums_ids <- get_ids("mediums")
 collectionmthds_ids <- get_ids("collectionmethods")
 
 extendedattrbts_ids <- get_ids("extendedattributes")
+
+units_ids <- get_ids("units")
+
+unitgrps_ids <- get_ids("unitgroups")
 
 # making one API all data request by id and data type ------------------------------
 # Function to make an API request
