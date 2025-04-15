@@ -2,6 +2,8 @@
 #
 #This code first extracts EAs as they are currently built in test, write them 
 #to an excel sheet that can then be used to upload to another environment
+#
+#Add a section to also delete all EAs from an environment J-krogh 2025-04-15
 
 library(httr)
 library(jsonlite)
@@ -43,6 +45,10 @@ colnames(df_DLL) <- c("EA_Id", "DDL_Id","DDL_customId", "EA_customId")
 
 write.csv(df_DLL,"./utils/config/ReferenceLists/EA_DropDownListItems.csv", row.names = FALSE)
 
+#Upload EAs to the new environment
+token <- Sys.getenv("api_prod_token")
+base_url = Sys.getenv("url_prod")
+
 #Read in files to post, they don't update 
 df_EA <- read_excel("./utils/config/ReferenceLists/ExtendedAttributes.xlsx", sheet = 1)
 df_DLL <- read_excel("./utils/config/ReferenceLists/ExtendedAttributes.xlsx", sheet = 2)
@@ -69,4 +75,13 @@ for (i in seq(1, nrow(df_EA))) {
   POST(paste0(base_url,'v1/extendedattributes/'), config = c(add_headers(.headers = c('Authorization' = token))), encode="json", body = post_data)
 }
 
+### Remove All EAs
 
+#get all of the EAs IDs
+data_body <- list()
+resp<-GET(paste0(base_url,'v1/extendedattributes/'), config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+df_EA <- fromJSON(rawToChar(resp$content))$domainObjects
+
+for (i in seq(1,nrow(df_EA))){
+  DELETE(paste0(base_url,'v1/extendedattributes/', df_EA$id[i]), config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+}
