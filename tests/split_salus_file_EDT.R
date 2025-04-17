@@ -6,7 +6,7 @@ library(tidyverse)
 
 #read the file from Salus
 fname <- "C:/Users/jkrogh/Downloads/air-april-14.csv"
-rows <- 4000
+rows <- 2000
 write_name <- "C:/Users/jkrogh/Downloads/EDT/air-april-14"
 
 #read the file from Salus, these can be big up to ~600,000
@@ -33,7 +33,7 @@ for (i in seq(1,ceiling(nrow(file)/rows))) {
   })
   
   temp$Project <- "AIR-TESTING"
-  
+
   write.csv(temp, paste0(write_name, "-", i, ".csv"), row.names = F)
   
   print(i)
