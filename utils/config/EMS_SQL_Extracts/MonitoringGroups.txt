@@ -1,0 +1,26 @@
+select distinct gr.id, gr.name, g.mon_locn_id "Location ID", l.name "Location Name", 
+l.latitude,
+l.longitude,
+'Created by ' || p.first_name ||' ' || p.Last_Name || ' on ' ||  to_char(g.when_created,'YYYY-MM-DD') "Comments",
+min(s.collection_start_date) "First Sample", 
+max(s.collection_start_date) "Last Sample", 
+count(distinct s.id) "Samples", count(distinct r.id) "Results"
+from ems_location_groups g, ems_monitoring_groups gr, ems_samples s, ems_results r, ems_monitoring_locations l
+, print.staffs p
+where g.mon_grp_id=gr.id
+and s.mon_locn_id=g.mon_locn_id
+and r.smpl_id=s.id
+and l.id=g.mon_locn_id
+and s.mon_locn_id=l.id
+
+and g.who_created=p.user_id
+
+--and gr.name='RDN COMMUNITY MONITORING PROGRAM'
+--and s.collection_start_date >= to_date('2013-01-01','YYYY-MM-DD')
+--and s.collection_start_date <= to_date('2014-01-01','YYYY-MM-DD')
+and gr.when_created >= to_date('2009-01-01','YYYY-MM-DD')  -- updated to 2014 to 2009 for 15 year window for Rosie
+
+group by gr.id, gr.name, g.mon_locn_id, l.name, 
+l.latitude,l.longitude,
+'Created by ' || p.first_name || ' ' || p.Last_Name || ' on ' ||  to_char(g.when_created,'YYYY-MM-DD')
+order by gr.id desc, g.mon_locn_id
