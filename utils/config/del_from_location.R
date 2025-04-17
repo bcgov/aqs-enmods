@@ -11,7 +11,7 @@ readRenviron(paste0(getwd(), "./.Renviron"))
 token <- Sys.getenv("api_test_token")
 base_url = Sys.getenv("url_test")
 #the custom ID of the location to remove everything from
-loc_id <- "0160103"
+loc_id <- "0111505"
 
 #Start by deleting all observations using the location ID as the anchor. Get all location IDs
 

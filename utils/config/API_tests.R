@@ -26,4 +26,7 @@ x<-GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body
 total_locations = fromJSON(rawToChar(x$content))$totalCount
 
 data_body <- list()
-https://bcenv-enmods-test.aqsamples.ca/observations/45af81d2-6802-415c-af82-dd7466c43698
+
+#remove all data from a location
+source('./utils/config/delete_all_location_obs.R')
+delete_location_obs(base_url, '0160016', token)
