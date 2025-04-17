@@ -1,0 +1,185 @@
+PARM_CD,parameter_name,Analysis Method,EMS Result Unit
+B150,Total-TCDD,1101,pg/g wet
+DIOM,Dimethoate + Omethoate (as Dimethoate),E752,mg/L
+SEO3,selenite SeO3(-2),E540,mg/L
+B072,"1,2,3,6,7,8-HxCDF",1101,pg/g wet
+B069,"1,2,3,6,7,8-HxCDD",E1613B,pg/L
+B107,"2,3,4,7,8-PeCDF",E1613B,pg/L
+AS-T,Arsenic Total,F113,ug/m3
+A026,Ametryn,E752,mg/L
+B063,"1,2,3,4,7,8-HxCDD",E1613B,pg/L
+BOSC,Boscalid,E752,mg/L
+B132,Total-HpCDD,E1613B,pg/L
+ANDA,Atrazine + n-dealkylated metabolites,E752,mg/L
+T082,Triallate,E752,mg/L
+B106,"2,3,4,7,8-PeCDF",1101,pg/g wet
+B061,"1,2,3,4,7,8,9-HpCDF",1101,pg/g wet
+B067,"1,2,3,4,7,8-HxCDF",E1613B,pg/L
+B058,"1,2,3,4,6,7,8-HpCDF",E1613B,pg/L
+C084,Carboxin,E752,mg/L
+A003,Aldicarb,E752,mg/L
+D18O,Delta 18 Oxygen,CRDS,per mille
+B060,"1,2,3,4,7,8,9-HpCDF",E1613B,pg/L
+B064,"1,2,3,4,7,8-HxCDD",E1613B,pg/L
+B136,Total-HpCDF,1101,pg/g wet
+A004,Alachlor,E752,mg/L
+CD-T,Cadmium Total,F113,ug/m3
+B153,Total-TCDF,E1613B,pg/L
+T081,Terbutryn,E752,mg/L
+B135,Total-HpCDF,1101,pg/g wet
+B122,OCDF,1101,pg/g wet
+B121,OCDF,E1613B,pg/L
+THM-,Trihalomethanes,P016,mg/L
+SETH,CAS RN: 74051-80-2 Sethoxydim,E752,mg/L
+B139,Total-HxCDD,E1613B,pg/L
+F018,Fluazifop-p-butyl,E752,mg/L
+TEME,Temephos,E752,mg/L
+B145,Total-PeCDD,E1613B,pg/L
+B148,Total-PeCDF,1101,pg/g wet
+ATMT,Atrazine + metabolites; Total,E752,mg/L
+D010,Diazinon,E752,mg/L
+B151,Total-TCDD,1101,pg/g wet
+IMAZA,CAS RN: 81405-85-8 Imazamethabenz-methyl,E752,mg/L
+B154,Total-TCDF,E1613B,pg/L
+B081,"1,2,3,7,8-PeCDD",E1613B,pg/L
+MU34,Methyl urea; 3-3-(3;4-dichlorophenyl)-1l)-1- [DCPMU],E752,mg/L
+M033,Myclobutanil,E752,mg/L
+B057,"1,2,3,4,6,7,8-HpCDF",E1613B,pg/L
+B082,"1,2,3,7,8-PeCDD",E1613B,pg/L
+B067,"1,2,3,4,7,8-HxCDF",1101,pg/g wet
+B084,"1,2,3,7,8-PeCDF",E1613B,pg/L
+AZOX,Azoxystrobin,E752,mg/L
+SE,"Selenium species, Other (as Se)",EC540,mg/L
+B058,"1,2,3,4,6,7,8-HpCDF",1101,pg/g wet
+B076,"1,2,3,7,8,9-HxCDD",E1613B,pg/L
+B154,Total-TCDF,1101,pg/g wet
+M004,Metalaxyl,E752,mg/L
+OMET-D,Omethoate (as dimethoate),E752,mg/L
+TRIBE,CAS RN: 101200-48-0 Tribenuron-methyl,E752,mg/L
+B109,"2,3,7,8-TCDD",1101,pg/g wet
+B110,"2,3,7,8-TCDD",1101,pg/g wet
+P005,Phorate,E752,mg/L
+B138,Total-HxCDD,1101,pg/g wet
+B078,"1,2,3,7,8,9-HxCDF",E1613B,pg/L
+B075,"1,2,3,7,8,9-HxCDD",1101,pg/g wet
+P103,Propachlor,E752,mg/L
+CYNZ,Cyanazine,E752,mg/L
+FLUD,Fludioxonil,E752,mg/L
+PCB169,"CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl)",HRGCMS,ng/L
+THIME,CAS RN: 79277-27-3 Thifensulfuron-methyl,E752,mg/L
+PCB126,"CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl)",HRGCMS,ng/L
+Q100,Quizalofop-ethyl,E752,mg/L
+P045,Prometon,E752,mg/L
+B147,Total-PeCDF,1101,pg/g wet
+PB-T,Lead Total,F113,ug/m3
+A008,Azinphos Methyl,E752,mg/L
+TRIF,Trifloxystrobin,E752,mg/L
+P015,Propazine,E752,mg/L
+B118,OCDD,E1613B,pg/L
+B070,"1,2,3,6,7,8-HxCDD",E1613B,pg/L
+D2-H,Delta 2-Hydrogen,CRDS,per mille
+B073,"1,2,3,6,7,8-HxCDF",1101,pg/g wet
+CU-T,Copper Total,F113,ug/m3
+SECN,selenocyanate SeCN(-1),E540,mg/L
+M001,Malathion,E752,mg/L
+AT2H,Atrazine; 2-hydroxy-,E752,mg/L
+B079,"1,2,3,7,8,9-HxCDF",E1613B,pg/L
+B104,"2,3,4,6,7,8-HxCDF",1101,pg/g wet
+D079,Deltamethring,E752,mg/L
+B069,"1,2,3,6,7,8-HxCDD",1101,pg/g wet
+B003,Benomyl,E752,mg/L
+PCB077,"CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl)",HRGCMS,ng/L
+B142,Total-HxCDF,E1613B,pg/L
+B142,Total-HxCDF,1101,pg/g wet
+B064,"1,2,3,4,7,8-HxCDD",1101,pg/g wet
+B151,Total-TCDD,E1613B,pg/L
+B118,OCDD,1101,pg/g wet
+P017,Prometryne,E752,mg/L
+B133,Total-HpCDD,E1613B,pg/L
+UV02,UV Absorbance 254nm,XM14,AU/cm
+B051,Bendiocarb,E752,mg/L
+P048,Propiconazole,E752,mg/L
+CATP,Chlorantraniliprole,E752,mg/L
+P046,Propanil,E752,mg/L
+B055,"1,2,3,4,6,7,8-HpCDD",E1613B,pg/L
+TRIT,Triticonazole,E752,mg/L
+B150,Total-TCDD,E1613B,pg/L
+B136,Total-HpCDF,E1613B,pg/L
+B122,OCDF,E1613B,pg/L
+B076,"1,2,3,7,8,9-HxCDD",1101,pg/g wet
+TRINE,CAS RN: 95266-40-3 Trinexapac-ethyl,E752,mg/L
+B066,"1,2,3,4,7,8-HxCDF",E1613B,pg/L
+B106,"2,3,4,7,8-PeCDF",E1613B,pg/L
+B144,Total-PeCDD,1101,pg/g wet
+A015,De-ethyl Atrazine,E752,mg/L
+B109,"2,3,7,8-TCDD",E1613B,pg/L
+S001,Simazine,E752,mg/L
+B144,Total-PeCDD,E1613B,pg/L
+B147,Total-PeCDF,E1613B,pg/L
+B153,Total-TCDF,1101,pg/g wet
+A016,Atrazine,E752,mg/L
+B085,"1,2,3,7,8-PeCDF",1101,pg/g wet
+B112,"2,3,7,8-TCDF",E1613B,pg/L
+B085,"1,2,3,7,8-PeCDF",E1613B,pg/L
+B103,"2,3,4,6,7,8-HxCDF",1101,pg/g wet
+C040,Carbofuran,E752,mg/L
+B141,Total-HxCDF,E1613B,pg/L
+OMET,Omethoate,E752,mg/L
+M005,Metolachlor,E752,mg/L
+B054,"1,2,3,4,6,7,8-HpCDD",E1613B,pg/L
+B104,"2,3,4,6,7,8-HxCDF",E1613B,pg/L
+P018,Propoxur,E752,mg/L
+D001,Dimethoate,E752,mg/L
+B121,OCDF,1101,pg/g wet
+SEO4,selenate SeO4(-2),E540,mg/L
+PH-F,pH-Field,XM09,pH units
+UVTR,UV Transmittance 254nm,XM14,%T/cm
+B141,Total-HxCDF,1101,pg/g wet
+B072,"1,2,3,6,7,8-HxCDF",E1613B,pg/L
+PCB105,"CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl)",HRGCMS,ng/L
+CR-T,Chromium Total,F113,ug/m3
+B079,"1,2,3,7,8,9-HxCDF",1101,pg/g wet
+B148,Total-PeCDF,E1613B,pg/L
+B060,"1,2,3,4,7,8,9-HpCDF",1101,pg/g wet
+B066,"1,2,3,4,7,8-HxCDF",1101,pg/g wet
+METSU,CAS RN: 74223-64-6 Metsulfuron-methyl,E752,mg/L
+ADDP,Atrazine-desthyl-desisopropyl,E752,mg/L
+ATDP,Atrazine-desisopropyl,E752,mg/L
+B112,"2,3,7,8-TCDF",1101,pg/g wet
+B145,Total-PeCDD,1101,pg/g wet
+D078,Diuron,E752,mg/L
+B075,"1,2,3,7,8,9-HxCDD",E1613B,pg/L
+B133,Total-HpCDD,1101,pg/g wet
+B113,"2,3,7,8-TCDF",E1613B,pg/L
+F101,Fenoxapropethyl,E752,mg/L
+B113,"2,3,7,8-TCDF",1101,pg/g wet
+B084,"1,2,3,7,8-PeCDF",1101,pg/g wet
+B119,OCDD,E1613B,pg/L
+B054,"1,2,3,4,6,7,8-HpCDD",1101,pg/g wet
+B073,"1,2,3,6,7,8-HxCDF",E1613B,pg/L
+DCPM,Diclofop-methyl,E752,mg/L
+B063,"1,2,3,4,7,8-HxCDD",1101,pg/g wet
+B070,"1,2,3,6,7,8-HxCDD",1101,pg/g wet
+E011,EPTC,E752,mg/L
+T008,Terbufos,E752,mg/L
+B132,Total-HpCDD,1101,pg/g wet
+PYCS,Pyraclostrobin,E752,mg/L
+B081,"1,2,3,7,8-PeCDD",1101,pg/g wet
+B103,"2,3,4,6,7,8-HxCDF",E1613B,pg/L
+B138,Total-HxCDD,E1613B,pg/L
+B107,"2,3,4,7,8-PeCDF",1101,pg/g wet
+B139,Total-HxCDD,1101,pg/g wet
+TRALK,CAS RN: 87820-88-0 Tralkoxydim,E752,mg/L
+CLOT,Clothianidin (Insecticide/Pesticide),E752,mg/L
+B135,Total-HpCDF,E1613B,pg/L
+B082,"1,2,3,7,8-PeCDD",1101,pg/g wet
+TEBU,Tebuthiuron,E752,mg/L
+B061,"1,2,3,4,7,8,9-HpCDF",E1613B,pg/L
+M006,Metribuzin,E752,mg/L
+IMID,Imidacloprid (Insecticide/Pesticide),E752,mg/L
+B055,"1,2,3,4,6,7,8-HpCDD",1101,pg/g wet
+B057,"1,2,3,4,6,7,8-HpCDF",1101,pg/g wet
+B078,"1,2,3,7,8,9-HxCDF",1101,pg/g wet
+C001,Carbaryl,E752,mg/L
+B110,"2,3,7,8-TCDD",E1613B,pg/L
+B119,OCDD,1101,pg/g wet
