@@ -5,9 +5,9 @@
 library(tidyverse)
 
 #read the file from Salus
-fname <- "C:/Users/jkrogh/Downloads/air-april-14.csv"
+fname <- "C:/Users/jkrogh/Downloads/water_split_part_28.csv"
 rows <- 2000
-write_name <- "C:/Users/jkrogh/Downloads/EDT/air-april-14"
+write_name <- "C:/Users/jkrogh/Downloads/EDT/water-april-14"
 
 #read the file from Salus, these can be big up to ~600,000
 big_file <- readr::read_csv(fname)
