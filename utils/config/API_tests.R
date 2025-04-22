@@ -29,4 +29,8 @@ data_body <- list()
 
 #remove all data from a location
 source('./utils/config/delete_all_location_obs.R')
-delete_location_obs(base_url, '0160016', token)
+delete_location_obs(base_url, '0160015', token)
+
+#remove all obs data but keep locations
+delete_all_records_keep_locations(base_url, token)
+
