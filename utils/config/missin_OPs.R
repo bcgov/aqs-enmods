@@ -47,6 +47,18 @@ for (i in seq(1, nrow(missing_op))) {
   x<-GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
   missing_op$name_in_aqs[i] <- fromJSON(rawToChar(x$content))$totalCount
   
+  if (missing_op$name_in_aqs[i] > 0) { #if the OP is in aqs
+    if (fromJSON(rawToChar(x$content))$domainObjects$analysisType == "CHEMICAL"){ #only chemicals have a cas
+      if (!is.null(fromJSON(rawToChar(x$content))$domainObjects$casNumber)) {   
+        missing_op$cas_in_aqs[i] <- fromJSON(rawToChar(x$content))$domainObjects$casNumber
+      } else {
+        missing_op$cas_in_aqs[i] <- "" #no cas in aqs
+      }
+    } else {
+      missing_op$cas_in_aqs[i] <- "" #not a chemical
+    }
+  } else {missing_op$cas_in_aqs[i] <- ""} # not in aqs
+  
   url <- paste0(base_url, "v1/labanalysismethods?search=", missing_op$Analysis.Method[i])
   data_body <- list()
   x<-GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
