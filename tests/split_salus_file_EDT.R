@@ -23,19 +23,24 @@ for (i in seq(1,ceiling(nrow(big_file)/rows))) {
   #remove NA and replace with ""
   temp[] <- lapply(temp, function(x) {
     if (inherits(x, "POSIXct") || inherits(x, "POSIXt")) {
-      x <- format(x, "%Y-%m-%dT%H:%M:%S-08:00")  # or whatever format you prefer
+      x <- format(x, "%Y-%m-%dT%H:%M:%S-08:00", tz="08:00")  # or whatever format you prefer
       x[is.na(x)] <- ""                    # replace NA with ""
     } else {
       x[is.na(x)] <- ""
+      x[x == "NA"] <- "" #remove the NA string from SQL
       x <- as.character(x)
     }
     x
   })
   
-  temp$Project <- "AIR-TESTING"
+  temp$Project <- "WATER-TESTING"
   
   #files end up sci notation in the string values
-  temp$`Method Detection Limit` <- format(as.numeric(temp$`Method Detection Limit`), scientific = FALSE, digits = 10, trim = T)
+  temp$`Method Detection Limit` <- format(as.numeric(temp$`Method Detection Limit`), 
+                                          scientific = FALSE, digits = 10, trim = T) #this adds back NA
+  temp$`Method Detection Limit` <- as.character(temp$`Method Detection Limit`)
+  temp$`Method Detection Limit`[temp$`Method Detection Limit` == "NA"] <- "" #remove NAs again
+  
   temp$`Result Value` <- format(as.numeric(temp$`Result Value`), scientific = FALSE, digits = 10, trim = T)
 
   write.csv(temp, paste0(write_name, "-", i, ".csv"), row.names = F)
