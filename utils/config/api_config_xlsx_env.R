@@ -13,6 +13,7 @@ library(sf)
 library(tidygeocoder)
 library(readr)
 library(readxl)
+library(writexl)
 
 #get the API tokens from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
@@ -50,9 +51,19 @@ token <- url_parameters[[2]]
 ### PREPROCESSING REFERENCE SHEETS ### ----
 
 # UNITS and UNIT GROUPS ----
+unitgroups_profiles <- get_profiles("prod", "unitgroups")
 
-units <- read_excel("./utils/config/ReferenceLists/Units.xlsx", 
-                    sheet = "Units")
+units_profiles <- get_profiles("prod", "units") %>% 
+  rename(unit.id = id, unit.custom.id = custom.id) %>%
+  unnest_wider(unitGroup) %>%
+  dplyr::select()
+
+units <- read_csv("./utils/config/ReferenceLists/EMS_Units_2025_04_16.csv") %>% 
+  mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD))
+
+units <- units %>% dplyr::select(-Results) %>% 
+  left_join(units_base %>% dplyr::select(-CONVERSION_FACTOR), by = 
+    join_by("CODE", "SHORT_NAME", "DESCRIPTION", "ACTIVE_IND", "MEAS_UNIT_CD"))
 
 #we know there are duplicates in this data set
 units <- units %>% rename(Sample.Unit.Name = Samples.Unit.Name, 
@@ -351,15 +362,89 @@ Labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F)
 Labs$Description = str_c("Created by ", Labs$WHO_CREATED, " on ", Labs$WHEN_CREATED)
 
 # TAXONOMY LEVELS ---------------------------------------------------------
-taxonomyLevels <- get_profiles("prod", "taxonomylevels")
-
-# taxonomyLevels <- taxonomyLevels$customId
+##Had to run this only once in a lifetime
+# taxonomylevels <- get_profiles("test", "taxonomylevels") %>%
+#   dplyr::select(customId)
+# # Save workbook
+# write_xlsx(list(taxonomylevels), "./utils/config/ReferenceLists/TaxonomyLevels.xlsx")
 # 
-# taxonomyLevels <- taxonomyLevels %>%
-#   summarise(
-#     list(map(customId, ~ list(customId = .x))
-#     )
-#   )
+# # Load an existing workbook
+# wb <- loadWorkbook("./utils/config/ReferenceLists/TaxonomyLevels.xlsx")
+# 
+# # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+# renameWorksheet(wb, sheet = "Sheet1", newName = "taxonomylevels")
+# 
+# # Save the workbook with the updated sheet name
+# saveWorkbook(wb, "./utils/config/ReferenceLists/TaxonomyLevels.xlsx", overwrite = TRUE)
+
+taxonomylevels <- read_excel("./utils/config/ReferenceLists/TaxonomyLevels.xlsx", 
+                             sheet = "taxonomylevels")
+
+# LOCATION GROUP TYPES ---------------------------------------------------------
+##Had to run this only once in a lifetime
+# locationgrouptypes <- get_profiles("test", "samplinglocationgrouptypes") %>%
+#   dplyr::select(customId)
+# # Save workbook
+# write_xlsx(list(locationgrouptypes), "./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+# 
+# # Load an existing workbook
+# wb <- loadWorkbook("./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+# 
+# # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+# renameWorksheet(wb, sheet = "Sheet1", newName = "locationgrouptypes")
+# 
+# # Save the workbook with the updated sheet name
+# saveWorkbook(wb, "./utils/config/ReferenceLists/LocationGroupTypes.xlsx", overwrite = TRUE)
+locationgrouptypes <- read_excel("./utils/config/ReferenceLists/LocationGroupTypes.xlsx", 
+                             sheet = "locationgrouptypes")
+
+# LOCATION TYPES ---------------------------------------------------------
+locationtypes <- read_excel("./utils/config/ReferenceLists/LocationTypes.xlsx", 
+                                 sheet = "locationtypes")
+
+
+# MEDIUMS ---------------------------------------------------------
+mediums <- read_excel("./utils/config/ReferenceLists/Mediums.xlsx", 
+                            sheet = "Mediums")
+
+# RESULT GRADES ---------------------------------------------------------
+##Had to run this only once in a lifetime
+# resultgrades <- get_profiles("test", "resultgrades") %>%
+#   dplyr::select(customId)
+#
+# # Save workbook
+# write_xlsx(list(resultgrades), "./utils/config/ReferenceLists/ResultGrades.xlsx")
+# 
+# # Load an existing workbook
+# wb <- loadWorkbook("./utils/config/ReferenceLists/ResultGrades.xlsx")
+# 
+# # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+# renameWorksheet(wb, sheet = "Sheet1", newName = "resultgrades")
+# 
+# # Save the workbook with the updated sheet name
+# saveWorkbook(wb, "./utils/config/ReferenceLists/ResultGrades.xlsx", overwrite = TRUE)
+resultgrades <- read_excel("./utils/config/ReferenceLists/ResultGrades.xlsx", 
+                                 sheet = "resultgrades")
+
+
+# RESULT STATUSES ---------------------------------------------------------
+# #Had to run this only once in a lifetime
+# resultstatuses <- get_profiles("test", "resultstatuses") %>%
+#   dplyr::select(customId)
+# 
+# # Save workbook
+# write_xlsx(list(resultstatuses), "./utils/config/ReferenceLists/ResultStatuses.xlsx")
+# 
+# # Load an existing workbook
+# wb <- loadWorkbook("./utils/config/ReferenceLists/ResultStatuses.xlsx")
+# 
+# # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+# renameWorksheet(wb, sheet = "Sheet1", newName = "resultstatuses")
+# 
+# # Save the workbook with the updated sheet name
+# saveWorkbook(wb, "./utils/config/ReferenceLists/ResultStatuses.xlsx", overwrite = TRUE)
+resultstatuses <- read_excel("./utils/config/ReferenceLists/ResultStatuses.xlsx", 
+                           sheet = "resultstatuses")
 
 # FISH TAXONOMY -----------------------------------------------------------
 Taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx", sheet = "Taxonomy")
@@ -477,9 +562,29 @@ get_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/laboratories")
     
+  } else if(data_type == "locationgrouptypes"){
+    
+    url <- str_c(base_url, "v1/samplinglocationgrouptypes")
+    
+  } else if(data_type == "locationtypes"){
+    
+    url <- str_c(base_url, "v1/samplinglocationtypes")
+    
+  } else if(data_type == "mediums"){
+    
+    url <- str_c(base_url, "v1/mediums")
+    
   } else if(data_type == "taxonomylevels"){
     
     url <- str_c(base_url, "v1/taxonomylevels")
+    
+  } else if(data_type == "resultgrades"){
+    
+    url <- str_c(base_url, "v1/resultgrades")
+    
+  } else if(data_type == "resultstatuses"){
+    
+    url <- str_c(base_url, "v1/resultstatuses")
     
   } else if(data_type == "fishtaxonomy"){
     
@@ -497,9 +602,19 @@ get_profiles <- function(env, data_type){
   
 }
 
+get_check <- get_profiles("prod", "resultgrades")
+
+get_check <- get_profiles("prod", "resultstatuses")
+
+get_check <- get_profiles("prod", "mediums")
+
+get_check <- get_profiles("prod", "locationtypes")
+
+get_check <- get_profiles("prod", "locationgrouptypes")
+
 get_check <- get_profiles("prod", "collectionmethods")
 
-get_check <- get_profiles("test", "taxonomylevels")
+get_check <- get_profiles("prod", "taxonomylevels")
 
 get_check <- get_profiles("prod", "fishtaxonomy")
 
@@ -513,9 +628,9 @@ get_check <- get_profiles("prod", "observedproperties")
 
 del_profiles <- function(env, data_type){
   
-  #env <- "prod"
-
-  #data_type <- "labs"#"observedproperties"
+  # env <- "prod"
+  # 
+  # data_type <- "taxonomylevels"#labs"#"observedproperties"
 
   temp_profile <- get_profiles(env, data_type)
   
@@ -555,6 +670,46 @@ del_profiles <- function(env, data_type){
   } else if(data_type == "collectionmethods"){
     
     url <- str_c(base_url, "v1/collectionmethods/")
+    
+  } else if(data_type == "locationgrouptypes"){
+    
+    put_profiles("prod", "locationgrouptypes", tibble(customId = character()))
+    
+    return()
+    
+  } else if(data_type == "locationtypes"){
+    
+    put_profiles("prod", "locationtypes", tibble(customId = character()))
+    
+    return()
+    
+  } else if(data_type == "mediums"){
+    
+    mediums_required <- get_profiles("prod", "mediums") %>%
+      dplyr::filter(!is.na(systemCode)) %>% 
+      dplyr::select(customId)
+    
+    put_profiles("prod", "mediums", mediums_required)
+    
+    return()
+    
+  } else if(data_type == "taxonomylevels"){
+    
+    put_profiles("prod", "taxonomylevels", tibble(customId = character()))
+    
+    return()
+    
+  } else if(data_type == "resultgrades"){
+    
+    put_profiles("prod", "resultgrades", tibble(customId = character()))
+    
+    return()
+    
+  } else if(data_type == "resultstatuses"){
+    
+    put_profiles("prod", "resultstatuses", tibble(customId = character()))
+    
+    return()
     
   }
   
@@ -605,9 +760,21 @@ del_profiles <- function(env, data_type){
   
 }
 
-del_check <- del_profiles("prod", "collectionmethods")
+del_check <- del_profiles("prod", "resultgrades")
+
+del_check <- del_profiles("prod", "resultstatuses")
+
+del_check <- del_profiles("prod", "mediums")
+
+del_check <- del_profiles("prod", "locationtypes")
+
+del_check <- del_profiles("prod", "locationgrouptypes")
 
 del_check <- del_profiles("prod", "fishtaxonomy")
+
+del_check <- del_profiles("prod", "taxonomylevels")
+
+del_check <- del_profiles("prod", "collectionmethods")
 
 del_check <- del_profiles("prod", "labs")
 
@@ -622,30 +789,89 @@ del_check <- del_profiles("prod", "unitgroups")
 
 del_check <- del_profiles("prod", "extendedattributes")
 
-# put_profiles <- function(env, data_type, profile){
-#   
-#   #default is "test" and for prod env, use the function parameter "prod"
-#   url_parameters <- update_base_url_token(env)
-#   base_url <- url_parameters[[1]]
-#   token <- url_parameters[[2]]
-#   
-#   # Convert to JSON
-#   data_body <- toJSON(list(customId = profile), pretty = TRUE)
-#   
-#   # PUT request
-#   x <- PUT(url, config = c(add_headers(.headers = 
-#                 c('Authorization' = token))), body = data_body, 
-#            add_headers("Content-Type" = "application/json"),
-#     encode = 'json'
-#   )
-#   
-#   message <- fromJSON(rawToChar(x$content))
-#   
-#   return(message)
-#   
-# }
-# 
-# put_profiles("prod", "taxonomylevels", taxonomyLevels)
+put_profiles <- function(env, data_type, profile){
+  
+  env <- "prod"
+
+  data_type <- "resultgrades"
+
+  profile <- resultgrades
+
+  #default is "test" and for prod env, use the function parameter "prod"
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
+  
+  if(data_type == "taxonomylevels"){
+    
+    #update url to include data_type
+    url <- str_c(base_url, "v1/taxonomylevels")
+    
+  } else if(data_type == "locationgrouptypes"){
+    
+    #update url to include data_type
+    url <- str_c(base_url, "v1/samplinglocationgrouptypes")
+    
+  } else if(data_type == "locationtypes"){
+    
+    #update url to include data_type
+    url <- str_c(base_url, "v1/samplinglocationtypes")
+  
+  } else if(data_type == "mediums"){
+    
+    #update url to include data_type
+    url <- str_c(base_url, "v1/mediums")
+    
+  } else if(data_type == "resultgrades"){
+    
+    #update url to include data_type
+    url <- str_c(base_url, "v1/resultgrades")
+    
+  } else if(data_type == "resultstatuses"){
+    
+    #update url to include data_type
+    url <- str_c(base_url, "v1/resultstatuses")
+    
+  }
+  
+  # Convert to tibble and then to list of named lists
+  json_list <- profile %>% #tibble(customId = profile)
+    mutate(row = row_number()) %>%
+    nest(data = c(customId)) %>%
+    pull(data) %>%
+    map(~.x %>% as.list())
+  
+  # Convert to JSON
+  data_body <- toJSON(json_list, pretty = TRUE, auto_unbox = TRUE)
+  #data_body = list()
+
+  # PUT request
+  x <- PUT(url, config = c(add_headers(.headers =
+                c('Authorization' = token))), body = data_body,
+           add_headers("Content-Type" = "application/json"),
+    encode = 'json'
+  )
+
+  message <- fromJSON(rawToChar(x$content))
+
+  return(message)
+  #return()
+
+}
+
+#Error code 500 which suggests something is wrong at AQS end; informed Jeremy
+put_check <- put_profiles("prod", "resultgrades", resultgrades)
+
+#Error code 500 which suggests something is wrong at AQS end; informed Jeremy
+put_check <- put_profiles("prod", "resultstatuses", resultstatuses)
+
+put_check <- put_profiles("prod", "taxonomylevels", taxonomylevels)
+
+put_check <- put_profiles("prod", "locationgrouptypes", locationgrouptypes)
+
+put_check <- put_profiles("prod", "locationtypes", locationtypes)
+
+put_check <- put_profiles("prod", "mediums", mediums)
 
 post_profiles <- function(env, data_type, profile){
 
