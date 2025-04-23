@@ -49,7 +49,7 @@ token <- url_parameters[[2]]
 
 ### PREPROCESSING REFERENCE SHEETS ### ----
 
-### UNITS and UNIT GROUPS ### ----
+# UNITS and UNIT GROUPS ----
 
 units <- read_excel("./utils/config/ReferenceLists/Units.xlsx", 
                     sheet = "Units")
@@ -156,7 +156,7 @@ unit_groups <- units %>%
 # }
 
 
-### EXTENDED ATTRIBUTES ### ----
+# EXTENDED ATTRIBUTES ----
 
 extendedAttributes <- read_excel("./utils/config/ReferenceLists/ExtendedAttributes.xlsx", 
                                  sheet = "ExtendedAttributes")
@@ -178,7 +178,7 @@ extendedAttributes <- extendedAttributes %>%
   left_join(dropdownLists, by = join_by(customId == EA_customId),
             keep = FALSE)
 
-### OBSERVED PROPERTIES ### ----
+# OBSERVED PROPERTIES ----
 #need to get unit group and unit IDs prior to importing OPs
 unit_groups <- get_profiles("prod", "unitgroups") %>% 
   rename("unit.group.id" = "id")
@@ -187,7 +187,7 @@ unit_groups <- get_profiles("prod", "unitgroups") %>%
 units <- get_profiles("prod", "units") %>% 
   rename("unit.id" = "id")
 
-# EMS exported OPs --------------------------------------------------------
+#EMS exported OPs
 OPs <- read_excel("./utils/config/ReferenceLists/Observed_Properties.xlsx")
 
 #The units don't matter for non-convertable OP units. For example microbial units. So remove them from consideration.
@@ -202,24 +202,43 @@ OPs$Result.Type <- ""
 #get the unique list of OP IDs
 OPs <- OPs %>% dplyr::select(c("Parm.Code", "NewNameID", "Description", 
                                "Analysis.Type", "Result.Type", "Sample.Unit.Group", 
-                               "Sample.Unit", "CAS")) %>% unique()
+                               "Sample.Unit", "CAS")) #%>% unique()
 
-### NEW OBSERVED PROPERTIES not in EMS -------------
-new_OP_not_in_EMS <- 
+## OPs new to EnMoDS not in EMS
+OPs_new_to_EnMoDS <- 
   read_excel("./utils/config/ReferenceLists/New_OPS_not_in_EMS.xlsx", 
              sheet = "OPs_new")
 
 #get the unique list of OP IDs
-OPs_new <- new_OP_not_in_EMS %>% 
+OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>% 
   dplyr::select(c("Parm.Code", "NewNameID", "Description", 
                   "Analysis.Type", "Result.Type", "Sample.Unit.Group", 
-                  "Sample.Unit","CAS")) %>% unique()
+                  "Sample.Unit","CAS")) #%>% unique()
 
+#fixing the missing sample group id issue in the list
+OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>% mutate(Sample.Unit.Group = 
+              if_else(NewNameID == "Biological Sample Volume (vol.)", 
+                      "Volume", Sample.Unit.Group))
 
-# Merge all OPs and process -----------------------------------------------
+## Taxonomic OPs
+OPs_taxonomic <- read.csv("./utils/config/ReferenceLists/Taxonomic_OP.csv", stringsAsFactors = F) #1607
 
 #get the unique list of OP IDs
-OPs <- bind_rows(OPs, OPs_new) %>%
+OPs_taxonomic <- OPs_taxonomic %>% 
+  dplyr::select(c("Parm.Code", "NewNameID", "Description", "Analysis.Type", 
+                  "Result.Type", "Sample.Unit.Group", "Sample.Unit","CAS")) #%>%  unique()
+
+#use CAS for ITIS ID? Nope not allowed eye roll
+#OPs_unique$CAS <- unlist(lapply(str_split(OPs_unique$NewNameID, " - "), function(x) x[[1]][1]))
+
+#error holder these two are missing!
+#"39369 - Carex" 734
+#"40371 - Agropyron cristatum" 741
+
+## Merge all OPs and process
+
+#get the unique list of OP IDs
+OPs <- bind_rows(OPs, OPs_new_to_EnMoDS, OPs_taxonomic) %>%
         unique() %>% 
         group_by(NewNameID) %>% 
         mutate(Count = n()) %>%
@@ -256,6 +275,114 @@ OPs <- left_join(OPs, units,
 OPs$Analysis.Type <- toupper(OPs$Analysis.Type)
 OPs$Result.Type <- toupper(OPs$Result.Type)
 
+# METHODS -----------------------------------------------------------------
+Methods <- read_excel("./utils/config/ReferenceLists/Observed_Properties.xlsx")
+
+#Method names cannot contain semicolons
+
+#The units don't matter for non convertable OP units. For example microbial units. So remove them from consideration.
+Methods$Sample.Unit[Methods$Convertable.In.Samples == "N"] <- ""
+
+#get the new name (customId) and methods 
+Methods <- Methods %>% select(c("NewNameID", "Method.Code", "Method", "Method.Description"))
+
+OPs_ids <- get_profiles("prod", "observedproperties") %>% 
+  dplyr::select("id", "customId")
+
+#check that nothing has been dropped here!
+Methods_problematic <- anti_join(Methods, OPs_ids, by = join_by("NewNameID" == "customId")) 
+
+Methods <- left_join(Methods, OPs_ids, by = join_by("NewNameID" == "customId"))
+# 
+# list_methods <- unique(Methods %>% select(-c("NewNameID", "id")))
+# 
+# update_base_url_token("prod")
+# 
+# for (i in seq(1, nrow(list_methods))) {
+#   
+#   OPs_for_method <- Methods %>% filter(Method.Code == list_methods$Method.Code[i]) %>% select(id)
+#   
+#   result_list = list()
+#   
+#   for (j in seq(1, nrow(OPs_for_method))) {
+#     result_list[[j]] = list("id" = OPs_for_method$id[j])
+#   }
+#   
+#   
+#   #Make a new method and assign a single OP
+#   url <- paste0(base_url, 'v1/analysismethods')
+#   data_body <- list("methodId" = list_methods$Method.Code[i],
+#                     "name" = list_methods$Method[i],
+#                     "description" = list_methods$Method.Description[i],
+#                     "context" = "EMS Migration",
+#                     "observedProperties" = result_list
+#   )
+#   
+#   
+#   x<-POST(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+#   
+#   if (x$status_code != 200) {
+#     print(i)
+#     print(x$status_code)
+#     print(list_methods$Method[i])
+#   }
+#   
+# }
+
+OPs_for_methods <- Methods %>%
+  dplyr::select(id, Method.Code) %>%
+  group_by(Method.Code) %>%
+  summarise(
+    OPs_list = list(
+      map(id, ~ list("id" = .x))
+    ),
+    .groups = "drop"
+  )
+
+Methods <- unique(Methods %>% select(-c("NewNameID", "id")))
+
+Methods <- Methods %>%
+  left_join(OPs_for_methods, by = join_by(Method.Code == Method.Code),
+            keep = FALSE)
+
+# LABS --------------------------------------------------------------------
+Labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F)
+
+Labs$Description = str_c("Created by ", Labs$WHO_CREATED, " on ", Labs$WHEN_CREATED)
+
+# TAXONOMY LEVELS ---------------------------------------------------------
+taxonomyLevels <- get_profiles("prod", "taxonomylevels")
+
+# taxonomyLevels <- taxonomyLevels$customId
+# 
+# taxonomyLevels <- taxonomyLevels %>%
+#   summarise(
+#     list(map(customId, ~ list(customId = .x))
+#     )
+#   )
+
+# FISH TAXONOMY -----------------------------------------------------------
+Taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx", sheet = "Taxonomy")
+
+# COLLECTION METHODS ------------------------------------------------------
+collection_methods <- read_excel("./utils/config/ReferenceLists/Collection_methods.xlsx", sheet = "CollectionMethods")
+
+#remove collection methods we no longer want
+collection_methods <- collection_methods %>% filter(`New EnMoDS Short Name/ID` != "DELETE")
+
+#select just the needed columns
+collection_methods <- collection_methods %>% select(c("New EnMoDS Short Name/ID", "EMS CODE", "Definition"))
+
+#merge ems codes into a long string
+collection_methods <- collection_methods %>% 
+  group_by(`New EnMoDS Short Name/ID`) %>% 
+  reframe(merged_codes = paste(`EMS CODE`, collapse = ", "), Definition)
+
+#remove duplicates
+collection_methods<-distinct(collection_methods)
+
+#replace EMS code with blanks where its NA
+collection_methods$merged_codes[collection_methods$merged_codes == 'NA'] = ""
 
 # Function based configuration development----------------------------------------------------
 
@@ -342,6 +469,26 @@ get_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/observedproperties")
     
+  } else if(data_type == "methods"){
+    
+    url <- str_c(base_url, "v1/analysismethods")
+    
+  } else if(data_type == "labs"){
+    
+    url <- str_c(base_url, "v1/laboratories")
+    
+  } else if(data_type == "taxonomylevels"){
+    
+    url <- str_c(base_url, "v1/taxonomylevels")
+    
+  } else if(data_type == "fishtaxonomy"){
+    
+    url <- str_c(base_url, "v1/taxons")
+    
+  } else if(data_type == "collectionmethods"){
+    
+    url <- str_c(base_url, "v1/collectionmethods")
+    
   }
   
   temp_profiles <- get_profiles_for_url(env, url)
@@ -350,15 +497,25 @@ get_profiles <- function(env, data_type){
   
 }
 
+get_check <- get_profiles("prod", "collectionmethods")
+
+get_check <- get_profiles("test", "taxonomylevels")
+
+get_check <- get_profiles("prod", "fishtaxonomy")
+
+get_check <- get_profiles("prod", "labs")
+
+get_check <- get_profiles("prod", "methods")
+
 get_check <- get_profiles("prod", "extendedattributes")
 
 get_check <- get_profiles("prod", "observedproperties")
 
 del_profiles <- function(env, data_type){
   
-  # env <- "prod"
-  # 
-  # data_type <- "extendedattributes"
+  #env <- "prod"
+
+  #data_type <- "labs"#"observedproperties"
 
   temp_profile <- get_profiles(env, data_type)
   
@@ -369,23 +526,43 @@ del_profiles <- function(env, data_type){
   
   if(data_type == "unitgroups"){
     
-    base_url <- str_c(base_url, "v1/unitgroups/")
+    url <- str_c(base_url, "v1/unitgroups/")
     
   } else if(data_type == "units"){
     
-    base_url <- str_c(base_url, "v1/units/")
+    url <- str_c(base_url, "v1/units/")
     
   } else if(data_type == "extendedattributes"){
     
-    base_url <- str_c(base_url, "v1/extendedattributes/")
+    url <- str_c(base_url, "v1/extendedattributes/")
     
   } else if(data_type == "observedproperties"){
     
-    base_url <- str_c(base_url, "v1/observedproperties/")
+    url <- str_c(base_url, "v1/observedproperties/")
+    
+  } else if(data_type == "methods"){
+    
+    url <- str_c(base_url, "v1/analysismethods/")
+    
+  } else if(data_type == "labs"){
+    
+    url <- str_c(base_url, "v1/laboratories/")
+    
+  } else if(data_type == "fishtaxonomy"){
+    
+    url <- str_c(base_url, "v1/taxons/")
+    
+  } else if(data_type == "collectionmethods"){
+    
+    url <- str_c(base_url, "v1/collectionmethods/")
     
   }
   
   del_ids <- temp_profile$id
+  
+  #response <- character(length = length(del_ids))
+  
+  i = 1
   
   for(id in del_ids){
     
@@ -393,13 +570,19 @@ del_profiles <- function(env, data_type){
     
     data_body <- list()
     
-    url <- str_c(base_url, id)
+    url_id <- str_c(url, id)
     
     #Make the unit group
-    x<-DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), 
+    x<-DELETE(url_id, config = c(add_headers(.headers = c('Authorization' = token))), 
               body = data_body, encode = 'json')
     
-    #response_check <- fromJSON(rawToChar(x$content))$message
+    print(i)
+    
+    #response_check <- fromJSON(rawToChar(x$content))
+    
+    #response[i] <- if ("message" %in% names(response_check)) response_check$message else ""
+    
+    i = i + 1
     
     # Add a sleep to avoid hitting the rate limit
     #Sys.sleep(5)
@@ -417,10 +600,21 @@ del_profiles <- function(env, data_type){
     
   }
   
-  #return(response_check)
+  #return(response)
   return()
   
 }
+
+del_check <- del_profiles("prod", "collectionmethods")
+
+del_check <- del_profiles("prod", "fishtaxonomy")
+
+del_check <- del_profiles("prod", "labs")
+
+del_check <- del_profiles("prod", "methods")
+
+#OPs use units so have to be deleted first
+del_check <- del_profiles("prod", "observedproperties")
 
 del_check <- del_profiles("prod", "units")
 
@@ -428,14 +622,39 @@ del_check <- del_profiles("prod", "unitgroups")
 
 del_check <- del_profiles("prod", "extendedattributes")
 
-del_check <- del_profiles("prod", "observedproperties")
+# put_profiles <- function(env, data_type, profile){
+#   
+#   #default is "test" and for prod env, use the function parameter "prod"
+#   url_parameters <- update_base_url_token(env)
+#   base_url <- url_parameters[[1]]
+#   token <- url_parameters[[2]]
+#   
+#   # Convert to JSON
+#   data_body <- toJSON(list(customId = profile), pretty = TRUE)
+#   
+#   # PUT request
+#   x <- PUT(url, config = c(add_headers(.headers = 
+#                 c('Authorization' = token))), body = data_body, 
+#            add_headers("Content-Type" = "application/json"),
+#     encode = 'json'
+#   )
+#   
+#   message <- fromJSON(rawToChar(x$content))
+#   
+#   return(message)
+#   
+# }
+# 
+# put_profiles("prod", "taxonomylevels", taxonomyLevels)
 
 post_profiles <- function(env, data_type, profile){
 
   # env = "prod"
   # 
-  # data_type = "observedproperties"
+  # data_type = "fishtaxonomy"
   # 
+  # profile <- Taxons
+
   # profile <- OPs %>%
   #   dplyr::filter(NewNameID == "pH (acidity)")
 
@@ -496,6 +715,41 @@ post_profiles <- function(env, data_type, profile){
     
     rel_var <- c("Parm.Code", "NewNameID", "Description", "Analysis.Type",
                  "unit.group.id", "unit.id", "CAS")
+    
+  } else if(data_type == "methods"){
+    
+    url <- paste0(base_url, "v1/analysismethods")
+    
+    rel_var <- c("Method.Code", "Method", "Method.Description", "OPs_list")
+    
+  } else if(data_type == "labs"){
+    
+    url <- str_c(base_url, "v1/laboratories")
+    
+    rel_var <- c("ID", "Name", "Description", "Address", "Point.Of.Contact", 
+                 "Email", "Phone.Number")
+    
+  } else if(data_type == "fishtaxonomy"){
+    
+    url <- str_c(base_url, "v1/taxons")
+    
+    taxonomylevels_profiles <- get_profiles("prod", "taxonomylevels")
+    
+    profile <- profile %>%
+      left_join(taxonomylevels_profiles %>% 
+                  dplyr::select(id, customId) %>%
+                  rename(Taxonomy.Level.ID = id), 
+                by = join_by(Level == customId), 
+                keep = FALSE)
+    
+    rel_var <- c("Taxonomy.Level.ID", "Scientific Name", "Common Name", "Source", 
+                 "Comments", "ITIS TSN")
+    
+  } else if(data_type == "collectionmethods"){
+    
+    url <- str_c(base_url, "v1/collectionmethods")
+    
+    rel_var <- c("New EnMoDS Short Name/ID", "merged_codes", "Definition")
     
   }
   
@@ -566,6 +820,41 @@ post_profiles <- function(env, data_type, profile){
           "casNumber" = temp_profile$CAS
       )
       
+    } else if(data_type == "methods"){
+      
+      data_body <- list("methodId" = temp_profile$Method.Code,
+                        "name" = temp_profile$Method,
+                        "description" = temp_profile$Method.Description,
+                        "context" = "EMS Migration",
+                        "observedProperties" = temp_profile$OPs_list[[1]]
+      )
+      
+    } else if(data_type == "labs"){
+      
+      data_body <- list("customId" = temp_profile$ID,
+                        "name" = temp_profile$Name,
+                        "description" = temp_profile$Description,
+                        "address" = temp_profile$Address,
+                        "pointOfContact" = temp_profile$Point.Of.Contact,
+                        "emailAddress" = temp_profile$Email,
+                        "phoneNumber" = temp_profile$Phone.Number)
+      
+    } else if(data_type == "fishtaxonomy"){
+      
+      data_body <- list("scientificName" = temp_profile$`Scientific Name`,
+                        "commonName" = temp_profile$`Common Name`,
+                        "TaxonomyLevel" = list("id" = temp_profile$Taxonomy.Level.ID),
+                        "source" = temp_profile$Source,
+                        "comment" = temp_profile$Comments,
+                        "itisTsn" = temp_profile$`ITIS TSN`,
+                        "itisURL" = "www.google.ca")
+      
+    } else if(data_type == "collectionmethods"){
+      
+      data_body <- list("customId" = temp_profile$`New EnMoDS Short Name/ID`,
+                          "identifierOrganization" = temp_profile$merged_codes,
+                          "name" = temp_profile$Definition)
+      
     }
     
     #Post the configuration
@@ -578,17 +867,46 @@ post_profiles <- function(env, data_type, profile){
     
   }
   
+  post_check <- get_profiles(env, data_type)
+  
+  if(dim(post_check)[1] >= dim(profile)[1]){
+    
+    print("All items in reference list have likely been imported")
+    
+  } else {
+    
+    print("It seems like all items in reference list were not imported")
+    
+  }
+  
   return(messages)
   
 }
+
+post_profiles("prod", "collectionmethods", collection_methods)
+
+post_profiles("prod", "fishtaxonomy", Taxons)
 
 post_profiles("prod", "unitgroups", unit_groups)
 
 post_profiles("prod", "units", units)
 
-post_profiles("prod", "extendedattributes", extendedAttributes)
+post_check <- post_profiles("prod", "observedproperties", OPs)
 
-post_profiles("prod", "observedproperties", OPs)
+post_check <- post_profiles("prod", "extendedattributes", extendedAttributes)
+
+post_check <- post_profiles("prod", "methods", Methods)
+
+post_check <- post_profiles("prod", "labs", Labs)
+
+# Checking which entries are not getting posted ---------------------------
+# #not all OPs getting posted
+# #compare get_check for OPs with raw OPs
+# OPs_not_posted <- OPs %>% anti_join(get_check, 
+#                     by = join_by("NewNameID" == "customId"))
+# 
+# OPs_not_posted <- OPs %>% dplyr::filter(NewNameID == "Biological Sample Volume (vol.)")
+
 
 # Categorical values issue ------------------------------------------------
 
