@@ -494,7 +494,7 @@ delete_all_records_keep_locations <- function(base_url, token) {
       
       element <- rbind(element, temp_element)
       
-      print(paste("Gett location records:", i*1000)) #for every 1000s locations
+      print(paste("Get location records:", i*1000)) #for every 1000s locations
     }
     
   } else {
@@ -517,6 +517,13 @@ delete_all_records_keep_locations <- function(base_url, token) {
     #data_body <- list()
     
     #DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+    
+    #only call deletes if the location has at least one field visit else skip
+    url <- paste0(base_url, 'v1/fieldvisits?samplingLocationIds=', loc_id, '&limit=10')
+    x <- GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+    total_field_visit <- fromJSON(rawToChar(x$content))$total
+    
+    if (total_field_visit > 0) {
     
     #specimens
     #First get a list of specimen IDs for this location
@@ -713,7 +720,7 @@ delete_all_records_keep_locations <- function(base_url, token) {
       print(paste("Number of reaminig field visits:" ,total_no_field_visits))
       
     }
-    
+    } else {print(paste("skipping location", all_locations$customId[j], "no field visits or obs to delete"))}
   }
 }
 
