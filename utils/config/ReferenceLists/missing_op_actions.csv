@@ -1,189 +1,189 @@
-"EMS.Result.Unit","PARM_CD","parameter_name","Analysis.Method","Sample.Unit.Short.Name","Sample.Unit.Modifier","AQS.Name","name_in_aqs","cas_in_aqs","Analysis.Method_in_AQS"
-"%T/cm","UVTR","UV Transmittance 254nm","XM14","(app.)","","UV Transmittance 254nm (app.)",1,"",1
-"AU/cm","UV02","UV Absorbance 254nm","XM14","(app.)","","UV Absorbance 254nm (app.)",1,"",1
-"mg/L","P015","Propazine","E752","(fl. conc.)","","Propazine (fl. conc.)",1,"139-40-2",0
-"mg/L","M033","Myclobutanil","E752","(fl. conc.)","","Myclobutanil (fl. conc.)",1,"88671-89-0",0
-"mg/L","TRIBE","CAS RN: 101200-48-0 Tribenuron-methyl","E752","(fl. conc.)","","CAS RN: 101200-48-0 Tribenuron-methyl (fl. conc.)",0,"",0
-"mg/L","FLUD","Fludioxonil","E752","(fl. conc.)","","Fludioxonil (fl. conc.)",1,"",0
-"mg/L","PYCS","Pyraclostrobin","E752","(fl. conc.)","","Pyraclostrobin (fl. conc.)",1,"175013-18-0",0
-"mg/L","SE","Selenium species, Other (as Se)","EC540","(fl. conc.)","","Selenium species, Other (as Se) (fl. conc.)",0,"",0
-"mg/L","D079","Deltamethring","E752","(fl. conc.)","","Deltamethring (fl. conc.)",1,"",0
-"mg/L","Q100","Quizalofop-ethyl","E752","(fl. conc.)","","Quizalofop-ethyl (fl. conc.)",1,"76578-14-8",0
-"mg/L","B003","Benomyl","E752","(fl. conc.)","","Benomyl (fl. conc.)",0,"",0
-"mg/L","C084","Carboxin","E752","(fl. conc.)","","Carboxin (fl. conc.)",1,"5234-68-4",0
-"mg/L","BOSC","Boscalid","E752","(fl. conc.)","","Boscalid (fl. conc.)",1,"188425-85-6",0
-"mg/L","M005","Metolachlor","E752","(fl. conc.)","","Metolachlor (fl. conc.)",1,"51218-45-2",0
-"mg/L","M006","Metribuzin","E752","(fl. conc.)","","Metribuzin (fl. conc.)",1,"21087-64-9",0
-"mg/L","P046","Propanil","E752","(fl. conc.)","","Propanil (fl. conc.)",1,"709-98-8",0
-"mg/L","DIOM","Dimethoate + Omethoate (as Dimethoate)","E752","(fl. conc.)","","Dimethoate + Omethoate (as Dimethoate) (fl. conc.)",0,"",0
-"mg/L","CYNZ","Cyanazine","E752","(fl. conc.)","","Cyanazine (fl. conc.)",1,"21725-46-2",0
-"mg/L","ADDP","Atrazine-desthyl-desisopropyl","E752","(fl. conc.)","","Atrazine-desthyl-desisopropyl (fl. conc.)",1,"3397-62-4",0
-"mg/L","T082","Triallate","E752","(fl. conc.)","","Triallate (fl. conc.)",1,"2303-17-5",0
-"mg/L","THM-","Trihalomethanes","P016","(fl. conc.)","","Trihalomethanes (fl. conc.)",1,"",1
-"mg/L","A015","De-ethyl Atrazine","E752","(fl. conc.)","","De-ethyl Atrazine (fl. conc.)",1,"6190-65-4",0
-"mg/L","SEO3","selenite SeO3(-2)","E540","(fl. conc.)","","selenite SeO3(-2) (fl. conc.)",1,"14124-67-5",1
-"mg/L","M001","Malathion","E752","(fl. conc.)","","Malathion (fl. conc.)",1,"121-75-5",0
-"mg/L","TEME","Temephos","E752","(fl. conc.)","","Temephos (fl. conc.)",1,"3383-96-8",0
-"mg/L","C001","Carbaryl","E752","(fl. conc.)","","Carbaryl (fl. conc.)",1,"63-25-2",0
-"mg/L","F101","Fenoxapropethyl","E752","(fl. conc.)","","Fenoxapropethyl (fl. conc.)",1,"",0
-"mg/L","ATMT","Atrazine + metabolites; Total","E752","(fl. conc.)","","Atrazine + metabolites; Total (fl. conc.)",1,"1912-24-9, 6190-65-4,1007-28-9",0
-"mg/L","ATDP","Atrazine-desisopropyl","E752","(fl. conc.)","","Atrazine-desisopropyl (fl. conc.)",1,"1007-28-9",0
-"mg/L","T081","Terbutryn","E752","(fl. conc.)","","Terbutryn (fl. conc.)",1,"886-50-0",0
-"mg/L","D001","Dimethoate","E752","(fl. conc.)","","Dimethoate (fl. conc.)",1,"60-51-5",0
-"mg/L","OMET-D","Omethoate (as dimethoate)","E752","(fl. conc.)","","Omethoate (as dimethoate) (fl. conc.)",0,"",0
-"mg/L","P017","Prometryne","E752","(fl. conc.)","","Prometryne (fl. conc.)",1,"7287-19-6",0
-"mg/L","MU34","Methyl urea; 3-3-(3;4-dichlorophenyl)-1l)-1- [DCPMU]","E752","(fl. conc.)","","Methyl urea; 3-3-(3;4-dichlorophenyl)-1l)-1- [DCPMU] (fl. conc.)",1,"3567-62-2",0
-"mg/L","IMID","Imidacloprid (Insecticide/Pesticide)","E752","(fl. conc.)","","Imidacloprid (Insecticide/Pesticide) (fl. conc.)",1,"",0
-"mg/L","OMET","Omethoate","E752","(fl. conc.)","","Omethoate (fl. conc.)",1,"1113-02-6",0
-"mg/L","F018","Fluazifop-p-butyl","E752","(fl. conc.)","","Fluazifop-p-butyl (fl. conc.)",1,"",0
-"mg/L","A026","Ametryn","E752","(fl. conc.)","","Ametryn (fl. conc.)",1,"834-12-8",0
-"mg/L","TRIF","Trifloxystrobin","E752","(fl. conc.)","","Trifloxystrobin (fl. conc.)",1,"141517-21-7",0
-"mg/L","A004","Alachlor","E752","(fl. conc.)","","Alachlor (fl. conc.)",1,"15972-60-8",0
-"mg/L","TRALK","CAS RN: 87820-88-0 Tralkoxydim","E752","(fl. conc.)","","CAS RN: 87820-88-0 Tralkoxydim (fl. conc.)",0,"",0
-"mg/L","D010","Diazinon","E752","(fl. conc.)","","Diazinon (fl. conc.)",1,"333-41-5",0
-"mg/L","SEO4","selenate SeO4(-2)","E540","(fl. conc.)","","selenate SeO4(-2) (fl. conc.)",1,"14124-68-6",1
-"mg/L","SECN","selenocyanate SeCN(-1)","E540","(fl. conc.)","","selenocyanate SeCN(-1) (fl. conc.)",1,"5749-48-4",1
-"mg/L","TRINE","CAS RN: 95266-40-3 Trinexapac-ethyl","E752","(fl. conc.)","","CAS RN: 95266-40-3 Trinexapac-ethyl (fl. conc.)",0,"",0
-"mg/L","D078","Diuron","E752","(fl. conc.)","","Diuron (fl. conc.)",1,"330-54-1",0
-"mg/L","T008","Terbufos","E752","(fl. conc.)","","Terbufos (fl. conc.)",1,"13071-79-9",0
-"mg/L","P045","Prometon","E752","(fl. conc.)","","Prometon (fl. conc.)",1,"1610-18-0",0
-"mg/L","A003","Aldicarb","E752","(fl. conc.)","","Aldicarb (fl. conc.)",1,"116-06-3",0
-"mg/L","B051","Bendiocarb","E752","(fl. conc.)","","Bendiocarb (fl. conc.)",1,"22781-23-3",0
-"mg/L","CATP","Chlorantraniliprole","E752","(fl. conc.)","","Chlorantraniliprole (fl. conc.)",1,"",0
-"mg/L","P048","Propiconazole","E752","(fl. conc.)","","Propiconazole (fl. conc.)",1,"60207-90-1",0
-"mg/L","AZOX","Azoxystrobin","E752","(fl. conc.)","","Azoxystrobin (fl. conc.)",1,"131860-33-8",0
-"mg/L","P103","Propachlor","E752","(fl. conc.)","","Propachlor (fl. conc.)",1,"1918-16-7",0
-"mg/L","TRIT","Triticonazole","E752","(fl. conc.)","","Triticonazole (fl. conc.)",1,"131983-72-7",0
-"mg/L","A016","Atrazine","E752","(fl. conc.)","","Atrazine (fl. conc.)",1,"1912-24-9",0
-"mg/L","IMAZA","CAS RN: 81405-85-8 Imazamethabenz-methyl","E752","(fl. conc.)","","CAS RN: 81405-85-8 Imazamethabenz-methyl (fl. conc.)",0,"",0
-"mg/L","E011","EPTC","E752","(fl. conc.)","","EPTC (fl. conc.)",0,"",0
-"mg/L","TEBU","Tebuthiuron","E752","(fl. conc.)","","Tebuthiuron (fl. conc.)",1,"34014-18-1",0
-"mg/L","A008","Azinphos Methyl","E752","(fl. conc.)","","Azinphos Methyl (fl. conc.)",1,"86-50-0",0
-"mg/L","AT2H","Atrazine; 2-hydroxy-","E752","(fl. conc.)","","Atrazine; 2-hydroxy- (fl. conc.)",1,"2163-68-0",0
-"mg/L","SETH","CAS RN: 74051-80-2 Sethoxydim","E752","(fl. conc.)","","CAS RN: 74051-80-2 Sethoxydim (fl. conc.)",0,"",0
-"mg/L","P018","Propoxur","E752","(fl. conc.)","","Propoxur (fl. conc.)",1,"114-26-1",0
-"mg/L","THIME","CAS RN: 79277-27-3 Thifensulfuron-methyl","E752","(fl. conc.)","","CAS RN: 79277-27-3 Thifensulfuron-methyl (fl. conc.)",0,"",0
-"mg/L","ANDA","Atrazine + n-dealkylated metabolites","E752","(fl. conc.)","","Atrazine + n-dealkylated metabolites (fl. conc.)",1,"1912-24-9, 6190-65-4, 1007-28-9",0
-"mg/L","S001","Simazine","E752","(fl. conc.)","","Simazine (fl. conc.)",1,"122-34-9",0
-"mg/L","M004","Metalaxyl","E752","(fl. conc.)","","Metalaxyl (fl. conc.)",1,"57837-19-1",0
-"mg/L","P005","Phorate","E752","(fl. conc.)","","Phorate (fl. conc.)",1,"298-02-2",0
-"mg/L","DCPM","Diclofop-methyl","E752","(fl. conc.)","","Diclofop-methyl (fl. conc.)",1,"51338-27-3",0
-"mg/L","C040","Carbofuran","E752","(fl. conc.)","","Carbofuran (fl. conc.)",1,"1563-66-2",0
-"mg/L","METSU","CAS RN: 74223-64-6 Metsulfuron-methyl","E752","(fl. conc.)","","CAS RN: 74223-64-6 Metsulfuron-methyl (fl. conc.)",0,"",0
-"mg/L","CLOT","Clothianidin (Insecticide/Pesticide)","E752","(fl. conc.)","","Clothianidin (Insecticide/Pesticide) (fl. conc.)",1,"210880-92-5",0
-"ng/L","PCB126","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl) (fl. conc.)",0,"",0
-"ng/L","PCB126","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl) (fl. conc.)",0,"",0
-"ng/L","PCB169","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl) (fl. conc.)",0,"",0
-"ng/L","PCB169","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl) (fl. conc.)",0,"",0
-"ng/L","PCB077","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl) (fl. conc.)",0,"",0
-"ng/L","PCB077","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl) (fl. conc.)",0,"",0
-"ng/L","PCB105","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl) (fl. conc.)",0,"",0
-"ng/L","PCB105","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl) (fl. conc.)",0,"",0
-"per mille","D2-H","Delta 2-Hydrogen","CRDS",NA,NA,"Delta 2-Hydrogen NA NA",0,"",0
-"per mille","D18O","Delta 18 Oxygen","CRDS",NA,NA,"Delta 18 Oxygen NA NA",0,"",0
-"pg/g wet","B061","1,2,3,4,7,8,9-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8,9-HpCDF (wet) (mass conc.)",1,"55673-89-7",1
-"pg/g wet","B072","1,2,3,6,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDF (wet) (mass conc.)",1,"57117-44-9",1
-"pg/g wet","B150","Total-TCDD","1101","(mass conc.)","(wet)","Total-TCDD (wet) (mass conc.)",1,"41903-57-5",1
-"pg/g wet","B104","2,3,4,6,7,8-HxCDF","1101","(mass conc.)","(wet)","2,3,4,6,7,8-HxCDF (wet) (mass conc.)",1,"60851-34-5",1
-"pg/g wet","B103","2,3,4,6,7,8-HxCDF","1101","(mass conc.)","(wet)","2,3,4,6,7,8-HxCDF (wet) (mass conc.)",1,"60851-34-5",1
-"pg/g wet","B067","1,2,3,4,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDF (wet) (mass conc.)",1,"70648-26-9",1
-"pg/g wet","B109","2,3,7,8-TCDD","1101","(mass conc.)","(wet)","2,3,7,8-TCDD (wet) (mass conc.)",1,"1746-01-6",1
-"pg/g wet","B139","Total-HxCDD","1101","(mass conc.)","(wet)","Total-HxCDD (wet) (mass conc.)",1,"34465-46-8",1
-"pg/g wet","B119","OCDD","1101","(mass conc.)","(wet)","OCDD (wet) (mass conc.)",1,"3268-87-9",1
-"pg/g wet","B058","1,2,3,4,6,7,8-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDF (wet) (mass conc.)",1,"67562-39-4",1
-"pg/g wet","B107","2,3,4,7,8-PeCDF","1101","(mass conc.)","(wet)","2,3,4,7,8-PeCDF (wet) (mass conc.)",1,"57117-31-4",1
-"pg/g wet","B106","2,3,4,7,8-PeCDF","1101","(mass conc.)","(wet)","2,3,4,7,8-PeCDF (wet) (mass conc.)",1,"57117-31-4",1
-"pg/g wet","B135","Total-HpCDF","1101","(mass conc.)","(wet)","Total-HpCDF (wet) (mass conc.)",1,"38998-75-3",1
-"pg/g wet","B141","Total-HxCDF","1101","(mass conc.)","(wet)","Total-HxCDF (wet) (mass conc.)",1,"55684-94-1",1
-"pg/g wet","B145","Total-PeCDD","1101","(mass conc.)","(wet)","Total-PeCDD (wet) (mass conc.)",1,"36088-22-9",1
-"pg/g wet","B133","Total-HpCDD","1101","(mass conc.)","(wet)","Total-HpCDD (wet) (mass conc.)",1,"37871-00-4",1
-"pg/g wet","B110","2,3,7,8-TCDD","1101","(mass conc.)","(wet)","2,3,7,8-TCDD (wet) (mass conc.)",1,"1746-01-6",1
-"pg/g wet","B081","1,2,3,7,8-PeCDD","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDD (wet) (mass conc.)",1,"40321-76-4",1
-"pg/g wet","B138","Total-HxCDD","1101","(mass conc.)","(wet)","Total-HxCDD (wet) (mass conc.)",1,"34465-46-8",1
-"pg/g wet","B060","1,2,3,4,7,8,9-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8,9-HpCDF (wet) (mass conc.)",1,"55673-89-7",1
-"pg/g wet","B136","Total-HpCDF","1101","(mass conc.)","(wet)","Total-HpCDF (wet) (mass conc.)",1,"38998-75-3",1
-"pg/g wet","B148","Total-PeCDF","1101","(mass conc.)","(wet)","Total-PeCDF (wet) (mass conc.)",1,"30402-15-4",1
-"pg/g wet","B153","Total-TCDF","1101","(mass conc.)","(wet)","Total-TCDF (wet) (mass conc.)",1,"55722-27-5",1
-"pg/g wet","B064","1,2,3,4,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDD (wet) (mass conc.)",1,"39227-28-6",1
-"pg/g wet","B112","2,3,7,8-TCDF","1101","(mass conc.)","(wet)","2,3,7,8-TCDF (wet) (mass conc.)",1,"51207-31-9",1
-"pg/g wet","B070","1,2,3,6,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDD (wet) (mass conc.)",1,"57653-85-7",1
-"pg/g wet","B122","OCDF","1101","(mass conc.)","(wet)","OCDF (wet) (mass conc.)",1,"39001-02-0",1
-"pg/g wet","B063","1,2,3,4,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDD (wet) (mass conc.)",1,"39227-28-6",1
-"pg/g wet","B132","Total-HpCDD","1101","(mass conc.)","(wet)","Total-HpCDD (wet) (mass conc.)",1,"37871-00-4",1
-"pg/g wet","B147","Total-PeCDF","1101","(mass conc.)","(wet)","Total-PeCDF (wet) (mass conc.)",1,"30402-15-4",1
-"pg/g wet","B055","1,2,3,4,6,7,8-HpCDD","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDD (wet) (mass conc.)",1,"35822-46-9",1
-"pg/g wet","B113","2,3,7,8-TCDF","1101","(mass conc.)","(wet)","2,3,7,8-TCDF (wet) (mass conc.)",1,"51207-31-9",1
-"pg/g wet","B084","1,2,3,7,8-PeCDF","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDF (wet) (mass conc.)",1,"57117-41-6",1
-"pg/g wet","B151","Total-TCDD","1101","(mass conc.)","(wet)","Total-TCDD (wet) (mass conc.)",1,"41903-57-5",1
-"pg/g wet","B075","1,2,3,7,8,9-HxCDD","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDD (wet) (mass conc.)",1,"19408-74-3",1
-"pg/g wet","B054","1,2,3,4,6,7,8-HpCDD","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDD (wet) (mass conc.)",1,"35822-46-9",1
-"pg/g wet","B142","Total-HxCDF","1101","(mass conc.)","(wet)","Total-HxCDF (wet) (mass conc.)",1,"55684-94-1",1
-"pg/g wet","B069","1,2,3,6,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDD (wet) (mass conc.)",1,"57653-85-7",1
-"pg/g wet","B154","Total-TCDF","1101","(mass conc.)","(wet)","Total-TCDF (wet) (mass conc.)",1,"55722-27-5",1
-"pg/g wet","B118","OCDD","1101","(mass conc.)","(wet)","OCDD (wet) (mass conc.)",1,"3268-87-9",1
-"pg/g wet","B079","1,2,3,7,8,9-HxCDF","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDF (wet) (mass conc.)",1,"72918-21-9",1
-"pg/g wet","B082","1,2,3,7,8-PeCDD","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDD (wet) (mass conc.)",1,"40321-76-4",1
-"pg/g wet","B121","OCDF","1101","(mass conc.)","(wet)","OCDF (wet) (mass conc.)",1,"39001-02-0",1
-"pg/g wet","B144","Total-PeCDD","1101","(mass conc.)","(wet)","Total-PeCDD (wet) (mass conc.)",1,"36088-22-9",1
-"pg/g wet","B066","1,2,3,4,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDF (wet) (mass conc.)",1,"70648-26-9",1
-"pg/g wet","B078","1,2,3,7,8,9-HxCDF","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDF (wet) (mass conc.)",1,"72918-21-9",1
-"pg/g wet","B073","1,2,3,6,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDF (wet) (mass conc.)",1,"57117-44-9",1
-"pg/g wet","B076","1,2,3,7,8,9-HxCDD","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDD (wet) (mass conc.)",1,"19408-74-3",1
-"pg/g wet","B085","1,2,3,7,8-PeCDF","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDF (wet) (mass conc.)",1,"57117-41-6",1
-"pg/g wet","B057","1,2,3,4,6,7,8-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDF (wet) (mass conc.)",1,"67562-39-4",1
-"pg/L","B058","1,2,3,4,6,7,8-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDF (fl. conc.)",1,"67562-39-4",1
-"pg/L","B150","Total-TCDD","E1613B","(fl. conc.)","","Total-TCDD (fl. conc.)",1,"41903-57-5",1
-"pg/L","B145","Total-PeCDD","E1613B","(fl. conc.)","","Total-PeCDD (fl. conc.)",1,"36088-22-9",1
-"pg/L","B139","Total-HxCDD","E1613B","(fl. conc.)","","Total-HxCDD (fl. conc.)",1,"34465-46-8",1
-"pg/L","B066","1,2,3,4,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDF (fl. conc.)",1,"70648-26-9",1
-"pg/L","B069","1,2,3,6,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDD (fl. conc.)",1,"57653-85-7",1
-"pg/L","B082","1,2,3,7,8-PeCDD","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDD (fl. conc.)",1,"40321-76-4",1
-"pg/L","B118","OCDD","E1613B","(fl. conc.)","","OCDD (fl. conc.)",1,"3268-87-9",1
-"pg/L","B070","1,2,3,6,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDD (fl. conc.)",1,"57653-85-7",1
-"pg/L","B063","1,2,3,4,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDD (fl. conc.)",1,"39227-28-6",1
-"pg/L","B144","Total-PeCDD","E1613B","(fl. conc.)","","Total-PeCDD (fl. conc.)",1,"36088-22-9",1
-"pg/L","B112","2,3,7,8-TCDF","E1613B","(fl. conc.)","","2,3,7,8-TCDF (fl. conc.)",1,"51207-31-9",1
-"pg/L","B121","OCDF","E1613B","(fl. conc.)","","OCDF (fl. conc.)",1,"39001-02-0",1
-"pg/L","B067","1,2,3,4,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDF (fl. conc.)",1,"70648-26-9",1
-"pg/L","B133","Total-HpCDD","E1613B","(fl. conc.)","","Total-HpCDD (fl. conc.)",1,"37871-00-4",1
-"pg/L","B079","1,2,3,7,8,9-HxCDF","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDF (fl. conc.)",1,"72918-21-9",1
-"pg/L","B107","2,3,4,7,8-PeCDF","E1613B","(fl. conc.)","","2,3,4,7,8-PeCDF (fl. conc.)",1,"57117-31-4",1
-"pg/L","B103","2,3,4,6,7,8-HxCDF","E1613B","(fl. conc.)","","2,3,4,6,7,8-HxCDF (fl. conc.)",1,"60851-34-5",1
-"pg/L","B054","1,2,3,4,6,7,8-HpCDD","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDD (fl. conc.)",1,"35822-46-9",1
-"pg/L","B084","1,2,3,7,8-PeCDF","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDF (fl. conc.)",1,"57117-41-6",1
-"pg/L","B055","1,2,3,4,6,7,8-HpCDD","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDD (fl. conc.)",1,"35822-46-9",1
-"pg/L","B132","Total-HpCDD","E1613B","(fl. conc.)","","Total-HpCDD (fl. conc.)",1,"37871-00-4",1
-"pg/L","B153","Total-TCDF","E1613B","(fl. conc.)","","Total-TCDF (fl. conc.)",1,"55722-27-5",1
-"pg/L","B122","OCDF","E1613B","(fl. conc.)","","OCDF (fl. conc.)",1,"39001-02-0",1
-"pg/L","B151","Total-TCDD","E1613B","(fl. conc.)","","Total-TCDD (fl. conc.)",1,"41903-57-5",1
-"pg/L","B154","Total-TCDF","E1613B","(fl. conc.)","","Total-TCDF (fl. conc.)",1,"55722-27-5",1
-"pg/L","B085","1,2,3,7,8-PeCDF","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDF (fl. conc.)",1,"57117-41-6",1
-"pg/L","B075","1,2,3,7,8,9-HxCDD","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDD (fl. conc.)",1,"19408-74-3",1
-"pg/L","B106","2,3,4,7,8-PeCDF","E1613B","(fl. conc.)","","2,3,4,7,8-PeCDF (fl. conc.)",1,"57117-31-4",1
-"pg/L","B113","2,3,7,8-TCDF","E1613B","(fl. conc.)","","2,3,7,8-TCDF (fl. conc.)",1,"51207-31-9",1
-"pg/L","B057","1,2,3,4,6,7,8-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDF (fl. conc.)",1,"67562-39-4",1
-"pg/L","B060","1,2,3,4,7,8,9-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8,9-HpCDF (fl. conc.)",1,"55673-89-7",1
-"pg/L","B064","1,2,3,4,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDD (fl. conc.)",1,"39227-28-6",1
-"pg/L","B119","OCDD","E1613B","(fl. conc.)","","OCDD (fl. conc.)",1,"3268-87-9",1
-"pg/L","B147","Total-PeCDF","E1613B","(fl. conc.)","","Total-PeCDF (fl. conc.)",1,"30402-15-4",1
-"pg/L","B073","1,2,3,6,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDF (fl. conc.)",1,"57117-44-9",1
-"pg/L","B076","1,2,3,7,8,9-HxCDD","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDD (fl. conc.)",1,"19408-74-3",1
-"pg/L","B135","Total-HpCDF","E1613B","(fl. conc.)","","Total-HpCDF (fl. conc.)",1,"38998-75-3",1
-"pg/L","B141","Total-HxCDF","E1613B","(fl. conc.)","","Total-HxCDF (fl. conc.)",1,"55684-94-1",1
-"pg/L","B110","2,3,7,8-TCDD","E1613B","(fl. conc.)","","2,3,7,8-TCDD (fl. conc.)",1,"1746-01-6",1
-"pg/L","B081","1,2,3,7,8-PeCDD","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDD (fl. conc.)",1,"40321-76-4",1
-"pg/L","B072","1,2,3,6,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDF (fl. conc.)",1,"57117-44-9",1
-"pg/L","B104","2,3,4,6,7,8-HxCDF","E1613B","(fl. conc.)","","2,3,4,6,7,8-HxCDF (fl. conc.)",1,"60851-34-5",1
-"pg/L","B078","1,2,3,7,8,9-HxCDF","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDF (fl. conc.)",1,"72918-21-9",1
-"pg/L","B109","2,3,7,8-TCDD","E1613B","(fl. conc.)","","2,3,7,8-TCDD (fl. conc.)",1,"1746-01-6",1
-"pg/L","B138","Total-HxCDD","E1613B","(fl. conc.)","","Total-HxCDD (fl. conc.)",1,"34465-46-8",1
-"pg/L","B148","Total-PeCDF","E1613B","(fl. conc.)","","Total-PeCDF (fl. conc.)",1,"30402-15-4",1
-"pg/L","B142","Total-HxCDF","E1613B","(fl. conc.)","","Total-HxCDF (fl. conc.)",1,"55684-94-1",1
-"pg/L","B136","Total-HpCDF","E1613B","(fl. conc.)","","Total-HpCDF (fl. conc.)",1,"38998-75-3",1
-"pg/L","B061","1,2,3,4,7,8,9-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8,9-HpCDF (fl. conc.)",1,"55673-89-7",1
-"pH units","PH-F","pH-Field","XM09","(acidity)","","pH-Field (acidity)",1,"",0
-"ug/m3","PB-T","Lead Total","F113","(air conc.)","","Lead Total (air conc.)",1,"",0
-"ug/m3","CU-T","Copper Total","F113","(air conc.)","","Copper Total (air conc.)",1,"7440-50-8",0
-"ug/m3","CR-T","Chromium Total","F113","(air conc.)","","Chromium Total (air conc.)",1,"7440-47-3",0
-"ug/m3","AS-T","Arsenic Total","F113","(air conc.)","","Arsenic Total (air conc.)",1,"7440-38-2",0
-"ug/m3","CD-T","Cadmium Total","F113","(air conc.)","","Cadmium Total (air conc.)",1,"7440-43-9",0
+"EMS.Result.Unit","PARM_CD","parameter_name","Analysis.Method","Sample.Unit.Short.Name","Sample.Unit.Modifier","AQS.Name","name_in_aqs","desc","cas_in_aqs","Analysis.Method_in_AQS"
+"%T/cm","UVTR","UV Transmittance 254nm","XM14","(app.)","","UV Transmittance 254nm (app.)",1,"Physical Properties; EMS code: UVTR","",1
+"AU/cm","UV02","UV Absorbance 254nm","XM14","(app.)","","UV Absorbance 254nm (app.)",1,"Physical Properties; EMS code: UV02","",1
+"mg/L","P015","Propazine","E752","(fl. conc.)","","Propazine (fl. conc.)",1,"Pesticides; EMS code: P015","139-40-2",0
+"mg/L","M033","Myclobutanil","E752","(fl. conc.)","","Myclobutanil (fl. conc.)",1,"Pesticides; EMS code: M033","88671-89-0",0
+"mg/L","TRIBE","CAS RN: 101200-48-0 Tribenuron-methyl","E752","(fl. conc.)","","CAS RN: 101200-48-0 Tribenuron-methyl (fl. conc.)",0,"","",0
+"mg/L","FLUD","Fludioxonil","E752","(fl. conc.)","","Fludioxonil (fl. conc.)",1,"Pesticides; EMS code: FLUD","",0
+"mg/L","PYCS","Pyraclostrobin","E752","(fl. conc.)","","Pyraclostrobin (fl. conc.)",1,"Pesticides; EMS code: PYCS","175013-18-0",0
+"mg/L","SE","Selenium species, Other (as Se)","EC540","(fl. conc.)","","Selenium species, Other (as Se) (fl. conc.)",0,"","",0
+"mg/L","D079","Deltamethring","E752","(fl. conc.)","","Deltamethring (fl. conc.)",1,"Pesticides; EMS code: D079","",0
+"mg/L","Q100","Quizalofop-ethyl","E752","(fl. conc.)","","Quizalofop-ethyl (fl. conc.)",1,"Pesticides; EMS code: Q100","76578-14-8",0
+"mg/L","B003","Benomyl","E752","(fl. conc.)","","Benomyl (fl. conc.)",0,"","",0
+"mg/L","C084","Carboxin","E752","(fl. conc.)","","Carboxin (fl. conc.)",1,"Pesticides; EMS code: C084","5234-68-4",0
+"mg/L","BOSC","Boscalid","E752","(fl. conc.)","","Boscalid (fl. conc.)",1,"Pesticides; EMS code: BOSC","188425-85-6",0
+"mg/L","M005","Metolachlor","E752","(fl. conc.)","","Metolachlor (fl. conc.)",1,"Pesticides; EMS code: M005","51218-45-2",0
+"mg/L","M006","Metribuzin","E752","(fl. conc.)","","Metribuzin (fl. conc.)",1,"Pesticides; EMS code: M006","21087-64-9",0
+"mg/L","P046","Propanil","E752","(fl. conc.)","","Propanil (fl. conc.)",1,"Pesticides; EMS code: P046","709-98-8",0
+"mg/L","DIOM","Dimethoate + Omethoate (as Dimethoate)","E752","(fl. conc.)","","Dimethoate + Omethoate (as Dimethoate) (fl. conc.)",0,"","",0
+"mg/L","CYNZ","Cyanazine","E752","(fl. conc.)","","Cyanazine (fl. conc.)",1,"Pesticides; EMS code: CYNZ","21725-46-2",0
+"mg/L","ADDP","Atrazine-desthyl-desisopropyl","E752","(fl. conc.)","","Atrazine-desthyl-desisopropyl (fl. conc.)",1,"Pesticides; EMS code: ADDP","3397-62-4",0
+"mg/L","T082","Triallate","E752","(fl. conc.)","","Triallate (fl. conc.)",1,"Pesticides; EMS code: T082","2303-17-5",0
+"mg/L","THM-","Trihalomethanes","P016","(fl. conc.)","","Trihalomethanes (fl. conc.)",1,"Disinfection by Products (DBPs); EMS code: THM-","",1
+"mg/L","A015","De-ethyl Atrazine","E752","(fl. conc.)","","De-ethyl Atrazine (fl. conc.)",1,"Pesticides; EMS code: A015","6190-65-4",0
+"mg/L","SEO3","selenite SeO3(-2)","E540","(fl. conc.)","","selenite SeO3(-2) (fl. conc.)",1,"Organometallics; EMS code: SEO3","14124-67-5",1
+"mg/L","M001","Malathion","E752","(fl. conc.)","","Malathion (fl. conc.)",1,"Pesticides; EMS code: M001","121-75-5",0
+"mg/L","TEME","Temephos","E752","(fl. conc.)","","Temephos (fl. conc.)",1,"Pesticides; EMS code: TEME","3383-96-8",0
+"mg/L","C001","Carbaryl","E752","(fl. conc.)","","Carbaryl (fl. conc.)",1,"Pesticides; EMS code: C001","63-25-2",0
+"mg/L","F101","Fenoxapropethyl","E752","(fl. conc.)","","Fenoxapropethyl (fl. conc.)",1,"Pesticides; EMS code: F101","",0
+"mg/L","ATMT","Atrazine + metabolites; Total","E752","(fl. conc.)","","Atrazine + metabolites; Total (fl. conc.)",1,"Pesticides; EMS code: ATMT","1912-24-9, 6190-65-4,1007-28-9",0
+"mg/L","ATDP","Atrazine-desisopropyl","E752","(fl. conc.)","","Atrazine-desisopropyl (fl. conc.)",1,"Pesticides; EMS code: ATDP","1007-28-9",0
+"mg/L","T081","Terbutryn","E752","(fl. conc.)","","Terbutryn (fl. conc.)",1,"Pesticides; EMS code: T081","886-50-0",0
+"mg/L","D001","Dimethoate","E752","(fl. conc.)","","Dimethoate (fl. conc.)",1,"Pesticides; EMS code: D001","60-51-5",0
+"mg/L","OMET-D","Omethoate (as dimethoate)","E752","(fl. conc.)","","Omethoate (as dimethoate) (fl. conc.)",0,"","",0
+"mg/L","P017","Prometryne","E752","(fl. conc.)","","Prometryne (fl. conc.)",1,"Pesticides; EMS code: P017","7287-19-6",0
+"mg/L","MU34","Methyl urea; 3-3-(3;4-dichlorophenyl)-1l)-1- [DCPMU]","E752","(fl. conc.)","","Methyl urea; 3-3-(3;4-dichlorophenyl)-1l)-1- [DCPMU] (fl. conc.)",1,"Volatile Organic Compounds (VOCs); EMS code: MU34","3567-62-2",0
+"mg/L","IMID","Imidacloprid (Insecticide/Pesticide)","E752","(fl. conc.)","","Imidacloprid (Insecticide/Pesticide) (fl. conc.)",1,"Pesticides; EMS code: IMID","",0
+"mg/L","OMET","Omethoate","E752","(fl. conc.)","","Omethoate (fl. conc.)",1,"Pesticides; EMS code: OMET","1113-02-6",0
+"mg/L","F018","Fluazifop-p-butyl","E752","(fl. conc.)","","Fluazifop-p-butyl (fl. conc.)",1,"Pesticides; EMS code: F018","",0
+"mg/L","A026","Ametryn","E752","(fl. conc.)","","Ametryn (fl. conc.)",1,"Pesticides; EMS code: A026","834-12-8",0
+"mg/L","TRIF","Trifloxystrobin","E752","(fl. conc.)","","Trifloxystrobin (fl. conc.)",1,"Pesticides; EMS code: TRIF","141517-21-7",0
+"mg/L","A004","Alachlor","E752","(fl. conc.)","","Alachlor (fl. conc.)",1,"Pesticides; EMS code: A004","15972-60-8",0
+"mg/L","TRALK","CAS RN: 87820-88-0 Tralkoxydim","E752","(fl. conc.)","","CAS RN: 87820-88-0 Tralkoxydim (fl. conc.)",0,"","",0
+"mg/L","D010","Diazinon","E752","(fl. conc.)","","Diazinon (fl. conc.)",1,"Pesticides; EMS code: D010","333-41-5",0
+"mg/L","SEO4","selenate SeO4(-2)","E540","(fl. conc.)","","selenate SeO4(-2) (fl. conc.)",1,"Organometallics; EMS code: SEO4","14124-68-6",1
+"mg/L","SECN","selenocyanate SeCN(-1)","E540","(fl. conc.)","","selenocyanate SeCN(-1) (fl. conc.)",1,"Organometallics; EMS code: SECN","5749-48-4",1
+"mg/L","TRINE","CAS RN: 95266-40-3 Trinexapac-ethyl","E752","(fl. conc.)","","CAS RN: 95266-40-3 Trinexapac-ethyl (fl. conc.)",0,"","",0
+"mg/L","D078","Diuron","E752","(fl. conc.)","","Diuron (fl. conc.)",1,"Pesticides; EMS code: D078","330-54-1",0
+"mg/L","T008","Terbufos","E752","(fl. conc.)","","Terbufos (fl. conc.)",1,"Pesticides; EMS code: T008","13071-79-9",0
+"mg/L","P045","Prometon","E752","(fl. conc.)","","Prometon (fl. conc.)",1,"Pesticides; EMS code: P045","1610-18-0",0
+"mg/L","A003","Aldicarb","E752","(fl. conc.)","","Aldicarb (fl. conc.)",1,"Pesticides; EMS code: A003","116-06-3",0
+"mg/L","B051","Bendiocarb","E752","(fl. conc.)","","Bendiocarb (fl. conc.)",1,"Pesticides; EMS code: B051","22781-23-3",0
+"mg/L","CATP","Chlorantraniliprole","E752","(fl. conc.)","","Chlorantraniliprole (fl. conc.)",1,"Pesticides; EMS code: CATP","",0
+"mg/L","P048","Propiconazole","E752","(fl. conc.)","","Propiconazole (fl. conc.)",1,"Pesticides; EMS code: P048","60207-90-1",0
+"mg/L","AZOX","Azoxystrobin","E752","(fl. conc.)","","Azoxystrobin (fl. conc.)",1,"Pesticides; EMS code: AZOX","131860-33-8",0
+"mg/L","P103","Propachlor","E752","(fl. conc.)","","Propachlor (fl. conc.)",1,"Pesticides; EMS code: P103","1918-16-7",0
+"mg/L","TRIT","Triticonazole","E752","(fl. conc.)","","Triticonazole (fl. conc.)",1,"Pesticides; EMS code: TRIT","131983-72-7",0
+"mg/L","A016","Atrazine","E752","(fl. conc.)","","Atrazine (fl. conc.)",1,"Pesticides; EMS code: A016","1912-24-9",0
+"mg/L","IMAZA","CAS RN: 81405-85-8 Imazamethabenz-methyl","E752","(fl. conc.)","","CAS RN: 81405-85-8 Imazamethabenz-methyl (fl. conc.)",0,"","",0
+"mg/L","E011","EPTC","E752","(fl. conc.)","","EPTC (fl. conc.)",0,"","",0
+"mg/L","TEBU","Tebuthiuron","E752","(fl. conc.)","","Tebuthiuron (fl. conc.)",1,"Pesticides; EMS code: TEBU","34014-18-1",0
+"mg/L","A008","Azinphos Methyl","E752","(fl. conc.)","","Azinphos Methyl (fl. conc.)",1,"Pesticides; EMS code: A008","86-50-0",0
+"mg/L","AT2H","Atrazine; 2-hydroxy-","E752","(fl. conc.)","","Atrazine; 2-hydroxy- (fl. conc.)",1,"Pesticides; EMS code: AT2H","2163-68-0",0
+"mg/L","SETH","CAS RN: 74051-80-2 Sethoxydim","E752","(fl. conc.)","","CAS RN: 74051-80-2 Sethoxydim (fl. conc.)",0,"","",0
+"mg/L","P018","Propoxur","E752","(fl. conc.)","","Propoxur (fl. conc.)",1,"Pesticides; EMS code: P018","114-26-1",0
+"mg/L","THIME","CAS RN: 79277-27-3 Thifensulfuron-methyl","E752","(fl. conc.)","","CAS RN: 79277-27-3 Thifensulfuron-methyl (fl. conc.)",0,"","",0
+"mg/L","ANDA","Atrazine + n-dealkylated metabolites","E752","(fl. conc.)","","Atrazine + n-dealkylated metabolites (fl. conc.)",1,"Pesticides; EMS code: ANDA","1912-24-9, 6190-65-4, 1007-28-9",0
+"mg/L","S001","Simazine","E752","(fl. conc.)","","Simazine (fl. conc.)",1,"Pesticides; EMS code: S001","122-34-9",0
+"mg/L","M004","Metalaxyl","E752","(fl. conc.)","","Metalaxyl (fl. conc.)",1,"Pesticides; EMS code: M004","57837-19-1",0
+"mg/L","P005","Phorate","E752","(fl. conc.)","","Phorate (fl. conc.)",1,"Pesticides; EMS code: P005","298-02-2",0
+"mg/L","DCPM","Diclofop-methyl","E752","(fl. conc.)","","Diclofop-methyl (fl. conc.)",1,"Pesticides; EMS code: DCPM","51338-27-3",0
+"mg/L","C040","Carbofuran","E752","(fl. conc.)","","Carbofuran (fl. conc.)",1,"Pesticides; EMS code: C040","1563-66-2",0
+"mg/L","METSU","CAS RN: 74223-64-6 Metsulfuron-methyl","E752","(fl. conc.)","","CAS RN: 74223-64-6 Metsulfuron-methyl (fl. conc.)",0,"","",0
+"mg/L","CLOT","Clothianidin (Insecticide/Pesticide)","E752","(fl. conc.)","","Clothianidin (Insecticide/Pesticide) (fl. conc.)",1,"Pesticides; EMS code: CLOT","210880-92-5",0
+"ng/L","PCB126","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl) (fl. conc.)",0,"","",0
+"ng/L","PCB126","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 57465-28-8 (3,3',4,4',5-pentachlorobiphenyl) (fl. conc.)",0,"","",0
+"ng/L","PCB169","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl) (fl. conc.)",0,"","",0
+"ng/L","PCB169","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32774-16-6 (3,3',4,4',5,5'-hexachlorobiphenyl) (fl. conc.)",0,"","",0
+"ng/L","PCB077","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl) (fl. conc.)",0,"","",0
+"ng/L","PCB077","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-13-3 (3,3',4,4'-tetrachlorobiphenyl) (fl. conc.)",0,"","",0
+"ng/L","PCB105","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl) (fl. conc.)",0,"","",0
+"ng/L","PCB105","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl)","HRGCMS","(fl. conc.)","","CAS RN: 32598-14-4 (2,3,3',4,4'-pentachlorobiphenyl) (fl. conc.)",0,"","",0
+"per mille","D2-H","Delta 2-Hydrogen","CRDS",NA,NA,"Delta 2-Hydrogen NA NA",0,"","",0
+"per mille","D18O","Delta 18 Oxygen","CRDS",NA,NA,"Delta 18 Oxygen NA NA",0,"","",0
+"pg/g wet","B061","1,2,3,4,7,8,9-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8,9-HpCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B059","55673-89-7",1
+"pg/g wet","B072","1,2,3,6,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B071","57117-44-9",1
+"pg/g wet","B150","Total-TCDD","1101","(mass conc.)","(wet)","Total-TCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B149","41903-57-5",1
+"pg/g wet","B104","2,3,4,6,7,8-HxCDF","1101","(mass conc.)","(wet)","2,3,4,6,7,8-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B102","60851-34-5",1
+"pg/g wet","B103","2,3,4,6,7,8-HxCDF","1101","(mass conc.)","(wet)","2,3,4,6,7,8-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B102","60851-34-5",1
+"pg/g wet","B067","1,2,3,4,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B065","70648-26-9",1
+"pg/g wet","B109","2,3,7,8-TCDD","1101","(mass conc.)","(wet)","2,3,7,8-TCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B108","1746-01-6",1
+"pg/g wet","B139","Total-HxCDD","1101","(mass conc.)","(wet)","Total-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B137","34465-46-8",1
+"pg/g wet","B119","OCDD","1101","(mass conc.)","(wet)","OCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B117","3268-87-9",1
+"pg/g wet","B058","1,2,3,4,6,7,8-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B056","67562-39-4",1
+"pg/g wet","B107","2,3,4,7,8-PeCDF","1101","(mass conc.)","(wet)","2,3,4,7,8-PeCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B105","57117-31-4",1
+"pg/g wet","B106","2,3,4,7,8-PeCDF","1101","(mass conc.)","(wet)","2,3,4,7,8-PeCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B105","57117-31-4",1
+"pg/g wet","B135","Total-HpCDF","1101","(mass conc.)","(wet)","Total-HpCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B134","38998-75-3",1
+"pg/g wet","B141","Total-HxCDF","1101","(mass conc.)","(wet)","Total-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B140","55684-94-1",1
+"pg/g wet","B145","Total-PeCDD","1101","(mass conc.)","(wet)","Total-PeCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B143","36088-22-9",1
+"pg/g wet","B133","Total-HpCDD","1101","(mass conc.)","(wet)","Total-HpCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B131","37871-00-4",1
+"pg/g wet","B110","2,3,7,8-TCDD","1101","(mass conc.)","(wet)","2,3,7,8-TCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B108","1746-01-6",1
+"pg/g wet","B081","1,2,3,7,8-PeCDD","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B080","40321-76-4",1
+"pg/g wet","B138","Total-HxCDD","1101","(mass conc.)","(wet)","Total-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B137","34465-46-8",1
+"pg/g wet","B060","1,2,3,4,7,8,9-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8,9-HpCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B059","55673-89-7",1
+"pg/g wet","B136","Total-HpCDF","1101","(mass conc.)","(wet)","Total-HpCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B134","38998-75-3",1
+"pg/g wet","B148","Total-PeCDF","1101","(mass conc.)","(wet)","Total-PeCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B146","30402-15-4",1
+"pg/g wet","B153","Total-TCDF","1101","(mass conc.)","(wet)","Total-TCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B152","55722-27-5",1
+"pg/g wet","B064","1,2,3,4,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B062","39227-28-6",1
+"pg/g wet","B112","2,3,7,8-TCDF","1101","(mass conc.)","(wet)","2,3,7,8-TCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B111","51207-31-9",1
+"pg/g wet","B070","1,2,3,6,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B068","57653-85-7",1
+"pg/g wet","B122","OCDF","1101","(mass conc.)","(wet)","OCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B120","39001-02-0",1
+"pg/g wet","B063","1,2,3,4,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B062","39227-28-6",1
+"pg/g wet","B132","Total-HpCDD","1101","(mass conc.)","(wet)","Total-HpCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B131","37871-00-4",1
+"pg/g wet","B147","Total-PeCDF","1101","(mass conc.)","(wet)","Total-PeCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B146","30402-15-4",1
+"pg/g wet","B055","1,2,3,4,6,7,8-HpCDD","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B053","35822-46-9",1
+"pg/g wet","B113","2,3,7,8-TCDF","1101","(mass conc.)","(wet)","2,3,7,8-TCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B111","51207-31-9",1
+"pg/g wet","B084","1,2,3,7,8-PeCDF","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B083","57117-41-6",1
+"pg/g wet","B151","Total-TCDD","1101","(mass conc.)","(wet)","Total-TCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B149","41903-57-5",1
+"pg/g wet","B075","1,2,3,7,8,9-HxCDD","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B074","19408-74-3",1
+"pg/g wet","B054","1,2,3,4,6,7,8-HpCDD","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B053","35822-46-9",1
+"pg/g wet","B142","Total-HxCDF","1101","(mass conc.)","(wet)","Total-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B140","55684-94-1",1
+"pg/g wet","B069","1,2,3,6,7,8-HxCDD","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B068","57653-85-7",1
+"pg/g wet","B154","Total-TCDF","1101","(mass conc.)","(wet)","Total-TCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B152","55722-27-5",1
+"pg/g wet","B118","OCDD","1101","(mass conc.)","(wet)","OCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B117","3268-87-9",1
+"pg/g wet","B079","1,2,3,7,8,9-HxCDF","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B077","72918-21-9",1
+"pg/g wet","B082","1,2,3,7,8-PeCDD","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B080","40321-76-4",1
+"pg/g wet","B121","OCDF","1101","(mass conc.)","(wet)","OCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B120","39001-02-0",1
+"pg/g wet","B144","Total-PeCDD","1101","(mass conc.)","(wet)","Total-PeCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B143","36088-22-9",1
+"pg/g wet","B066","1,2,3,4,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,4,7,8-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B065","70648-26-9",1
+"pg/g wet","B078","1,2,3,7,8,9-HxCDF","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B077","72918-21-9",1
+"pg/g wet","B073","1,2,3,6,7,8-HxCDF","1101","(mass conc.)","(wet)","1,2,3,6,7,8-HxCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B071","57117-44-9",1
+"pg/g wet","B076","1,2,3,7,8,9-HxCDD","1101","(mass conc.)","(wet)","1,2,3,7,8,9-HxCDD (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B074","19408-74-3",1
+"pg/g wet","B085","1,2,3,7,8-PeCDF","1101","(mass conc.)","(wet)","1,2,3,7,8-PeCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B083","57117-41-6",1
+"pg/g wet","B057","1,2,3,4,6,7,8-HpCDF","1101","(mass conc.)","(wet)","1,2,3,4,6,7,8-HpCDF (wet) (mass conc.)",1,"Dioxins & Furans; EMS code: B056","67562-39-4",1
+"pg/L","B058","1,2,3,4,6,7,8-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B056","67562-39-4",1
+"pg/L","B150","Total-TCDD","E1613B","(fl. conc.)","","Total-TCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B149","41903-57-5",1
+"pg/L","B145","Total-PeCDD","E1613B","(fl. conc.)","","Total-PeCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B143","36088-22-9",1
+"pg/L","B139","Total-HxCDD","E1613B","(fl. conc.)","","Total-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B137","34465-46-8",1
+"pg/L","B066","1,2,3,4,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B065","70648-26-9",1
+"pg/L","B069","1,2,3,6,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B068","57653-85-7",1
+"pg/L","B082","1,2,3,7,8-PeCDD","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B080","40321-76-4",1
+"pg/L","B118","OCDD","E1613B","(fl. conc.)","","OCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B117","3268-87-9",1
+"pg/L","B070","1,2,3,6,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B068","57653-85-7",1
+"pg/L","B063","1,2,3,4,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B062","39227-28-6",1
+"pg/L","B144","Total-PeCDD","E1613B","(fl. conc.)","","Total-PeCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B143","36088-22-9",1
+"pg/L","B112","2,3,7,8-TCDF","E1613B","(fl. conc.)","","2,3,7,8-TCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B111","51207-31-9",1
+"pg/L","B121","OCDF","E1613B","(fl. conc.)","","OCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B120","39001-02-0",1
+"pg/L","B067","1,2,3,4,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B065","70648-26-9",1
+"pg/L","B133","Total-HpCDD","E1613B","(fl. conc.)","","Total-HpCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B131","37871-00-4",1
+"pg/L","B079","1,2,3,7,8,9-HxCDF","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B077","72918-21-9",1
+"pg/L","B107","2,3,4,7,8-PeCDF","E1613B","(fl. conc.)","","2,3,4,7,8-PeCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B105","57117-31-4",1
+"pg/L","B103","2,3,4,6,7,8-HxCDF","E1613B","(fl. conc.)","","2,3,4,6,7,8-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B102","60851-34-5",1
+"pg/L","B054","1,2,3,4,6,7,8-HpCDD","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B053","35822-46-9",1
+"pg/L","B084","1,2,3,7,8-PeCDF","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B083","57117-41-6",1
+"pg/L","B055","1,2,3,4,6,7,8-HpCDD","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B053","35822-46-9",1
+"pg/L","B132","Total-HpCDD","E1613B","(fl. conc.)","","Total-HpCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B131","37871-00-4",1
+"pg/L","B153","Total-TCDF","E1613B","(fl. conc.)","","Total-TCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B152","55722-27-5",1
+"pg/L","B122","OCDF","E1613B","(fl. conc.)","","OCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B120","39001-02-0",1
+"pg/L","B151","Total-TCDD","E1613B","(fl. conc.)","","Total-TCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B149","41903-57-5",1
+"pg/L","B154","Total-TCDF","E1613B","(fl. conc.)","","Total-TCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B152","55722-27-5",1
+"pg/L","B085","1,2,3,7,8-PeCDF","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B083","57117-41-6",1
+"pg/L","B075","1,2,3,7,8,9-HxCDD","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B074","19408-74-3",1
+"pg/L","B106","2,3,4,7,8-PeCDF","E1613B","(fl. conc.)","","2,3,4,7,8-PeCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B105","57117-31-4",1
+"pg/L","B113","2,3,7,8-TCDF","E1613B","(fl. conc.)","","2,3,7,8-TCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B111","51207-31-9",1
+"pg/L","B057","1,2,3,4,6,7,8-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,6,7,8-HpCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B056","67562-39-4",1
+"pg/L","B060","1,2,3,4,7,8,9-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8,9-HpCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B059","55673-89-7",1
+"pg/L","B064","1,2,3,4,7,8-HxCDD","E1613B","(fl. conc.)","","1,2,3,4,7,8-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B062","39227-28-6",1
+"pg/L","B119","OCDD","E1613B","(fl. conc.)","","OCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B117","3268-87-9",1
+"pg/L","B147","Total-PeCDF","E1613B","(fl. conc.)","","Total-PeCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B146","30402-15-4",1
+"pg/L","B073","1,2,3,6,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B071","57117-44-9",1
+"pg/L","B076","1,2,3,7,8,9-HxCDD","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B074","19408-74-3",1
+"pg/L","B135","Total-HpCDF","E1613B","(fl. conc.)","","Total-HpCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B134","38998-75-3",1
+"pg/L","B141","Total-HxCDF","E1613B","(fl. conc.)","","Total-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B140","55684-94-1",1
+"pg/L","B110","2,3,7,8-TCDD","E1613B","(fl. conc.)","","2,3,7,8-TCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B108","1746-01-6",1
+"pg/L","B081","1,2,3,7,8-PeCDD","E1613B","(fl. conc.)","","1,2,3,7,8-PeCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B080","40321-76-4",1
+"pg/L","B072","1,2,3,6,7,8-HxCDF","E1613B","(fl. conc.)","","1,2,3,6,7,8-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B071","57117-44-9",1
+"pg/L","B104","2,3,4,6,7,8-HxCDF","E1613B","(fl. conc.)","","2,3,4,6,7,8-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B102","60851-34-5",1
+"pg/L","B078","1,2,3,7,8,9-HxCDF","E1613B","(fl. conc.)","","1,2,3,7,8,9-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B077","72918-21-9",1
+"pg/L","B109","2,3,7,8-TCDD","E1613B","(fl. conc.)","","2,3,7,8-TCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B108","1746-01-6",1
+"pg/L","B138","Total-HxCDD","E1613B","(fl. conc.)","","Total-HxCDD (fl. conc.)",1,"Dioxins & Furans; EMS code: B137","34465-46-8",1
+"pg/L","B148","Total-PeCDF","E1613B","(fl. conc.)","","Total-PeCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B146","30402-15-4",1
+"pg/L","B142","Total-HxCDF","E1613B","(fl. conc.)","","Total-HxCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B140","55684-94-1",1
+"pg/L","B136","Total-HpCDF","E1613B","(fl. conc.)","","Total-HpCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B134","38998-75-3",1
+"pg/L","B061","1,2,3,4,7,8,9-HpCDF","E1613B","(fl. conc.)","","1,2,3,4,7,8,9-HpCDF (fl. conc.)",1,"Dioxins & Furans; EMS code: B059","55673-89-7",1
+"pH units","PH-F","pH-Field","XM09","(acidity)","","pH-Field (acidity)",1,"Physical Properties; EMS code: PH-F","",0
+"ug/m3","PB-T","Lead Total","F113","(air conc.)","","Lead Total (air conc.)",1,"Metals - Total; EMS code: PB-T","",0
+"ug/m3","CU-T","Copper Total","F113","(air conc.)","","Copper Total (air conc.)",1,"Metals - Total; EMS code: CU-T","7440-50-8",0
+"ug/m3","CR-T","Chromium Total","F113","(air conc.)","","Chromium Total (air conc.)",1,"Metals - Total; EMS code: CR-T","7440-47-3",0
+"ug/m3","AS-T","Arsenic Total","F113","(air conc.)","","Arsenic Total (air conc.)",1,"Metals - Total; EMS code: AS-T","7440-38-2",0
+"ug/m3","CD-T","Cadmium Total","F113","(air conc.)","","Cadmium Total (air conc.)",1,"Metals - Total; EMS code: CD-T","7440-43-9",0
