@@ -163,6 +163,9 @@ delete_location_obs <- function(base_url, loc_id, token) {
     #if the total number of activities is less than 1000 this gets the last index
     if (total_no_field_visits%%100 != 0) {ix[length(ix)+1] = total_no_field_visits}
     
+    #catch the case where exactly 100 field visits exists
+    if (total_no_field_visits == 100) {ix[length(ix)+1] = total_no_field_visits}
+    
     #catch and remove anything over 1000
     if (length(ix > 6)) {ix = ix[c(1,2,3,4,5,6)]}
     
@@ -677,6 +680,9 @@ delete_all_records_keep_locations <- function(base_url, token) {
       
       #if the total number of activities is less than 1000 this gets the last index
       if (total_no_field_visits%%100 != 0) {ix[length(ix)+1] = total_no_field_visits}
+      
+      #catch the case where exactly 100 field visits exists
+      if (total_no_field_visits == 100) {ix[length(ix)+1] = total_no_field_visits}
       
       #catch and remove anything over 1000
       if (length(ix > 6)) {ix = ix[c(1,2,3,4,5,6)]}
