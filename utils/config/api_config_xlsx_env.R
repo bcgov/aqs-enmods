@@ -53,25 +53,48 @@ token <- url_parameters[[2]]
 # UNITS and UNIT GROUPS ----
 unitgroups_profiles <- get_profiles("prod", "unitgroups")
 
-units_profiles <- get_profiles("prod", "units") %>% 
-  rename(unit.id = id, unit.custom.id = custom.id) %>%
-  unnest_wider(unitGroup) %>%
-  dplyr::select()
+# units_profiles <- get_profiles("prod", "units") %>% 
+#   dplyr::select(-auditAttributes) %>%
+#   rename(Sample.Unit.Id = id, Sample.Unit.CustomId = customId,
+#          Sample.Unit.Name = name) %>%
+#   unnest_wider(unitGroup) %>% 
+#   rename(Sample.Unit.Group = customId) %>%
+#   dplyr::select(-c(auditAttributes, id))
+  
+units <- read_csv("./utils/config/ReferenceLists/EMS_Units_2025_04_16.csv") %>%
+  mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>% 
+  mutate(CODE = as.character(CODE))
 
-units <- read_csv("./utils/config/ReferenceLists/EMS_Units_2025_04_16.csv") %>% 
-  mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD))
+units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", 
+                         sheet = "Units")
 
-units <- units %>% dplyr::select(-Results) %>% 
-  left_join(units_base %>% dplyr::select(-CONVERSION_FACTOR), by = 
-    join_by("CODE", "SHORT_NAME", "DESCRIPTION", "ACTIVE_IND", "MEAS_UNIT_CD"))
+units <- units %>% left_join(units_base %>%
+           dplyr::select(CODE, Sample.Unit.Group, 
+                         Sample.Unit.CustomId, Sample.Unit.Name), 
+           by = join_by("CODE")) %>%
+            mutate(Sample.Unit.Group = case_when(
+              SHORT_NAME == "‰" ~ "AmountOfSubstancePerVolume",
+              SHORT_NAME == "mg/dscm" ~ "Concentration",
+              SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
+              SHORT_NAME == "N/A" ~ "None",
+              .default = Sample.Unit.Group
+            ))
 
 #we know there are duplicates in this data set
-units <- units %>% rename(Sample.Unit.Name = Samples.Unit.Name, 
-                          Sample.Unit.CustomId = Samples.Unit.CustomId) %>%
-            dplyr::select(c(CONVERSION_FACTOR, Convertible,
-                            Sample.Unit.Group, Sample.Unit.CustomId,
-                            Sample.Unit.Name))
+units <- units %>% 
+            mutate(Sample.Unit.Name = if_else(is.na(Sample.Unit.Name), 
+            DESCRIPTION, Sample.Unit.Name), 
+            Sample.Unit.CustomId = if_else(is.na(Sample.Unit.CustomId),                            SHORT_NAME, Sample.Unit.CustomId)) %>% 
+            dplyr::select(c(CONVERSION_FACTOR, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
+
 units <- distinct(units)
+
+units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/New_Units_not_in_EMS.xlsx", sheet = "NewUnits") %>% 
+  dplyr::select(c(CONVERSION_FACTOR, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
+
+units <- units %>% 
+  bind_rows(units_new_to_enmods) %>% 
+  unique()
 
 #Sentence case in general
 #Accounting for special cases
@@ -79,6 +102,11 @@ units <- units %>%
   mutate(Sample.Unit.Name = str_to_sentence(Sample.Unit.Name)) %>%
   mutate(Sample.Unit.Name = ifelse(Sample.Unit.Name == "Ph units", 
                                    "pH units", Sample.Unit.Name))
+
+units <- units %>% left_join(unitgroups_profiles %>% 
+           dplyr::select(id, customId, supportsConversion), 
+           by = join_by("Sample.Unit.Group" == "customId")) %>%
+          rename(Convertible = supportsConversion)
 
 #Elevation does not exist in the Reference Sheet
 #Needs to be added manually even though it's metres
@@ -93,6 +121,12 @@ units <- units %>% add_row(CONVERSION_FACTOR = 1,
 units <- units %>% 
   mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square meter", 
                               FALSE, Convertible))
+
+get_check <- get_profiles("prod", "units")
+
+units_missing <- units %>% 
+                  anti_join(get_check, 
+                    by = join_by("Sample.Unit.CustomId" == "customId"))
 
 #list of unit groups
 #sometimes this list may have one less or more unit groups than in ENV
@@ -625,6 +659,8 @@ get_check <- get_profiles("prod", "methods")
 get_check <- get_profiles("prod", "extendedattributes")
 
 get_check <- get_profiles("prod", "observedproperties")
+
+get_check <- get_profiles("prod", "units")
 
 del_profiles <- function(env, data_type){
   
