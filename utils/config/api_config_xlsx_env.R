@@ -61,36 +61,36 @@ unitgroups_profiles <- get_profiles("prod", "unitgroups")
 #   rename(Sample.Unit.Group = customId) %>%
 #   dplyr::select(-c(auditAttributes, id))
   
-units <- read_csv("./utils/config/ReferenceLists/EMS_Units_2025_04_16.csv") %>%
-  mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>% 
-  mutate(CODE = as.character(CODE))
+units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>% 
+  mutate(CODE = as.character(CODE)) %>% 
+  dplyr::select(-CONVERSION_FACTOR)
 
-units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", 
-                         sheet = "Units")
+#Only conversions in this file are reliable
+units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% dplyr::select(c(CODE, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
 
 units <- units %>% left_join(units_base %>%
-           dplyr::select(CODE, Sample.Unit.Group, 
-                         Sample.Unit.CustomId, Sample.Unit.Name), 
+           dplyr::select(CODE, Sample.Unit.Group, Sample.Unit.CustomId, 
+                         Sample.Unit.Name, CONVERSION_FACTOR, OFFSET), 
            by = join_by("CODE")) %>%
             mutate(Sample.Unit.Group = case_when(
               SHORT_NAME == "‰" ~ "AmountOfSubstancePerVolume",
-              SHORT_NAME == "mg/dscm" ~ "Concentration",
+              SHORT_NAME == "mg/dscm" ~ "AirConcentration",
               SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
               SHORT_NAME == "N/A" ~ "None",
               .default = Sample.Unit.Group
-            ))
+            )) %>% 
+  mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR)) %>%
+  dplyr::select(-CODE) %>% unique()
 
 #we know there are duplicates in this data set
 units <- units %>% 
             mutate(Sample.Unit.Name = if_else(is.na(Sample.Unit.Name), 
             DESCRIPTION, Sample.Unit.Name), 
             Sample.Unit.CustomId = if_else(is.na(Sample.Unit.CustomId),                            SHORT_NAME, Sample.Unit.CustomId)) %>% 
-            dplyr::select(c(CONVERSION_FACTOR, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
+            dplyr::select(c(Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group)) %>% unique()
 
-units <- distinct(units)
-
-units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/New_Units_not_in_EMS.xlsx", sheet = "NewUnits") %>% 
-  dplyr::select(c(CONVERSION_FACTOR, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
+units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits") %>% 
+  dplyr::select(c(Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET))
 
 units <- units %>% 
   bind_rows(units_new_to_enmods) %>% 
@@ -111,7 +111,8 @@ units <- units %>% left_join(unitgroups_profiles %>%
 #Elevation does not exist in the Reference Sheet
 #Needs to be added manually even though it's metres
 #This metres is therefore different from metre (m) in EnMoDS
-units <- units %>% add_row(CONVERSION_FACTOR = 1, 
+units <- units %>% add_row(CONVERSION_FACTOR = 1,
+                           OFFSET = 0,
                            Convertible = TRUE,
                            Sample.Unit.Group = "SYS-REQUIRED - Length", 
                            Sample.Unit.CustomId = "metre",
@@ -120,13 +121,18 @@ units <- units %>% add_row(CONVERSION_FACTOR = 1,
 #fixing the units file for anomalous Count group associated with No/m2
 units <- units %>% 
   mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square meter", 
-                              FALSE, Convertible))
+                              FALSE, Convertible)) %>%
+  mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET))
 
-get_check <- get_profiles("prod", "units")
-
-units_missing <- units %>% 
-                  anti_join(get_check, 
-                    by = join_by("Sample.Unit.CustomId" == "customId"))
+# #110 only; even though 117 in the units file
+# get_check <- get_profiles("prod", "units")
+# 
+# #no such units
+# units_na <- units %>% dplyr::filter(is.na(Sample.Unit.CustomId))
+# 
+# units_missing <- units %>% 
+#                   anti_join(get_check, 
+#                     by = join_by("Sample.Unit.CustomId" == "customId"))
 
 #list of unit groups
 #sometimes this list may have one less or more unit groups than in ENV
@@ -947,7 +953,7 @@ post_profiles <- function(env, data_type, profile){
     
     url <- paste0(base_url, "v1/units")
     
-    rel_var <- c("CONVERSION_FACTOR", "Convertible",
+    rel_var <- c("CONVERSION_FACTOR", "OFFSET", "Convertible",
                  "Sample.Unit.Group", "Sample.Unit.CustomId",
                  "Sample.Unit.Name", "Sample.Unit.GroupID")
     
@@ -1043,7 +1049,7 @@ post_profiles <- function(env, data_type, profile){
           "customId" = temp_profile$Sample.Unit.CustomId,
           "name" = temp_profile$Sample.Unit.Name,
           "baseMultiplier" = 1/temp_profile$CONVERSION_FACTOR,
-          "baseOffset" = 0,
+          "baseOffset" = temp_profile$OFFSET,
           "unitGroup" = list("id" = temp_profile$Sample.Unit.GroupID))
         
       } else { 
