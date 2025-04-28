@@ -683,9 +683,13 @@ del_profiles <- function(env, data_type){
   
   if(data_type == "unitgroups"){
     
+    del_profiles(env, "units")
+    
     url <- str_c(base_url, "v1/unitgroups/")
     
   } else if(data_type == "units"){
+    
+    del_profiles(env, "observedproperties")
     
     url <- str_c(base_url, "v1/units/")
     
@@ -917,13 +921,15 @@ put_check <- put_profiles("prod", "mediums", mediums)
 
 post_profiles <- function(env, data_type, profile){
 
-  # env = "prod"
-  # 
-  # data_type = "fishtaxonomy"
-  # 
-  # profile <- Taxons
+  env = "prod"
 
-  # profile <- OPs %>%
+  data_type = "units"
+
+  profile <- units
+
+  profile <- profile %>% 
+  #profile <- OPs %>% 
+    dplyr::filter(Sample.Unit.CustomId == "mL")
   #   dplyr::filter(NewNameID == "pH (acidity)")
 
   #Clean the old stuff out of the environment before posting new stuff
