@@ -6,18 +6,26 @@ library(tidyverse)
 
 #read the file from Salus
 fname <- "C:/Users/jkrogh/Downloads/water_split_part_28.csv"
-rows <- 2000
+rows <- 25 #number of obs per field visit (apx)
 write_name <- "C:/Users/jkrogh/Downloads/EDT/water-april-14"
 
 #read the file from Salus, these can be big up to ~600,000
 big_file <- readr::read_csv(fname)
 
-for (i in seq(1,ceiling(nrow(big_file)/rows))) {
+#700k rows
+#group things by field visit
+big_file$fieldVisitId <- paste(big_file$`Location ID`, big_file$`Field Visit Start Time`)
+
+field_visits <- unique(big_file$fieldVisitId) #16k or avg of 43 obs per visit
+
+for (i in seq(1,ceiling(length(field_visits)/rows))) {
   
   if (i == 1) {
-    temp <- big_file[c(seq(i, i*rows)),]
+    #temp <- big_file[c(seq(i, i*rows)),]
+    temp <- big_file %>% filter(fieldVisitId %in% field_visits[seq(i, i*rows)])
   } else {
-    temp <- big_file[c(seq((i-1)*rows, i*rows)),]
+    #temp <- big_file[c(seq((i-1)*rows, i*rows)),]
+    temp <- big_file %>% filter(fieldVisitId %in% field_visits[seq(((i-1)*rows) + 1, i*rows)])
   }
   
   #remove NA and replace with ""
@@ -43,6 +51,9 @@ for (i in seq(1,ceiling(nrow(big_file)/rows))) {
   
   temp$`Result Value` <- format(as.numeric(temp$`Result Value`), scientific = FALSE, digits = 10, trim = T)
 
+  #remove the field visit id column
+  temp <- temp %>% select(-fieldVisitId)
+  
   write.csv(temp, paste0(write_name, "-", i, ".csv"), row.names = F)
   
   print(i)
