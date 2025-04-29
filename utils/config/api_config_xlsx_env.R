@@ -14,6 +14,7 @@ library(tidygeocoder)
 library(readr)
 library(readxl)
 library(writexl)
+library(openxlsx)
 
 #get the API tokens from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
@@ -229,6 +230,70 @@ extendedAttributes <- extendedAttributes %>%
   left_join(dropdownLists, by = join_by(customId == EA_customId),
             keep = FALSE)
 
+# DETECTION CONDITIONS ----
+
+# #Had to run this only once in a lifetime
+# detectionConditions <- get_profiles("test", "detectionconditions") #%>%
+#   #dplyr::select(customId)
+# 
+# # Save workbook
+# write_xlsx(list(detectionConditions), "./utils/config/ReferenceLists/DetectionConditions.xlsx")
+# 
+# # Load an existing workbook
+# wb <- loadWorkbook("./utils/config/ReferenceLists/DetectionConditions.xlsx")
+# 
+# # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+# renameWorksheet(wb, sheet = "Sheet1", newName = "detectionconditions")
+# 
+# # Save the workbook with the updated sheet name
+# saveWorkbook(wb, "./utils/config/ReferenceLists/DetectionConditions.xlsx", overwrite = TRUE)
+
+detectionConditions <- read_excel("./utils/config/ReferenceLists/DetectionConditions.xlsx", 
+                                 sheet = "detectionconditions")
+
+# SAVED FILTERS ----
+
+# #Had to run this only once in a lifetime
+# savedFilters <- get_profiles("test", "filters") #%>%
+#   #dplyr::select(customId)
+# 
+# # Save workbook
+# write_xlsx(list(savedFilters), "./utils/config/ReferenceLists/savedfilters.xlsx")
+# 
+# # Load an existing workbook
+# wb <- loadWorkbook("./utils/config/ReferenceLists/savedfilters.xlsx")
+# 
+# # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+# renameWorksheet(wb, sheet = "Sheet1", newName = "savedfilters")
+# 
+# # Save the workbook with the updated sheet name
+# saveWorkbook(wb, "./utils/config/ReferenceLists/savedfilters.xlsx", overwrite = TRUE)
+
+savedFilters <- read_excel("./utils/config/ReferenceLists/savedfilters.xlsx", 
+                                  sheet = "savedfilters")
+
+
+# PROJECTS ----
+
+projects_test <- get_profiles("test", "projects")
+
+projects <- read_excel("./utils/config/ReferenceLists/projects.xlsx", 
+                           sheet = "projects")
+
+#Type needs to be in case UPPER
+projects <- projects %>% 
+                mutate(StartDate = as.POSIXct(StartDate),
+                       EndDate = as.POSIXct(EndDate)) %>%
+                mutate(Type = toupper(Type), 
+                       StartDate = case_when(
+                           is.na(StartDate) ~ NA,
+                           .default =  format(StartDate, "%Y-%m-%dT00:00:00%z")
+                       ), 
+                       EndDate = case_when(
+                         is.na(EndDate) ~ NA,
+                         .default =  format(EndDate, "%Y-%m-%dT00:00:00%z")
+                       )) 
+                       
 # OBSERVED PROPERTIES ----
 #need to get unit group and unit IDs prior to importing OPs
 unit_groups <- get_profiles("prod", "unitgroups") %>% 
@@ -640,6 +705,10 @@ get_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/taxonomylevels")
     
+  } else if(data_type == "detectionconditions"){
+    
+    url <- str_c(base_url, "v1/detectionconditions")
+    
   } else if(data_type == "resultgrades"){
     
     url <- str_c(base_url, "v1/resultgrades")
@@ -656,6 +725,14 @@ get_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/collectionmethods")
     
+  } else if(data_type == "filters"){
+    
+    url <- str_c(base_url, "v1/filters")
+    
+  } else if(data_type == "projects"){
+    
+    url <- str_c(base_url, "v1/projects")
+    
   }
   
   temp_profiles <- get_profiles_for_url(env, url)
@@ -670,6 +747,8 @@ get_check <- get_profiles("prod", "resultstatuses")
 
 get_check <- get_profiles("prod", "mediums")
 
+get_check <- get_profiles("test", "projects")
+
 get_check <- get_profiles("prod", "locationtypes")
 
 get_check <- get_profiles("prod", "locationgrouptypes")
@@ -678,13 +757,15 @@ get_check <- get_profiles("prod", "collectionmethods")
 
 get_check <- get_profiles("prod", "taxonomylevels")
 
+get_check <- get_profiles("prod", "filters")
+
 get_check <- get_profiles("prod", "fishtaxonomy")
 
 get_check <- get_profiles("prod", "labs")
 
 get_check <- get_profiles("prod", "methods")
 
-get_check <- get_profiles("test", "extendedattributes")
+get_check <- get_profiles("prod", "extendedattributes")
 
 get_check <- get_profiles("prod", "observedproperties")
 
@@ -739,6 +820,14 @@ del_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/collectionmethods/")
     
+  } else if(data_type == "filters"){
+    
+    url <- str_c(base_url, "v1/filters/")
+    
+  } else if(data_type == "projects"){
+    
+    url <- str_c(base_url, "v1/projects/")
+    
   } else if(data_type == "locationgrouptypes"){
     
     put_profiles("prod", "locationgrouptypes", tibble(customId = character()))
@@ -766,6 +855,10 @@ del_profiles <- function(env, data_type){
     put_profiles("prod", "taxonomylevels", tibble(customId = character()))
     
     return()
+    
+  } else if(data_type == "detectionconditions"){
+    
+    url <- str_c(base_url, "v1/detectionconditions/")
     
   } else if(data_type == "resultgrades"){
     
@@ -834,6 +927,8 @@ del_check <- del_profiles("prod", "resultstatuses")
 
 del_check <- del_profiles("prod", "mediums")
 
+del_check <- del_profiles("prod", "projects")
+
 del_check <- del_profiles("prod", "locationtypes")
 
 del_check <- del_profiles("prod", "locationgrouptypes")
@@ -841,6 +936,12 @@ del_check <- del_profiles("prod", "locationgrouptypes")
 del_check <- del_profiles("prod", "fishtaxonomy")
 
 del_check <- del_profiles("prod", "taxonomylevels")
+
+del_check <- del_profiles("prod", "taxonomylevels")
+
+del_check <- del_profiles("prod", "detectionconditions")
+
+del_check <- del_profiles("prod", "filters")
 
 del_check <- del_profiles("prod", "collectionmethods")
 
@@ -946,15 +1047,15 @@ post_profiles <- function(env, data_type, profile){
 
   # env = "prod"
   # 
-  # data_type = "observedproperties"
+  # data_type = "projects"
   # 
-  # profile <- OPs_not_posted
+  # profile <- projects
   # 
   # profile <- profile %>%
-  # #profile <- OPs_not_posted %>%
-  #   dplyr::filter(NewNameID == "Biological Sex (cat.)")
-  # #  dplyr::filter(Sample.Unit.CustomId == "mL")
-  # #   dplyr::filter(NewNameID == "pH (acidity)")
+  #               dplyr::filter(ID == "BCLMN")
+  # #   dplyr::filter(NewNameID == "Biological Sex (cat.)")
+  # # #  dplyr::filter(Sample.Unit.CustomId == "mL")
+  # # #   dplyr::filter(NewNameID == "pH (acidity)")
 
   #Clean the old stuff out of the environment before posting new stuff
   if(!is.null(dim(get_profiles(env, data_type))[1])){
@@ -1048,6 +1149,25 @@ post_profiles <- function(env, data_type, profile){
     url <- str_c(base_url, "v1/collectionmethods")
     
     rel_var <- c("New EnMoDS Short Name/ID", "merged_codes", "Definition")
+    
+  } else if(data_type == "detectionconditions"){
+    
+    url <- str_c(base_url, "v1/detectionconditions")
+    
+    rel_var <- c("customId", "name", "description", "systemCode")
+    
+  } else if(data_type == "filters"){
+    
+    url <- str_c(base_url, "v1/filters")
+    
+    rel_var <- c("customId")
+    
+  } else if(data_type == "projects"){
+    
+    url <- str_c(base_url, "v1/projects")
+    
+    rel_var <- c("ID", "Name", "Type", "StartDate", "EndDate", 
+                 "Comments", "Scope")
     
   }
   
@@ -1153,6 +1273,28 @@ post_profiles <- function(env, data_type, profile){
                           "identifierOrganization" = temp_profile$merged_codes,
                           "name" = temp_profile$Definition)
       
+    } else if(data_type == "detectionconditions"){
+      
+      data_body <- list("customId" = temp_profile$customId,
+                        "name" = temp_profile$name,
+                        "description" = temp_profile$description,
+                        "systemCode" = temp_profile$systemCode)
+      
+    } else if(data_type == "filters"){
+      
+      data_body <- list("customId" = temp_profile$customId)
+      
+    } else if(data_type == "projects"){
+      
+      data_body <- list(
+                        "customId" = temp_profile$ID, 
+                        "name" = temp_profile$Name, 
+                        "type" = temp_profile$Type, 
+                        "startTime" = temp_profile$StartDate, 
+                        "endTime" = temp_profile$EndDate, 
+                        "description" = temp_profile$Comments,
+                        "scopeStatement" = temp_profile$Scope)
+      
     }
     
     #Post the configuration
@@ -1194,6 +1336,12 @@ post_profiles("prod", "units", units)
 post_check <- post_profiles("prod", "observedproperties", OPs)
 
 post_check <- post_profiles("prod", "extendedattributes", extendedAttributes)
+
+post_check <- post_profiles("prod", "detectionconditions", detectionConditions)
+
+post_check <- post_profiles("prod", "filters", savedFilters)
+
+post_check <- post_profiles("prod", "projects", projects)
 
 post_check <- post_profiles("prod", "methods", Methods)
 
