@@ -684,7 +684,7 @@ get_check <- get_profiles("prod", "labs")
 
 get_check <- get_profiles("prod", "methods")
 
-get_check <- get_profiles("prod", "extendedattributes")
+get_check <- get_profiles("test", "extendedattributes")
 
 get_check <- get_profiles("prod", "observedproperties")
 
@@ -859,11 +859,11 @@ del_check <- del_profiles("prod", "extendedattributes")
 
 put_profiles <- function(env, data_type, profile){
   
-  env <- "prod"
-
-  data_type <- "resultgrades"
-
-  profile <- resultgrades
+  # env <- "prod"
+  # 
+  # data_type <- "resultgrades"
+  # 
+  # profile <- resultgrades
 
   #default is "test" and for prod env, use the function parameter "prod"
   url_parameters <- update_base_url_token(env)
@@ -928,6 +928,7 @@ put_profiles <- function(env, data_type, profile){
 }
 
 #Error code 500 which suggests something is wrong at AQS end; informed Jeremy
+#Doing it manually
 put_check <- put_profiles("prod", "resultgrades", resultgrades)
 
 #Error code 500 which suggests something is wrong at AQS end; informed Jeremy
