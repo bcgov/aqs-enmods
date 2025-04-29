@@ -52,7 +52,7 @@ token <- url_parameters[[2]]
 ### PREPROCESSING REFERENCE SHEETS ### ----
 
 # UNITS and UNIT GROUPS ----
-unitgroups_profiles <- get_profiles("prod", "unitgroups")
+#unitgroups_profiles <- get_profiles("prod", "unitgroups")
 
 # units_profiles <- get_profiles("prod", "units") %>% 
 #   dplyr::select(-auditAttributes) %>%
@@ -112,18 +112,22 @@ units <- units %>% left_join(unitgroups_profiles %>%
 #Elevation does not exist in the Reference Sheet
 #Needs to be added manually even though it's metres
 #This metres is therefore different from metre (m) in EnMoDS
-units <- units %>% add_row(CONVERSION_FACTOR = 1,
-                           OFFSET = 0,
-                           Convertible = TRUE,
-                           Sample.Unit.Group = "SYS-REQUIRED - Length", 
-                           Sample.Unit.CustomId = "metre",
-                           Sample.Unit.Name = "Elevation")
+# units <- units %>% add_row(CONVERSION_FACTOR = 1,
+#                            OFFSET = 0,
+#                            Convertible = TRUE,
+#                            Sample.Unit.Group = "SYS-REQUIRED - Length", 
+#                            Sample.Unit.CustomId = "metre",
+#                            Sample.Unit.Name = "Elevation")
 
 #fixing the units file for anomalous Count group associated with No/m2
 units <- units %>% 
   mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square meter", 
                               FALSE, Convertible)) %>%
-  mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET))
+  mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
+  mutate(Sample.Unit.Group = case_when(
+    Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
+    .default = Sample.Unit.Group
+  ))
 
 # #110 only; even though 117 in the units file
 # get_check <- get_profiles("prod", "units")
@@ -143,7 +147,11 @@ unit_groups <- units %>%
   dplyr::select(Sample.Unit.Group, Convertible) %>% 
   group_by(across(everything())) %>%
   summarize(Count = n()) %>% 
-  ungroup()
+  ungroup() %>%
+  mutate(Sample.Unit.Group = case_when(
+          Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
+          .default = Sample.Unit.Group
+  ))
 
 # #loop to make all the unit groups
 # for (i in seq(1, dim(unit_groups)[1])) {
@@ -294,6 +302,116 @@ projects <- projects %>%
                          .default =  format(EndDate, "%Y-%m-%dT00:00:00%z")
                        )) 
                        
+
+# SAMPLING LOCATION GROUPS------------------------------------------------
+non_zero_post_2006 <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025NonzeroSamplesAfter2006Export.xlsx")
+zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx")
+zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_Between2006And2024ZeroSamples.xlsx")
+
+#Check for identical column names
+if(identical(names(zero_pre_2006_auth), names(non_zero_post_2006))){
+  
+  if(identical(names(zero_2006_2024_can), names(non_zero_post_2006))){
+    
+    print("The column names are SAME across the location files")
+    
+  } else {
+    
+    print("The column names are DIFFERENT across the location files")
+    
+  }
+    
+} else {
+  
+  print("The column names are DIFFERENT across the location files")
+  
+}
+
+#join together the ones with actual data that needs to be included
+locations <- rbind(non_zero_post_2006, zero_pre_2006_auth)
+
+#remove those locations that were cancelled and never sampled
+locations <- locations %>% 
+                anti_join(zero_2006_2024_can, by = join_by("Location ID"))
+
+#remove do not migrate
+locations <- locations %>% dplyr::filter(Type != "DO NOT MIGRATE")
+
+#remove all NA from data frame!
+locations <- locations %>% 
+  mutate(across(where(is.character), ~ replace(., is.na(.), "")),
+         across(where(is.numeric), ~ replace(., is.na(.), "")),
+         across(where(is.logical), ~ replace(., is.na(.), "")),)
+
+#Get location groups
+#read the AMS data
+ams_url <- "https://www2.gov.bc.ca/assets/gov/environment/waste-management/waste-discharge-authorization/datamart/all_ams_authorizations.xlsx"
+download.file(ams_url, "all_ams_authorizations.xlsx", mode = "wb")
+
+amsPermits <- read_excel("all_ams_authorizations.xlsx")
+
+#storing relevant records of AMS Permits
+amsPermits <- amsPermits %>% 
+  dplyr::select(`Authorization Number`, Company, `Facility Type - Description`, `Facility Address`)
+
+#remove duplicates in AMS
+amsPermits <- unique(amsPermits)
+
+#Get the list of permits from locations
+emsPermits <- unique(locations$`Location Groups`)
+emsPermits <- emsPermits[emsPermits != ""]
+
+emsPermits <- data.frame("Permit ID" = unlist(strsplit(emsPermits, ";"))) %>% unique()
+colnames(emsPermits) <- "Permit ID"
+emsPermits$`Permit ID` <- as.numeric(emsPermits$`Permit ID`)
+emsPermits <- emsPermits %>% unique()
+
+#join EMS with AMS dropping records that are only in the AMS side
+locationGroups <- left_join(emsPermits, amsPermits, 
+                            join_by(`Permit ID` == `Authorization Number`))
+
+locationGroups$Description = paste0("", locationGroups$Company)
+
+locationGroups$Type = "Authorization"
+
+#make the groups
+locationGroups <- locationGroups %>% dplyr::select(`Permit ID`, Type, Description)
+
+locationGroupTypes <- get_profiles("prod", "locationgrouptypes")
+
+#joing location group guid to location groups table
+locationGroups <- inner_join(locationGroups, locationGroupTypes, 
+                             by = join_by(Type == customId)) %>%
+                             rename(locationgrouptypeID = id)
+
+
+# SAMPLING LOCATIONS  ---------------------------------------------------------
+
+#after putting location groups in, come back here to attach location group IDs to locations
+#best way to check what columns are needed is to put in a get request
+#super complicated; start small and then add things
+locations_enmods <- get_profiles("prod", "locations")
+
+#get sampling group IDs because they will probably be needed
+locationGroups <- get_profiles("prod", "locationgroups")
+
+#make a sample locations file
+locations <- locations %>% mutate(`Elevation Unit` = case_when(
+                              #is.na(`Elevation Unit`) ~ "metre",
+                              `Elevation Unit` == "metre" ~ "m",
+                              .default = `Elevation Unit`
+  ))
+
+# #created a location file when pre-processing for Location Groups; use it here
+# #initially just trying to import the first location since it is associated
+# #with exactly one location group (will deal with complicated situations later)
+# test_locations <- locations[1,] %>% 
+
+#bigger test file
+locations_1 <- locations[seq(1,10000),]
+write.csv(locations_1, file = "1_Locations_Extract_Mar5_2025.csv", row.names = F)
+
+
 # OBSERVED PROPERTIES ----
 #need to get unit group and unit IDs prior to importing OPs
 unit_groups <- get_profiles("prod", "unitgroups") %>% 
@@ -697,6 +815,14 @@ get_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/samplinglocationtypes")
     
+  } else if(data_type == "locationgroups"){
+    
+    url <- str_c(base_url, "v1/samplinglocationgroups")
+    
+  } else if(data_type == "locations"){
+    
+    url <- str_c(base_url, "v1/samplinglocations?limit=1000")
+    
   } else if(data_type == "mediums"){
     
     url <- str_c(base_url, "v1/mediums")
@@ -751,6 +877,10 @@ get_check <- get_profiles("test", "projects")
 
 get_check <- get_profiles("prod", "locationtypes")
 
+get_check <- get_profiles("prod", "locations")
+
+get_check <- get_profiles("prod", "locationgroups")
+
 get_check <- get_profiles("prod", "locationgrouptypes")
 
 get_check <- get_profiles("prod", "collectionmethods")
@@ -768,6 +898,8 @@ get_check <- get_profiles("prod", "methods")
 get_check <- get_profiles("prod", "extendedattributes")
 
 get_check <- get_profiles("prod", "observedproperties")
+
+get_check <- get_profiles("prod", "unitgroups")
 
 get_check <- get_profiles("prod", "units")
 
@@ -827,6 +959,10 @@ del_profiles <- function(env, data_type){
   } else if(data_type == "projects"){
     
     url <- str_c(base_url, "v1/projects/")
+    
+  } else if(data_type == "locationgroups"){
+    
+    url <- str_c(base_url, "v1/samplinglocationgroups/")
     
   } else if(data_type == "locationgrouptypes"){
     
@@ -928,6 +1064,8 @@ del_check <- del_profiles("prod", "resultstatuses")
 del_check <- del_profiles("prod", "mediums")
 
 del_check <- del_profiles("prod", "projects")
+
+del_check <- del_profiles("prod", "locationgroups")
 
 del_check <- del_profiles("prod", "locationtypes")
 
@@ -1169,6 +1307,12 @@ post_profiles <- function(env, data_type, profile){
     rel_var <- c("ID", "Name", "Type", "StartDate", "EndDate", 
                  "Comments", "Scope")
     
+  } else if(data_type == "locationgroups"){
+    
+    url <- str_c(base_url, "v1/samplinglocationgroups")
+    
+    rel_var <- c("Permit ID", "locationgrouptypeID", "Description")
+    
   }
   
   messages <- list()
@@ -1295,6 +1439,14 @@ post_profiles <- function(env, data_type, profile){
                         "description" = temp_profile$Comments,
                         "scopeStatement" = temp_profile$Scope)
       
+    } else if(data_type == "locationgroups"){
+      
+      data_body <- list(
+        "name" = temp_profile$`Permit ID`,
+        "description" = temp_profile$Description,
+        "LocationGroupType" = list("id" = temp_profile$locationgrouptypeID)
+      )
+      
     }
     
     #Post the configuration
@@ -1342,6 +1494,8 @@ post_check <- post_profiles("prod", "detectionconditions", detectionConditions)
 post_check <- post_profiles("prod", "filters", savedFilters)
 
 post_check <- post_profiles("prod", "projects", projects)
+
+post_check <- post_profiles("prod", "locationgroups", locationGroups)
 
 post_check <- post_profiles("prod", "methods", Methods)
 
