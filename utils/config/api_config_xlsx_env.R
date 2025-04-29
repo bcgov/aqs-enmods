@@ -302,6 +302,19 @@ OPs <- OPs %>%
   mutate(Sample.Unit = ifelse(Sample.Unit == "pH Units", 
                                    "pH units", Sample.Unit))
 
+#rename the required OPs so they show up otherwise they are in the background?
+OPs <- OPs %>% 
+  mutate(Sample.Unit.Group = case_when(
+    NewNameID == "Biological Sex (cat.)" ~ "None",
+    NewNameID == "Biological Life Stage (cat.)" ~ "None",
+    .default = Sample.Unit.Group
+  )) %>% 
+  mutate(Analysis.Type = case_when(
+    NewNameID == "Biological Sex (cat.)" ~ "BIOLOGICAL",
+    NewNameID == "Biological Life Stage (cat.)" ~ "BIOLOGICAL",
+    .default = Analysis.Type
+  ))
+
 #they are not! 
 #current pipeline will upload the first OP into the system
 #But its fine because...
@@ -325,6 +338,15 @@ OPs <- left_join(OPs, units,
 #analysis.Type must be ALL CAPS
 OPs$Analysis.Type <- toupper(OPs$Analysis.Type)
 OPs$Result.Type <- toupper(OPs$Result.Type)
+
+# Checking which entries are not getting posted
+get_check <- get_profiles("prod", "observedproperties")
+#not all OPs getting posted
+#compare get_check for OPs with raw OPs
+OPs_not_posted <- OPs %>% anti_join(get_check,
+                                    by = join_by("NewNameID" == "customId"))
+# 
+# OPs_not_posted <- OPs %>% dplyr::filter(NewNameID == "Biological Sample Volume (vol.)")
 
 # METHODS -----------------------------------------------------------------
 Methods <- read_excel("./utils/config/ReferenceLists/Observed_Properties.xlsx")
@@ -921,16 +943,17 @@ put_check <- put_profiles("prod", "mediums", mediums)
 
 post_profiles <- function(env, data_type, profile){
 
-  env = "prod"
-
-  data_type = "units"
-
-  profile <- units
-
-  profile <- profile %>% 
-  #profile <- OPs %>% 
-    dplyr::filter(Sample.Unit.CustomId == "mL")
-  #   dplyr::filter(NewNameID == "pH (acidity)")
+  # env = "prod"
+  # 
+  # data_type = "observedproperties"
+  # 
+  # profile <- OPs_not_posted
+  # 
+  # profile <- profile %>%
+  # #profile <- OPs_not_posted %>%
+  #   dplyr::filter(NewNameID == "Biological Sex (cat.)")
+  # #  dplyr::filter(Sample.Unit.CustomId == "mL")
+  # #   dplyr::filter(NewNameID == "pH (acidity)")
 
   #Clean the old stuff out of the environment before posting new stuff
   if(!is.null(dim(get_profiles(env, data_type))[1])){
@@ -1135,6 +1158,8 @@ post_profiles <- function(env, data_type, profile){
     x<-POST(url, config = c(add_headers(.headers = 
         c('Authorization' = token))), body = data_body, encode = 'json')
     
+    #j <- 1
+    
     messages[[j]] <- fromJSON(rawToChar(x$content))
     
     print(j)
@@ -1172,15 +1197,6 @@ post_check <- post_profiles("prod", "extendedattributes", extendedAttributes)
 post_check <- post_profiles("prod", "methods", Methods)
 
 post_check <- post_profiles("prod", "labs", Labs)
-
-# Checking which entries are not getting posted ---------------------------
-# #not all OPs getting posted
-# #compare get_check for OPs with raw OPs
-# OPs_not_posted <- OPs %>% anti_join(get_check, 
-#                     by = join_by("NewNameID" == "customId"))
-# 
-# OPs_not_posted <- OPs %>% dplyr::filter(NewNameID == "Biological Sample Volume (vol.)")
-
 
 # Categorical values issue ------------------------------------------------
 
