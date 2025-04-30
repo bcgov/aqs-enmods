@@ -1,9 +1,7 @@
 name: Run R Script
 
 on:
-  push:
-    branches: [main]  # Or your target branch
-  workflow_dispatch:  # Allows manual runs
+  workflow_dispatch:
 
 jobs:
   run-r:
@@ -21,4 +19,7 @@ jobs:
           Rscript -e 'install.packages(c("dplyr", "ggplot2", "aws.s3"), repos="https://cloud.r-project.org")'
 
       - name: Run R script
+	env: test
+	  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
         run: /utils/coc/upload_BC_Box.R
