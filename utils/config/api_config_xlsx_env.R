@@ -395,6 +395,10 @@ locations_enmods <- get_profiles("prod", "locations")
 #get sampling group IDs because they will probably be needed
 locationGroups <- get_profiles("prod", "locationgroups")
 
+locationTypes <- get_profiles("prod", "locationtypes")
+
+units <- get_profiles("prod", "units")
+
 #make a sample locations file
 locations <- locations %>% mutate(`Elevation Unit` = case_when(
                               #is.na(`Elevation Unit`) ~ "metre",
@@ -405,11 +409,27 @@ locations <- locations %>% mutate(`Elevation Unit` = case_when(
 # #created a location file when pre-processing for Location Groups; use it here
 # #initially just trying to import the first location since it is associated
 # #with exactly one location group (will deal with complicated situations later)
-# test_locations <- locations[1,] %>% 
+locations <- locations %>% 
+                    left_join(locationTypes %>% dplyr::select(id, customId), 
+                      by = join_by("Type" == "customId")) %>%
+                      rename(Type.id = id) %>%
+                    left_join(locationGroups %>% 
+                                dplyr::select(id, name, 
+                                              locationGroupType), 
+                              by = join_by("Location Groups" == "name")) %>% 
+                    rename(Group.id = id) %>% 
+                      unnest_wider(locationGroupType) %>%
+                        rename(GroupType.id = id, 
+                               GroupType.customId = customId) %>%
+                    mutate(Elevation = 1, `Elevation Unit` = "m") %>%
+                    left_join(units %>% 
+                                dplyr::select(id, customId), 
+                              by = join_by("Elevation Unit" == "customId")) %>%
+                        rename("Elevation Unit.id" = id)
 
-#bigger test file
-locations_1 <- locations[seq(1,10000),]
-write.csv(locations_1, file = "1_Locations_Extract_Mar5_2025.csv", row.names = F)
+# #bigger test file
+# locations_1 <- locations[seq(1,10000),]
+# write.csv(locations_1, file = "1_Locations_Extract_Mar5_2025.csv", row.names = F)
 
 
 # OBSERVED PROPERTIES ----
@@ -1312,6 +1332,18 @@ post_profiles <- function(env, data_type, profile){
     url <- str_c(base_url, "v1/samplinglocationgroups")
     
     rel_var <- c("Permit ID", "locationgrouptypeID", "Description")
+     
+  } else if(data_type == "locations"){
+    
+    url <- str_c(base_url, "v1/samplinglocations")
+    
+    rel_var <- c("Location ID", "Name", "Type", "Type.id",
+                 "Latitude", "Longitude", 
+                 "Horizontal Datum", "Horizontal Collection Method", 
+                 "Vertical Datum", "Vertical Collection Method",
+                 "Comment", "Elevation", "Elevation Unit", 
+                 "Elevation Unit.id"
+                 )
     
   }
   
@@ -1447,6 +1479,34 @@ post_profiles <- function(env, data_type, profile){
         "LocationGroupType" = list("id" = temp_profile$locationgrouptypeID)
       )
       
+    } else if(data_type == "locations"){
+      
+      # "Location ID", "Name", "Type", "Type.id",
+      # "Latitude", "Longitude", 
+      # "Horizontal Datum", "Horizontal Collection Method", 
+      # "Vertical Datum", "Vertical Collection Method",
+      #"Comment"
+      
+      data_body = list(
+        "customId" = temp_profile$"Location ID",
+        "name" = temp_profile$Name,
+        #"type" = temp_profile$Type.id,
+        "type" = list(id = temp_profile$Type.id, 
+                            customId = temp_profile$Type),
+        "latitude" = temp_profile$Latitude,
+        "longitude" = temp_profile$Longitude,
+        "horizontalDatum" = temp_profile$"Horizontal Datum",
+        "horizontalCollectionMethod" = temp_profile$"Horizontal Collection Method",
+        "verticalDatum" = temp_profile$"Vertical Datum",
+        "verticalCollectionMethod" = temp_profile$"Vertical Collection Method",
+        "description" = temp_profile$Comment,
+        "elevation" = list(value = temp_profile$Elevation, 
+                           unit = list(
+                             id = temp_profile$"Elevation Unit.id",
+                             customId = temp_profile$"Elevation Unit"
+                           ))
+      )
+      
     }
     
     #Post the configuration
@@ -1473,6 +1533,8 @@ post_profiles <- function(env, data_type, profile){
     
   }
   
+  print(messages)
+  
   return(messages)
   
 }
@@ -1496,6 +1558,8 @@ post_check <- post_profiles("prod", "filters", savedFilters)
 post_check <- post_profiles("prod", "projects", projects)
 
 post_check <- post_profiles("prod", "locationgroups", locationGroups)
+
+post_check <- post_profiles("prod", "locations", locations)
 
 post_check <- post_profiles("prod", "methods", Methods)
 
