@@ -23,4 +23,4 @@ jobs:
         env:
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        run: Rscript -e 'source("/utils/coc/upload_BC_Box.R")'
+        run: Rscript -e 'source("utils/coc/upload_BC_Box.R")'
