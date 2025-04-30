@@ -3,8 +3,8 @@ library(aws.s3)
 readRenviron(paste0(getwd(), "./.Renviron"))
 
 #set up account access for BC boc
-Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("aws_access_key"),
-           "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("aws_secret_access_key"),
+Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
+           "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AWS_SECRET_ACCESS_KEY"),
            "AWS_S3_ENDPOINT" = "nrs.objectstore.gov.bc.ca")
 
 #test connection and list buckets
