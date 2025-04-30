@@ -18,7 +18,7 @@ jobs:
       - name: Cache R packages #cache packages to make future runs faster
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: aws.s3, dplyr, aws.signature
+          packages: aws.s3, dplyr
 
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
