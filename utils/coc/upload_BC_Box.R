@@ -15,7 +15,7 @@ get_bucket("enmods", region = "")
 
 #post a test file to a bucket, this can also be used to update a file
 put_object(file = "./utils/coc/jsons/test_proj_data.json", 
-           object = "CoC_Tables/project_json_from_R_test.json",
+           object = "CoC_Tables/project_json_from_R_test_workflow.json",
            bucket = "enmods",
            region = "",
            acl = "public-read")
