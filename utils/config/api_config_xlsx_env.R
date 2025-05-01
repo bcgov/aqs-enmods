@@ -96,9 +96,7 @@ cols_to_move <- c("Results", "Base Unit", "OFFSET", "Convertible",
 units <- units %>%
   dplyr::select(-all_of(cols_to_move), all_of(cols_to_move)) %>% 
   group_by(CODE) %>%
-  summarize(across(SHORT_NAME:Sample.Unit.Modifier, 
-                   ~ if (all(is.na(.x))) NA else .x[!is.na(.x)][1]), 
-            .groups = "drop") %>%
+  summarize(across(SHORT_NAME:Sample.Unit.Modifier, ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), .groups = "drop") %>%
   mutate(Sample.Unit.Group = case_when(
     SHORT_NAME == "‰" ~ "DimensionlessRatio",
     SHORT_NAME == "mg/dscm" ~ "AirConcentration",
