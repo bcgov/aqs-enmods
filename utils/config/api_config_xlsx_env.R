@@ -5,6 +5,7 @@
 library(httr)
 library(jsonlite)
 library(tidyverse)
+library(purrr)
 library(dplyr)
 library(lubridate)
 library(stringr)
@@ -15,6 +16,7 @@ library(readr)
 library(readxl)
 library(writexl)
 library(openxlsx)
+library(hunspell)
 
 #get the API tokens from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
@@ -64,34 +66,77 @@ token <- url_parameters[[2]]
   
 units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>% 
   mutate(CODE = as.character(CODE)) %>% 
-  dplyr::select(-CONVERSION_FACTOR)
+  dplyr::select(-CONVERSION_FACTOR) %>% 
+  mutate(CODE = str_replace(CODE, "^0+", ""))
 
 #Only conversions in this file are reliable
-units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% dplyr::select(c(CODE, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
+units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% mutate(CODE = str_replace(CODE, "^0+", ""))
+#%>% dplyr::select(c(CODE, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
 
-units <- units %>% left_join(units_base %>%
-           dplyr::select(CODE, Sample.Unit.Group, Sample.Unit.CustomId, 
-                         Sample.Unit.Name, CONVERSION_FACTOR, OFFSET), 
-           by = join_by("CODE")) %>%
-            mutate(Sample.Unit.Group = case_when(
-              SHORT_NAME == "‰" ~ "AmountOfSubstancePerVolume",
-              SHORT_NAME == "mg/dscm" ~ "AirConcentration",
-              SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
-              SHORT_NAME == "N/A" ~ "None",
-              .default = Sample.Unit.Group
-            )) %>% 
-  mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR)) %>%
-  dplyr::select(-CODE) %>% unique()
+# Identify the new columns from units_base
+new_cols <- setdiff(names(units_base), names(units))
 
-#we know there are duplicates in this data set
-units <- units %>% 
-            mutate(Sample.Unit.Name = if_else(is.na(Sample.Unit.Name), 
-            DESCRIPTION, Sample.Unit.Name), 
-            Sample.Unit.CustomId = if_else(is.na(Sample.Unit.CustomId),                            SHORT_NAME, Sample.Unit.CustomId)) %>% 
-            dplyr::select(c(Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group)) %>% unique()
+# Create a tibble of just those new columns
+new_data <- units_base %>% 
+  dplyr::select(all_of(new_cols)) %>%
+  mutate(across(everything(), ~ NA)) %>% 
+  unique() %>% slice(rep(1, nrow(units)))
 
-units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits") %>% 
-  dplyr::select(c(Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET))
+units <- units %>% bind_cols(new_data)
+
+units <- units %>% bind_rows(units_base %>% mutate(Results = NA)) %>% unique()
+
+# Columns to move
+cols_to_move <- c("Results", "Base Unit", "OFFSET", "Convertible", 
+                  "Sample.Unit.Group", "Sample.Unit.CustomId", 
+                  "Sample.Unit.Name", "Sample.Unit.Short.Name",
+                  "Sample.Unit.Modifier")
+
+# Reorder with selected columns at the end
+units <- units %>%
+  dplyr::select(-all_of(cols_to_move), all_of(cols_to_move)) %>% 
+  group_by(CODE) %>%
+  summarize(across(SHORT_NAME:Sample.Unit.Modifier, 
+                   ~ if (all(is.na(.x))) NA else .x[!is.na(.x)][1]), 
+            .groups = "drop") %>%
+  mutate(Sample.Unit.Group = case_when(
+    SHORT_NAME == "‰" ~ "DimensionlessRatio",
+    SHORT_NAME == "mg/dscm" ~ "AirConcentration",
+    SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
+    SHORT_NAME == "N/A" ~ "None",
+    .default = Sample.Unit.Group
+  )) %>% 
+  mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR))
+
+# 
+#  %>% #, #%>%
+#            #dplyr::select(CODE, Sample.Unit.Group, Sample.Unit.CustomId, 
+#            #              Sample.Unit.Name, CONVERSION_FACTOR, OFFSET), 
+#            #by = join_by("CODE", "")) 
+#   %>% dplyr::select(-CODE) %>% unique()
+
+# #we know there are duplicates in this data set
+# units <- units %>% 
+#             mutate(Sample.Unit.Name = if_else(is.na(Sample.Unit.Name), 
+#             DESCRIPTION, Sample.Unit.Name), 
+#             Sample.Unit.CustomId = if_else(is.na(Sample.Unit.CustomId),                            SHORT_NAME, Sample.Unit.CustomId)) %>% 
+#             dplyr::select(c(Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group)) %>% unique()
+
+units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits") #%>% 
+  #dplyr::select(c(Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET))
+
+# Identify the new columns from units_base
+new_cols <- setdiff(names(units), names(units_new_to_enmods))
+
+# Create a tibble of just those new columns
+new_data <- units %>% 
+  dplyr::select(all_of(new_cols)) %>%
+  mutate(across(everything(), ~ NA)) %>% 
+  unique() %>% slice(rep(1, nrow(units_new_to_enmods)))
+
+units_new_to_enmods <- units_new_to_enmods %>% 
+  bind_cols(new_data) %>% 
+  mutate(Sample.Unit.Modifier = as.character(Sample.Unit.Modifier))
 
 units <- units %>% 
   bind_rows(units_new_to_enmods) %>% 
@@ -107,7 +152,36 @@ units <- units %>%
 units <- units %>% left_join(unitgroups_profiles %>% 
            dplyr::select(id, customId, supportsConversion), 
            by = join_by("Sample.Unit.Group" == "customId")) %>%
+          dplyr::select(-Convertible) %>%
           rename(Convertible = supportsConversion)
+
+#fixing the units file for anomalous Count group associated with No/m2
+units <- units %>% 
+  mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square meter", 
+                              FALSE, Convertible)) %>%
+  mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
+  mutate(Sample.Unit.Group = case_when(
+    Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
+    Sample.Unit.Group == "Apperance" ~ "Appearance",
+    .default = Sample.Unit.Group
+  ))
+
+units <- units %>% mutate(Convertible = 
+                            if_else(is.na(Convertible), FALSE, Convertible))
+
+#Spell check things before writing
+units_spellcheck <- units %>% 
+  mutate(
+    # words = str_extract_all(Sample.Unit.Group, "[A-Z][a-z]+"),  # splits CamelCase into words
+    words = strsplit(DESCRIPTION, "\\s+"),  # split text into words
+    misspelled = map(words, hunspell)
+  )
+
+# print(units_spellcheck %>%
+#   select(misspelled) %>%
+#   unnest(misspelled) %>% unlist() %>% unique(), n=126)
+
+write_xlsx(units, "./utils/config/ReferenceLists/Consolidated_units.xlsx")
 
 #Elevation does not exist in the Reference Sheet
 #Needs to be added manually even though it's metres
@@ -119,15 +193,6 @@ units <- units %>% left_join(unitgroups_profiles %>%
 #                            Sample.Unit.CustomId = "metre",
 #                            Sample.Unit.Name = "Elevation")
 
-#fixing the units file for anomalous Count group associated with No/m2
-units <- units %>% 
-  mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square meter", 
-                              FALSE, Convertible)) %>%
-  mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
-  mutate(Sample.Unit.Group = case_when(
-    Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-    .default = Sample.Unit.Group
-  ))
 
 # #110 only; even though 117 in the units file
 # get_check <- get_profiles("prod", "units")
@@ -152,6 +217,9 @@ unit_groups <- units %>%
           Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
           .default = Sample.Unit.Group
   ))
+
+#Spell check unit groups
+
 
 # #loop to make all the unit groups
 # for (i in seq(1, dim(unit_groups)[1])) {
@@ -408,6 +476,8 @@ locations <- locations %>% mutate(`Elevation Unit` = case_when(
 locations <- locations %>% 
                 dplyr::filter(str_detect(`Location Groups`, ";"))
 
+extendedAttributes <- get_profiles("prod", "extendedattributes")
+
 # #created a location file when pre-processing for Location Groups; use it here
 # #initially just trying to import the first location since it is associated
 # #with exactly one location group (will deal with complicated situations later)
@@ -418,6 +488,26 @@ test_locations <- locations %>%
                       left_join(units %>% dplyr::select(id, customId), 
                                 by = join_by("Elevation Unit" == "customId")) %>%
                       rename("Elevation Unit.id" = id) %>% 
+                      rename(`Closed Date` = `EA_Closed Date`, 
+                             `EMS Who Created` = `EA_EMS Who Created`,
+                             `Well Tag ID` = `EA_Well Tag ID`,
+                             `EMS When Created` = `EA_EMS When Created`,
+                             `EMS When Updated` = `EA_EMS When Updated`,
+                             `EMS Who Updated` = `EA_EMS Who Updated`,
+                             `Established Date` = `EA_Established Date`) %>%
+                      mutate(across(`Closed Date`:`Well Tag ID`, 
+                                    as.character)) %>%
+                      pivot_longer(cols = `Closed Date`:`Well Tag ID`,
+                                   names_to = "customId",
+                                   values_to = "EA.value") %>%
+                      left_join(extendedAttributes %>% 
+                                  dplyr::select(id, customId)) %>%
+                      rename(EA.id = id) %>%
+                      dplyr::select(-customId) %>%
+                      group_by(across(`Location ID`:
+                        `Elevation Unit.id`)) %>%
+                      summarise(across(`EA.value`:`EA.id`, 
+                        ~ list(as.character(.))), .groups = "drop") %>%
                       separate_rows(`Location Groups`, sep = ";") %>% 
                       mutate(`Location Groups` = 
                         str_replace_all(`Location Groups`, "\\s+", "")) %>%
@@ -430,20 +520,10 @@ test_locations <- locations %>%
                              GroupType.customId = customId) %>%
                       dplyr::select(-auditAttributes) %>%
                       relocate(`Location Groups`, .after = last_col()) %>%
-                      group_by(across(`Location ID`:`Elevation Unit.id`)) %>%
+                      group_by(across(`Location ID`:
+                                        `EA.id`)) %>%
                       summarise(across(Group.id:`Location Groups`, 
                         ~ list(as.character(.))), .groups = "drop")
-                      
-# 
-#   "samplingLocationGroups" = list(list(id = temp_profile$Group.id,
-#                                        name = temp_profile$`Location Groups`,
-#                                        locationGroupType = list(
-#                                          id = temp_profile$GroupType.id,
-#                                          customId = temp_profile$GroupType.customId
-#                                        )))
-
-#simple test location file
-test_locations <- test_locations[1, ]
                 
 
 # #bigger test file
@@ -1228,11 +1308,11 @@ put_check <- put_profiles("prod", "mediums", mediums)
 
 post_profiles <- function(env, data_type, profile){
 
-  env = "prod"
-
-  data_type = "locations"
-
-  profile <- test_locations
+# env = "prod"
+# 
+# data_type = "locations"
+# 
+# profile <- test_locations
   # 
   # profile <- profile %>%
   #               dplyr::filter(ID == "BCLMN")
@@ -1370,10 +1450,7 @@ post_profiles <- function(env, data_type, profile){
                  "Elevation", "Elevation Unit", "Elevation Unit.id",
                  "Location Groups", "Group.id", 
                  "GroupType.id", "GroupType.customId",
-                 "EA_Closed Date", "EA_EMS When Created", "EA_EMS When Updated",
-                 "EA_EMS Who Created", "EA_EMS Who Updated",
-                 "EA_Established Date", "EA_Well Tag ID"
-                 )
+                 "EA.value", "EA.id")
     
   }
   
@@ -1381,7 +1458,7 @@ post_profiles <- function(env, data_type, profile){
   
   for(j in 1:dim(profile)[1]){
     
-    j <- 1
+    #j <- 1
   
       temp_profile <- profile %>% 
         keep(names(.) %in% rel_var) %>%
@@ -1511,13 +1588,43 @@ post_profiles <- function(env, data_type, profile){
       
     } else if(data_type == "locations"){
       
-      # "Location ID", "Name", "Type", "Type.id",
-      # "Latitude", "Longitude", 
-      # "Horizontal Datum", "Horizontal Collection Method", 
-      # "Vertical Datum", "Vertical Collection Method",
-      #"Comment"
-      # "Location Groups", "Group.id", 
-      # "GroupType.id", "GroupType.customId"#,
+      num_location_groups <- temp_profile$Group.id %>% unlist() %>% length()
+      
+      samplingLocationGroups = list()
+      
+      for(i in 1:num_location_groups){
+        
+        samplingLocationGroups[[i]] <- list(
+          id = temp_profile$Group.id[[1]][i], 
+          name = temp_profile$`Location Groups`[[1]][i], 
+          locationGroupType = list(
+            id = temp_profile$GroupType.id[[1]][i], 
+            customId = temp_profile$GroupType.customId[[1]][i]
+            ))
+        
+      }
+      
+      num_extended_attributes <- temp_profile$EA.id %>% 
+        unlist() %>% length()
+      
+      extendedAttributes = list()
+      
+      # extendedAttributes = list(attributeId = NA,
+      #                           id = temp_profile$EA.id[[1]][1], 
+      #                           text = temp_profile$EA.value[[1]][1]),
+      #                           )
+      # 
+      #extendedAttributes = list()
+      
+      # for(i in 1:num_extended_attributes){
+      #   
+      #   extendedAttributes[[i]] <- list(
+      #     temp_profile$EA.id[[1]][i],
+      #     temp_profile$EA.value[[1]][i],
+      #     NULL
+      #   )
+      #   
+      # }
       
       data_body = list(
         "customId" = temp_profile$"Location ID",
@@ -1537,23 +1644,19 @@ post_profiles <- function(env, data_type, profile){
                               id = temp_profile$"Elevation Unit.id",
                               customId = temp_profile$"Elevation Unit"
                            )),
-         "samplingLocationGroups" = list(list(id = temp_profile$Group.id[[1]],
-                                         name = temp_profile$`Location Groups`[[1]],
-                                         locationGroupType = list(
-                                            id = temp_profile$GroupType.id[[1]],
-                                   customId = temp_profile$GroupType.customId[[1]]
-                                        )))
+        "samplingLocationGroups" = samplingLocationGroups,
+        "extendedAttributes" = extendedAttributes
       )
       
     }
     
-    #print(data_body)
+    print(data_body)
     
     #Post the configuration
     x<-POST(url, config = c(add_headers(.headers = 
         c('Authorization' = token))), body = data_body, encode = 'json')
     
-    j <- 1
+    #j <- 1
     
     messages[[j]] <- fromJSON(rawToChar(x$content))
     
