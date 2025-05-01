@@ -384,7 +384,6 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
                              by = join_by(Type == customId)) %>%
                              rename(locationgrouptypeID = id)
 
-
 # SAMPLING LOCATIONS  ---------------------------------------------------------
 
 #after putting location groups in, come back here to attach location group IDs to locations
@@ -406,26 +405,46 @@ locations <- locations %>% mutate(`Elevation Unit` = case_when(
                               .default = `Elevation Unit`
   ))
 
+locations <- locations %>% 
+                dplyr::filter(str_detect(`Location Groups`, ";"))
+
 # #created a location file when pre-processing for Location Groups; use it here
 # #initially just trying to import the first location since it is associated
 # #with exactly one location group (will deal with complicated situations later)
-locations <- locations %>% 
+test_locations <- locations %>% 
                     left_join(locationTypes %>% dplyr::select(id, customId), 
                       by = join_by("Type" == "customId")) %>%
-                      rename(Type.id = id) %>%
-                    left_join(locationGroups %>% 
-                                dplyr::select(id, name, 
-                                              locationGroupType), 
-                              by = join_by("Location Groups" == "name")) %>% 
-                    rename(Group.id = id) %>% 
-                      unnest_wider(locationGroupType) %>%
-                        rename(GroupType.id = id, 
-                               GroupType.customId = customId) %>%
-                    mutate(Elevation = 1, `Elevation Unit` = "m") %>%
-                    left_join(units %>% 
-                                dplyr::select(id, customId), 
-                              by = join_by("Elevation Unit" == "customId")) %>%
-                        rename("Elevation Unit.id" = id)
+                      rename(Type.id = id) %>% 
+                      left_join(units %>% dplyr::select(id, customId), 
+                                by = join_by("Elevation Unit" == "customId")) %>%
+                      rename("Elevation Unit.id" = id) %>% 
+                      separate_rows(`Location Groups`, sep = ";") %>% 
+                      mutate(`Location Groups` = 
+                        str_replace_all(`Location Groups`, "\\s+", "")) %>%
+                      left_join(locationGroups %>% 
+                                  dplyr::select(id, name, locationGroupType),
+                                  by = join_by("Location Groups" == "name")) %>% 
+                      rename(Group.id = id) %>% 
+                      unnest_wider(locationGroupType) %>% 
+                      rename(GroupType.id = id, 
+                             GroupType.customId = customId) %>%
+                      dplyr::select(-auditAttributes) %>%
+                      relocate(`Location Groups`, .after = last_col()) %>%
+                      group_by(across(`Location ID`:`Elevation Unit.id`)) %>%
+                      summarise(across(Group.id:`Location Groups`, 
+                        ~ list(as.character(.))), .groups = "drop")
+                      
+# 
+#   "samplingLocationGroups" = list(list(id = temp_profile$Group.id,
+#                                        name = temp_profile$`Location Groups`,
+#                                        locationGroupType = list(
+#                                          id = temp_profile$GroupType.id,
+#                                          customId = temp_profile$GroupType.customId
+#                                        )))
+
+#simple test location file
+test_locations <- test_locations[1, ]
+                
 
 # #bigger test file
 # locations_1 <- locations[seq(1,10000),]
@@ -980,6 +999,10 @@ del_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/projects/")
     
+  } else if(data_type == "locations"){
+    
+    url <- str_c(base_url, "v1/samplinglocations/")
+    
   } else if(data_type == "locationgroups"){
     
     url <- str_c(base_url, "v1/samplinglocationgroups/")
@@ -1084,6 +1107,8 @@ del_check <- del_profiles("prod", "resultstatuses")
 del_check <- del_profiles("prod", "mediums")
 
 del_check <- del_profiles("prod", "projects")
+
+del_check <- del_profiles("prod", "locations")
 
 del_check <- del_profiles("prod", "locationgroups")
 
@@ -1203,11 +1228,11 @@ put_check <- put_profiles("prod", "mediums", mediums)
 
 post_profiles <- function(env, data_type, profile){
 
-  # env = "prod"
-  # 
-  # data_type = "projects"
-  # 
-  # profile <- projects
+  env = "prod"
+
+  data_type = "locations"
+
+  profile <- test_locations
   # 
   # profile <- profile %>%
   #               dplyr::filter(ID == "BCLMN")
@@ -1341,8 +1366,13 @@ post_profiles <- function(env, data_type, profile){
                  "Latitude", "Longitude", 
                  "Horizontal Datum", "Horizontal Collection Method", 
                  "Vertical Datum", "Vertical Collection Method",
-                 "Comment", "Elevation", "Elevation Unit", 
-                 "Elevation Unit.id"
+                 "Comment", 
+                 "Elevation", "Elevation Unit", "Elevation Unit.id",
+                 "Location Groups", "Group.id", 
+                 "GroupType.id", "GroupType.customId",
+                 "EA_Closed Date", "EA_EMS When Created", "EA_EMS When Updated",
+                 "EA_EMS Who Created", "EA_EMS Who Updated",
+                 "EA_Established Date", "EA_Well Tag ID"
                  )
     
   }
@@ -1351,11 +1381,11 @@ post_profiles <- function(env, data_type, profile){
   
   for(j in 1:dim(profile)[1]){
     
-    #j <- 1
-    
-    temp_profile <- profile %>% 
-      keep(names(.) %in% rel_var) %>%
-      slice(j) #%>%
+    j <- 1
+  
+      temp_profile <- profile %>% 
+        keep(names(.) %in% rel_var) %>%
+        slice(j) #%>%
       #as.list()
     
     if(data_type == "unitgroups"){
@@ -1486,6 +1516,8 @@ post_profiles <- function(env, data_type, profile){
       # "Horizontal Datum", "Horizontal Collection Method", 
       # "Vertical Datum", "Vertical Collection Method",
       #"Comment"
+      # "Location Groups", "Group.id", 
+      # "GroupType.id", "GroupType.customId"#,
       
       data_body = list(
         "customId" = temp_profile$"Location ID",
@@ -1502,18 +1534,26 @@ post_profiles <- function(env, data_type, profile){
         "description" = temp_profile$Comment,
         "elevation" = list(value = temp_profile$Elevation, 
                            unit = list(
-                             id = temp_profile$"Elevation Unit.id",
-                             customId = temp_profile$"Elevation Unit"
-                           ))
+                              id = temp_profile$"Elevation Unit.id",
+                              customId = temp_profile$"Elevation Unit"
+                           )),
+         "samplingLocationGroups" = list(list(id = temp_profile$Group.id[[1]],
+                                         name = temp_profile$`Location Groups`[[1]],
+                                         locationGroupType = list(
+                                            id = temp_profile$GroupType.id[[1]],
+                                   customId = temp_profile$GroupType.customId[[1]]
+                                        )))
       )
       
     }
+    
+    #print(data_body)
     
     #Post the configuration
     x<-POST(url, config = c(add_headers(.headers = 
         c('Authorization' = token))), body = data_body, encode = 'json')
     
-    #j <- 1
+    j <- 1
     
     messages[[j]] <- fromJSON(rawToChar(x$content))
     
@@ -1539,6 +1579,23 @@ post_profiles <- function(env, data_type, profile){
   
 }
 
+get_check <- get_profiles("prod", "locations")
+
+# The test below did not work
+# This means that output from GET cannot be simply pushed back into POST
+# env <- "prod"
+# 
+# #default is "test" and for prod env, use the function parameter "prod"
+# url_parameters <- update_base_url_token(env)
+# base_url <- url_parameters[[1]]
+# token <- url_parameters[[2]]
+# 
+# url <- str_c(base_url, "v1/samplinglocations")
+# 
+# #Post the configuration
+# x<-POST(url, config = c(add_headers(.headers = 
+#                                       c('Authorization' = token))), body = locations_enmods, encode = 'json')
+
 post_profiles("prod", "collectionmethods", collection_methods)
 
 post_profiles("prod", "fishtaxonomy", Taxons)
@@ -1559,7 +1616,7 @@ post_check <- post_profiles("prod", "projects", projects)
 
 post_check <- post_profiles("prod", "locationgroups", locationGroups)
 
-post_check <- post_profiles("prod", "locations", locations)
+post_check <- post_profiles("prod", "locations", test_locations)
 
 post_check <- post_profiles("prod", "methods", Methods)
 
