@@ -164,7 +164,10 @@ units <- units %>%
     Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
     Sample.Unit.Group == "Apperance" ~ "Appearance",
     .default = Sample.Unit.Group
-  ))
+  )) %>% mutate(Sample.Unit.Name = case_when(
+    str_detect(Sample.Unit.Name
+  )
+  )
 
 units <- units %>% mutate(Convertible = 
                             if_else(is.na(Convertible), FALSE, Convertible))
@@ -172,8 +175,8 @@ units <- units %>% mutate(Convertible =
 #Spell check things before writing
 units_spellcheck <- units %>% 
   mutate(
-    # words = str_extract_all(Sample.Unit.Group, "[A-Z][a-z]+"),  # splits CamelCase into words
-    words = strsplit(DESCRIPTION, "\\s+"),  # split text into words
+    words = str_extract_all(Sample.Unit.Name, "[A-Z][a-z]+"),  # splits CamelCase into words
+    # words = strsplit(Sample.Unit.Name, "\\s+"),  # split text into words
     misspelled = map(words, hunspell)
   )
 
