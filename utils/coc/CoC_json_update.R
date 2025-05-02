@@ -50,22 +50,28 @@ put_object(file = jsonMediumsProc,
 # LOCATIONS ---------------------------------------------------------------
 
 # #reading in EnMoDS config
-# locations <- get_profiles("prod", "locations") %>% 
-#   keep(names(.) %in% gen_list_rel_var("locations"))
+ locations <- get_profiles("test", "locations") %>% 
+   keep(names(.) %in% gen_list_rel_var("samplinglocations"))
 # 
 # #selecting columns and renaming them as required
-# jsonLocationsRaw <- locations %>%
-#   dplyr::select(customId, name) %>%
-#   rename(disp_name = name) %>%
-#   mutate(disp_name = str_c(customId, " - ", disp_name)) %>%
-#   dplyr::select(disp_name)
+ jsonLocationsRaw <- locations %>%
+   dplyr::select(customId, name) %>%
+   rename(disp_name = name) %>%
+   mutate(disp_name = str_c(customId, " - ", disp_name)) %>%
+   dplyr::select(disp_name)
 # 
 # #processing data into JSON format
 # #added the items keyword to store variables in an array
-# jsonLocationsProc <- toJSON(list(items = jsonLocationsRaw), pretty = TRUE)
+ jsonLocationsProc <- toJSON(list(items = jsonLocationsRaw), pretty = TRUE)
 # 
 # #writing the created JSON file
-# write(jsonLocationsProc, file = "enmods_locations_data.json")
+write(jsonLocationsProc, file = "enmods_locations_data.json")
+
+put_object(file = "full_enmods_locations_data.json", 
+           object = "CoC_Tables/enmods_locations_data.json",
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
 
 # LABS --------------------------------------------------------------------
 
@@ -89,7 +95,7 @@ put_object(file = "enmods_labs_data.json",
 # SAMPLING AGENCY ---------------------------------------------------------
 
 # #reading in EnMoDS config
-# samplingAgency <- dropdownlist_extended_attributes("prod", "samplingagency")
+samplingAgency <- dropdownlist_extended_attributes("prod", "Sampling Agency")
 # 
 # #processing data into JSON format
 # jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
