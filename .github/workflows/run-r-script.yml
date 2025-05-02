@@ -18,7 +18,7 @@ jobs:
       - name: Cache R packages #cache packages to make future runs faster
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: aws.s3, dplyr
+          packages: aws.s3, dplyr, httr, jsonlite, tidyverse, dplyr, lubridate, stringr, readr
 
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
@@ -27,4 +27,8 @@ jobs:
         env:
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        run: Rscript utils/coc/upload_BC_Box.R
+            PROD_READ_ONLY_TOKEN: ${{ secrets.PROD_READ_ONLY_TOKEN }}
+            TEST_READ_ONLY_TOKEN: ${{ secrets.TEST_READ_ONLY_TOKEN }}
+            PROD_URL: ${{ vars.PROD_URL }}
+            TEST_URL: ${{ vars.TEST_URL }}
+        run: Rscript utils/coc/CoC_json_update.R
