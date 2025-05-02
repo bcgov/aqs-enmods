@@ -226,7 +226,7 @@ make_api_request <- function(env, id, dataType) {
     
     url <- str_c(baseURL, "v1/projects/", id)
     
-  } else if (dataType == "samplingagency") {
+  } else if (dataType == "Sampling Agency") {
 
     url <- str_c(baseURL, "v1/extendedattributes/", id, "/dropdownlistitems")
     
