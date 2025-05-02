@@ -96,12 +96,20 @@ put_object(file = "enmods_labs_data.json",
 
 # #reading in EnMoDS config
 samplingAgency <- dropdownlist_extended_attributes("prod", "Sampling Agency")
-# 
+
+samplingAgency <- samplingAgency$domainObjects
 # #processing data into JSON format
-# jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
+ jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
 # 
 # #writing the created JSON file
-# write(jsonSamplingAgencyProc, file = "enmods_samplingagency_data.json")
+ write(jsonSamplingAgencyProc, file = "enmods_samplingagency_data.json")
+ 
+ #Post to object store
+ put_object(file = "enmods_samplingagency_data.json", 
+            object = "CoC_Tables/sampling_agency_PROD.json",
+            bucket = "enmods",
+            region = "",
+            acl = "public-read")
 
 # COLLECTION METHODS ------------------------------------------------------
 

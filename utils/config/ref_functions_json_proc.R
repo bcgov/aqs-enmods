@@ -333,7 +333,7 @@ gen_list_rel_var <- function(dataType){
 dropdownlist_extended_attributes <- function(env, dataType){
   
   idDataType <- get_profiles(env, "extendedattributes") %>%
-    dplyr::filter(customId == dataType) %>% dplyr::select(id) %>% unlist()
+    dplyr::filter(customId == !!dataType) %>% dplyr::select(id) %>% unlist()
   
   data_dropdown <- make_api_request(env, idDataType, dataType)  
   
