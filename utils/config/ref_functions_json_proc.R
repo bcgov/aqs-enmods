@@ -6,8 +6,6 @@ library(dplyr)
 library(lubridate)
 library(stringr)
 library(readr)
-library(readxl)
-library(writexl)
 
 #get the API token from your environment file
 #readRenviron(paste0(getwd(), "./.Renviron"))
