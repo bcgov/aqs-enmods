@@ -103,7 +103,17 @@ units <- units %>%
     SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
     SHORT_NAME == "N/A" ~ "None",
     .default = Sample.Unit.Group
-  )) %>% 
+  )) %>% mutate(Sample.Unit.CustomId = case_when(
+    SHORT_NAME == "N/A" ~ "Unknown",
+    SHORT_NAME == "‰" ~ "‰",
+    SHORT_NAME == "mg/dscm" ~ "mg/dscm",
+    .default = Sample.Unit.CustomId
+  )) %>% mutate(Sample.Unit.Name = case_when(
+    SHORT_NAME == "N/A" ~ "Unknown",
+    SHORT_NAME == "‰" ~ "Per mille (0/00 VSMOW, isotope composition)",
+    SHORT_NAME == "mg/dscm" ~ "Milligrams per dry standard cubic metre",
+    .default = Sample.Unit.Name
+  )) %>%
   mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR))
 
 # 
@@ -140,47 +150,71 @@ units <- units %>%
   bind_rows(units_new_to_enmods) %>% 
   unique()
 
-#Sentence case in general
+# Replacement dictionary as a named vector
+replacements <- c("Ph units" = "pH units", 
+                  "hectar" = "hectare", 
+                  "Count" = "Counts",
+                  "Us gallons" = "US gallons",
+                  "Tons" = "US tons",
+                  "Kilopascal" = "Kilopascals", 
+                  "Micro grams per kilogram" = "Micrograms per kilogram", 
+                  "Microequivelents" = "Microequivalents",
+                  "Milliequivalent" = "Milliequivalents",
+                  "meter" = "metre",
+                  "Tons" = "US tons",
+                  "Day" = "Days",
+                  "Micromole per gram" = "Micromoles per gram",
+                  "Cenitmetre" = "Centimetres",
+                  "Milisiemens per centimetre" = "Millisiemens per centimetre")
+
+#Sentence case in general for sample unit names
 #Accounting for special cases
 units <- units %>% 
   mutate(Sample.Unit.Name = str_to_sentence(Sample.Unit.Name)) %>%
-  mutate(Sample.Unit.Name = ifelse(Sample.Unit.Name == "Ph units", 
-                                   "pH units", Sample.Unit.Name))
+  mutate(Sample.Unit.Name = 
+           str_replace_all(Sample.Unit.Name, replacements)) %>%
+  mutate(Sample.Unit.Name = case_when(
+    Sample.Unit.Name == "Centimetre" ~ "Centimetres",
+    Sample.Unit.Name == "Micrometre" ~ "Micrometres",
+    .default = Sample.Unit.Name)) %>% 
+  mutate(DESCRIPTION = str_replace_all(DESCRIPTION, "Tons", "US tons"))
 
 units <- units %>% left_join(unitgroups_profiles %>% 
            dplyr::select(id, customId, supportsConversion), 
            by = join_by("Sample.Unit.Group" == "customId")) %>%
           dplyr::select(-Convertible) %>%
-          rename(Convertible = supportsConversion)
+          rename(Convertible = supportsConversion,
+                 Sample.Unit.GroupID = id)
 
 #fixing the units file for anomalous Count group associated with No/m2
 units <- units %>% 
-  mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square meter", 
+  mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square metre", 
                               FALSE, Convertible)) %>%
   mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
   mutate(Sample.Unit.Group = case_when(
     Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
     Sample.Unit.Group == "Apperance" ~ "Appearance",
     .default = Sample.Unit.Group
-  )) %>% mutate(Sample.Unit.Name = case_when(
-    str_detect(Sample.Unit.Name
-  )
-  )
+  ))
 
-units <- units %>% mutate(Convertible = 
-                            if_else(is.na(Convertible), FALSE, Convertible))
+units <- units %>% mutate(Convertible = if_else(is.na(Convertible), FALSE, Convertible))
+
+
+
+# columns needed for AQS POST request
+# "CONVERSION_FACTOR", "OFFSET", "Convertible",
+# "Sample.Unit.Group", "Sample.Unit.CustomId",
+# "Sample.Unit.Name", "Sample.Unit.GroupID"
 
 #Spell check things before writing
 units_spellcheck <- units %>% 
   mutate(
-    words = str_extract_all(Sample.Unit.Name, "[A-Z][a-z]+"),  # splits CamelCase into words
+    words = str_extract_all(DESCRIPTION, "[A-Z][a-z]+"),  # splits CamelCase into words
     # words = strsplit(Sample.Unit.Name, "\\s+"),  # split text into words
     misspelled = map(words, hunspell)
   )
 
-# print(units_spellcheck %>%
-#   select(misspelled) %>%
-#   unnest(misspelled) %>% unlist() %>% unique(), n=126)
+print(units_spellcheck %>% select(misspelled) %>% unnest(misspelled) %>% unlist() %>% unique(), n = 126)
 
 write_xlsx(units, "./utils/config/ReferenceLists/Consolidated_units.xlsx")
 
