@@ -1,7 +1,8 @@
-name: Run R Script
+name: Update CoC json files
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '51 11 * * *'  # Runs at 11:51 UTC every day - 3:51am Pacific
 
 jobs:
   run-r:
