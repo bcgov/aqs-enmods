@@ -3,24 +3,16 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 library(dplyr)
-library(purrr)
 library(lubridate)
 library(stringr)
-library(bcdata)
-library(sf)
-library(tidygeocoder)
 library(readr)
-library(readxl)
-library(writexl)
-library(openxlsx)
-library(hunspell)
 
 #get the API token from your environment file
-readRenviron(paste0(getwd(), "./.Renviron"))
-testToken <- Sys.getenv("TEST_TOKEN")
-prodToken <- Sys.getenv("PROD_TOKEN")
-testURL <- Sys.getenv("TEST_URL")
-prodURL <- Sys.getenv("PROD_URL")
+#readRenviron(paste0(getwd(), "./.Renviron"))
+#testToken <- Sys.getenv("TEST_TOKEN")
+#prodToken <- Sys.getenv("PROD_TOKEN")
+#testURL <- Sys.getenv("TEST_URL")
+#prodURL <- Sys.getenv("PROD_URL")
 
 # Reference functions----------------------------------------------------
 #function to update URL/token based on chosen environment
@@ -51,11 +43,11 @@ token <- urlParameters[[2]]
 
 get_profiles_for_url <- function(env, url){
   
-  urlParameters <- update_baseURL_token(env)
+  urlParameters <- update_base_url_token(env)
   baseURL <- urlParameters[[1]]
   token <- urlParameters[[2]]
   
-  dataBody <- list()
+  data_body <- list()
   
   xTemp <- GET(url, config = c(add_headers(.headers = 
                                               c('Authorization' = token))), body = data_body, encode = 'json')
@@ -101,7 +93,7 @@ get_profiles_for_url <- function(env, url){
 get_profiles <- function(env, dataType){
   
   #for prod env, use the function parameter env = "prod"
-  urlParameters <- update_baseURL_token(env)
+  urlParameters <- update_base_url_token(env)
   baseURL <- urlParameters[[1]]
   token <- urlParameters[[2]]
   
@@ -234,7 +226,7 @@ make_api_request <- function(env, id, dataType) {
     
     url <- str_c(baseURL, "v1/projects/", id)
     
-  } else if (dataType == "samplingagency") {
+  } else if (dataType == "Sampling Agency") {
 
     url <- str_c(baseURL, "v1/extendedattributes/", id, "/dropdownlistitems")
     
@@ -341,124 +333,10 @@ gen_list_rel_var <- function(dataType){
 dropdownlist_extended_attributes <- function(env, dataType){
   
   idDataType <- get_profiles(env, "extendedattributes") %>%
-    dplyr::filter(customId == dataType) %>% dplyr::select(id) %>% unlist()
+    dplyr::filter(customId == !!dataType) %>% dplyr::select(id) %>% unlist()
   
   data_dropdown <- make_api_request(env, idDataType, dataType)  
   
   return(data_dropdown)
   
 }
-
-# #example code using the reference functions -------------------------------
-# MEDIUMS -----------------------------------------------------------------
-
-#reading in EnMoDS config
-mediums <- get_profiles("prod", "mediums") %>% 
-  keep(names(.) %in% gen_list_rel_var("mediums"))
-
-#extracting medium names from the imported mediums file
-jsonMediumsRaw <- mediums %>% dplyr::select(customId)
-
-#storing medium names in JSON format
-jsonMediumsProc <- toJSON(list(items = jsonMediumsRaw), pretty = TRUE)
-
-#writing the created JSON file to upload to BC Box
-write(jsonMediumsProc, file = "enmods_mediums_data.json")
-# LOCATIONS ---------------------------------------------------------------
-
-#reading in EnMoDS config
-locations <- get_profiles("prod", "locations") %>% 
-  keep(names(.) %in% gen_list_rel_var("locations"))
-
-#selecting columns and renaming them as required
-jsonLocationsRaw <- locations %>%
-  dplyr::select(customId, name) %>%
-  rename(disp_name = name) %>%
-  mutate(disp_name = str_c(customId, " - ", disp_name)) %>%
-  dplyr::select(disp_name)
-
-#processing data into JSON format
-#added the items keyword to store variables in an array
-jsonLocationsProc <- toJSON(list(items = jsonLocationsRaw), pretty = TRUE)
-
-#writing the created JSON file
-write(jsonLocationsProc, file = "enmods_locations_data.json")
-
-# LABS --------------------------------------------------------------------
-
-#reading in EnMoDS config
-labs <- get_profiles("prod", "labs") %>% 
-  keep(names(.) %in% gen_list_rel_var("labs"))
-
-#processing data into JSON format
-jsonLabsProc <- toJSON(list(items = labs), pretty = TRUE)
-
-#writing the created JSON file
-write(jsonLabsProc, file = "enmods_labs_data.json")
-
-# SAMPLING AGENCY ---------------------------------------------------------
-
-#reading in EnMoDS config
-samplingAgency <- dropdownlist_extended_attributes("prod", "samplingagency")
-
-#processing data into JSON format
-jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
-
-#writing the created JSON file
-write(jsonSamplingAgencyProc, file = "enmods_samplingagency_data.json")
-
-# COLLECTION METHODS ------------------------------------------------------
-
-#reading in EnMoDS config
-collectionMethods <- get_profiles("prod", "collectionmethods") %>% 
-  keep(names(.) %in% gen_list_rel_var("collectionmethods"))
-
-#processing data into JSON format
-jsonCollectionMethodsProc <- toJSON(list(items = collectionMethods), pretty = TRUE)
-
-#writing the created JSON file
-write(jsonCollectionMethodsProc, file = "enmods_collectionmethods_data.json")
-
-# PROJECTS ----------------------------------------------------------------
-
-#reading in EnMoDS config
-projects <- get_profiles("prod", "projects") %>%
-  keep(names(.) %in% gen_list_rel_var("projects")) 
-
-#further selecting relevant columns
-jsonProjectsRaw <- projects %>%
-  dplyr::select(id, customId, name, description, type) %>%
-  dplyr::filter(type!="ROUTINE_MONITORING")
-
-#processing data into JSON format
-jsonProjectsProc <- toJSON(list(items = jsonProjectsRaw), pretty = TRUE)
-
-#writing the created JSON file
-write(jsonProjectsProc, file = "enmods_projects_data.json")
-
-# ANALYSIS PACKAGES -------------------------------------------------------
-#reading in raw analysis package file
-jsonAnalysisPackages <- read_csv("../COC_form/json_list_extracts/analysisPackagesCoC - April-3-2025(Sheet1).csv", col_types = cols(preservative.name = col_character(), comments = col_character(), ...9 = col_skip())) 
-
-#selecting columns and renaming them as required
-jsonAnalysisPackagesRaw <- jsonAnalysisPackages %>%
-  dplyr::select(-c(preservative.name)) %>%
-  rename(bottle = items.bottle, 
-         filter = items.field.filter,
-         preservative = items.preservative
-  ) %>%
-  group_by(matrix, bottle, filter, preservative, comments) %>%
-  mutate(observedProperties = list(tibble(label = test.label, 
-                                          analysisGroup = items.analysisGroup))) %>%
-  ungroup() %>%
-  dplyr::select(-c(items.analysisGroup, test.label)) %>% unique()
-
-#processing data into JSON format
-jsonAnalysisPackagesProc <- toJSON(list(items = jsonAnalysisPackagesRaw), pretty = TRUE)
-
-#writing the created JSON file
-write(jsonAnalysisPackagesProc, file = "enmods_analysispackages_data.json")
-
-
-
-
