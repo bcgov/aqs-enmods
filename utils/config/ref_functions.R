@@ -17,73 +17,73 @@ library(hunspell)
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-test_token <- Sys.getenv("TEST_TOKEN")
-prod_token <- Sys.getenv("PROD_TOKEN")
-test_url <- Sys.getenv("TEST_URL")
-prod_url <- Sys.getenv("PROD_URL")
+testToken <- Sys.getenv("TEST_TOKEN")
+prodToken <- Sys.getenv("PROD_TOKEN")
+testURL <- Sys.getenv("TEST_URL")
+prodURL <- Sys.getenv("PROD_URL")
 
+# Reference functions----------------------------------------------------
 #function to update URL/token based on chosen environment
 update_base_url_token <- function(env){
   
   if(env == "prod"){
     
-    base_url <- prod_url
-    token <- prod_token
+    baseURL <- prodURL
+    token <- prodToken
     
   } else {
     
-    base_url <- test_url
-    token <- test_token
+    baseURL <- testURL
+    token <- testToken
     
   }
   
-  url_parameters <- list(base_url, token)
+  urlParameters <- list(baseURL, token)
   
-  return(url_parameters)
+  return(urlParameters)
   
 }
 
 #by default global variables always reference "test" environment
-url_parameters <- update_base_url_token("test")
-base_url <- url_parameters[[1]]
-token <- url_parameters[[2]]
+urlParameters <- update_base_url_token("test")
+baseURL <- urlParameters[[1]]
+token <- urlParameters[[2]]
 
-# Reference functions----------------------------------------------------
 get_profiles_for_url <- function(env, url){
   
-  url_parameters <- update_base_url_token(env)
-  base_url <- url_parameters[[1]]
-  token <- url_parameters[[2]]
+  urlParameters <- update_baseURL_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
   
-  data_body <- list()
+  dataBody <- list()
   
-  x_temp <- GET(url, config = c(add_headers(.headers = 
+  xTemp <- GET(url, config = c(add_headers(.headers = 
                                               c('Authorization' = token))), body = data_body, encode = 'json')
   
-  total = fromJSON(rawToChar(x_temp$content))$totalCount
+  total = fromJSON(rawToChar(xTemp$content))$totalCount
   
   if (total > 1000) { #if there are more than 1000 records loop
     
-    temp <- fromJSON(rawToChar(x_temp$content))$domainObjects
+    temp <- fromJSON(rawToChar(xTemp$content))$domainObjects
     
-    number_loops = ceiling(total/1000)
+    numberLoops = ceiling(total/1000)
     
-    for (i in seq(2,number_loops)) {
+    for (i in seq(2, numberLoops)) {
       
-      cursor = fromJSON(rawToChar(x_temp$content))$cursor
+      cursor = fromJSON(rawToChar(xTemp$content))$cursor
       
       tempURL = paste0(url, "&cursor=", cursor)
       
-      x_temp <- GET(tempURL, config = c(add_headers(.headers = 
+      xTemp <- GET(tempURL, config = c(add_headers(.headers = 
                                                       c('Authorization' = token))), body = data_body, encode = 'json')
       
-      temp_element <- fromJSON(rawToChar(x_temp$content))$domainObjects
+      tempElement <- fromJSON(rawToChar(xTemp$content))$domainObjects
       
-      rownames(temp_element) <- NULL
+      rownames(tempElement) <- NULL
       
       rownames(temp) <- NULL
       
-      temp <- bind_rows(temp, temp_element)
+      temp <- bind_rows(temp, tempElement)
       
       print(i)
       
@@ -91,112 +91,354 @@ get_profiles_for_url <- function(env, url){
     
   } else {
     
-    temp <- fromJSON(rawToChar(x_temp$content))$domainObjects
+    temp <- fromJSON(rawToChar(xTemp$content))$domainObjects
     
   }
   
   return(temp)  
   
 }
-get_profiles <- function(env, data_type){
+get_profiles <- function(env, dataType){
   
   #for prod env, use the function parameter env = "prod"
-  url_parameters <- update_base_url_token(env)
-  base_url <- url_parameters[[1]]
-  token <- url_parameters[[2]]
+  urlParameters <- update_baseURL_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
   
-  if(data_type == "units"){
+  if(dataType == "units"){
     
-    url <- str_c(base_url, "v1/units")
+    url <- str_c(baseURL, "v1/units")
     
-  } else if(data_type == "unitgroups"){
+  } else if(dataType == "unitgroups"){
     
-    url <- str_c(base_url, "v1/unitgroups")
+    url <- str_c(baseURL, "v1/unitgroups")
     
-  } else if(data_type == "extendedattributes"){
+  } else if(dataType == "extendedattributes"){
     
-    url <- str_c(base_url, "v1/extendedattributes")
+    url <- str_c(baseURL, "v1/extendedattributes")
     
-  } else if(data_type == "observedproperties"){
+  } else if(dataType == "observedproperties"){
     
-    url <- str_c(base_url, "v1/observedproperties")
+    url <- str_c(baseURL, "v1/observedproperties")
     
-  } else if(data_type == "methods"){
+  } else if(dataType == "methods"){
     
-    url <- str_c(base_url, "v1/analysismethods")
+    url <- str_c(baseURL, "v1/analysismethods")
     
-  } else if(data_type == "labs"){
+  } else if(dataType == "labs"){
     
-    url <- str_c(base_url, "v1/laboratories")
+    url <- str_c(baseURL, "v1/laboratories")
     
-  } else if(data_type == "locationgrouptypes"){
+  } else if(dataType == "locationgrouptypes"){
     
-    url <- str_c(base_url, "v1/samplinglocationgrouptypes")
+    url <- str_c(baseURL, "v1/samplinglocationgrouptypes")
     
-  } else if(data_type == "locationtypes"){
+  } else if(dataType == "locationtypes"){
     
-    url <- str_c(base_url, "v1/samplinglocationtypes")
+    url <- str_c(baseURL, "v1/samplinglocationtypes")
     
-  } else if(data_type == "locationgroups"){
+  } else if(dataType == "locationgroups"){
     
-    url <- str_c(base_url, "v1/samplinglocationgroups")
+    url <- str_c(baseURL, "v1/samplinglocationgroups")
     
-  } else if(data_type == "locations"){
+  } else if(dataType == "locations"){
     
-    url <- str_c(base_url, "v1/samplinglocations?limit=1000")
+    url <- str_c(baseURL, "v1/samplinglocations?limit=1000")
     
-  } else if(data_type == "mediums"){
+  } else if(dataType == "mediums"){
     
-    url <- str_c(base_url, "v1/mediums")
+    url <- str_c(baseURL, "v1/mediums")
     
-  } else if(data_type == "taxonomylevels"){
+  } else if(dataType == "taxonomylevels"){
     
-    url <- str_c(base_url, "v1/taxonomylevels")
+    url <- str_c(baseURL, "v1/taxonomylevels")
     
-  } else if(data_type == "detectionconditions"){
+  } else if(dataType == "detectionconditions"){
     
-    url <- str_c(base_url, "v1/detectionconditions")
+    url <- str_c(baseURL, "v1/detectionconditions")
     
-  } else if(data_type == "resultgrades"){
+  } else if(dataType == "resultgrades"){
     
-    url <- str_c(base_url, "v1/resultgrades")
+    url <- str_c(baseURL, "v1/resultgrades")
     
-  } else if(data_type == "resultstatuses"){
+  } else if(dataType == "resultstatuses"){
     
-    url <- str_c(base_url, "v1/resultstatuses")
+    url <- str_c(baseURL, "v1/resultstatuses")
     
-  } else if(data_type == "fishtaxonomy"){
+  } else if(dataType == "fishtaxonomy"){
     
-    url <- str_c(base_url, "v1/taxons")
+    url <- str_c(baseURL, "v1/taxons")
     
-  } else if(data_type == "collectionmethods"){
+  } else if(dataType == "collectionmethods"){
     
-    url <- str_c(base_url, "v1/collectionmethods")
+    url <- str_c(baseURL, "v1/collectionmethods")
     
-  } else if(data_type == "filters"){
+  } else if(dataType == "filters"){
     
-    url <- str_c(base_url, "v1/filters")
+    url <- str_c(baseURL, "v1/filters")
     
-  } else if(data_type == "projects"){
+  } else if(dataType == "projects"){
     
-    url <- str_c(base_url, "v1/projects")
+    url <- str_c(baseURL, "v1/projects")
     
   }
   
-  temp_profiles <- get_profiles_for_url(env, url)
+  tempProfiles <- get_profiles_for_url(env, url)
   
-  return(temp_profiles)
+  return(tempProfiles)
+  
+}
+make_api_request <- function(env, id, dataType) {
+  
+  urlParameters <- update_base_url_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
+  
+  if (dataType == "activities") {
+    
+    url <- str_c(baseURL, "v1/activities/", id)
+    
+  } else if (dataType == "analyticalgroups") {
+    
+    url <- str_c(baseURL, "v1/analyticalgroups/", id)
+    
+  } else if (dataType == "collectionmethods") {
+    
+    url <- str_c(baseURL, "v1/collectionmethods/", id)
+    
+  } else if (dataType == "extendedattributes") {
+    
+    url <- str_c(baseURL, "v1/extendedattributes/", id)
+    
+  } else if (dataType == "fieldvisits") {
+    
+    url <- str_c(baseURL, "v1/fieldvisits/", id)
+    
+  } else if (dataType == "filters") {
+    
+    url <- str_c(baseURL, "v1/filters/", id)
+    
+  } else if (dataType == "laboratories") {
+    
+    url <- str_c(baseURL, "v1/laboratories/", id)
+    
+  } else if(dataType == "mediums"){
+    
+    url <- str_c(baseURL, "v1/mediums/")
+    
+  } else if (dataType == "observations"){
+    
+    url <- str_c(baseURL, "v2/observations/", id)
+    
+  } else if (dataType == "projects") {
+    
+    url <- str_c(baseURL, "v1/projects/", id)
+    
+  } else if (dataType == "samplingagency") {
+
+    url <- str_c(baseURL, "v1/extendedattributes/", id, "/dropdownlistitems")
+    
+  } else if (dataType == "samplinglocations") {
+    
+    url <- str_c(baseURL, "v1/samplinglocations/", id)
+    
+  } else if (dataType == "samplinglocationgroups") {
+    
+    url <- str_c(baseURL, "v1/samplinglocationgroups/", id)
+    
+  } else if (dataType == "specimens") {
+    
+    url <- str_c(baseURL, "v1/specimens/", id)
+    
+  } else {
+    
+    return("The code is currently set to only make requests for observations, field visits, and samplinglocations")
+    
+  }
+  
+  data_body <- list()
+  
+  response <- GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+  
+  if (status_code(response) != 200) {
+    
+    return("Failed to fetch data: ", status_code(response))
+    
+  }
+  
+  data <- fromJSON(rawToChar(response$content)) #%>% unnest_wider(auditAttributes, names_repair = "universal")
+  
+  if(dataType %in% c("mediums", "samplingagency")){
+    
+    data <- data$domainObjects
+    
+  }
+  
+  return(data)
+}
+
+# getting relevant parameters (other than id) to download for given variable --------
+gen_list_rel_var <- function(dataType){
+  
+  if (dataType == "activities"){
+    
+    relVar <- c("fieldVisit.id", "fieldVisit.project.id", "activity.samplingLocation.id", "auditAttributes.creationUserProfileId")
+    
+  } else if (dataType == "analyticalgroups"){
+    
+    relVar <- c("name", "type", "auditAttributes.creationUserProfileId")
+    
+  } else if (dataType == "collectionmethods"){
+    
+    relVar <- c("customId", "identifierOrganization", "name")
+    
+  } else if (dataType == "extendedattributes"){
+    
+    relVar <- c("customId", "dataType")
+    
+  } else if (dataType == "fieldvisits"){
+    
+    relVar <- c("project.id", "startTime", "auditAttributes.creationUserProfileId", "samplingLocation.id")
+    
+  } else if (dataType == "filters"){
+    
+    relVar <- c("customId", "samplingLocations.id", "auditAttributes.creationUserProfileId")
+    
+  } else if (dataType == "labs"){
+    
+    relVar <- c("customId", "name")
+    
+  } else if (dataType == "mediums"){
+    
+    relVar <- c("customId")
+    
+  } else if (dataType == "observations"){
+    
+    relVar <- c("activity.id", "fieldVisit.id", "fieldVisit.project.id", "activity.samplingLocation.id", "auditAttributes.creationUserProfileId")
+    
+  } else if (dataType == "projects"){
+    
+    relVar <- c("customId", "name", "description", "type", "auditAttributes.creationUserProfileId")
+    
+  } else if (dataType == "samplinglocations"){
+    
+    relVar <- c("customId", "name", "type.customId", "description", "attachments.attachment.comment", "elevation.value", "elevation.unit.customId", "longitude", "latitude", "horizontalCollectionMethod", "auditAttributes.creationUserProfileId",  "auditAttributes.modificationUserProfileId", "auditAttributes.creationTime", "auditAttributes.modificationTime", "samplingLocationGroups.id", "samplingLocationGroups.name", "samplingLocationGroups.description", "samplingLocationGroups.locationGroupType.customId")
+    
+  } else if (dataType == "samplinglocationgroups"){
+    
+    relVar <- c("name", "description", "auditAttributes.creationUserProfileId")
+    
+  } else if (dataType == "specimens"){
+    
+    relVar <- c("activity.id", "observations.id", "fieldVisit.id", "fieldVisit.project.id", "activity.samplingLocation.id", "auditAttributes.creationUserProfileId")
+    
+  } 
+  
+  return(relVar)
+  
+}
+# getting dropdown lists of extended attributes
+dropdownlist_extended_attributes <- function(env, dataType){
+  
+  idDataType <- get_profiles(env, "extendedattributes") %>%
+    dplyr::filter(customId == dataType) %>% dplyr::select(id) %>% unlist()
+  
+  data_dropdown <- make_api_request(env, idDataType, dataType)  
+  
+  return(data_dropdown)
   
 }
 
 # #example code using the reference functions -------------------------------
-mediums <- get_profiles("prod", "mediums")
+# MEDIUMS -----------------------------------------------------------------
+mediums <- get_profiles("prod", "mediums") %>% 
+  keep(names(.) %in% gen_list_relVar("mediums"))
 
 #extracting medium names from the imported mediums file
-json_mediums_raw <- mediums %>% dplyr::select(customId)
+jsonMediumsRaw <- mediums %>% dplyr::select(customId)
 
 #storing medium names in JSON format
-json_mediums_proc <- toJSON(list(items = json_mediums_data), pretty = TRUE)
+jsonMediumsProc <- toJSON(list(items = jsonMediumsRaw), pretty = TRUE)
 
 #writing the created JSON file to upload to BC Box
-write(json_mediums_proc, file = "enmods_mediums_data.json")
+write(jsonMediumsProc, file = "enmods_mediums_data.json")
+# LOCATIONS ---------------------------------------------------------------
+locations <- get_profiles("prod", "locations") %>% 
+  keep(names(.) %in% gen_list_relVar("locations"))
+
+#getting a test location data in the JSON format expectation
+jsonLocationsRaw <- locations %>%
+  dplyr::select(customId, name) %>%
+  rename(disp_name = name) %>%
+  mutate(disp_name = str_c(customId, " - ", disp_name)) %>%
+  dplyr::select(disp_name)
+
+#added the items keyword to store variables in an array
+jsonLocationsProc <- toJSON(list(items = jsonLocationsRaw), pretty = TRUE)
+
+#writing the created JSON file
+write(jsonLocationsProc, file = "enmods_locations_data.json")
+
+# LABS --------------------------------------------------------------------
+labs <- get_profiles("prod", "labs") %>% 
+  keep(names(.) %in% gen_list_relVar("labs"))
+
+jsonLabsProc <- toJSON(list(items = labs), pretty = TRUE)
+
+#writing the created JSON file
+write(jsonLabsProc, file = "enmods_labs_data.json")
+
+# SAMPLING AGENCY ---------------------------------------------------------
+samplingAgency <- dropdownlist_extended_attributes("prod", "samplingagency")
+
+jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
+
+#writing the created JSON file
+write(jsonSamplingAgencyProc, file = "enmods_samplingagency_data.json")
+
+# COLLECTION METHODS ------------------------------------------------------
+collectionMethods <- get_profiles("prod", "collectionmethods") %>% 
+  keep(names(.) %in% gen_list_relVar("collectionmethods"))
+
+jsonCollectionMethodsProc <- toJSON(list(items = collectionMethods), pretty = TRUE)
+
+#writing the created JSON file
+write(jsonCollectionMethodsProc, file = "enmods_collectionmethods_data.json")
+
+# PROJECTS ----------------------------------------------------------------
+projects <- get_profiles("prod", "projects") %>%
+  keep(names(.) %in% gen_list_relVar("projects")) 
+
+jsonProjectsRaw <- projects %>%
+  dplyr::select(id, customId, name, description, type) %>%
+  dplyr::filter(type!="ROUTINE_MONITORING")
+
+jsonProjectsProc <- toJSON(list(items = jsonProjectsRaw), pretty = TRUE)
+
+#writing the created JSON file
+write(jsonProjectsProc, file = "enmods_projects_data.json")
+
+# ANALYSIS PACKAGES -------------------------------------------------------
+jsonAnalysisPackages <- read_csv("../COC_form/json_list_extracts/analysisPackagesCoC - April-3-2025(Sheet1).csv", col_types = cols(preservative.name = col_character(), comments = col_character(), ...9 = col_skip())) 
+
+jsonAnalysisPackagesRaw <- jsonAnalysisPackages %>%
+  dplyr::select(-c(preservative.name)) %>%
+  rename(bottle = items.bottle, 
+         filter = items.field.filter,
+         preservative = items.preservative
+  ) %>%
+  group_by(matrix, bottle, filter, preservative, comments) %>%
+  #rowwise() %>%
+  mutate(observedProperties = list(tibble(label = test.label, 
+                                          analysisGroup = items.analysisGroup))) %>%
+  ungroup() %>%
+  dplyr::select(-c(items.analysisGroup, test.label)) %>% unique()
+
+jsonAnalysisPackagesProc <- toJSON(list(items = jsonAnalysisPackagesRaw), pretty = TRUE)
+
+#writing the created JSON file
+write(jsonAnalysisPackagesProc, file = "enmods_analysispackages_data.json")
+
+
+
+
