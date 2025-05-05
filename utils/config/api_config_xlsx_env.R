@@ -56,189 +56,201 @@ token <- url_parameters[[2]]
 # UNITS and UNIT GROUPS ----
 #unitgroups_profiles <- get_profiles("prod", "unitgroups")
 
-# units_profiles <- get_profiles("prod", "units") %>% 
+# units_profiles <- get_profiles("prod", "units") %>%
 #   dplyr::select(-auditAttributes) %>%
 #   rename(Sample.Unit.Id = id, Sample.Unit.CustomId = customId,
 #          Sample.Unit.Name = name) %>%
-#   unnest_wider(unitGroup) %>% 
+#   unnest_wider(unitGroup) %>%
 #   rename(Sample.Unit.Group = customId) %>%
 #   dplyr::select(-c(auditAttributes, id))
-  
+
 # # #PREPROCESSING TO CONSOLIDATE OLDER UNITS FILES--------
-# units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>% 
-#   mutate(CODE = as.character(CODE)) %>% 
-#   dplyr::select(-CONVERSION_FACTOR) %>% 
-#   mutate(CODE = str_replace(CODE, "^0+", ""))
-# 
-# #Only conversions in this file are reliable
-# units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% mutate(CODE = str_replace(CODE, "^0+", ""))
-# #%>% dplyr::select(c(CODE, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
-# 
-# # Identify the new columns from units_base
-# new_cols <- setdiff(names(units_base), names(units))
-# 
-# # Create a tibble of just those new columns
-# new_data <- units_base %>% 
-#   dplyr::select(all_of(new_cols)) %>%
-#   mutate(across(everything(), ~ NA)) %>% 
-#   unique() %>% slice(rep(1, nrow(units)))
-# 
-# units <- units %>% bind_cols(new_data)
-# 
-# units <- units %>% bind_rows(units_base %>% mutate(Results = NA)) %>% unique()
-# 
-# # Columns to move
-# cols_to_move <- c("Results", "Base Unit", "OFFSET", "Convertible", 
-#                   "Sample.Unit.Group", "Sample.Unit.CustomId", 
-#                   "Sample.Unit.Name", "Sample.Unit.Short.Name",
-#                   "Sample.Unit.Modifier")
-# 
-# # Reorder with selected columns at the end
+units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>%
+  mutate(CODE = as.character(CODE)) %>%
+  dplyr::select(-CONVERSION_FACTOR) %>%
+  mutate(CODE = str_replace(CODE, "^0+", ""))
+
+#Only conversions in this file are reliable
+units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% mutate(CODE = str_replace(CODE, "^0+", ""))
+#%>% dplyr::select(c(CODE, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
+
+# Identify the new columns from units_base
+new_cols <- setdiff(names(units_base), names(units))
+
+# Create a tibble of just those new columns
+new_data <- units_base %>%
+  dplyr::select(all_of(new_cols)) %>%
+  mutate(across(everything(), ~ NA)) %>%
+  unique() %>% slice(rep(1, nrow(units)))
+
+units <- units %>% bind_cols(new_data)
+
+units <- units %>% bind_rows(units_base %>% mutate(Results = NA)) %>% unique()
+
+# Columns to move
+cols_to_move <- c("CODE", "Sample.Unit.CustomId", "Sample.Unit.Name", 
+                  "Sample.Unit.Short.Name", "Sample.Unit.Group", 
+                  "Sample.Unit.Modifier", "Results", "Base Unit", 
+                  "OFFSET", "Convertible")
+
+# Reorder with selected columns at the end
+units <- units %>%
+  dplyr::select(all_of(cols_to_move), everything()) %>%
+  group_by(CODE) %>%
+  summarize(across(Sample.Unit.CustomId:CONVERSION_FACTOR, ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), .groups = "drop") %>%
+  mutate(Sample.Unit.Group = case_when(
+    SHORT_NAME == "‰" ~ "DimensionlessRatio",
+    SHORT_NAME == "mg/dscm" ~ "AirConcentration",
+    SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
+    SHORT_NAME == "N/A" ~ "None",
+    .default = Sample.Unit.Group
+  )) %>% mutate(Sample.Unit.CustomId = case_when(
+    SHORT_NAME == "N/A" ~ "Unknown",
+    SHORT_NAME == "‰" ~ "‰",
+    SHORT_NAME == "mg/dscm" ~ "mg/dscm",
+    .default = Sample.Unit.CustomId
+  )) %>% mutate(Sample.Unit.Name = case_when(
+    SHORT_NAME == "N/A" ~ "Unknown",
+    SHORT_NAME == "‰" ~ "Per mille (0/00 VSMOW, isotope composition)",
+    SHORT_NAME == "mg/dscm" ~ "Milligrams per dry standard cubic metre",
+    .default = Sample.Unit.Name
+  )) %>%
+  mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR))
+
+#
+#  %>% #, #%>%
+#            #dplyr::select(CODE, Sample.Unit.Group, Sample.Unit.CustomId,
+#            #              Sample.Unit.Name, CONVERSION_FACTOR, OFFSET),
+#            #by = join_by("CODE", ""))
+#   %>% dplyr::select(-CODE) %>% unique()
+
+# #we know there are duplicates in this data set
 # units <- units %>%
-#   dplyr::select(-all_of(cols_to_move), all_of(cols_to_move)) %>% 
-#   group_by(CODE) %>%
-#   summarize(across(SHORT_NAME:Sample.Unit.Modifier, ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), .groups = "drop") %>%
-#   mutate(Sample.Unit.Group = case_when(
-#     SHORT_NAME == "‰" ~ "DimensionlessRatio",
-#     SHORT_NAME == "mg/dscm" ~ "AirConcentration",
-#     SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
-#     SHORT_NAME == "N/A" ~ "None",
-#     .default = Sample.Unit.Group
-#   )) %>% mutate(Sample.Unit.CustomId = case_when(
-#     SHORT_NAME == "N/A" ~ "Unknown",
-#     SHORT_NAME == "‰" ~ "‰",
-#     SHORT_NAME == "mg/dscm" ~ "mg/dscm",
-#     .default = Sample.Unit.CustomId
-#   )) %>% mutate(Sample.Unit.Name = case_when(
-#     SHORT_NAME == "N/A" ~ "Unknown",
-#     SHORT_NAME == "‰" ~ "Per mille (0/00 VSMOW, isotope composition)",
-#     SHORT_NAME == "mg/dscm" ~ "Milligrams per dry standard cubic metre",
-#     .default = Sample.Unit.Name
-#   )) %>%
-#   mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR))
-# 
-# # 
-# #  %>% #, #%>%
-# #            #dplyr::select(CODE, Sample.Unit.Group, Sample.Unit.CustomId, 
-# #            #              Sample.Unit.Name, CONVERSION_FACTOR, OFFSET), 
-# #            #by = join_by("CODE", "")) 
-# #   %>% dplyr::select(-CODE) %>% unique()
-# 
-# # #we know there are duplicates in this data set
-# # units <- units %>% 
-# #             mutate(Sample.Unit.Name = if_else(is.na(Sample.Unit.Name), 
-# #             DESCRIPTION, Sample.Unit.Name), 
-# #             Sample.Unit.CustomId = if_else(is.na(Sample.Unit.CustomId),                            SHORT_NAME, Sample.Unit.CustomId)) %>% 
-# #             dplyr::select(c(Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group)) %>% unique()
-# 
-# units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits") #%>% 
-#   #dplyr::select(c(Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET))
-# 
-# # Identify the new columns from units_base
-# new_cols <- setdiff(names(units), names(units_new_to_enmods))
-# 
-# # Create a tibble of just those new columns
-# new_data <- units %>% 
-#   dplyr::select(all_of(new_cols)) %>%
-#   mutate(across(everything(), ~ NA)) %>% 
-#   unique() %>% slice(rep(1, nrow(units_new_to_enmods)))
-# 
-# units_new_to_enmods <- units_new_to_enmods %>% 
-#   bind_cols(new_data) %>% 
-#   mutate(Sample.Unit.Modifier = as.character(Sample.Unit.Modifier))
-# 
-# units <- units %>% 
-#   bind_rows(units_new_to_enmods) %>% 
-#   unique()
-# 
+#             mutate(Sample.Unit.Name = if_else(is.na(Sample.Unit.Name),
+#             DESCRIPTION, Sample.Unit.Name),
+#             Sample.Unit.CustomId = if_else(is.na(Sample.Unit.CustomId),                            SHORT_NAME, Sample.Unit.CustomId)) %>%
+#             dplyr::select(c(Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group)) %>% unique()
+
+units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits") #%>%
+  #dplyr::select(c(Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET))
+
+# Identify the new columns from units_base
+new_cols <- setdiff(names(units), names(units_new_to_enmods))
+
+# Create a tibble of just those new columns
+new_data <- units %>%
+  dplyr::select(all_of(new_cols)) %>%
+  mutate(across(everything(), ~ NA)) %>%
+  unique() %>% slice(rep(1, nrow(units_new_to_enmods)))
+
+units_new_to_enmods <- units_new_to_enmods %>%
+  bind_cols(new_data) %>%
+  mutate(Sample.Unit.Modifier = as.character(Sample.Unit.Modifier))
+
+units <- units %>%
+  bind_rows(units_new_to_enmods) %>%
+  unique()
+
 # Replacement dictionary as a named vector
 replacements <- c("Ph units" = "pH units",
                   "hg" = "Hg",
                   #"hectar" = "hectare",
                   #"Count" = "Counts",
                   "Us gallons" = "US gallons",
-                  "Tons" = "US tons",
+                  #"Tons" = "US tons",
                   #"Kilopascal" = "Kilopascals",
                   "Micro grams per kilogram" = "Micrograms per kilogram",
                   "Microequivelents" = "Microequivalents",
                   #"Milliequivalent" = "Milliequivalents",
                   "meter" = "metre",
                   #"Day" = "Days",
-                  #"Micromole per gram" = "Micromoles per gram",
+                  "Micromole per gram" = "Micromoles per gram",
                   "Cenitmetre" = "Centimetres",
                   "Milisiemens per centimetre" = "Millisiemens per centimetre")
-# 
-# #Sentence case in general for sample unit names
-# #Accounting for special cases
-# units <- units %>% 
-#   mutate(Sample.Unit.Name = str_to_sentence(Sample.Unit.Name)) %>%
-#   mutate(Sample.Unit.Name = 
-#            str_replace_all(Sample.Unit.Name, replacements)) %>%
-#   mutate(Sample.Unit.Name = case_when(
-#     Sample.Unit.Name == "Centimetre" ~ "Centimetres",
-#     Sample.Unit.Name == "Micrometre" ~ "Micrometres",
-#     .default = Sample.Unit.Name)) %>% 
-#   mutate(DESCRIPTION = str_replace_all(DESCRIPTION, "Tons", "US tons"))
-# 
-# units <- units %>% left_join(unitgroups_profiles %>% 
-#            dplyr::select(id, customId, supportsConversion), 
-#            by = join_by("Sample.Unit.Group" == "customId")) %>%
-#           dplyr::select(-Convertible) %>%
-#           rename(Convertible = supportsConversion,
-#                  Sample.Unit.GroupID = id)
-# 
-# #fixing the units file for anomalous Count group associated with No/m2
-# units <- units %>% 
-#   mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square metre", 
-#                               FALSE, Convertible)) %>%
-#   mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
-#   mutate(Sample.Unit.Group = case_when(
-#     Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-#     Sample.Unit.Group == "Apperance" ~ "Appearance",
-#     .default = Sample.Unit.Group
-#   ))
-# 
-# units <- units %>% mutate(Convertible = if_else(is.na(Convertible), FALSE, Convertible))
-# 
-# 
-# 
-# # columns needed for AQS POST request
-# # "CONVERSION_FACTOR", "OFFSET", "Convertible",
-# # "Sample.Unit.Group", "Sample.Unit.CustomId",
-# # "Sample.Unit.Name", "Sample.Unit.GroupID"
-# 
-# #Spell check things before writing
-# units_spellcheck <- units %>% 
-#   mutate(
-#     words = str_extract_all(DESCRIPTION, "[A-Z][a-z]+"),  # splits CamelCase into words
-#     # words = strsplit(Sample.Unit.Name, "\\s+"),  # split text into words
-#     misspelled = map(words, hunspell)
-#   )
-# 
+#
+#Sentence case in general for sample unit names
+#Accounting for special cases
+units <- units %>%
+  mutate(Sample.Unit.Name = str_to_sentence(Sample.Unit.Name)) %>%
+  mutate(Sample.Unit.Name =
+           str_replace_all(Sample.Unit.Name, replacements)) %>%
+  mutate(Sample.Unit.Name = case_when(
+    Sample.Unit.Name == "Centimetre" ~ "Centimetres",
+    Sample.Unit.Name == "Micrometre" ~ "Micrometres",
+    .default = Sample.Unit.Name)) %>%
+  mutate(DESCRIPTION = str_replace_all(DESCRIPTION, "Tons", "US tons"))
+
+#need to insert unit groups now
+unitGroups <- units %>% 
+  dplyr::select(Sample.Unit.Group, Convertible) %>%
+  #group_by(across(everything())) %>%
+  #summarize(Count = n()) %>% 
+  #ungroup() %>%
+  mutate(Sample.Unit.Group = case_when(
+    Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
+    .default = Sample.Unit.Group
+  )) %>% dplyr::filter(!is.na(Convertible)) %>%
+  unique()
+
+post_check <- post_profiles("prod", "unitgroups", unitGroups)
+
+unitGroupsProfiles <- get_profiles("prod", "unitgroups")
+
+units <- units %>% left_join(unitGroupsProfiles %>%
+           dplyr::select(id, customId, supportsConversion),
+           by = join_by("Sample.Unit.Group" == "customId")) %>%
+          dplyr::select(-Convertible) %>%
+          rename(Convertible = supportsConversion,
+                 Sample.Unit.GroupID = id)
+
+#fixing the units file for anomalous Count group associated with No/m2
+units <- units %>%
+  #mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square metre",
+  #                            FALSE, Convertible)) %>%
+  mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
+  mutate(Sample.Unit.Group = case_when(
+    Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
+    Sample.Unit.Group == "Apperance" ~ "Appearance",
+    .default = Sample.Unit.Group
+  ))
+
+units <- units %>% mutate(Convertible = if_else(is.na(Convertible), FALSE, Convertible)) %>% unique()
+
+#Spell check things before writing
+units_spellcheck <- units %>%
+  mutate(
+    words = str_extract_all(DESCRIPTION, "[A-Z][a-z]+"),  # splits CamelCase into words
+    # words = strsplit(Sample.Unit.Name, "\\s+"),  # split text into words
+    misspelled = map(words, hunspell)
+  )
+#
 # print(units_spellcheck %>% select(misspelled) %>% unnest(misspelled) %>% unlist() %>% unique(), n = 126)
-# 
-# write_xlsx(units, "./utils/config/ReferenceLists/Consolidated_units.xlsx")
-# 
+#
+write_xlsx(units, "./utils/config/ReferenceLists/Consolidated_units.xlsx")
+#
 # #Elevation does not exist in the Reference Sheet
 # #Needs to be added manually even though it's metres
 # #This metres is therefore different from metre (m) in EnMoDS
+# #No longer need it since regular m has become a non-deletable entity
 # # units <- units %>% add_row(CONVERSION_FACTOR = 1,
 # #                            OFFSET = 0,
 # #                            Convertible = TRUE,
-# #                            Sample.Unit.Group = "SYS-REQUIRED - Length", 
+# #                            Sample.Unit.Group = "SYS-REQUIRED - Length",
 # #                            Sample.Unit.CustomId = "metre",
 # #                            Sample.Unit.Name = "Elevation")
-# 
-# 
+#
+#
 # # #110 only; even though 117 in the units file
-# # get_check <- get_profiles("prod", "units")
-# # 
+get_check <- get_profiles("prod", "units")
+# #
 # # #no such units
-# # units_na <- units %>% dplyr::filter(is.na(Sample.Unit.CustomId))
-# # 
-# # units_missing <- units %>% 
-# #                   anti_join(get_check, 
-# #                     by = join_by("Sample.Unit.CustomId" == "customId"))
+#units_na <- units %>% dplyr::filter(is.na(Sample.Unit.CustomId))
+# #
+
+
+units_missing <- units %>%
+                  anti_join(get_check,
+                    by = join_by("Sample.Unit.CustomId" == "customId"))
 
 # PREPROCESSING OF UNITS CODE ---------------------------------------------
 units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% 
@@ -302,7 +314,7 @@ units <- units %>%
 #sometimes this list may have one less or more unit groups than in ENV
 #This is because AQS automatically creates Length if no unit groups present
 #This added Unit Group may be called "SYS-REQUIRED - Length"
-unit_groups <- units %>% 
+unitGroups <- units %>% 
   dplyr::select(Sample.Unit.Group, Convertible) %>% 
   group_by(across(everything())) %>%
   summarize(Count = n()) %>% 
@@ -1431,6 +1443,13 @@ post_profiles <- function(env, data_type, profile){
   
   if(data_type == "unitgroups"){
     
+    #Clean the old stuff out of the environment before posting new stuff
+    if(!is.null(dim(get_profiles(env, "units"))[1])){
+      
+      del_profiles(env, "units")
+      
+    }
+    
     url <- paste0(base_url, "v1/unitgroups")
     
     rel_var <- c("Sample.Unit.Group", "Convertible")
@@ -1438,6 +1457,19 @@ post_profiles <- function(env, data_type, profile){
     #EnMoDS labels: "customId", "supportsConversion"
 
   } else if(data_type == "units"){
+    
+    unitGroups <- profile %>% 
+      dplyr::select(Sample.Unit.Group, Convertible) %>%
+      #group_by(across(everything())) %>%
+      #summarize(Count = n()) %>% 
+      #ungroup() %>%
+      mutate(Sample.Unit.Group = case_when(
+        Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
+        .default = Sample.Unit.Group
+      )) %>% dplyr::filter(!is.na(Convertible)) %>%
+      unique()
+    
+    post_check <- post_profiles(env, "unitgroups")
     
     url <- paste0(base_url, "v1/units")
     
@@ -1797,7 +1829,7 @@ post_profiles("prod", "collectionmethods", collection_methods)
 
 post_profiles("prod", "fishtaxonomy", Taxons)
 
-post_profiles("prod", "unitgroups", unit_groups)
+post_profiles("prod", "unitgroups", unitGroups)
 
 post_profiles("prod", "units", units)
 
