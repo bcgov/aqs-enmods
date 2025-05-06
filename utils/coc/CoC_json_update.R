@@ -156,3 +156,32 @@ put_object(file = "enmods_projects_data.json",
            acl = "public-read")
 
 
+#lab analysis packages, run on demand as needed
+if (FALSE) {
+json_analysisPackagesCoC_data <- read_csv("../COC_form/json_list_extracts/analysisPackagesCoC - April-3-2025(Sheet1).csv", col_types = cols(preservative.name = col_character(), comments = col_character(), ...9 = col_skip())) 
+
+json_analysisPackagesCoC_data <- json_analysisPackagesCoC_data %>%
+  dplyr::select(-c(preservative.name)) %>%
+  rename(bottle = items.bottle, 
+         filter = items.field.filter,
+         preservative = items.preservative
+  ) %>%
+  group_by(matrix, bottle, filter, preservative, comments) %>%
+  #rowwise() %>%
+  mutate(observedProperties = list(tibble(label = test.label, 
+                                          analysisGroup = items.analysisGroup))) %>%
+  ungroup() %>%
+  dplyr::select(-c(items.analysisGroup, test.label)) %>% unique()
+
+json_data_test <- toJSON(list(items = json_analysisPackagesCoC_data), pretty = TRUE)
+
+#writing the created JSON file
+write(json_data_test, file = "test_analysisPackages_data.json")
+
+#Post to object store
+put_object(file = "test_analysisPackages_data.json", 
+           object = "CoC_Tables/AnalyticalPackages_PROD.json",
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+}
