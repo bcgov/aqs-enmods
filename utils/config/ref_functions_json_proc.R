@@ -314,7 +314,13 @@ gen_list_rel_var <- function(dataType){
     
   } else if (dataType == "samplinglocations"){
     
-    relVar <- c("customId", "name", "type.customId", "description", "attachments.attachment.comment", "elevation.value", "elevation.unit.customId", "longitude", "latitude", "horizontalCollectionMethod", "auditAttributes.creationUserProfileId",  "auditAttributes.modificationUserProfileId", "auditAttributes.creationTime", "auditAttributes.modificationTime", "samplingLocationGroups.id", "samplingLocationGroups.name", "samplingLocationGroups.description", "samplingLocationGroups.locationGroupType.customId")
+    relVar <- c("customId", "name", "type.customId", "description", "attachments.attachment.comment", 
+                "elevation.value", "elevation.unit.customId", "longitude", "latitude", 
+                "horizontalCollectionMethod", "auditAttributes.creationUserProfileId",  
+                "auditAttributes.modificationUserProfileId", "auditAttributes.creationTime", 
+                "auditAttributes.modificationTime", "samplingLocationGroups.id", 
+                "samplingLocationGroups.name", "samplingLocationGroups.description", 
+                "samplingLocationGroups.locationGroupType.customId", "extendedAttributes")
     
   } else if (dataType == "samplinglocationgroups"){
     
