@@ -205,29 +205,38 @@ token <- urlParameters[[2]]
 # saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_units.xlsx", overwrite = TRUE)
 
 # [SB OK] PREPROCESSING UNITS FOR NEW DATA ---------------------------------------------
-units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% 
-  mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>%
-  mutate(CODE = as.character(CODE)) %>%
-  dplyr::select(-CONVERSION_FACTOR) %>%
-  mutate(CODE = str_replace(CODE, "^0+", ""))
 
 #Only conversions in this file are reliable
 units_base <- read_excel("./utils/config/ReferenceLists/consolidatedUnits.xlsx", sheet = "Units") %>% 
   mutate(CODE = str_replace(CODE, "^0+", ""))
-#%>% dplyr::select(c(CODE, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
 
-# Identify the new columns from units_base
-new_cols <- setdiff(names(units_base), names(units))
+#ADD NEW FILE HERE; IF NO NEW FILE, CONSOLIDATED BASE UNITS FILE WILL BE USED
+if(file.exists("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv")){
 
-# Create a tibble of just those new columns
-new_data <- units_base %>%
-  dplyr::select(all_of(new_cols)) %>%
-  mutate(across(everything(), ~ NA)) %>%
-  unique() %>% slice(rep(1, nrow(units)))
+      units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% 
+      mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>%
+      mutate(CODE = as.character(CODE)) %>%
+      dplyr::select(-CONVERSION_FACTOR) %>%
+      mutate(CODE = str_replace(CODE, "^0+", ""))
+      
+      # Identify the new columns from units_base
+      new_cols <- setdiff(names(units_base), names(units))
+      
+      # Create a tibble of just those new columns
+      new_data <- units_base %>%
+        dplyr::select(all_of(new_cols)) %>%
+        mutate(across(everything(), ~ NA)) %>%
+        unique() %>% slice(rep(1, nrow(units)))
+      
+      units <- units %>% bind_cols(new_data)
+      
+      units <- units %>% bind_rows(units_base %>% mutate(Results = NA)) %>% unique()
+      
+} else {
+      
+      units <- units_base
 
-units <- units %>% bind_cols(new_data)
-
-units <- units %>% bind_rows(units_base %>% mutate(Results = NA)) %>% unique()
+}
 
 # Columns to move
 cols_to_move <- c("Sample.Unit.CustomId", "CODE", "Sample.Unit.Name",
@@ -339,6 +348,7 @@ renameWorksheet(wb, sheet = "Sheet1", newName = "UnitGroups")
 # Save the workbook with the updated sheet name
 saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedUnitGroups.xlsx", overwrite = TRUE)
 
+
 # [SB OK] EXTENDED ATTRIBUTES ----
 # [SB OK] PREPROCESSING EXTENDED ATTRIBUTES FOR NEW DATA --------------------------
 
@@ -361,6 +371,7 @@ dropdownLists <- dropdownLists %>%
 extendedAttributes <- extendedAttributes %>%
   left_join(dropdownLists, by = join_by(customId == EA_customId),
             keep = FALSE)
+
 
 
 
@@ -391,6 +402,7 @@ detectionConditions <- read_excel("./utils/config/ReferenceLists/DetectionCondit
 
 
 
+
 # [SB OK] SAVED FILTERS ----
 # [SB OK] PREPROCESSING TO GENERATE OLDER SAVED FILTERS FILES ---------------
 
@@ -417,6 +429,7 @@ savedFilters <- read_excel("./utils/config/ReferenceLists/savedfilters.xlsx",
 
 
 
+
 # [SB OK] PROJECTS ----
 # [SB OK] PREPROCESSING PROJECTS FOR NEW DATA ---------------------
 
@@ -440,6 +453,7 @@ projects <- projects %>%
                          .default =  format(EndDate, "%Y-%m-%dT00:00:00%z")
                        )) 
                        
+
 
 
 
@@ -547,6 +561,7 @@ write.csv(locations_3, file = "./utils/config/ReferenceLists/samplingLocations/3
 
 locations_4 <- locations[seq(30001, nrow(locations)),]
 write.csv(locations_4, file = "./utils/config/ReferenceLists/samplingLocations/4_Locations_Extract_May6_2025.csv", row.names = F)
+
 
 # [SB OK] OBSERVED PROPERTIES ----
 # [SB OK] PREPROCESSING TO CONSOLIDATE OLDER OP FILES -----------------------------
@@ -840,6 +855,7 @@ OPs_not_posted <- observedProperties %>% anti_join(get_check,
                                     by = join_by("NewNameID" == "customId"))
 
 
+
 # [SB OK] METHODS -----------------------------------------------------------------
 # [SB OK] PREPROCESSING METHODS FOR NEW DATA --------------------------------------
 
@@ -894,12 +910,14 @@ methods.missing <- methods %>%
             by = join_by("Method.Code" == "methodId"))
 
 
+
 # [SB OK] LABS --------------------------------------------------------------------
 # [SB OK] PREPROCESSING LABS FOR NEW DATA --------------------------------------
 
 labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F)
 
 labs$Description = str_c("Created by ", labs$WHO_CREATED, " on ", labs$WHEN_CREATED)
+
 
 
 
@@ -929,6 +947,7 @@ taxonomyLevels <- read_excel("./utils/config/ReferenceLists/TaxonomyLevels.xlsx"
 
 
 
+
 # [SB OK] LOCATION GROUP TYPES -----------------------------------------
 # [SB OK] PREPROCESSING TO GENERATE OLDER LOCATION GROUP TYPES FILES ------------
 ##Had to run this only once in a lifetime
@@ -952,6 +971,7 @@ locationgrouptypes <- read_excel("./utils/config/ReferenceLists/LocationGroupTyp
                              sheet = "locationgrouptypes")
 
 
+
 # [SB OK] LOCATION TYPES ---------------------------------------------------------
 locationTypes <- read_excel("./utils/config/ReferenceLists/LocationTypes.xlsx", 
                                  sheet = "locationtypes")
@@ -963,12 +983,14 @@ locationTypes <- locationTypes %>%
                     ))
 
 
+
 # [SB OK] MEDIUMS ---------------------------------------------------------
 mediums <- read_excel("./utils/config/ReferenceLists/Mediums.xlsx", 
                             sheet = "Mediums")
 
 
 # Doing it manually; getting error on AQS's end
+
 # [SB OK] RESULT GRADES ---------------------------------------------------------
 # [SB OK] PREPROCESSING TO GENERATE OLDER RESULT GRADES FILES --------------
 
@@ -997,6 +1019,7 @@ resultGrades <- read_excel("./utils/config/ReferenceLists/ResultGrades.xlsx",
 
 # Doing it manually; getting error on AQS's end
 
+
 # [SB OK] RESULT STATUSES ---------------------------------------------------------
 # [SB OK] PREPROCESSING TO GENERATE OLDER RESULT STATUSES FILES ---------------------
 
@@ -1023,10 +1046,12 @@ resultStatuses <- read_excel("./utils/config/ReferenceLists/ResultStatuses.xlsx"
 
 
 
+
 # [SB OK] FISH TAXONOMY -----------------------------------------------------------
 # [SB OK] PREPROCESSING FISH TAXONS FOR NEW DATA ----------------------------------
 
 taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx", sheet = "Taxonomy")
+
 
 
 
@@ -1056,7 +1081,10 @@ collectionMethods$merged_codes[collectionMethods$merged_codes == 'NA'] = ""
 
 
 
+
 # Function based configuration development----------------------------------------------------
+
+# GET FUNCTIONS -----------------------------------------------------------
 
 get_profiles_for_url <- function(env, url){
   
@@ -1241,6 +1269,8 @@ get_check <- get_profiles("prod", "unitgroups")
 
 get_check <- get_profiles("prod", "units")
 
+# DELETE FUNCTIONS -----------------------------------------------------------
+
 del_profiles <- function(env, dataType){
   
   # env <- "prod"
@@ -1378,10 +1408,13 @@ del_profiles <- function(env, dataType){
   
 }
 
+#not working
 del_check <- del_profiles("prod", "resultgrades")
 
+#not working
 del_check <- del_profiles("prod", "resultstatuses")
 
+#not working because they are required
 del_check <- del_profiles("prod", "mediums")
 
 del_check <- del_profiles("prod", "projects")
@@ -1398,6 +1431,7 @@ del_check <- del_profiles("prod", "fishtaxonomy")
 
 del_check <- del_profiles("prod", "taxonomylevels")
 
+#not working
 del_check <- del_profiles("prod", "detectionconditions")
 
 del_check <- del_profiles("prod", "filters")
@@ -1416,6 +1450,8 @@ del_check <- del_profiles("prod", "units")
 del_check <- del_profiles("prod", "unitgroups")
 
 del_check <- del_profiles("prod", "extendedattributes")
+
+# PUT FUNCTIONS -----------------------------------------------------------
 
 put_profiles <- function(env, dataType, profile){
   
@@ -1505,6 +1541,8 @@ put_check <- put_profiles("prod", "locationgrouptypes", locationGroupTypes)
 put_check <- put_profiles("prod", "locationtypes", locationTypes)
 
 put_check <- put_profiles("prod", "mediums", mediums)
+
+# POST FUNCTIONS -----------------------------------------------------------
 
 post_profiles <- function(env, dataType, profile){
 
