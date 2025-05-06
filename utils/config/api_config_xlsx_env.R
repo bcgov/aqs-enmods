@@ -1,7 +1,3 @@
-#Things to work on:
-#Spell checks and updates
-#Standardization of column names: Sample or Samples
-
 library(httr)
 library(jsonlite)
 library(tidyverse)
@@ -20,51 +16,41 @@ library(hunspell)
 
 #get the API tokens from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-test_token <- Sys.getenv("test_token")
-prod_token <- Sys.getenv("prod_token")
-test_url <- Sys.getenv("test_url")
-prod_url <- Sys.getenv("prod_url")
+testToken <- Sys.getenv("testToken")
+prodToken <- Sys.getenv("prodToken")
+testURL <- Sys.getenv("testURL")
+prodURL <- Sys.getenv("prodURL")
 
 #function to update URL/token based on chosen environment
-update_base_url_token <- function(env){
+update_baseURL_token <- function(env){
   
   if(env == "prod"){
     
-    base_url <- prod_url
-    token <- prod_token
+    baseURL <- prodURL
+    token <- prodToken
     
   } else {
     
-    base_url <- test_url
-    token <- test_token
+    baseURL <- testURL
+    token <- testToken
     
   }
   
-  url_parameters <- list(base_url, token)
+  urlParameters <- list(baseURL, token)
   
-  return(url_parameters)
+  return(urlParameters)
   
 }
 
 #by default global variables always reference "test" environment
-url_parameters <- update_base_url_token("test")
-base_url <- url_parameters[[1]]
-token <- url_parameters[[2]]
+urlParameters <- update_baseURL_token("test")
+baseURL <- urlParameters[[1]]
+token <- urlParameters[[2]]
 
 ### PREPROCESSING REFERENCE SHEETS ### ----
 
-# UNITS and UNIT GROUPS ----
-# #unitgroups_profiles <- get_profiles("prod", "unitgroups")
-# 
-# # units_profiles <- get_profiles("prod", "units") %>%
-# #   dplyr::select(-auditAttributes) %>%
-# #   rename(Sample.Unit.Id = id, Sample.Unit.CustomId = customId,
-# #          Sample.Unit.Name = name) %>%
-# #   unnest_wider(unitGroup) %>%
-# #   rename(Sample.Unit.Group = customId) %>%
-# #   dplyr::select(-c(auditAttributes, id))
-# 
-# PREPROCESSING TO CONSOLIDATE OLDER UNITS FILES--------
+# [SB OK] UNITS and UNIT GROUPS ----
+# [SB OK] PREPROCESSING TO CONSOLIDATE OLDER UNITS FILES--------
 # units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>%
 #   mutate(CODE = as.character(CODE)) %>%
 #   dplyr::select(-CONVERSION_FACTOR) %>%
@@ -115,24 +101,9 @@ token <- url_parameters[[2]]
 #     .default = Sample.Unit.Name
 #   )) %>%
 #   mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR))
-# # #
-# # # #
-# # # #  %>% #, #%>%
-# # # #            #dplyr::select(CODE, Sample.Unit.Group, Sample.Unit.CustomId,
-# # # #            #              Sample.Unit.Name, CONVERSION_FACTOR, OFFSET),
-# # # #            #by = join_by("CODE", ""))
-# # # #   %>% dplyr::select(-CODE) %>% unique()
-# # #
-# # # #we know there are duplicates in this data set
-# # # units <- units %>%
-# # #             mutate(Sample.Unit.Name = if_else(is.na(Sample.Unit.Name),
-# # #             DESCRIPTION, Sample.Unit.Name),
-# # #             Sample.Unit.CustomId = if_else(is.na(Sample.Unit.CustomId),                            SHORT_NAME, Sample.Unit.CustomId)) %>%
-# # #             dplyr::select(c(Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group)) %>% unique()
-# # #
-# units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits") #%>%
-#   #dplyr::select(c(Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name, CONVERSION_FACTOR, OFFSET))
-# 
+#
+# units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits")
+#
 # # Identify the new columns from units_base
 # new_cols <- setdiff(names(units), names(units_new_to_enmods))
 # 
@@ -233,20 +204,7 @@ token <- url_parameters[[2]]
 # # Save the workbook with the updated sheet name
 # saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_units.xlsx", overwrite = TRUE)
 
-#
-# #Elevation does not exist in the Reference Sheet
-# #Needs to be added manually even though it's metres
-# #This metres is therefore different from metre (m) in EnMoDS
-# #No longer need it since regular m has become a non-deletable entity
-# # units <- units %>% add_row(CONVERSION_FACTOR = 1,
-# #                            OFFSET = 0,
-# #                            Convertible = TRUE,
-# #                            Sample.Unit.Group = "SYS-REQUIRED - Length",
-# #                            Sample.Unit.CustomId = "metre",
-# #                            Sample.Unit.Name = "Elevation")
-#
-#
-# PREPROCESSING UNITS CODE FOR NEW DATA ---------------------------------------------
+# [SB OK] PREPROCESSING UNITS FOR NEW DATA ---------------------------------------------
 units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% 
   mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>%
   mutate(CODE = as.character(CODE)) %>%
@@ -339,7 +297,7 @@ units <- units %>%
                 Convertible, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group) %>%
   unique()
 
-# UNITS QA/QC -------------------------------------------
+# [SB OK] QA/QC for UNITS -------------------------------------------
 
 #first post files
 post_check <- post_profiles("prod", "units", units)
@@ -354,7 +312,7 @@ units_missing <- units %>%
   anti_join(get_check,
             by = join_by("Sample.Unit.CustomId" == "customId"))
 
-# PREPROCESSING OF UNIT GROUPS --------------------------------------------
+# [SB OK] PREPROCESSING OF UNIT GROUPS --------------------------------------------
 
 #list of unit groups
 #sometimes this list may have one less or more unit groups than in ENV
@@ -381,72 +339,8 @@ renameWorksheet(wb, sheet = "Sheet1", newName = "UnitGroups")
 # Save the workbook with the updated sheet name
 saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedUnitGroups.xlsx", overwrite = TRUE)
 
-
-#Spell check unit groups
-
-# #loop to make all the unit groups
-# for (i in seq(1, dim(unit_groups)[1])) {
-#   
-#   #get the updated base_url and token for the prod env
-#   url_parameters <- update_base_url_token("prod")
-#   base_url <- url_parameters[[1]]
-#   token <- url_parameters[[2]]
-#   
-#   url <- paste0(base_url, "v1/unitgroups")
-#   data_body <- list("customId" = unit_groups$Sample.Unit.Group[i],
-#                   "supportsConversion" = unit_groups$Convertible[i])
-#   
-#   #Make the unit group
-#   x<-POST(url, config = c(add_headers(.headers = 
-#     c('Authorization' = token))), body = data_body, encode = 'json')
-#   
-#   #get the unit group's id
-#   unit_group_id <- fromJSON(rawToChar(x$content))$id
-#   
-#   #if the unit group already exist get the id
-#   if (is.null(unit_group_id)) {
-#     
-#     url = paste0(base_url, 'v1/unitgroups?customId=', 
-#                  unit_groups$Sample.Unit.Group[i])
-#     data_body <- list()
-#     x<-GET(url, config = c(add_headers(.headers = 
-#       c('Authorization' = token))), body = data_body, encode = 'json')
-#     unit_group_id <- fromJSON(rawToChar(x$content))$domainObjects$id
-#     
-#   }
-#   
-#   #get all the units for the i-th group
-#   unit_group_units <- units %>% 
-#     dplyr::filter(Sample.Unit.Group == unit_groups$Sample.Unit.Group[i])
-#   
-#   #loop to put all the units in the group
-#   for (j in seq(1, nrow(unit_group_units))) {
-#     
-#     #If the unit group supports conversion provide conversion factors
-#     if (unit_groups$Convertible[j] == TRUE) {
-#       url <- paste0(base_url, "v1/units")
-#       data_body <- list("customId" = unit_group_units$Samples.Unit.CustomId[j],
-#                         "name" = unit_group_units$Samples.Unit.Name[j],
-#                         "baseMultiplier" = 1/unit_group_units$CONVERSION_FACTOR[j],
-#                         "baseOffset" = 0,
-#                         "unitGroup" = list("id" = unit_group_id))
-#       POST(url, config = c(add_headers(.headers = 
-#         c('Authorization' = token))), body = data_body, encode = 'json')
-#     } #else if the group does not support conversion do not provide conversion factors
-#     else {
-#       url <- paste0(base_url, "v1/units")
-#       data_body <- list("customId" = unit_group_units$Samples.Unit.CustomId[j],
-#                         "name" = unit_group_units$Samples.Unit.Name[j],
-#                         "unitGroup" = list("id" = unit_group_id))
-#       POST(url, config = c(add_headers(.headers = 
-#         c('Authorization' = token))), body = data_body, encode = 'json')
-#     }
-#     
-#   }
-#   
-# }
-
-# EXTENDED ATTRIBUTES ----
+# [SB OK] EXTENDED ATTRIBUTES ----
+# [SB OK] PREPROCESSING EXTENDED ATTRIBUTES FOR NEW DATA --------------------------
 
 extendedAttributes <- read_excel("./utils/config/ReferenceLists/ExtendedAttributes.xlsx", 
                                  sheet = "ExtendedAttributes")
@@ -468,8 +362,11 @@ extendedAttributes <- extendedAttributes %>%
   left_join(dropdownLists, by = join_by(customId == EA_customId),
             keep = FALSE)
 
-# DETECTION CONDITIONS ----
 
+
+
+# [SB OK] DETECTION CONDITIONS ----
+# [SB OK] PREPROCESSING TO GENERATE OLDER DETECTION CONDITION FILES ---------------
 # #Had to run this only once in a lifetime
 # detectionConditions <- get_profiles("test", "detectionconditions") #%>%
 #   #dplyr::select(customId)
@@ -486,10 +383,16 @@ extendedAttributes <- extendedAttributes %>%
 # # Save the workbook with the updated sheet name
 # saveWorkbook(wb, "./utils/config/ReferenceLists/DetectionConditions.xlsx", overwrite = TRUE)
 
+# [SB OK] PREPROCESSING DETECTION CONDITIONS FOR NEW DATA --------------------
+
 detectionConditions <- read_excel("./utils/config/ReferenceLists/DetectionConditions.xlsx", 
                                  sheet = "detectionconditions")
 
-# SAVED FILTERS ----
+
+
+
+# [SB OK] SAVED FILTERS ----
+# [SB OK] PREPROCESSING TO GENERATE OLDER SAVED FILTERS FILES ---------------
 
 # #Had to run this only once in a lifetime
 # savedFilters <- get_profiles("test", "filters") #%>%
@@ -507,13 +410,18 @@ detectionConditions <- read_excel("./utils/config/ReferenceLists/DetectionCondit
 # # Save the workbook with the updated sheet name
 # saveWorkbook(wb, "./utils/config/ReferenceLists/savedfilters.xlsx", overwrite = TRUE)
 
+# [SB OK] PREPROCESSING SAVED FILTERS FOR NEW DATA ---------------------------
+
 savedFilters <- read_excel("./utils/config/ReferenceLists/savedfilters.xlsx", 
                                   sheet = "savedfilters")
 
 
-# PROJECTS ----
 
-projects_test <- get_profiles("test", "projects")
+# [SB OK] PROJECTS ----
+# [SB OK] PREPROCESSING PROJECTS FOR NEW DATA ---------------------
+
+##had to run only once
+#projects_test <- get_profiles("test", "projects")
 
 projects <- read_excel("./utils/config/ReferenceLists/projects.xlsx", 
                            sheet = "projects")
@@ -533,7 +441,10 @@ projects <- projects %>%
                        )) 
                        
 
-# SAMPLING LOCATION GROUPS------------------------------------------------
+
+
+# [SB OK] SAMPLING LOCATION GROUPS AND LOCATIONS-------------------------------------------
+# [SB OK] PREPROCESSING SAMPLING LOCATIONS AND GROUPS FOR NEW DATA --------------------
 non_zero_post_2006 <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025NonzeroSamplesAfter2006Export.xlsx")
 zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx")
 zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_Between2006And2024ZeroSamples.xlsx")
@@ -614,87 +525,31 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
                              by = join_by(Type == customId)) %>%
                              rename(locationgrouptypeID = id)
 
-# # SAMPLING LOCATIONS  ---------------------------------------------------------
-# 
-# #after putting location groups in, come back here to attach location group IDs to locations
-# #best way to check what columns are needed is to put in a get request
-# #super complicated; start small and then add things
-# locations_enmods <- get_profiles("prod", "locations")
-# 
-# #get sampling group IDs because they will probably be needed
-# locationGroups <- get_profiles("prod", "locationgroups")
-# 
-# locationTypes <- get_profiles("prod", "locationtypes")
-# 
-# units <- get_profiles("prod", "units")
-# 
-# #make a sample locations file
-# locations <- locations %>% mutate(`Elevation Unit` = case_when(
-#                               #is.na(`Elevation Unit`) ~ "metre",
-#                               `Elevation Unit` == "metre" ~ "m",
-#                               .default = `Elevation Unit`
-#   ))
-# 
-# locations <- locations %>% 
-#                 dplyr::filter(str_detect(`Location Groups`, ";"))
-# 
-# extendedAttributes <- get_profiles("prod", "extendedattributes")
-# 
-# # #created a location file when pre-processing for Location Groups; use it here
-# # #initially just trying to import the first location since it is associated
-# # #with exactly one location group (will deal with complicated situations later)
-# test_locations <- locations %>% 
-#                     left_join(locationTypes %>% dplyr::select(id, customId), 
-#                       by = join_by("Type" == "customId")) %>%
-#                       rename(Type.id = id) %>% 
-#                       left_join(units %>% dplyr::select(id, customId), 
-#                                 by = join_by("Elevation Unit" == "customId")) %>%
-#                       rename("Elevation Unit.id" = id) %>% 
-#                       rename(`Closed Date` = `EA_Closed Date`, 
-#                              `EMS Who Created` = `EA_EMS Who Created`,
-#                              `Well Tag ID` = `EA_Well Tag ID`,
-#                              `EMS When Created` = `EA_EMS When Created`,
-#                              `EMS When Updated` = `EA_EMS When Updated`,
-#                              `EMS Who Updated` = `EA_EMS Who Updated`,
-#                              `Established Date` = `EA_Established Date`) %>%
-#                       mutate(across(`Closed Date`:`Well Tag ID`, 
-#                                     as.character)) %>%
-#                       pivot_longer(cols = `Closed Date`:`Well Tag ID`,
-#                                    names_to = "customId",
-#                                    values_to = "EA.value") %>%
-#                       left_join(extendedAttributes %>% 
-#                                   dplyr::select(id, customId)) %>%
-#                       rename(EA.id = id) %>%
-#                       dplyr::select(-customId) %>%
-#                       group_by(across(`Location ID`:
-#                         `Elevation Unit.id`)) %>%
-#                       summarise(across(`EA.value`:`EA.id`, 
-#                         ~ list(as.character(.))), .groups = "drop") %>%
-#                       separate_rows(`Location Groups`, sep = ";") %>% 
-#                       mutate(`Location Groups` = 
-#                         str_replace_all(`Location Groups`, "\\s+", "")) %>%
-#                       left_join(locationGroups %>% 
-#                                   dplyr::select(id, name, locationGroupType),
-#                                   by = join_by("Location Groups" == "name")) %>% 
-#                       rename(Group.id = id) %>% 
-#                       unnest_wider(locationGroupType) %>% 
-#                       rename(GroupType.id = id, 
-#                              GroupType.customId = customId) %>%
-#                       dplyr::select(-auditAttributes) %>%
-#                       relocate(`Location Groups`, .after = last_col()) %>%
-#                       group_by(across(`Location ID`:
-#                                         `EA.id`)) %>%
-#                       summarise(across(Group.id:`Location Groups`, 
-#                         ~ list(as.character(.))), .groups = "drop")
-#                 
-# 
-# # #bigger test file
-# # locations_1 <- locations[seq(1,10000),]
-# # write.csv(locations_1, file = "1_Locations_Extract_Mar5_2025.csv", row.names = F)
-# 
-# 
-# OBSERVED PROPERTIES ----
-# PREPROCESSING TO CONSOLIDATE OLDER OP FILES -----------------------------
+# could not figure out locations completely
+# generating split files that have to be loaded manually
+# make the files smaller
+locations <- locations %>% 
+  mutate(`Elevation Unit` = 
+           case_when(#is.na(`Elevation Unit`) ~ "metre", 
+             `Elevation Unit` == "metre" ~ "m",
+             .default = `Elevation Unit`))
+
+
+#locations have to be pushed manually, 10000 at a time using AQS Import
+locations_1 <- locations[seq(1,10000),]
+write.csv(locations_1, file = "./utils/config/ReferenceLists/samplingLocations/1_Locations_Extract_May6_2025.csv", row.names = F)
+
+locations_2 <- locations[seq(10001,20000),]
+write.csv(locations_2, file = "./utils/config/ReferenceLists/samplingLocations/2_Locations_Extract_May6_2025.csv", row.names = F)
+
+locations_3 <- locations[seq(20001,30000),]
+write.csv(locations_3, file = "./utils/config/ReferenceLists/samplingLocations/3_Locations_Extract_May6_2025.csv", row.names = F)
+
+locations_4 <- locations[seq(30001, nrow(locations)),]
+write.csv(locations_4, file = "./utils/config/ReferenceLists/samplingLocations/4_Locations_Extract_May6_2025.csv", row.names = F)
+
+# [SB OK] OBSERVED PROPERTIES ----
+# [SB OK] PREPROCESSING TO CONSOLIDATE OLDER OP FILES -----------------------------
 # #EMS exported observedProperties
 # observedProperties <- read_excel("./utils/config/ReferenceLists/Observed_Properties.xlsx")
 # 
@@ -715,10 +570,6 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
 # #get the unique list of OP IDs
 # observedProperties <- observedProperties %>% unique()
 # 
-# # no longer selecting columns since want to retain all data
-# # observedProperties <- observedProperties %>% dplyr::select(c("Parm.Code", "NewNameID", "Description",
-# #                                "Analysis.Type", "Result.Type", "Sample.Unit.Group",
-# #                                "Sample.Unit", "CAS")) #%>% unique()
 # 
 # ## observedProperties new to EnMoDS not in EMS
 # OPs_new_to_EnMoDS <-
@@ -727,12 +578,6 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
 # 
 # #get the unique list of OP IDs
 # OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>% unique()
-# 
-# # #no longer selecting columns since want to retain all data
-# # OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>%
-# #   dplyr::select(c("Parm.Code", "NewNameID", "Description",
-# #                   "Analysis.Type", "Result.Type", "Sample.Unit.Group",
-# #                   "Sample.Unit","CAS")) #%>% unique()
 # 
 # #fixing the missing sample group id issue in the list
 # OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>% mutate(Sample.Unit.Group =
@@ -758,11 +603,6 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
 # #get the unique list of OP IDs
 # OPs_taxonomic <- OPs_taxonomic %>% unique()
 # 
-# # # #no longer selecting columns since want to retain all data
-# # OPs_taxonomic <- OPs_taxonomic %>%
-# #   dplyr::select(c("Parm.Code", "NewNameID", "Description", "Analysis.Type",
-# #                   "Result.Type", "Sample.Unit.Group", "Sample.Unit","CAS")) #%>%  unique()
-# 
 # #Identify the new columns compared to observedProperties
 # new_cols <- setdiff(names(observedProperties), names(OPs_taxonomic))
 # 
@@ -776,16 +616,8 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
 # 
 # observedProperties <- observedProperties %>% bind_rows(OPs_taxonomic %>% mutate(Results = NA)) %>% unique()
 # 
-# #use CAS for ITIS ID? Nope not allowed eye roll
-# #OPs_unique$CAS <- unlist(lapply(str_split(OPs_unique$NewNameID, " - "), function(x) x[[1]][1]))
-# 
-# #error holder these two are missing!
-# #"39369 - Carex" 734
-# #"40371 - Agropyron cristatum" 741
-# 
 # ## Merge all observedProperties and process
 # 
-# #get the unique list of OP IDs
 # observedProperties <- observedProperties %>%
 # #bind_rows(observedProperties, OPs_new_to_EnMoDS, OPs_taxonomic) %>%
 # #        unique() %>%
@@ -845,7 +677,8 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
 # 
 # #units without groups
 # units <- get_profiles("prod", "units") %>%
-#   rename("Unit.Id" = "id")
+#    dplyr::select(id, customId) %>%
+#    rename("Unit.Id" = "id")
 # 
 # #add GUID to the list of observedProperties for units
 # observedProperties <- left_join(observedProperties, units,
@@ -868,7 +701,7 @@ locationGroups <- inner_join(locationGroups, locationGroupTypes,
 # 
 # observedProperties <- observedProperties %>% dplyr::select(c("Parm.Code", "NewNameID", "Description", "Analysis.Type", "Result.Type", "Sample.Unit.Group", "Sample.Unit","CAS")) %>% unique()
 
-# PREPROCESSING OP CODE FOR NEW DATA --------------------------------------
+# [SB OK] PREPROCESSING OP FOR NEW DATA --------------------------------------
 
 observedProperties_new <- read_excel("./utils/config/ReferenceLists/Observed_Properties_jk_2025-04-22.xlsx") 
 
@@ -892,6 +725,9 @@ observedProperties_base$Modifier[is.na(observedProperties_base$Modifier)] <- ""
 #Add an empty Result.Type column
 observedProperties_base$Result.Type <- ""
 
+#Unit and unit groups may have been updated; remove their IDs
+observedProperties_base <- observedProperties_base %>%
+                              dplyr::select(-c(Unit.Id, Unit.Group.Id))
 
 #Identify the new columns compared to observedProperties
 new_cols <- setdiff(names(observedProperties_base), names(observedProperties_new))
@@ -907,9 +743,7 @@ observedProperties_new <- observedProperties_new %>% bind_cols(new_data)
 observedProperties <- observedProperties_base %>% 
   bind_rows(observedProperties_new %>% mutate(Results = NA)) %>% unique()
 
-## Merge all observedProperties and process
-
-#get the unique list of OP IDs
+## Merge all observedProperties
 observedProperties <- observedProperties %>%
   #bind_rows(observedProperties, OPs_new_to_EnMoDS, OPs_taxonomic) %>%
   #        unique() %>% 
@@ -969,12 +803,12 @@ observedProperties <- left_join(observedProperties, unitGroups,
                                 by = join_by('Sample.Unit.Group' == 'customId'), keep = FALSE)
 
 #units without groups
-units <- get_profiles("prod", "units") %>% 
+units <- get_profiles("prod", "units") %>%
+  dplyr::select(id, customId) %>%
   rename("Unit.Id" = "id")
 
 #add GUID to the list of observedProperties for units
 observedProperties <- observedProperties %>% 
-                        dplyr::select(-Unit.Id) %>% 
                         left_join(units, 
                                   by = join_by('Sample.Unit' == 'customId'), 
                                   keep = FALSE)
@@ -996,7 +830,7 @@ saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedObservedProperties.x
 
 observedProperties <- observedProperties %>% dplyr::select(c("Parm.Code", "NewNameID", "Description", "Analysis.Type", "Sample.Unit.Group", "Sample.Unit","CAS")) %>% unique()
 
-# QA/QC for OPs -----------------------------------------------------------
+# [SB OK] QA/QC for OPs -----------------------------------------------------------
 
 # Checking which entries are not getting posted
 get_check <- get_profiles("prod", "observedproperties")
@@ -1004,87 +838,76 @@ get_check <- get_profiles("prod", "observedproperties")
 #compare get_check for observedProperties with raw observedProperties
 OPs_not_posted <- observedProperties %>% anti_join(get_check,
                                     by = join_by("NewNameID" == "customId"))
-# 
-# OPs_not_posted <- observedProperties %>% dplyr::filter(NewNameID == "Biological Sample Volume (vol.)")
 
-# METHODS -----------------------------------------------------------------
-Methods <- read_excel("./utils/config/ReferenceLists/Observed_Properties.xlsx")
 
-#Method names cannot contain semicolons
+# [SB OK] METHODS -----------------------------------------------------------------
+# [SB OK] PREPROCESSING METHODS FOR NEW DATA --------------------------------------
+
+methods <- read_excel("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx")
 
 #The units don't matter for non convertable OP units. For example microbial units. So remove them from consideration.
-Methods$Sample.Unit[Methods$Convertable.In.Samples == "N"] <- ""
+methods$Sample.Unit[methods$Convertable.In.Samples == "N"] <- ""
 
 #get the new name (customId) and methods 
-Methods <- Methods %>% select(c("NewNameID", "Method.Code", "Method", "Method.Description"))
+methods <- methods %>% 
+              dplyr::select(c("NewNameID", "Method.Code", "Method", 
+                              "Method.Description"))
 
-OPs_ids <- get_profiles("prod", "observedproperties") %>% 
+OPs.ids <- get_profiles("prod", "observedproperties") %>% 
   dplyr::select("id", "customId")
 
 #check that nothing has been dropped here!
-Methods_problematic <- anti_join(Methods, OPs_ids, by = join_by("NewNameID" == "customId")) 
+methodsProblematic <- anti_join(methods, OPs.ids, by = join_by("NewNameID" == "customId")) 
 
-Methods <- left_join(Methods, OPs_ids, by = join_by("NewNameID" == "customId"))
-# 
-# list_methods <- unique(Methods %>% select(-c("NewNameID", "id")))
-# 
-# update_base_url_token("prod")
-# 
-# for (i in seq(1, nrow(list_methods))) {
-#   
-#   OPs_for_method <- Methods %>% filter(Method.Code == list_methods$Method.Code[i]) %>% select(id)
-#   
-#   result_list = list()
-#   
-#   for (j in seq(1, nrow(OPs_for_method))) {
-#     result_list[[j]] = list("id" = OPs_for_method$id[j])
-#   }
-#   
-#   
-#   #Make a new method and assign a single OP
-#   url <- paste0(base_url, 'v1/analysismethods')
-#   data_body <- list("methodId" = list_methods$Method.Code[i],
-#                     "name" = list_methods$Method[i],
-#                     "description" = list_methods$Method.Description[i],
-#                     "context" = "EMS Migration",
-#                     "observedProperties" = result_list
-#   )
-#   
-#   
-#   x<-POST(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
-#   
-#   if (x$status_code != 200) {
-#     print(i)
-#     print(x$status_code)
-#     print(list_methods$Method[i])
-#   }
-#   
-# }
+methods <- left_join(methods, OPs.ids, by = join_by("NewNameID" == "customId"))
 
-OPs_for_methods <- Methods %>%
+OPs.for.methods <- methods %>%
   dplyr::select(id, Method.Code) %>%
   group_by(Method.Code) %>%
   summarise(
-    OPs_list = list(
+    OPs.list = list(
       map(id, ~ list("id" = .x))
     ),
     .groups = "drop"
   )
 
-Methods <- unique(Methods %>% select(-c("NewNameID", "id")))
+methods <- unique(methods %>% select(-c("NewNameID", "id")))
 
-Methods <- Methods %>%
-  left_join(OPs_for_methods, by = join_by(Method.Code == Method.Code),
+methods <- methods %>%
+  left_join(OPs.for.methods, by = join_by(Method.Code == Method.Code),
             keep = FALSE)
 
-# LABS --------------------------------------------------------------------
-Labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F)
+#Method names cannot contain semicolons
+#removing semicolons in names and replacing them with colons
+methods <- methods %>% 
+  mutate(Method = str_replace_all(Method, ";", ":"))
 
-Labs$Description = str_c("Created by ", Labs$WHO_CREATED, " on ", Labs$WHEN_CREATED)
+# [SB OK] QA/QC for METHODS -------------------------------------------
 
-# TAXONOMY LEVELS ---------------------------------------------------------
+#first post files
+post_check <- post_profiles("prod", "methods", Methods)
+
+get_check <- get_profiles("prod", "methods")
+
+methods.missing <- methods %>%
+  anti_join(get_check,
+            by = join_by("Method.Code" == "methodId"))
+
+
+# [SB OK] LABS --------------------------------------------------------------------
+# [SB OK] PREPROCESSING LABS FOR NEW DATA --------------------------------------
+
+labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F)
+
+labs$Description = str_c("Created by ", labs$WHO_CREATED, " on ", labs$WHEN_CREATED)
+
+
+
+# [SB OK] TAXONOMY LEVELS ---------------------------------------------------------
+# [SB OK] PREPROCESSING TO GENERATE OLDER TAXONOMY LEVELS FILES ----------------
+
 ##Had to run this only once in a lifetime
-# taxonomylevels <- get_profiles("test", "taxonomylevels") %>%
+# taxonomyLevels <- get_profiles("test", "taxonomylevels") %>%
 #   dplyr::select(customId)
 # # Save workbook
 # write_xlsx(list(taxonomylevels), "./utils/config/ReferenceLists/TaxonomyLevels.xlsx")
@@ -1098,10 +921,16 @@ Labs$Description = str_c("Created by ", Labs$WHO_CREATED, " on ", Labs$WHEN_CREA
 # # Save the workbook with the updated sheet name
 # saveWorkbook(wb, "./utils/config/ReferenceLists/TaxonomyLevels.xlsx", overwrite = TRUE)
 
-taxonomylevels <- read_excel("./utils/config/ReferenceLists/TaxonomyLevels.xlsx", 
+# [SB OK] PREPROCESSING TAXONOMY LEVELS FOR NEW DATA ------------------------------
+
+taxonomyLevels <- read_excel("./utils/config/ReferenceLists/TaxonomyLevels.xlsx", 
                              sheet = "taxonomylevels")
 
-# LOCATION GROUP TYPES ---------------------------------------------------------
+
+
+
+# [SB OK] LOCATION GROUP TYPES -----------------------------------------
+# [SB OK] PREPROCESSING TO GENERATE OLDER LOCATION GROUP TYPES FILES ------------
 ##Had to run this only once in a lifetime
 # locationgrouptypes <- get_profiles("test", "samplinglocationgrouptypes") %>%
 #   dplyr::select(customId)
@@ -1116,21 +945,35 @@ taxonomylevels <- read_excel("./utils/config/ReferenceLists/TaxonomyLevels.xlsx"
 # 
 # # Save the workbook with the updated sheet name
 # saveWorkbook(wb, "./utils/config/ReferenceLists/LocationGroupTypes.xlsx", overwrite = TRUE)
+
+# [SB OK] PREPROCESSING LOCATION GROUP TYPES FOR NEW DATA -------------------------
+
 locationgrouptypes <- read_excel("./utils/config/ReferenceLists/LocationGroupTypes.xlsx", 
                              sheet = "locationgrouptypes")
 
-# LOCATION TYPES ---------------------------------------------------------
-locationtypes <- read_excel("./utils/config/ReferenceLists/LocationTypes.xlsx", 
+
+# [SB OK] LOCATION TYPES ---------------------------------------------------------
+locationTypes <- read_excel("./utils/config/ReferenceLists/LocationTypes.xlsx", 
                                  sheet = "locationtypes")
 
+locationTypes <- locationTypes %>% 
+                    mutate(customId = case_when(
+                      customId == "Land - Fram" ~ "Land - Farm",
+                      .default = customId
+                    ))
 
-# MEDIUMS ---------------------------------------------------------
+
+# [SB OK] MEDIUMS ---------------------------------------------------------
 mediums <- read_excel("./utils/config/ReferenceLists/Mediums.xlsx", 
                             sheet = "Mediums")
 
-# RESULT GRADES ---------------------------------------------------------
+
+# Doing it manually; getting error on AQS's end
+# [SB OK] RESULT GRADES ---------------------------------------------------------
+# [SB OK] PREPROCESSING TO GENERATE OLDER RESULT GRADES FILES --------------
+
 ##Had to run this only once in a lifetime
-# resultgrades <- get_profiles("test", "resultgrades") %>%
+# resultGrades <- get_profiles("test", "resultgrades") %>%
 #   dplyr::select(customId)
 #
 # # Save workbook
@@ -1144,13 +987,21 @@ mediums <- read_excel("./utils/config/ReferenceLists/Mediums.xlsx",
 # 
 # # Save the workbook with the updated sheet name
 # saveWorkbook(wb, "./utils/config/ReferenceLists/ResultGrades.xlsx", overwrite = TRUE)
-resultgrades <- read_excel("./utils/config/ReferenceLists/ResultGrades.xlsx", 
+
+# [SB OK] PREPROCESSING RESULT GRADES FOR NEW DATA --------------------------------
+
+resultGrades <- read_excel("./utils/config/ReferenceLists/ResultGrades.xlsx", 
                                  sheet = "resultgrades")
 
 
-# RESULT STATUSES ---------------------------------------------------------
+
+# Doing it manually; getting error on AQS's end
+
+# [SB OK] RESULT STATUSES ---------------------------------------------------------
+# [SB OK] PREPROCESSING TO GENERATE OLDER RESULT STATUSES FILES ---------------------
+
 # #Had to run this only once in a lifetime
-# resultstatuses <- get_profiles("test", "resultstatuses") %>%
+# resultStatuses <- get_profiles("test", "resultstatuses") %>%
 #   dplyr::select(customId)
 # 
 # # Save workbook
@@ -1164,39 +1015,54 @@ resultgrades <- read_excel("./utils/config/ReferenceLists/ResultGrades.xlsx",
 # 
 # # Save the workbook with the updated sheet name
 # saveWorkbook(wb, "./utils/config/ReferenceLists/ResultStatuses.xlsx", overwrite = TRUE)
-resultstatuses <- read_excel("./utils/config/ReferenceLists/ResultStatuses.xlsx", 
+
+# [SB OK] PREPROCESSING RESULT STATUSES FOR NEW DATA ------------------------------
+
+resultStatuses <- read_excel("./utils/config/ReferenceLists/ResultStatuses.xlsx", 
                            sheet = "resultstatuses")
 
-# FISH TAXONOMY -----------------------------------------------------------
-Taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx", sheet = "Taxonomy")
 
-# COLLECTION METHODS ------------------------------------------------------
-collection_methods <- read_excel("./utils/config/ReferenceLists/Collection_methods.xlsx", sheet = "CollectionMethods")
+
+# [SB OK] FISH TAXONOMY -----------------------------------------------------------
+# [SB OK] PREPROCESSING FISH TAXONS FOR NEW DATA ----------------------------------
+
+taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx", sheet = "Taxonomy")
+
+
+
+# [SB OK] COLLECTION METHODS ------------------------------------------------------
+# [SB OK] PREPROCESSING COLLECTION METHODS FOR NEW DATA ---------------------------
+
+collectionMethods <- read_excel("./utils/config/ReferenceLists/Collection_methods.xlsx", 
+                                 sheet = "Collectionmethods")
 
 #remove collection methods we no longer want
-collection_methods <- collection_methods %>% filter(`New EnMoDS Short Name/ID` != "DELETE")
+collectionMethods <- collectionMethods %>% filter(`New EnMoDS Short Name/ID` != "DELETE")
 
 #select just the needed columns
-collection_methods <- collection_methods %>% select(c("New EnMoDS Short Name/ID", "EMS CODE", "Definition"))
+collectionMethods <- collectionMethods %>% select(c("New EnMoDS Short Name/ID", "EMS CODE", "Definition"))
 
 #merge ems codes into a long string
-collection_methods <- collection_methods %>% 
+collectionMethods <- collectionMethods %>% 
   group_by(`New EnMoDS Short Name/ID`) %>% 
   reframe(merged_codes = paste(`EMS CODE`, collapse = ", "), Definition)
 
 #remove duplicates
-collection_methods<-distinct(collection_methods)
+collectionMethods<-distinct(collectionMethods)
 
 #replace EMS code with blanks where its NA
-collection_methods$merged_codes[collection_methods$merged_codes == 'NA'] = ""
+collectionMethods$merged_codes[collectionMethods$merged_codes == 'NA'] = ""
+
+
+
 
 # Function based configuration development----------------------------------------------------
 
 get_profiles_for_url <- function(env, url){
   
-  url_parameters <- update_base_url_token(env)
-  base_url <- url_parameters[[1]]
-  token <- url_parameters[[2]]
+  urlParameters <- update_baseURL_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
   
   data_body <- list()
   
@@ -1232,10 +1098,6 @@ get_profiles_for_url <- function(env, url){
       
       print(i)
       
-      # if(i==3){
-      #   break
-      # }
-      
     }
     
   } else {
@@ -1248,92 +1110,92 @@ get_profiles_for_url <- function(env, url){
   
 }
 
-get_profiles <- function(env, data_type){
+get_profiles <- function(env, dataType){
   
   #env <- "test"
   
   #default is "test" and for prod env, use the function parameter "prod"
-  url_parameters <- update_base_url_token(env)
-  base_url <- url_parameters[[1]]
-  token <- url_parameters[[2]]
+  urlParameters <- update_baseURL_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
   
-  #data_type <- "unitgroups"
+  #dataType <- "unitgroups"
   
-  if(data_type == "units"){
+  if(dataType == "units"){
     
-    url <- str_c(base_url, "v1/units")
+    url <- str_c(baseURL, "v1/units")
     
-  } else if(data_type == "unitgroups"){
+  } else if(dataType == "unitgroups"){
     
-    url <- str_c(base_url, "v1/unitgroups")
+    url <- str_c(baseURL, "v1/unitgroups")
     
-  } else if(data_type == "extendedattributes"){
+  } else if(dataType == "extendedattributes"){
     
-    url <- str_c(base_url, "v1/extendedattributes")
+    url <- str_c(baseURL, "v1/extendedattributes")
     
-  } else if(data_type == "observedproperties"){
+  } else if(dataType == "observedproperties"){
     
-    url <- str_c(base_url, "v1/observedproperties")
+    url <- str_c(baseURL, "v1/observedproperties")
     
-  } else if(data_type == "methods"){
+  } else if(dataType == "methods"){
     
-    url <- str_c(base_url, "v1/analysismethods")
+    url <- str_c(baseURL, "v1/analysismethods")
     
-  } else if(data_type == "labs"){
+  } else if(dataType == "labs"){
     
-    url <- str_c(base_url, "v1/laboratories")
+    url <- str_c(baseURL, "v1/laboratories")
     
-  } else if(data_type == "locationgrouptypes"){
+  } else if(dataType == "locationgrouptypes"){
     
-    url <- str_c(base_url, "v1/samplinglocationgrouptypes")
+    url <- str_c(baseURL, "v1/samplinglocationgrouptypes")
     
-  } else if(data_type == "locationtypes"){
+  } else if(dataType == "locationtypes"){
     
-    url <- str_c(base_url, "v1/samplinglocationtypes")
+    url <- str_c(baseURL, "v1/samplinglocationtypes")
     
-  } else if(data_type == "locationgroups"){
+  } else if(dataType == "locationgroups"){
     
-    url <- str_c(base_url, "v1/samplinglocationgroups")
+    url <- str_c(baseURL, "v1/samplinglocationgroups")
     
-  } else if(data_type == "locations"){
+  } else if(dataType == "locations"){
     
-    url <- str_c(base_url, "v1/samplinglocations?limit=1000")
+    url <- str_c(baseURL, "v1/samplinglocations?limit=1000")
     
-  } else if(data_type == "mediums"){
+  } else if(dataType == "mediums"){
     
-    url <- str_c(base_url, "v1/mediums")
+    url <- str_c(baseURL, "v1/mediums")
     
-  } else if(data_type == "taxonomylevels"){
+  } else if(dataType == "taxonomylevels"){
     
-    url <- str_c(base_url, "v1/taxonomylevels")
+    url <- str_c(baseURL, "v1/taxonomylevels")
     
-  } else if(data_type == "detectionconditions"){
+  } else if(dataType == "detectionconditions"){
     
-    url <- str_c(base_url, "v1/detectionconditions")
+    url <- str_c(baseURL, "v1/detectionconditions")
     
-  } else if(data_type == "resultgrades"){
+  } else if(dataType == "resultgrades"){
     
-    url <- str_c(base_url, "v1/resultgrades")
+    url <- str_c(baseURL, "v1/resultgrades")
     
-  } else if(data_type == "resultstatuses"){
+  } else if(dataType == "resultstatuses"){
     
-    url <- str_c(base_url, "v1/resultstatuses")
+    url <- str_c(baseURL, "v1/resultstatuses")
     
-  } else if(data_type == "fishtaxonomy"){
+  } else if(dataType == "fishtaxonomy"){
     
-    url <- str_c(base_url, "v1/taxons")
+    url <- str_c(baseURL, "v1/taxons")
     
-  } else if(data_type == "collectionmethods"){
+  } else if(dataType == "collectionmethods"){
     
-    url <- str_c(base_url, "v1/collectionmethods")
+    url <- str_c(baseURL, "v1/collectionmethods")
     
-  } else if(data_type == "filters"){
+  } else if(dataType == "filters"){
     
-    url <- str_c(base_url, "v1/filters")
+    url <- str_c(baseURL, "v1/filters")
     
-  } else if(data_type == "projects"){
+  } else if(dataType == "projects"){
     
-    url <- str_c(base_url, "v1/projects")
+    url <- str_c(baseURL, "v1/projects")
     
   }
   
@@ -1379,84 +1241,84 @@ get_check <- get_profiles("prod", "unitgroups")
 
 get_check <- get_profiles("prod", "units")
 
-del_profiles <- function(env, data_type){
+del_profiles <- function(env, dataType){
   
   # env <- "prod"
   # 
-  # data_type <- "taxonomylevels"#labs"#"observedproperties"
+  # dataType <- "taxonomylevels"#labs"#"observedproperties"
 
-  temp_profile <- get_profiles(env, data_type)
+  temp_profile <- get_profiles(env, dataType)
   
   #default is "test" and for prod env, use the function parameter "prod"
-  url_parameters <- update_base_url_token(env)
-  base_url <- url_parameters[[1]]
-  token <- url_parameters[[2]]
+  urlParameters <- update_baseURL_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
   
-  if(data_type == "unitgroups"){
+  if(dataType == "unitgroups"){
     
     del_profiles(env, "units")
     
-    url <- str_c(base_url, "v1/unitgroups/")
+    url <- str_c(baseURL, "v1/unitgroups/")
     
-  } else if(data_type == "units"){
+  } else if(dataType == "units"){
     
     del_profiles(env, "observedproperties")
     
-    url <- str_c(base_url, "v1/units/")
+    url <- str_c(baseURL, "v1/units/")
     
-  } else if(data_type == "extendedattributes"){
+  } else if(dataType == "extendedattributes"){
     
-    url <- str_c(base_url, "v1/extendedattributes/")
+    url <- str_c(baseURL, "v1/extendedattributes/")
     
-  } else if(data_type == "observedproperties"){
+  } else if(dataType == "observedproperties"){
     
-    url <- str_c(base_url, "v1/observedproperties/")
+    url <- str_c(baseURL, "v1/observedproperties/")
     
-  } else if(data_type == "methods"){
+  } else if(dataType == "methods"){
     
-    url <- str_c(base_url, "v1/analysismethods/")
+    url <- str_c(baseURL, "v1/analysismethods/")
     
-  } else if(data_type == "labs"){
+  } else if(dataType == "labs"){
     
-    url <- str_c(base_url, "v1/laboratories/")
+    url <- str_c(baseURL, "v1/laboratories/")
     
-  } else if(data_type == "fishtaxonomy"){
+  } else if(dataType == "fishtaxonomy"){
     
-    url <- str_c(base_url, "v1/taxons/")
+    url <- str_c(baseURL, "v1/taxons/")
     
-  } else if(data_type == "collectionmethods"){
+  } else if(dataType == "collectionmethods"){
     
-    url <- str_c(base_url, "v1/collectionmethods/")
+    url <- str_c(baseURL, "v1/collectionmethods/")
     
-  } else if(data_type == "filters"){
+  } else if(dataType == "filters"){
     
-    url <- str_c(base_url, "v1/filters/")
+    url <- str_c(baseURL, "v1/filters/")
     
-  } else if(data_type == "projects"){
+  } else if(dataType == "projects"){
     
-    url <- str_c(base_url, "v1/projects/")
+    url <- str_c(baseURL, "v1/projects/")
     
-  } else if(data_type == "locations"){
+  } else if(dataType == "locations"){
     
-    url <- str_c(base_url, "v1/samplinglocations/")
+    url <- str_c(baseURL, "v1/samplinglocations/")
     
-  } else if(data_type == "locationgroups"){
+  } else if(dataType == "locationgroups"){
     
-    url <- str_c(base_url, "v1/samplinglocationgroups/")
+    url <- str_c(baseURL, "v1/samplinglocationgroups/")
     
-  } else if(data_type == "locationgrouptypes"){
+  } else if(dataType == "locationgrouptypes"){
     
     put_profiles("prod", "locationgrouptypes", tibble(customId = character()))
     
     return()
     
-  } else if(data_type == "locationtypes"){
+  } else if(dataType == "locationtypes"){
     
     put_profiles("prod", "locationtypes", tibble(customId = character()))
     
     return()
     
-  } else if(data_type == "mediums"){
+  } else if(dataType == "mediums"){
     
     mediums_required <- get_profiles("prod", "mediums") %>%
       dplyr::filter(!is.na(systemCode)) %>% 
@@ -1466,23 +1328,23 @@ del_profiles <- function(env, data_type){
     
     return()
     
-  } else if(data_type == "taxonomylevels"){
+  } else if(dataType == "taxonomylevels"){
     
     put_profiles("prod", "taxonomylevels", tibble(customId = character()))
     
     return()
     
-  } else if(data_type == "detectionconditions"){
+  } else if(dataType == "detectionconditions"){
     
-    url <- str_c(base_url, "v1/detectionconditions/")
+    url <- str_c(baseURL, "v1/detectionconditions/")
     
-  } else if(data_type == "resultgrades"){
+  } else if(dataType == "resultgrades"){
     
     put_profiles("prod", "resultgrades", tibble(customId = character()))
     
     return()
     
-  } else if(data_type == "resultstatuses"){
+  } else if(dataType == "resultstatuses"){
     
     put_profiles("prod", "resultstatuses", tibble(customId = character()))
     
@@ -1491,8 +1353,6 @@ del_profiles <- function(env, data_type){
   }
   
   del_ids <- temp_profile$id
-  
-  #response <- character(length = length(del_ids))
   
   i = 1
   
@@ -1510,29 +1370,10 @@ del_profiles <- function(env, data_type){
     
     print(i)
     
-    #response_check <- fromJSON(rawToChar(x$content))
-    
-    #response[i] <- if ("message" %in% names(response_check)) response_check$message else ""
-    
     i = i + 1
-    
-    # Add a sleep to avoid hitting the rate limit
-    #Sys.sleep(5)
-    
-    # if(status_code(x)!=200){
-    #   
-    #   print(id)
-    #   
-    #   next
-    #} # else {
-    #   
-    #   post_check_temp[i] <- fromJSON(rawToChar(x$content))$message
-    #   
-    # }
     
   }
   
-  #return(response)
   return()
   
 }
@@ -1557,8 +1398,6 @@ del_check <- del_profiles("prod", "fishtaxonomy")
 
 del_check <- del_profiles("prod", "taxonomylevels")
 
-del_check <- del_profiles("prod", "taxonomylevels")
-
 del_check <- del_profiles("prod", "detectionconditions")
 
 del_check <- del_profiles("prod", "filters")
@@ -1578,48 +1417,48 @@ del_check <- del_profiles("prod", "unitgroups")
 
 del_check <- del_profiles("prod", "extendedattributes")
 
-put_profiles <- function(env, data_type, profile){
+put_profiles <- function(env, dataType, profile){
   
   # env <- "prod"
   # 
-  # data_type <- "resultgrades"
+  # dataType <- "resultgrades"
   # 
   # profile <- resultgrades
 
   #default is "test" and for prod env, use the function parameter "prod"
-  url_parameters <- update_base_url_token(env)
-  base_url <- url_parameters[[1]]
-  token <- url_parameters[[2]]
+  urlParameters <- update_baseURL_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
   
-  if(data_type == "taxonomylevels"){
+  if(dataType == "taxonomylevels"){
     
-    #update url to include data_type
-    url <- str_c(base_url, "v1/taxonomylevels")
+    #update url to include dataType
+    url <- str_c(baseURL, "v1/taxonomylevels")
     
-  } else if(data_type == "locationgrouptypes"){
+  } else if(dataType == "locationgrouptypes"){
     
-    #update url to include data_type
-    url <- str_c(base_url, "v1/samplinglocationgrouptypes")
+    #update url to include dataType
+    url <- str_c(baseURL, "v1/samplinglocationgrouptypes")
     
-  } else if(data_type == "locationtypes"){
+  } else if(dataType == "locationtypes"){
     
-    #update url to include data_type
-    url <- str_c(base_url, "v1/samplinglocationtypes")
+    #update url to include dataType
+    url <- str_c(baseURL, "v1/samplinglocationtypes")
   
-  } else if(data_type == "mediums"){
+  } else if(dataType == "mediums"){
     
-    #update url to include data_type
-    url <- str_c(base_url, "v1/mediums")
+    #update url to include dataType
+    url <- str_c(baseURL, "v1/mediums")
     
-  } else if(data_type == "resultgrades"){
+  } else if(dataType == "resultgrades"){
     
-    #update url to include data_type
-    url <- str_c(base_url, "v1/resultgrades")
+    #update url to include dataType
+    url <- str_c(baseURL, "v1/resultgrades")
     
-  } else if(data_type == "resultstatuses"){
+  } else if(dataType == "resultstatuses"){
     
-    #update url to include data_type
-    url <- str_c(base_url, "v1/resultstatuses")
+    #update url to include dataType
+    url <- str_c(baseURL, "v1/resultstatuses")
     
   }
   
@@ -1649,50 +1488,45 @@ put_profiles <- function(env, data_type, profile){
 }
 
 #Error code 500 which suggests something is wrong at AQS end; informed Jeremy
+#Now getting a new error as well as follows:
+#Error occurred at repository: PSQLException: ERROR: cannot update system code or delete result grade with system code\n  Where: PL/pgSQL function raise_exception_for_result_grade_systemcode_update() line 3 at RAISE
 #Doing it manually
-put_check <- put_profiles("prod", "resultgrades", resultgrades)
+put_check <- put_profiles("prod", "resultgrades", resultGrades)
 
 #Error code 500 which suggests something is wrong at AQS end; informed Jeremy
-put_check <- put_profiles("prod", "resultstatuses", resultstatuses)
+#Also getting a new error
+#"org.postgresql.util.PSQLException: ERROR: cannot update system code or delete mediums with system code\n  Where: PL/pgSQL function raise_exception_for_systemcode_update() line 3 at RAISE"
+put_check <- put_profiles("prod", "resultstatuses", resultStatuses)
 
-put_check <- put_profiles("prod", "taxonomylevels", taxonomylevels)
+put_check <- put_profiles("prod", "taxonomylevels", taxonomyLevels)
 
-put_check <- put_profiles("prod", "locationgrouptypes", locationgrouptypes)
+put_check <- put_profiles("prod", "locationgrouptypes", locationGroupTypes)
 
-put_check <- put_profiles("prod", "locationtypes", locationtypes)
+put_check <- put_profiles("prod", "locationtypes", locationTypes)
 
 put_check <- put_profiles("prod", "mediums", mediums)
 
-post_profiles <- function(env, data_type, profile){
+post_profiles <- function(env, dataType, profile){
 
   # env = "prod"
   # 
-  # data_type = "observedproperties"
+  # dataType = "methods"
   # 
-  # profile <- observedProperties[2, ]
-  #
-  # profile <- profile %>%
-  #               dplyr::filter(ID == "BCLMN")
-  # #   dplyr::filter(NewNameID == "Biological Sex (cat.)")
-  # # #  dplyr::filter(Sample.Unit.CustomId == "mL")
-  # # #   dplyr::filter(NewNameID == "pH (acidity)")
+  # profile <- methods.missing
 
   #Clean the old stuff out of the environment before posting new stuff
-  if(!is.null(dim(get_profiles(env, data_type))[1])){
+  if(!is.null(dim(get_profiles(env, dataType))[1])){
     
-      del_profiles(env, data_type)
+      del_profiles(env, dataType)
   
     }
 
   #default is "test" and for prod env, use the function parameter "prod"
-  url_parameters <- update_base_url_token(env)
-  base_url <- url_parameters[[1]]
-  token <- url_parameters[[2]]
+  urlParameters <- update_baseURL_token(env)
+  baseURL <- urlParameters[[1]]
+  token <- urlParameters[[2]]
   
-  # profile <- profile %>% 
-  #   mutate(across(everything(), ~ replace(., is.na(.), "")))
-  
-  if(data_type == "unitgroups"){
+  if(dataType == "unitgroups"){
     
     #Clean the old stuff out of the environment before posting new stuff
     if(!is.null(dim(get_profiles(env, "units"))[1])){
@@ -1701,13 +1535,13 @@ post_profiles <- function(env, data_type, profile){
       
     }
     
-    url <- paste0(base_url, "v1/unitgroups")
+    url <- paste0(baseURL, "v1/unitgroups")
     
     rel_var <- c("Sample.Unit.Group", "Convertible")
     
     #EnMoDS labels: "customId", "supportsConversion"
 
-  } else if(data_type == "units"){
+  } else if(dataType == "units"){
     
     unitGroups <- profile %>% 
       dplyr::select(Sample.Unit.Group, Convertible) %>%
@@ -1722,7 +1556,7 @@ post_profiles <- function(env, data_type, profile){
     
     post_check <- post_profiles(env, "unitgroups", unitGroups)
     
-    url <- paste0(base_url, "v1/units")
+    url <- paste0(baseURL, "v1/units")
     
     #EnMoDS labels: "customId", "name", "baseMultiplier",
     # "baseOffset", "unitGroup.id", 
@@ -1741,14 +1575,14 @@ post_profiles <- function(env, data_type, profile){
                  "Sample.Unit.Group", "Sample.Unit.CustomId",
                  "Sample.Unit.Name", "Sample.Unit.GroupID")
     
-  } else if(data_type == "extendedattributes"){
+  } else if(dataType == "extendedattributes"){
     
-    url <- paste0(base_url, "v1/extendedattributes")
+    url <- paste0(baseURL, "v1/extendedattributes")
     
     rel_var <- c("customId", "dataType",
                  "appliesToType", "description", "dropdownlist")
     
-  } else if(data_type == "observedproperties"){
+  } else if(dataType == "observedproperties"){
     
     #need to get unit group and unit IDs prior to importing observedProperties
     unitGroups <- get_profiles(env, "unitgroups") %>% 
@@ -1771,27 +1605,27 @@ post_profiles <- function(env, data_type, profile){
                                     keep = FALSE)
     
     
-    url <- paste0(base_url, "v1/observedproperties")
+    url <- paste0(baseURL, "v1/observedproperties")
     
     rel_var <- c("Parm.Code", "NewNameID", "Description", "Analysis.Type",
                  "Unit.Group.Id", "Unit.Id", "CAS")
     
-  } else if(data_type == "methods"){
+  } else if(dataType == "methods"){
     
-    url <- paste0(base_url, "v1/analysismethods")
+    url <- paste0(baseURL, "v1/analysismethods")
     
-    rel_var <- c("Method.Code", "Method", "Method.Description", "OPs_list")
+    rel_var <- c("Method.Code", "Method", "Method.Description", "OPs.list")
     
-  } else if(data_type == "labs"){
+  } else if(dataType == "labs"){
     
-    url <- str_c(base_url, "v1/laboratories")
+    url <- str_c(baseURL, "v1/laboratories")
     
     rel_var <- c("ID", "Name", "Description", "Address", "Point.Of.Contact", 
                  "Email", "Phone.Number")
     
-  } else if(data_type == "fishtaxonomy"){
+  } else if(dataType == "fishtaxonomy"){
     
-    url <- str_c(base_url, "v1/taxons")
+    url <- str_c(baseURL, "v1/taxons")
     
     taxonomylevels_profiles <- get_profiles("prod", "taxonomylevels")
     
@@ -1805,50 +1639,36 @@ post_profiles <- function(env, data_type, profile){
     rel_var <- c("Taxonomy.Level.ID", "Scientific Name", "Common Name", "Source", 
                  "Comments", "ITIS TSN")
     
-  } else if(data_type == "collectionmethods"){
+  } else if(dataType == "collectionmethods"){
     
-    url <- str_c(base_url, "v1/collectionmethods")
+    url <- str_c(baseURL, "v1/collectionmethods")
     
     rel_var <- c("New EnMoDS Short Name/ID", "merged_codes", "Definition")
     
-  } else if(data_type == "detectionconditions"){
+  } else if(dataType == "detectionconditions"){
     
-    url <- str_c(base_url, "v1/detectionconditions")
+    url <- str_c(baseURL, "v1/detectionconditions")
     
     rel_var <- c("customId", "name", "description", "systemCode")
     
-  } else if(data_type == "filters"){
+  } else if(dataType == "filters"){
     
-    url <- str_c(base_url, "v1/filters")
+    url <- str_c(baseURL, "v1/filters")
     
     rel_var <- c("customId")
     
-  } else if(data_type == "projects"){
+  } else if(dataType == "projects"){
     
-    url <- str_c(base_url, "v1/projects")
+    url <- str_c(baseURL, "v1/projects")
     
     rel_var <- c("ID", "Name", "Type", "StartDate", "EndDate", 
                  "Comments", "Scope")
     
-  } else if(data_type == "locationgroups"){
+  } else if(dataType == "locationgroups"){
     
-    url <- str_c(base_url, "v1/samplinglocationgroups")
+    url <- str_c(baseURL, "v1/samplinglocationgroups")
     
     rel_var <- c("Permit ID", "locationgrouptypeID", "Description")
-     
-  } else if(data_type == "locations"){
-    
-    url <- str_c(base_url, "v1/samplinglocations")
-    
-    rel_var <- c("Location ID", "Name", "Type", "Type.id",
-                 "Latitude", "Longitude", 
-                 "Horizontal Datum", "Horizontal Collection Method", 
-                 "Vertical Datum", "Vertical Collection Method",
-                 "Comment", 
-                 "Elevation", "Elevation Unit", "Elevation Unit.id",
-                 "Location Groups", "Group.id", 
-                 "GroupType.id", "GroupType.customId",
-                 "EA.value", "EA.id")
     
   }
   
@@ -1860,18 +1680,15 @@ post_profiles <- function(env, data_type, profile){
   
       temp_profile <- profile %>% 
         keep(names(.) %in% rel_var) %>% 
-        slice(j) #%>%
-      #as.list()
+        slice(j)
     
-    if(data_type == "unitgroups"){
+    if(dataType == "unitgroups"){
       
       data_body <- list(
         "customId" = temp_profile$Sample.Unit.Group,
         "supportsConversion" = temp_profile$Convertible)
       
-    } else if(data_type == "units"){
-      
-      #loop to put all the units in the group
+    } else if(dataType == "units"){
       
       #If the unit group supports conversion provide conversion factors
       if (temp_profile$Convertible == TRUE) {
@@ -1891,7 +1708,7 @@ post_profiles <- function(env, data_type, profile){
           "unitGroup" = list("id" = temp_profile$Sample.Unit.GroupID))
       }
       
-    } else if(data_type == "extendedattributes"){
+    } else if(dataType == "extendedattributes"){
       
       data_body <- list(
           "customId" = temp_profile$customId,
@@ -1906,7 +1723,7 @@ post_profiles <- function(env, data_type, profile){
    
       }
       
-    } else if(data_type == "observedproperties"){
+    } else if(dataType == "observedproperties"){
       
       data_body <- list(
           "customId" = temp_profile$NewNameID,
@@ -1919,16 +1736,16 @@ post_profiles <- function(env, data_type, profile){
           "casNumber" = temp_profile$CAS
       )
       
-    } else if(data_type == "methods"){
+    } else if(dataType == "methods"){
       
       data_body <- list("methodId" = temp_profile$Method.Code,
                         "name" = temp_profile$Method,
                         "description" = temp_profile$Method.Description,
                         "context" = "EMS Migration",
-                        "observedProperties" = temp_profile$OPs_list[[1]]
+                        "observedProperties" = temp_profile$OPs.list[[1]]
       )
       
-    } else if(data_type == "labs"){
+    } else if(dataType == "labs"){
       
       data_body <- list("customId" = temp_profile$ID,
                         "name" = temp_profile$Name,
@@ -1938,7 +1755,7 @@ post_profiles <- function(env, data_type, profile){
                         "emailAddress" = temp_profile$Email,
                         "phoneNumber" = temp_profile$Phone.Number)
       
-    } else if(data_type == "fishtaxonomy"){
+    } else if(dataType == "fishtaxonomy"){
       
       data_body <- list("scientificName" = temp_profile$`Scientific Name`,
                         "commonName" = temp_profile$`Common Name`,
@@ -1948,24 +1765,24 @@ post_profiles <- function(env, data_type, profile){
                         "itisTsn" = temp_profile$`ITIS TSN`,
                         "itisURL" = "www.google.ca")
       
-    } else if(data_type == "collectionmethods"){
+    } else if(dataType == "collectionmethods"){
       
       data_body <- list("customId" = temp_profile$`New EnMoDS Short Name/ID`,
                           "identifierOrganization" = temp_profile$merged_codes,
                           "name" = temp_profile$Definition)
       
-    } else if(data_type == "detectionconditions"){
+    } else if(dataType == "detectionconditions"){
       
       data_body <- list("customId" = temp_profile$customId,
                         "name" = temp_profile$name,
                         "description" = temp_profile$description,
                         "systemCode" = temp_profile$systemCode)
       
-    } else if(data_type == "filters"){
+    } else if(dataType == "filters"){
       
       data_body <- list("customId" = temp_profile$customId)
       
-    } else if(data_type == "projects"){
+    } else if(dataType == "projects"){
       
       data_body <- list(
                         "customId" = temp_profile$ID, 
@@ -1976,74 +1793,12 @@ post_profiles <- function(env, data_type, profile){
                         "description" = temp_profile$Comments,
                         "scopeStatement" = temp_profile$Scope)
       
-    } else if(data_type == "locationgroups"){
+    } else if(dataType == "locationgroups"){
       
       data_body <- list(
         "name" = temp_profile$`Permit ID`,
         "description" = temp_profile$Description,
         "LocationGroupType" = list("id" = temp_profile$locationgrouptypeID)
-      )
-      
-    } else if(data_type == "locations"){
-      
-      num_location_groups <- temp_profile$Group.id %>% unlist() %>% length()
-      
-      samplingLocationGroups = list()
-      
-      for(i in 1:num_location_groups){
-        
-        samplingLocationGroups[[i]] <- list(
-          id = temp_profile$Group.id[[1]][i], 
-          name = temp_profile$`Location Groups`[[1]][i], 
-          locationGroupType = list(
-            id = temp_profile$GroupType.id[[1]][i], 
-            customId = temp_profile$GroupType.customId[[1]][i]
-            ))
-        
-      }
-      
-      num_extended_attributes <- temp_profile$EA.id %>% 
-        unlist() %>% length()
-      
-      extendedAttributes = list()
-      
-      # extendedAttributes = list(attributeId = NA,
-      #                           id = temp_profile$EA.id[[1]][1], 
-      #                           text = temp_profile$EA.value[[1]][1]),
-      #                           )
-      # 
-      #extendedAttributes = list()
-      
-      # for(i in 1:num_extended_attributes){
-      #   
-      #   extendedAttributes[[i]] <- list(
-      #     temp_profile$EA.id[[1]][i],
-      #     temp_profile$EA.value[[1]][i],
-      #     NULL
-      #   )
-      #   
-      # }
-      
-      data_body = list(
-        "customId" = temp_profile$"Location ID",
-        "name" = temp_profile$Name,
-        #"type" = temp_profile$Type.id,
-        "type" = list(id = temp_profile$Type.id, 
-                            customId = temp_profile$Type),
-        "latitude" = temp_profile$Latitude,
-        "longitude" = temp_profile$Longitude,
-        "horizontalDatum" = temp_profile$"Horizontal Datum",
-        "horizontalCollectionMethod" = temp_profile$"Horizontal Collection Method",
-        "verticalDatum" = temp_profile$"Vertical Datum",
-        "verticalCollectionMethod" = temp_profile$"Vertical Collection Method",
-        "description" = temp_profile$Comment,
-        "elevation" = list(value = temp_profile$Elevation, 
-                           unit = list(
-                              id = temp_profile$"Elevation Unit.id",
-                              customId = temp_profile$"Elevation Unit"
-                           )),
-        "samplingLocationGroups" = samplingLocationGroups,
-        "extendedAttributes" = extendedAttributes
       )
       
     }
@@ -2062,7 +1817,7 @@ post_profiles <- function(env, data_type, profile){
     
   }
   
-  post_check <- get_profiles(env, data_type)
+  post_check <- get_profiles(env, dataType)
   
   if(dim(post_check)[1] >= dim(profile)[1]){
     
@@ -2080,30 +1835,13 @@ post_profiles <- function(env, data_type, profile){
   
 }
 
-# get_check <- get_profiles("prod", "locations")
+post_check <- post_profiles("prod", "collectionmethods", collectionMethods)
 
-# The test below did not work
-# This means that output from GET cannot be simply pushed back into POST
-# env <- "prod"
-# 
-# #default is "test" and for prod env, use the function parameter "prod"
-# url_parameters <- update_base_url_token(env)
-# base_url <- url_parameters[[1]]
-# token <- url_parameters[[2]]
-# 
-# url <- str_c(base_url, "v1/samplinglocations")
-# 
-# #Post the configuration
-# x<-POST(url, config = c(add_headers(.headers = 
-#                                       c('Authorization' = token))), body = locations_enmods, encode = 'json')
-
-post_check <- post_profiles("prod", "collectionmethods", collection_methods)
-
-post_check <- post_profiles("prod", "fishtaxonomy", Taxons)
+post_check <- post_profiles("prod", "fishtaxonomy", taxons)
 
 post_check <- post_profiles("prod", "unitgroups", unitGroups)
 
-post_check <- post_profiles("prod", "units", units_missing)
+post_check <- post_profiles("prod", "units", units)
 
 post_check <- post_profiles("prod", "observedproperties", observedProperties)
 
@@ -2117,97 +1855,6 @@ post_check <- post_profiles("prod", "projects", projects)
 
 post_check <- post_profiles("prod", "locationgroups", locationGroups)
 
-post_check <- post_profiles("prod", "locations", test_locations)
+post_check <- post_profiles("prod", "methods", methods)
 
-post_check <- post_profiles("prod", "methods", Methods)
-
-post_check <- post_profiles("prod", "labs", Labs)
-
-# Categorical values issue ------------------------------------------------
-
-#Issue with categorical values in observedProperties
-# get_categorical_values_sample <- function(env, data_type){
-#   
-#   #env <- "test"
-#   
-#   #default is "test" and for prod env, use the function parameter "prod"
-#   url_parameters <- update_base_url_token(env)
-#   base_url <- url_parameters[[1]]
-#   token <- url_parameters[[2]]
-#   
-#   #data_type <- "unitgroups"
-#   
-#   temp_ids <- get_profiles(env, data_type)$id %>% unlist()
-#   
-#   profiles <- tibble()
-#   
-#   for(id in temp_ids){
-#     
-#     if(data_type == "observedproperties"){
-#       
-#       url <- str_c(base_url, "v1/observedproperties/", id, "/categoricalvalues")
-#       
-#     }
-#     
-#     temp_profiles <- get_profiles_for_url(env, url)
-#     
-#     profiles <- bind_rows(profiles, temp_profiles)
-#     
-#   }
-#   
-#   return(profiles)
-#   
-# }
-# 
-# categoricalIds <- get_categorical_values_sample("prod", "observedproperties")
-# 
-# env <- "prod"
-# 
-# data_type <- "categoricalvalues"
-# 
-# #default is "test" and for prod env, use the function parameter "prod"
-# url_parameters <- update_base_url_token("prod")
-# base_url <- url_parameters[[1]]
-# token <- url_parameters[[2]]
-# 
-# data_body <- list()
-# 
-# if(data_type == "categoricalvalues"){
-#   
-#   url <- str_c(base_url, "v1/observedproperties/", get_check$id[1], "/categoricalvalues/")#, categoricalIds$id[1]
-#   
-# } 
-# 
-# #Make the unit group
-# x<-DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), 
-#           body = data_body, encode = 'json')
-# 
-# response_check <- fromJSON(rawToChar(x$content))$message
-# 
-# 
-# del_categorical_values_sample <- function(env, data_type){
-#   
-#   #env <- "test"
-#   
-#   #default is "test" and for prod env, use the function parameter "prod"
-#   url_parameters <- update_base_url_token(env)
-#   base_url <- url_parameters[[1]]
-#   token <- url_parameters[[2]]
-#   
-#   #data_type <- "unitgroups"
-#   
-#   temp_data <- get_profiles(env, data_type)$id[1] %>% unlist()
-#   
-#   if(data_type == "observedproperties"){
-#     
-#     url <- str_c(base_url, "v1/observedproperties/", temp_data, "/categoricalvalues")
-#     
-#   }
-#   
-#   temp_profiles <- get_profiles_for_url(env, url)
-#   
-#   return(temp_profiles)
-#   
-# }
-
-
+post_check <- post_profiles("prod", "labs", labs)
