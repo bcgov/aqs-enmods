@@ -16,10 +16,10 @@ library(hunspell)
 
 #get the API tokens from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-testToken <- Sys.getenv("testToken")
-prodToken <- Sys.getenv("prodToken")
-testURL <- Sys.getenv("testURL")
-prodURL <- Sys.getenv("prodURL")
+testToken <- Sys.getenv("TEST_TOKEN")
+prodToken <- Sys.getenv("PROD_TOKEN")
+testURL <- Sys.getenv("TEST_URL")
+prodURL <- Sys.getenv("PROD_URL")
 
 #function to update URL/token based on chosen environment
 update_baseURL_token <- function(env){
@@ -311,7 +311,8 @@ units <- units %>%
 #first post files
 post_check <- post_profiles("prod", "units", units)
 
-# # #110 only; even though 117 in the units file
+# # #109 only; even though 126 in the units file - this is OK because many units
+#were merged from EMS for example % ww and % weight and % vv all become %
 get_check <- get_profiles("prod", "units")
 # #
 # # #no such units
@@ -843,6 +844,10 @@ renameWorksheet(wb, sheet = "Sheet1", newName = "ObservedProperties")
 # Save the workbook with the updated sheet name
 saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx", overwrite = TRUE)
 
+#read observed properties
+observedProperties <- read_excel("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx",
+                                 sheet = "ObservedProperties")
+
 observedProperties <- observedProperties %>% dplyr::select(c("Parm.Code", "NewNameID", "Description", "Analysis.Type", "Sample.Unit.Group", "Sample.Unit","CAS")) %>% unique()
 
 # [SB OK] QA/QC for OPs -----------------------------------------------------------
@@ -850,7 +855,7 @@ observedProperties <- observedProperties %>% dplyr::select(c("Parm.Code", "NewNa
 # Checking which entries are not getting posted
 get_check <- get_profiles("prod", "observedproperties")
 #not all observedProperties getting posted
-#compare get_check for observedProperties with raw observedProperties
+#compare get_check for observedProperties with raw observedProperties - 0 but 4172 in AQS 4285 in data frame
 OPs_not_posted <- observedProperties %>% anti_join(get_check,
                                     by = join_by("NewNameID" == "customId"))
 
@@ -901,7 +906,7 @@ methods <- methods %>%
 # [SB OK] QA/QC for METHODS -------------------------------------------
 
 #first post files
-post_check <- post_profiles("prod", "methods", Methods)
+post_check <- post_profiles("prod", "methods", methods)
 
 get_check <- get_profiles("prod", "methods")
 
@@ -951,7 +956,7 @@ taxonomyLevels <- read_excel("./utils/config/ReferenceLists/TaxonomyLevels.xlsx"
 # [SB OK] LOCATION GROUP TYPES -----------------------------------------
 # [SB OK] PREPROCESSING TO GENERATE OLDER LOCATION GROUP TYPES FILES ------------
 ##Had to run this only once in a lifetime
-# locationgrouptypes <- get_profiles("test", "samplinglocationgrouptypes") %>%
+# locationgrouptypes <- get_profiles("test", "locationgrouptypes") %>%
 #   dplyr::select(customId)
 # # Save workbook
 # write_xlsx(list(locationgrouptypes), "./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
@@ -1059,7 +1064,7 @@ taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx", sheet = 
 # [SB OK] PREPROCESSING COLLECTION METHODS FOR NEW DATA ---------------------------
 
 collectionMethods <- read_excel("./utils/config/ReferenceLists/Collection_methods.xlsx", 
-                                 sheet = "Collectionmethods")
+                                 sheet = "CollectionMethods")
 
 #remove collection methods we no longer want
 collectionMethods <- collectionMethods %>% filter(`New EnMoDS Short Name/ID` != "DELETE")
@@ -1875,7 +1880,7 @@ post_profiles <- function(env, dataType, profile){
 
 post_check <- post_profiles("prod", "collectionmethods", collectionMethods)
 
-post_check <- post_profiles("prod", "fishtaxonomy", taxons)
+post_check <- post_profiles("prod", "fishtaxonomy", taxons) 
 
 post_check <- post_profiles("prod", "unitgroups", unitGroups)
 
