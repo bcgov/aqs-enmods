@@ -52,6 +52,8 @@ put_object(file = jsonMediumsProc,
 # #reading in EnMoDS config
  locations <- get_profiles("test", "locations") %>% 
    keep(names(.) %in% gen_list_rel_var("samplinglocations"))
+
+locations$emsDateModified <- lapply(locations$extendedAttributes,)
 # 
 # #selecting columns and renaming them as required
  jsonLocationsRaw <- locations %>%
@@ -158,20 +160,21 @@ put_object(file = "enmods_projects_data.json",
 
 #lab analysis packages, run on demand as needed
 if (FALSE) {
-json_analysisPackagesCoC_data <- read_csv("../COC_form/json_list_extracts/analysisPackagesCoC - April-3-2025(Sheet1).csv", col_types = cols(preservative.name = col_character(), comments = col_character(), ...9 = col_skip())) 
+json_analysisPackagesCoC_data <- read_excel("./utils/coc/analysisPackagesCoC - May-7-2025.xlsx") 
 
 json_analysisPackagesCoC_data <- json_analysisPackagesCoC_data %>%
   dplyr::select(-c(preservative.name)) %>%
   rename(bottle = items.bottle, 
          filter = items.field.filter,
-         preservative = items.preservative
+         preservative = items.preservative,
+         analysisGroup = items.analysisGroup
   ) %>%
-  group_by(matrix, bottle, filter, preservative, comments) %>%
+  group_by(matrix, analysisGroup, bottle, filter, preservative, comments) %>%
   #rowwise() %>%
   mutate(observedProperties = list(tibble(label = test.label, 
-                                          analysisGroup = items.analysisGroup))) %>%
+                                          analysisGroup = analysisGroup))) %>%
   ungroup() %>%
-  dplyr::select(-c(items.analysisGroup, test.label)) %>% unique()
+  dplyr::select(-c(test.label)) %>% unique()
 
 json_data_test <- toJSON(list(items = json_analysisPackagesCoC_data), pretty = TRUE)
 
