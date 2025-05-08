@@ -48,12 +48,12 @@ put_object(file = jsonMediumsProc,
 
 
 # LOCATIONS ---------------------------------------------------------------
-
+if (FALSE) {
 # #reading in EnMoDS config
  locations <- get_profiles("test", "locations") %>% 
    keep(names(.) %in% gen_list_rel_var("samplinglocations"))
 
-locations$emsDateModified <- lapply(locations$extendedAttributes,)
+#locations$emsDateModified <- lapply(locations$extendedAttributes,)
 # 
 # #selecting columns and renaming them as required
  jsonLocationsRaw <- locations %>%
@@ -74,7 +74,7 @@ put_object(file = "full_enmods_locations_data.json",
            bucket = "enmods",
            region = "",
            acl = "public-read")
-
+}
 # LABS --------------------------------------------------------------------
 
 #reading in EnMoDS config
