@@ -6,6 +6,7 @@
 #May 2 2025
 
 library(aws.s3)
+library(readxl)
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
@@ -162,7 +163,10 @@ put_object(file = "enmods_projects_data.json",
 if (FALSE) {
 json_analysisPackagesCoC_data <- read_excel("./utils/coc/analysisPackagesCoC - May-7-2025.xlsx") 
 
-json_analysisPackagesCoC_data <- json_analysisPackagesCoC_data %>%
+#### water and soil
+water_soil <- json_analysisPackagesCoC_data %>% filter(matrix %in% c("water", "soil"))
+
+json_water_soil <- water_soil %>%
   dplyr::select(-c(preservative.name)) %>%
   rename(bottle = items.bottle, 
          filter = items.field.filter,
@@ -176,15 +180,77 @@ json_analysisPackagesCoC_data <- json_analysisPackagesCoC_data %>%
   ungroup() %>%
   dplyr::select(-c(test.label)) %>% unique()
 
-json_data_test <- toJSON(list(items = json_analysisPackagesCoC_data), pretty = TRUE)
+json_water_soil <- toJSON(list(items = json_water_soil), pretty = TRUE)
 
 #writing the created JSON file
-write(json_data_test, file = "test_analysisPackages_data.json")
+write(json_water_soil, file = "water_soil_analysisPackages_data.json")
+
+### air
+air <- json_analysisPackagesCoC_data %>% filter(matrix %in% c("air"))
+
+json_air <- air %>%
+  dplyr::select(-c(preservative.name)) %>%
+  rename(bottle = items.bottle, 
+         filter = items.field.filter,
+         preservative = items.preservative,
+         analysisGroup = items.analysisGroup
+  ) %>%
+  group_by(matrix, analysisGroup, bottle, filter, preservative, comments) %>%
+  #rowwise() %>%
+  mutate(observedProperties = list(tibble(label = test.label, 
+                                          analysisGroup = analysisGroup))) %>%
+  ungroup() %>%
+  dplyr::select(-c(test.label)) %>% unique()
+
+json_air <- toJSON(list(items = json_air), pretty = TRUE)
+
+#writing the created JSON file
+write(json_air, file = "air_analysisPackages_data.json")
+
+### Biological
+bio <- json_analysisPackagesCoC_data %>% filter(matrix %in% c("biological"))
+
+json_bio <- bio %>%
+  dplyr::select(-c(preservative.name)) %>%
+  rename(bottle = items.bottle, 
+         filter = items.field.filter,
+         preservative = items.preservative,
+         analysisGroup = items.analysisGroup
+  ) %>%
+  group_by(matrix, analysisGroup, bottle, filter, preservative, comments) %>%
+  #rowwise() %>%
+  mutate(observedProperties = list(tibble(label = test.label, 
+                                          analysisGroup = analysisGroup))) %>%
+  ungroup() %>%
+  dplyr::select(-c(test.label)) %>% unique()
+
+json_bio <- toJSON(list(items = json_bio), pretty = TRUE)
+
+#writing the created JSON file
+write(json_bio, file = "bio_analysisPackages_data.json")
+
+### Upload to BC Box
 
 #Post to object store
-put_object(file = "test_analysisPackages_data.json", 
-           object = "CoC_Tables/AnalyticalPackages_PROD.json",
+put_object(file = "water_soil_analysisPackages_data.json", 
+           object = "CoC_Tables/PROD_water_soil_AnalyticalPackages.json",
            bucket = "enmods",
            region = "",
            acl = "public-read")
+
+#Post to object store
+put_object(file = "air_analysisPackages_data.json", 
+           object = "CoC_Tables/PROD_air_AnalyticalPackages.json",
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
+#Post to object store
+put_object(file = "bio_analysisPackages_data.json", 
+           object = "CoC_Tables/PROD_bio_AnalyticalPackages.json",
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
+
 }
