@@ -87,9 +87,23 @@ savedFilters <- read_excel("./utils/config/ReferenceLists/savedfilters.xlsx",
 
 run_init = FALSE
 if(run_init){
-  ##had to run only once
-  #projects_test <- get_profiles("test", "projects")
+  #had to run only once
+  projects <- get_profiles("test", "projects")
   
+  # Save workbook
+  write_xlsx(projects, "./utils/config/ReferenceLists/projects.xlsx")
+  
+  # Load an existing workbook
+  wb <- loadWorkbook("./utils/config/ReferenceLists/projects.xlsx")
+  
+  # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Projects")
+  
+  # Save the workbook with the updated sheet name
+  saveWorkbook(wb, "./utils/config/ReferenceLists/projects.xlsx", overwrite = TRUE)
+  
+}
+
   projects <- read_excel("./utils/config/ReferenceLists/projects.xlsx", 
                          sheet = "projects")
   
@@ -105,8 +119,7 @@ if(run_init){
            EndDate = case_when(
              is.na(EndDate) ~ NA,
              .default =  format(EndDate, "%Y-%m-%dT00:00:00%z")
-           )) 
-}
+           ))
 
 # METHODS -----------------------------------------------------------------
 # PREPROCESSING METHODS FOR NEW DATA --------------------------------------
@@ -286,7 +299,7 @@ taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx",
 # PREPROCESSING COLLECTION METHODS FOR NEW DATA ---------------------------
 
 collectionMethods <- read_excel("./utils/config/ReferenceLists/Collection_methods.xlsx", 
-                                sheet = "CollectionMethods")
+                                sheet = "collectionMethods")
 
 #remove collection methods we no longer want
 collectionMethods <- collectionMethods %>% filter(`New EnMoDS Short Name/ID` != "DELETE")
@@ -307,5 +320,34 @@ collectionMethods$merged_codes[collectionMethods$merged_codes == 'NA'] = ""
 
 
 
+
+
+
+# LOCATION GROUP TYPES ----------------------------------------------------
+# PREPROCESSING TO GENERATE OLDER LOCATION GROUP TYPES FILES ------------
+
+run_init <- FALSE
+if(run_init){
+  #Had to run this only once in a lifetime
+  locationGroupTypes <- get_profiles("test", "locationgrouptypes") %>%
+    dplyr::select(customId)
+  
+  # Save workbook
+  write_xlsx(list(locationGroupTypes), "./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+  
+  # Load an existing workbook
+  wb <- loadWorkbook("./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+  
+  # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "locationgrouptypes")
+  
+  # Save the workbook with the updated sheet name
+  saveWorkbook(wb, "./utils/config/ReferenceLists/LocationGroupTypes.xlsx", overwrite = TRUE)
+}
+
+# PREPROCESSING LOCATION GROUP TYPES FOR NEW DATA -------------------------
+
+locationGroupTypes <- read_excel("./utils/config/ReferenceLists/LocationGroupTypes.xlsx", 
+                                 sheet = "locationgrouptypes")
 
 
