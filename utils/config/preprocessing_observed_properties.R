@@ -108,7 +108,7 @@ if (run_init) {
     ))
   
   #need to get unit group and unit IDs prior to importing observedProperties
-  unitGroups <- get_profiles("prod", "unitgroups") %>%
+  unitGroups <- get_profiles(env, "unitgroups") %>%
     dplyr::select(id, customId, supportsConversion) %>%
     rename("Unit.Group.Id" = "id")
   
@@ -132,7 +132,7 @@ if (run_init) {
                                   by = join_by('Sample.Unit.Group' == 'customId'), keep = FALSE)
   
   #units without groups
-  units <- get_profiles("prod", "units") %>%
+  units <- get_profiles(env, "units") %>%
     dplyr::select(id, customId) %>%
     rename("Unit.Id" = "id")
   
@@ -161,7 +161,10 @@ if (run_init) {
 
 # PREPROCESSING OP FOR NEW DATA --------------------------------------
 
-observedProperties_base <- read_excel("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx")
+#Get base file; Unit and unit groups may have been updated; remove their IDs
+observedProperties_base <- 
+  read_excel("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx") %>%
+  dplyr::select(-c(supportsConversion, Unit.Group.Id, Unit.Id))
 
 #The units don't matter for non-convertable OP units. For example microbial units. So remove them from consideration.
 observedProperties_base$Sample.Unit[observedProperties_base$Convertable.In.Samples == "N"] <- ""
@@ -171,10 +174,6 @@ observedProperties_base$Modifier[is.na(observedProperties_base$Modifier)] <- ""
 
 #Add an empty Result.Type column
 observedProperties_base$Result.Type <- ""
-
-#Unit and unit groups may have been updated; remove their IDs
-observedProperties_base <- observedProperties_base %>%
-  dplyr::select(-c(Unit.Id, Unit.Group.Id, supportsConversion))
 
 #checking if a new file is in the folder
 file_exists <- length(list.files(pattern = "^Observed_properties_ems_jk_")) > 0
@@ -256,7 +255,7 @@ observedProperties <- observedProperties %>%
 }
 
 #need to get unit group and unit IDs prior to importing observedProperties
-unitGroups <- get_profiles("prod", "unitgroups") %>% 
+unitGroups <- get_profiles(env, "unitgroups") %>% 
   dplyr::select(id, customId, supportsConversion) %>%
   rename("Unit.Group.Id" = "id")
 
@@ -279,7 +278,7 @@ observedProperties <- left_join(observedProperties, unitGroups,
 OPs_missing_unitgroup <- observedProperties %>% dplyr::filter(is.na(Unit.Group.Id))
 
 #units without groups
-units <- get_profiles("prod", "units") %>%
+units <- get_profiles(env, "units") %>%
   dplyr::select(id, customId) %>%
   rename("Unit.Id" = "id")
 
