@@ -6,7 +6,7 @@ library(tidyverse)
 
 #read the file from Salus
 fname <- "C:/Users/jkrogh/Downloads/water_split_part_07.csv"
-rows <- 25 #number of obs per field visit (apx)
+rows <- 75 #number of obs per field visit (apx)
 write_name <- "C:/Users/jkrogh/Downloads/EDT/water-may-13"
 
 #read the file from Salus, these can be big up to ~600,000

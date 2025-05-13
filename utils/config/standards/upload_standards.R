@@ -71,7 +71,8 @@ for (i in seq(1, length(standards_ID))) {
         'observedProperty' = list('id' = standards_data$OP.id[j]), 
         'resultUpperLimit' = list('value' = standards_data$Maximum[j], 'unit' =
                                     list('id' = standards_data$unit.id[j], 'unitGroup' =
-                                           list('id' = standards_data$groupId[j]))) #upper limit
+                                           list('id' = standards_data$groupId[j]))),
+        'ruleText' = standards_data$`Warning Message`[j]
       ))
     } else { #has lower limit
       ops_list[j] <- list(list(
@@ -82,8 +83,9 @@ for (i in seq(1, length(standards_ID))) {
         
         'resultUpperLimit' = list('value' = standards_data$Maximum[j], 'unit' = 
                                     list('id' = standards_data$unit.id[j], 'unitGroup' =
-                                           list('id' = standards_data$groupId[j]))) #upper limit
-      ))
+                                           list('id' = standards_data$groupId[j]))), #upper limit
+        'ruleText' = standards_data$`Warning Message`[j]
+        ))
       }
     
   }
@@ -106,4 +108,10 @@ for (i in seq(1, length(standards_ID))) {
 } #end for loop of unique standards
 
 
+### Code to delete all standards to post a fresh copy
+x <- GET(paste0(testURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = list(), encode = 'json')
+standards_guid <- fromJSON(rawToChar(x$content))$domainObjects$id
 
+for (i in seq(1, length(standards_guid))) {
+  DELETE(paste0(testURL, "v1/standards/", standards_guid[i]), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = list(), encode = 'json')
+}
