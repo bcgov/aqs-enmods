@@ -134,7 +134,7 @@ methods <- methods %>%
   dplyr::select(c("NewNameID", "Method.Code", "Method", 
                   "Method.Description"))
 
-OPs.ids <- get_profiles("prod", "observedproperties") %>% 
+OPs.ids <- get_profiles(env, "observedproperties") %>% 
   dplyr::select("id", "customId")
 
 #check that nothing has been dropped here!
@@ -166,9 +166,9 @@ methods <- methods %>%
 # # QA/QC for METHODS -------------------------------------------
 # 
 # #first post files
-# post_check <- post_profiles("prod", "methods", methods)
+# post_check <- post_profiles(env, "methods", methods)
 # 
-# get_check <- get_profiles("prod", "methods")
+# get_check <- get_profiles(env, "methods")
 # 
 # methods.missing <- methods %>%
 #   anti_join(get_check,
@@ -299,7 +299,7 @@ taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx",
 # PREPROCESSING COLLECTION METHODS FOR NEW DATA ---------------------------
 
 collectionMethods <- read_excel("./utils/config/ReferenceLists/Collection_methods.xlsx", 
-                                sheet = "collectionMethods")
+                                sheet = "CollectionMethods")
 
 #remove collection methods we no longer want
 collectionMethods <- collectionMethods %>% filter(`New EnMoDS Short Name/ID` != "DELETE")

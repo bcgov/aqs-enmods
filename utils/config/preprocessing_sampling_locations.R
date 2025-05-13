@@ -115,7 +115,7 @@ locationGroups$Type = "Authorization"
 #make the groups
 locationGroups <- locationGroups %>% dplyr::select(`Permit ID`, Type, Description)
 
-locationGroupTypes <- get_profiles("prod", "locationgrouptypes")
+locationGroupTypes <- get_profiles(env, "locationgrouptypes")
 
 #joing location group guid to location groups table
 locationGroups <- inner_join(locationGroups, locationGroupTypes, 
