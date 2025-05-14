@@ -1,4 +1,4 @@
-## Steps to configure an instance of EnMoDS - AQS
+## Code Style Standards
 
 Naming conventions based on the reference value (SNAKE CASE)
 
@@ -9,6 +9,8 @@ Naming conventions based on the reference value (SNAKE CASE)
 	 3. Column names for tables also follow "snake_case" as dot notation can cause parsing issues in some environments
 	 4. AQI uses "camelCase" so using formatting styles in 1 through 3 will also allow us to differentiate between variables created by BC Gov vs AQI
   
+## Steps to configure an instance of EnMoDS - AQS
+
 Starting from a clean environment with no configuration (see how to wipe an environment)...
   1. Run preprocessing steps
   2. Run configuration steps
