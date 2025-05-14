@@ -6,174 +6,184 @@ source("./utils/config/api_functions.R")
 run_init <- FALSE
 if (run_init) {
 
-  #EMS exported observedProperties
-  observedProperties <- read_excel("./utils/config/ReferenceLists/Observed_Properties.xlsx")
+  #EMS exported observed_properties
+  observed_properties <- read_excel("./utils/config/ReferenceLists/Observed_Properties.xlsx") %>%
+    rename_with(tolower) %>%
+    rename_with(~ gsub("\\.", "_", .))
   
   #The units don't matter for non-convertable OP units. For example microbial units. So remove them from consideration.
-  observedProperties$Sample.Unit[observedProperties$Convertable.In.Samples == "N"] <- ""
+  observed_properties$sample_unit[observed_properties$convertable_in_samples == "N"] <- ""
   
   #clean up modifers
-  observedProperties$Modifier[is.na(observedProperties$Modifier)] <- ""
+  observed_properties$modifier[is.na(observed_properties$modifier)] <- ""
   
-  #Add an empty Result.Type column
-  observedProperties$Result.Type <- ""
+  #Add an empty result_type column
+  observed_properties$result_type <- ""
   
   #Keep the core columns at the front
-  cols_to_move <- c("NewNameID", "Parm.Code", "Description",
-                    "Analysis.Type", "Result.Type", "Sample.Unit.Group",
-                    "Sample.Unit","CAS")
+  cols_to_move <- c("newnameid", "parm_code", "description",
+                    "analysis_type", "result_type", "sample_unit_group",
+                    "sample_unit","CAS")
   
   #get the unique list of OP IDs
-  observedProperties <- observedProperties %>% unique()
+  observed_properties <- observed_properties %>% unique()
   
   
-  ## observedProperties new to EnMoDS not in EMS
-  OPs_new_to_EnMoDS <-
+  ## observed_properties new to EnMoDS not in EMS
+  observed_properties_new_to_EnMoDS <-
     read_excel("./utils/config/ReferenceLists/New_OPS_not_in_EMS.xlsx",
-               sheet = "OPs_new")
+               sheet = "observed_properties_new") %>% 
+    rename_with(tolower) %>%
+    rename_with(~ gsub("\\.", "_", .))
   
   #get the unique list of OP IDs
-  OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>% unique()
+  observed_properties_new_to_EnMoDS <- observed_properties_new_to_EnMoDS %>% unique()
   
   #fixing the missing sample group id issue in the list
-  OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>% mutate(Sample.Unit.Group =
-                                                      if_else(NewNameID == "Biological Sample Volume (vol.)",
-                                                              "Volume", Sample.Unit.Group))
+  observed_properties_new_to_EnMoDS <- observed_properties_new_to_EnMoDS %>% mutate(sample_unit_group =
+                                                      if_else(newnameid == "Biological Sample Volume (vol.)",
+                                                              "Volume", sample_unit_group))
   
-  #Identify the new columns compared to observedProperties
-  new_cols <- setdiff(names(observedProperties), names(OPs_new_to_EnMoDS))
+  #Identify the new columns compared to observed_properties
+  new_cols <- setdiff(names(observed_properties), names(observed_properties_new_to_EnMoDS))
   
   # Create a tibble of just those new columns
-  new_data <- observedProperties %>%
+  new_data <- observed_properties %>%
     dplyr::select(all_of(new_cols)) %>%
     mutate(across(everything(), ~ NA)) %>%
-    unique() %>% slice(rep(1, nrow(OPs_new_to_EnMoDS)))
+    unique() %>% slice(rep(1, nrow(observed_properties_new_to_EnMoDS)))
   
-  OPs_new_to_EnMoDS <- OPs_new_to_EnMoDS %>% bind_cols(new_data)
+  observed_properties_new_to_EnMoDS <- observed_properties_new_to_EnMoDS %>% bind_cols(new_data)
   
-  observedProperties <- observedProperties %>% bind_rows(OPs_new_to_EnMoDS %>% mutate(Results = NA)) %>% unique()
+  observed_properties <- observed_properties %>% bind_rows(observed_properties_new_to_EnMoDS %>% mutate(Results = NA)) %>% unique()
   
-  ## Taxonomic observedProperties
-  OPs_taxonomic <- read.csv("./utils/config/ReferenceLists/Taxonomic_OP.csv", stringsAsFactors = F) #1607
+  ## Taxonomic observed_properties
+  observed_properties_taxonomic <- read.csv("./utils/config/ReferenceLists/Taxonomic_OP.csv", 
+                                            stringsAsFactors = F) %>% 
+    rename_with(tolower) %>%
+    rename_with(~ gsub("\\.", "_", .)) #1607 
   
   #get the unique list of OP IDs
-  OPs_taxonomic <- OPs_taxonomic %>% unique()
+  observed_properties_taxonomic <- observed_properties_taxonomic %>% unique()
   
-  #Identify the new columns compared to observedProperties
-  new_cols <- setdiff(names(observedProperties), names(OPs_taxonomic))
+  #Identify the new columns compared to observed_properties
+  new_cols <- setdiff(names(observed_properties), names(observed_properties_taxonomic))
   
   # Create a tibble of just those new columns
-  new_data <- observedProperties %>%
+  new_data <- observed_properties %>%
     dplyr::select(all_of(new_cols)) %>%
     mutate(across(everything(), ~ NA)) %>%
-    unique() %>% slice(rep(1, nrow(OPs_taxonomic)))
+    unique() %>% slice(rep(1, nrow(observed_properties_taxonomic)))
   
-  OPs_taxonomic <- OPs_taxonomic %>% bind_cols(new_data)
+  observed_properties_taxonomic <- observed_properties_taxonomic %>% bind_cols(new_data)
   
-  observedProperties <- observedProperties %>% bind_rows(OPs_taxonomic %>% mutate(Results = NA)) %>% unique()
+  observed_properties <- observed_properties %>% bind_rows(observed_properties_taxonomic %>% mutate(Results = NA)) %>% unique()
   
-  ## Merge all observedProperties and process
+  ## Merge all observed_properties and process
   
-  observedProperties <- observedProperties %>%
-    #bind_rows(observedProperties, OPs_new_to_EnMoDS, OPs_taxonomic) %>%
+  observed_properties <- observed_properties %>%
+    #bind_rows(observed_properties, observed_properties_new_to_EnMoDS, observed_properties_taxonomic) %>%
     #        unique() %>%
-    group_by(NewNameID) %>%
-    mutate(Count = n()) %>%
+    group_by(newnameid) %>%
+    mutate(count = n()) %>%
     ungroup()
   
-  #the total number of unique NewNameID should be the same as the total number of unique rows
-  newNameIDUnique <- observedProperties$NewNameID %>% unique()
+  #the total number of unique newnameid should be the same as the total number of unique rows
+  new_name_id_unique <- observed_properties$newnameid %>% unique()
   
-  observedProperties <- observedProperties %>%
-    mutate(Sample.Unit = case_when(
-      Sample.Unit == "pH Units" ~ "pH units",
-      #Sample.Unit == NA ~ Unit,
-      #Sample.Unit == "" ~ NA,
-      .default = Sample.Unit),
+  observed_properties <- observed_properties %>%
+    mutate(sample_unit = case_when(
+      sample_unit == "pH Units" ~ "pH units",
+      #sample_unit == NA ~ Unit,
+      #sample_unit == "" ~ NA,
+      .default = sample_unit),
     )
   
-  #rename the required observedProperties so they show up otherwise they are in the background?
-  observedProperties <- observedProperties %>%
-    mutate(Sample.Unit.Group = case_when(
-      NewNameID == "Biological Sex (cat.)" ~ "None",
-      NewNameID == "Biological Life Stage (cat.)" ~ "None",
-      Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-      Sample.Unit.Group == "Apperance"~ "Appearance",
-      .default = Sample.Unit.Group
+  #rename the required observed_properties so they show up otherwise they are in the background?
+  observed_properties <- observed_properties %>%
+    mutate(sample_unit_group = case_when(
+      newnameid == "Biological Sex (cat.)" ~ "None",
+      newnameid == "Biological Life Stage (cat.)" ~ "None",
+      sample_unit_group == "Length" ~ "SYS-REQUIRED - Length",
+      sample_unit_group == "Apperance"~ "Appearance",
+      .default = sample_unit_group
     )) %>%
-    mutate(Analysis.Type = case_when(
-      NewNameID == "Biological Sex (cat.)" ~ "BIOLOGICAL",
-      NewNameID == "Biological Life Stage (cat.)" ~ "BIOLOGICAL",
-      .default = Analysis.Type
+    mutate(analysis_type = case_when(
+      newnameid == "Biological Sex (cat.)" ~ "BIOLOGICAL",
+      newnameid == "Biological Life Stage (cat.)" ~ "BIOLOGICAL",
+      .default = analysis_type
     ))
   
-  #need to get unit group and unit IDs prior to importing observedProperties
-  unitGroups <- get_profiles(env, "unitgroups") %>%
+  #need to get unit group and unit IDs prior to importing observed_properties
+  unit_groups <- get_profiles(env, "unit_groups") %>%
     dplyr::select(id, customId, supportsConversion) %>%
-    rename("Unit.Group.Id" = "id")
+    rename("unit_group_id" = "id")
   
   #they are not!
   #current pipeline will upload the first OP into the system
   #But its fine because...
   #they belong to unit groups that are convertible
   #Below code helps you make that check
-  OPs_convertible <- observedProperties %>%
-    dplyr::filter(Count>1) %>%
-    left_join(unitGroups %>%
-                dplyr::select(customId, Unit.Group.Id, supportsConversion),
-              by = join_by("Sample.Unit.Group" == "customId")) %>%
+  observed_properties_convertible <- observed_properties %>%
+    dplyr::filter(count>1) %>%
+    left_join(unit_groups %>%
+                dplyr::select(customId, unit_group_id, supportsConversion),
+              by = join_by("sample_unit_group" == "customId")) %>%
     dplyr::filter(supportsConversion == FALSE)
   
-  # OPs_missing_unitgroup <- observedProperties %>%
-  #   dplyr::filter(is.na(Unit.Group.Id))
+  # observed_properties_missing_unitgroup <- observed_properties %>%
+  #   dplyr::filter(is.na(unit_group_id))
   
-  #add GUID to the list of observedProperties for unit groups
-  observedProperties <- left_join(observedProperties, unitGroups,
-                                  by = join_by('Sample.Unit.Group' == 'customId'), keep = FALSE)
+  #add GUID to the list of observed_properties for unit groups
+  observed_properties <- left_join(observed_properties, unit_groups,
+                                  by = join_by('sample_unit_group' == 'customId'), keep = FALSE)
   
   #units without groups
   units <- get_profiles(env, "units") %>%
     dplyr::select(id, customId) %>%
-    rename("Unit.Id" = "id")
+    rename("unit_id" = "id")
   
-  #add GUID to the list of observedProperties for units
-  observedProperties <- left_join(observedProperties, units,
-                                  by = join_by('Sample.Unit' == 'customId'), keep = FALSE)
+  #add GUID to the list of observed_properties for units
+  observed_properties <- left_join(observed_properties, units,
+                                  by = join_by('sample_unit' == 'customId'), keep = FALSE)
   
   #analysis.Type must be ALL CAPS
-  observedProperties$Analysis.Type <- toupper(observedProperties$Analysis.Type)
-  observedProperties$Result.Type <- toupper(observedProperties$Result.Type)
+  observed_properties$analysis_type <- toupper(observed_properties$analysis_type)
+  observed_properties$result_type <- toupper(observed_properties$result_type)
   
-  write_xlsx(observedProperties, "./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx")
+  write_xlsx(observed_properties, "./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx")
   
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx")
   
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "ObservedProperties")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Observed_Properties")
   
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx", overwrite = TRUE)
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx", overwrite = TRUE)
   
-  observedProperties <- observedProperties %>% dplyr::select(c("Parm.Code", "NewNameID", "Description", "Analysis.Type", "Result.Type", "Sample.Unit.Group", "Sample.Unit","CAS")) %>% unique()
+  observed_properties <- observed_properties %>% dplyr::select(c("parm_code", "newnameid", "description", "analysis_type", "result_type", "sample_unit_group", "sample_unit","CAS")) %>% unique()
   
 }
 
 # PREPROCESSING OP FOR NEW DATA --------------------------------------
 
 #Get base file; Unit and unit groups may have been updated; remove their IDs
-observedProperties_base <- 
-  read_excel("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx") %>%
-  dplyr::select(-c(supportsConversion, Unit.Group.Id, Unit.Id))
+observed_properties_base <- 
+  read_excel("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx") %>%
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .)) %>%
+  rename(supports_conversion = supportsconversion) %>%
+  dplyr::select(-c(supports_conversion, unit_group_id, unit_id))
 
 #The units don't matter for non-convertable OP units. For example microbial units. So remove them from consideration.
-observedProperties_base$Sample.Unit[observedProperties_base$Convertable.In.Samples == "N"] <- ""
+observed_properties_base$sample_unit[observed_properties_base$convertable_in_samples == "N"] <- ""
 
 #clean up modifers
-observedProperties_base$Modifier[is.na(observedProperties_base$Modifier)] <- ""
+observed_properties_base$modifier[is.na(observed_properties_base$modifier)] <- ""
 
-#Add an empty Result.Type column
-observedProperties_base$Result.Type <- ""
+#Add an empty result_type column
+observed_properties_base$result_type <- ""
 
 #checking if a new file is in the folder
 file_exists <- length(list.files(pattern = "^Observed_properties_ems_jk_")) > 0
@@ -188,133 +198,137 @@ if (length(file_exists) > 0) {
   latest_file <- file_exists[which.max(file.info(file_exists)$mtime)]
   message("Latest file found: ", latest_file)
 
-observedProperties_new <- read_excel(latest_file)
+observed_properties_new <- read_excel(latest_file)
 
 #The units don't matter for non-convertable OP units. For example microbial units. So remove them from consideration.
-observedProperties_new$Sample.Unit[observedProperties_new$Convertable.In.Samples == "N"] <- ""
+observed_properties_new$sample_unit[observed_properties_new$convertable_in_samples == "N"] <- ""
 
 #clean up modifers
-observedProperties_new$Modifier[is.na(observedProperties_new$Modifier)] <- ""
+observed_properties_new$modifier[is.na(observed_properties_new$modifier)] <- ""
 
-#Add an empty Result.Type column
-observedProperties_new$Result.Type <- ""
+#Add an empty result_type column
+observed_properties_new$result_type <- ""
 
-#Identify the new columns compared to observedProperties
-new_cols <- setdiff(names(observedProperties_base), names(observedProperties_new))
+#Identify the new columns compared to observed_properties
+new_cols <- setdiff(names(observed_properties_base), names(observed_properties_new))
 
 # Create a tibble of just those new columns
-new_data <- observedProperties_base %>%
+new_data <- observed_properties_base %>%
   dplyr::select(all_of(new_cols)) %>%
   mutate(across(everything(), ~ NA)) %>%
-  unique() %>% slice(rep(1, nrow(observedProperties_new)))
+  unique() %>% slice(rep(1, nrow(observed_properties_new)))
 
-observedProperties_new <- observedProperties_new %>% bind_cols(new_data)
+observed_properties_new <- observed_properties_new %>% bind_cols(new_data)
 
-observedProperties <- observedProperties_base %>% 
-  bind_rows(observedProperties_new %>% mutate(Results = NA)) %>% unique()
+observed_properties <- observed_properties_base %>% 
+  bind_rows(observed_properties_new %>% mutate(Results = NA)) %>% unique()
 
-## Merge all observedProperties
-observedProperties <- observedProperties %>%
-  #bind_rows(observedProperties, OPs_new_to_EnMoDS, OPs_taxonomic) %>%
+## Merge all observed_properties
+observed_properties <- observed_properties %>%
+  #bind_rows(observed_properties, observed_properties_new_to_EnMoDS, observed_properties_taxonomic) %>%
   #        unique() %>% 
-  group_by(NewNameID) %>% 
-  mutate(Count = n()) %>%
+  group_by(newnameid) %>% 
+  mutate(count = n()) %>%
   ungroup()
 
-#the total number of unique NewNameID should be the same as the total number of unique rows
-newNameIDUnique <- observedProperties$NewNameID %>% unique()
+#the total number of unique newnameid should be the same as the total number of unique rows
+new_name_id_unique <- observed_properties$newnameid %>% unique()
 
-observedProperties <- observedProperties %>% 
-  mutate(Sample.Unit = case_when(
-    Sample.Unit == "pH Units" ~ "pH units",
-    #Sample.Unit == NA ~ Unit,
-    #Sample.Unit == "" ~ NA,
-    .default = Sample.Unit),
+observed_properties <- observed_properties %>% 
+  mutate(sample_unit = case_when(
+    sample_unit == "pH Units" ~ "pH units",
+    #sample_unit == NA ~ Unit,
+    #sample_unit == "" ~ NA,
+    .default = sample_unit),
   )
 
-#rename the required observedProperties so they show up otherwise they are in the background?
-observedProperties <- observedProperties %>% 
-  mutate(Sample.Unit.Group = case_when(
-    NewNameID == "Biological Sex (cat.)" ~ "None",
-    NewNameID == "Biological Life Stage (cat.)" ~ "None",
-    Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-    Sample.Unit.Group == "Apperance"~ "Appearance",
-    .default = Sample.Unit.Group
+#rename the required observed_properties so they show up otherwise they are in the background?
+observed_properties <- observed_properties %>% 
+  mutate(sample_unit_group = case_when(
+    newnameid == "Biological Sex (cat.)" ~ "None",
+    newnameid == "Biological Life Stage (cat.)" ~ "None",
+    sample_unit_group == "Length" ~ "SYS-REQUIRED - Length",
+    sample_unit_group == "Apperance"~ "Appearance",
+    .default = sample_unit_group
   )) %>% 
-  mutate(Analysis.Type = case_when(
-    NewNameID == "Biological Sex (cat.)" ~ "BIOLOGICAL",
-    NewNameID == "Biological Life Stage (cat.)" ~ "BIOLOGICAL",
-    .default = Analysis.Type
+  mutate(analysis_type = case_when(
+    newnameid == "Biological Sex (cat.)" ~ "BIOLOGICAL",
+    newnameid == "Biological Life Stage (cat.)" ~ "BIOLOGICAL",
+    .default = analysis_type
   ))
 
 } else {
   
   #Unit and unit groups may have been updated; remove their IDs
-  observedProperties <- observedProperties_base
+  observed_properties <- observed_properties_base
   
 }
 
-#need to get unit group and unit IDs prior to importing observedProperties
-unitGroups <- get_profiles(env, "unitgroups") %>% 
+#need to get unit group and unit IDs prior to importing observed_properties
+unit_groups <- get_profiles(env, "unit_groups") %>% 
   dplyr::select(id, customId, supportsConversion) %>%
-  rename("Unit.Group.Id" = "id")
+  rename("unit_group_id" = "id")
 
 #they are not! 
 #current pipeline will upload the first OP into the system
 #But its fine because...
 #they belong to unit groups that are convertible
 #Below code helps you make that check
-OPs_convertible <- observedProperties %>% 
-  dplyr::filter(Count>1) %>%
-  left_join(unitGroups %>% 
-              dplyr::select(customId, Unit.Group.Id, supportsConversion), 
-            by = join_by("Sample.Unit.Group" == "customId")) %>%
+observed_properties_convertible <- observed_properties %>% 
+  dplyr::filter(count>1) %>%
+  left_join(unit_groups %>% 
+              dplyr::select(customId, unit_group_id, supportsConversion), 
+            by = join_by("sample_unit_group" == "customId")) %>%
   dplyr::filter(supportsConversion == FALSE)
 
-#add GUID to the list of observedProperties for unit groups
-observedProperties <- left_join(observedProperties, unitGroups, 
-                                by = join_by('Sample.Unit.Group' == 'customId'), keep = FALSE)
+#add GUID to the list of observed_properties for unit groups
+observed_properties <- left_join(observed_properties, unit_groups, 
+                                by = join_by('sample_unit_group' == 'customId'), 
+                                keep = FALSE)
 
-OPs_missing_unitgroup <- observedProperties %>% dplyr::filter(is.na(Unit.Group.Id))
+observed_properties_missing_unitgroup <- observed_properties %>% dplyr::filter(is.na(unit_group_id))
 
 #units without groups
 units <- get_profiles(env, "units") %>%
   dplyr::select(id, customId) %>%
-  rename("Unit.Id" = "id")
+  rename("unit_id" = "id")
 
-#add GUID to the list of observedProperties for units
-observedProperties <- observedProperties %>% 
+#add GUID to the list of observed_properties for units
+observed_properties <- observed_properties %>% 
   left_join(units, 
-            by = join_by('Sample.Unit' == 'customId'), 
+            by = join_by('sample_unit' == 'customId'), 
             keep = FALSE)
 
 #analysis.Type must be ALL CAPS
-observedProperties$Analysis.Type <- toupper(observedProperties$Analysis.Type)
-observedProperties$Result.Type <- toupper(observedProperties$Result.Type)
+observed_properties$analysis_type <- toupper(observed_properties$analysis_type)
+observed_properties$result_type <- toupper(observed_properties$result_type)
 
-write_xlsx(observedProperties, "./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx")
+write_xlsx(observed_properties, "./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx")
 
 # Load an existing workbook
-wb <- loadWorkbook("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx")
+wb <- loadWorkbook("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx")
 
 # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-renameWorksheet(wb, sheet = "Sheet1", newName = "ObservedProperties")
+renameWorksheet(wb, sheet = "Sheet1", newName = "Observed_Properties")
 
 # Save the workbook with the updated sheet name
-saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx", overwrite = TRUE)
 
 #read observed properties
-observedProperties <- read_excel("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx",
-                                 sheet = "ObservedProperties")
+observed_properties <- read_excel("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx",
+                                 sheet = "Observed_Properties")
 
-observedProperties <- observedProperties %>% dplyr::select(c("Parm.Code", "NewNameID", "Description", "Analysis.Type", "Sample.Unit.Group", "Sample.Unit","CAS")) %>% unique()
+observed_properties <- observed_properties %>% 
+  dplyr::select(c("parm_code", "newnameid", "description", 
+                  "analysis_type", "sample_unit_group", "sample_unit",
+                  "cas")) %>% unique()
 
-# # QA/QC for OPs -----------------------------------------------------------
+# # QA/QC for observed_properties -----------------------------------------------------------
 # 
 # # Checking which entries are not getting posted
 # get_check <- get_profiles("prod", "observedproperties")
 # 
-# #not all observedProperties getting posted
-# #compare get_check for observedProperties with raw observedProperties - 0 but 4172 in AQS 4285 in data frame
-# OPs_not_posted <- observedProperties %>% anti_join(get_check,
-#                                                    by = join_by("NewNameID" == "customId"))
+# #not all observed_properties getting posted
+# #compare get_check for observed_properties with raw observed_properties - 0 but 4172 in AQS 4285 in data frame
+# observed_properties_not_posted <- observed_properties %>% anti_join(get_check,
+#                                                    by = join_by("newnameid" == "customId"))

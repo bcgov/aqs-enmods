@@ -1,32 +1,36 @@
 # FILE TO PREPROCESS OTHER VARIABLES THAT MIGHT BE USED BY SAMPLING LOCATIONS
-# REQUIRES THAT OPs ARE ALREADY IN THE SYSTEM
+# REQUIRES THAT observed_properties ARE ALREADY IN THE SYSTEM
 
 # EXTENDED ATTRIBUTES ----
 # PREPROCESSING EXTENDED ATTRIBUTES FOR NEW DATA --------------------------
 
-extendedAttributes <- read_excel("./utils/config/ReferenceLists/ExtendedAttributes.xlsx", 
-                                 sheet = "ExtendedAttributes")
+extended_attributes <- read_excel("./utils/config/ReferenceLists/Extended_Attributes.xlsx", 
+                                 sheet = "Extended_Attributes") %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .)) %>%
+  rename_with(~ gsub(" ", "_", .)) %>%
+  rename(data_type = datatype, 
+         applies_to_type = appliestotype)
 
-dropdownLists <- read_excel("./utils/config/ReferenceLists/ExtendedAttributes.xlsx", 
-                            sheet = "DropdownLists")
+dropdownlists <- read_excel("./utils/config/ReferenceLists/Extended_Attributes.xlsx", 
+                            sheet = "Dropdownlists") %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .))
 
-dropdownLists <- dropdownLists %>%
-  dplyr::select(EA_customId, DDL_customId) %>%
-  group_by(EA_customId) %>%
+dropdownlists <- dropdownlists %>%
+  dplyr::select(ea_customid, ddl_customid) %>%
+  mutate(ddl_customid = as.character(ddl_customid)) %>%
+  group_by(ea_customid) %>%
   summarise(
     dropdownlist = list(
-      map(DDL_customId, ~ list(customId = .x))
+      map(ddl_customid, ~ list(customId = .x))
     ),
     .groups = "drop"
   )
 
-extendedAttributes <- extendedAttributes %>%
-  left_join(dropdownLists, by = join_by(customId == EA_customId),
+extended_attributes <- extended_attributes %>%
+  left_join(dropdownlists, by = join_by(customid == ea_customid),
             keep = FALSE)
-
-
-
-
 
 # DETECTION CONDITIONS ----
 # PREPROCESSING TO GENERATE OLDER DETECTION CONDITION FILES ---------------
@@ -34,53 +38,29 @@ run_init <- FALSE
 
 if(run_init){
   #Had to run this only once in a lifetime
-  detectionConditions <- get_profiles("test", "detectionconditions") #%>%
+  detection_conditions <- get_profiles("test", "detection_conditions") #%>%
   #dplyr::select(customId)
   
   # Save workbook
-  write_xlsx(list(detectionConditions), "./utils/config/ReferenceLists/DetectionConditions.xlsx")
+  write_xlsx(list(detection_conditions), "./utils/config/ReferenceLists/Detection_Conditions.xlsx")
   
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/DetectionConditions.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Detection_Conditions.xlsx")
   
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "detectionconditions")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Detection_Conditions")
   
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/DetectionConditions.xlsx", overwrite = TRUE)
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Detection_Conditions.xlsx", 
+               overwrite = TRUE)
 }
 
 # PREPROCESSING DETECTION CONDITIONS FOR NEW DATA --------------------
 
-detectionConditions <- read_excel("./utils/config/ReferenceLists/DetectionConditions.xlsx", 
-                                  sheet = "detectionconditions")
-
-# SAVED FILTERS ----
-# PREPROCESSING TO GENERATE OLDER SAVED FILTERS FILES ---------------
-
-run_init = FALSE
-if(run_init){
-  #Had to run this only once in a lifetime
-  savedFilters <- get_profiles("test", "filters") #%>%
-  #dplyr::select(customId)
+detection_conditions <- read_excel("./utils/config/ReferenceLists/Detection_Conditions.xlsx", 
+                                  sheet = "Detection_Conditions") %>% 
+  rename(customid = customId, system_code = systemCode)
   
-  # Save workbook
-  write_xlsx(list(savedFilters), "./utils/config/ReferenceLists/savedfilters.xlsx")
-  
-  # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/savedfilters.xlsx")
-  
-  # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "savedfilters")
-  
-  # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/savedfilters.xlsx", overwrite = TRUE)
-}
-
-# PREPROCESSING SAVED FILTERS FOR NEW DATA ---------------------------
-
-savedFilters <- read_excel("./utils/config/ReferenceLists/savedfilters.xlsx", 
-                           sheet = "savedfilters")
 
 # PROJECTS ----
 # PREPROCESSING PROJECTS FOR NEW DATA ---------------------
@@ -91,21 +71,21 @@ if(run_init){
   projects <- get_profiles("test", "projects")
   
   # Save workbook
-  write_xlsx(projects, "./utils/config/ReferenceLists/projects.xlsx")
+  write_xlsx(projects, "./utils/config/ReferenceLists/Projects.xlsx")
   
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/projects.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Projects.xlsx")
   
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
   renameWorksheet(wb, sheet = "Sheet1", newName = "Projects")
   
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/projects.xlsx", overwrite = TRUE)
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Projects.xlsx", overwrite = TRUE)
   
 }
 
-  projects <- read_excel("./utils/config/ReferenceLists/projects.xlsx", 
-                         sheet = "projects")
+  projects <- read_excel("./utils/config/ReferenceLists/Projects.xlsx", 
+                         sheet = "Projects")
   
   #Type needs to be in case UPPER
   projects <- projects %>% 
@@ -124,44 +104,49 @@ if(run_init){
 # METHODS -----------------------------------------------------------------
 # PREPROCESSING METHODS FOR NEW DATA --------------------------------------
 
-methods <- read_excel("./utils/config/ReferenceLists/consolidatedObservedProperties.xlsx")
+methods <- read_excel("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx") %>% 
+    rename_with(tolower) %>% 
+    rename_with(~ gsub("\\.", "_", .))
 
 #The units don't matter for non convertable OP units. For example microbial units. So remove them from consideration.
-methods$Sample.Unit[methods$Convertable.In.Samples == "N"] <- ""
+methods$sample_unit[methods$convertable_in_samples == "N"] <- ""
 
 #get the new name (customId) and methods 
 methods <- methods %>% 
-  dplyr::select(c("NewNameID", "Method.Code", "Method", 
-                  "Method.Description"))
+  dplyr::select(tolower(c("NewNameID", "Method_Code", "Method", 
+                  "Method_Description")))
 
-OPs.ids <- get_profiles(env, "observedproperties") %>% 
+observed_properties.ids <- get_profiles(env, "observed_properties") %>% 
   dplyr::select("id", "customId")
 
 #check that nothing has been dropped here!
-methodsProblematic <- anti_join(methods, OPs.ids, by = join_by("NewNameID" == "customId")) 
+methods_problematic <- anti_join(methods, observed_properties.ids, 
+                                 by = join_by("newnameid" == "customId")) 
 
-methods <- left_join(methods, OPs.ids, by = join_by("NewNameID" == "customId"))
+methods <- left_join(methods, observed_properties.ids, 
+                     by = join_by("newnameid" == "customId"))
 
-OPs.for.methods <- methods %>%
-  dplyr::select(id, Method.Code) %>%
-  group_by(Method.Code) %>%
+observed_properties_for_methods <- methods %>%
+  dplyr::select(id, method_code) %>%
+  group_by(method_code) %>%
   summarise(
-    OPs.list = list(
+    observed_properties_list = list(
       map(id, ~ list("id" = .x))
     ),
     .groups = "drop"
   )
 
-methods <- unique(methods %>% select(-c("NewNameID", "id")))
+methods <- unique(methods %>% select(-c("newnameid", "id")))
 
 methods <- methods %>%
-  left_join(OPs.for.methods, by = join_by(Method.Code == Method.Code),
+  left_join(observed_properties_for_methods, 
+            by = join_by(method_code == method_code),
             keep = FALSE)
 
 #Method names cannot contain semicolons
 #removing semicolons in names and replacing them with colons
 methods <- methods %>% 
-  mutate(Method = str_replace_all(Method, ";", ":"))
+  mutate(method = str_replace_all(method, ";", ":"))
 
 # # QA/QC for METHODS -------------------------------------------
 # 
@@ -172,19 +157,18 @@ methods <- methods %>%
 # 
 # methods.missing <- methods %>%
 #   anti_join(get_check,
-#             by = join_by("Method.Code" == "methodId"))
+#             by = join_by("method_code" == "methodId"))
 # 
 # 
 # 
 # LABS --------------------------------------------------------------------
 # PREPROCESSING LABS FOR NEW DATA --------------------------------------
 
-labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F)
+labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F) %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .))
 
-labs$Description = str_c("Created by ", labs$WHO_CREATED, " on ", labs$WHEN_CREATED)
-
-
-
+labs$description = str_c("Created by ", labs$who_created, " on ", labs$when_created)
 
 # TAXONOMY LEVELS ---------------------------------------------------------
 # PREPROCESSING TO GENERATE OLDER TAXONOMY LEVELS FILES ----------------
@@ -192,37 +176,32 @@ run_init = FALSE
 
 if(run_init){
   #Had to run this only once in a lifetime
-  taxonomyLevels <- get_profiles("test", "taxonomylevels") %>%
+  taxonomy_levels <- get_profiles("test", "taxonomy_levels") %>%
     dplyr::select(customId)
   # Save workbook
-  write_xlsx(list(taxonomylevels), "./utils/config/ReferenceLists/TaxonomyLevels.xlsx")
+  write_xlsx(list(taxonomy_levels), "./utils/config/ReferenceLists/Taxonomy_Levels.xlsx")
   
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/TaxonomyLevels.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Taxonomy_Levels.xlsx")
   
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "taxonomylevels")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Taxonomy_Levels")
   
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/TaxonomyLevels.xlsx", overwrite = TRUE)
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Taxonomy_Levels.xlsx", 
+               overwrite = TRUE)
 }
 
 # PREPROCESSING TAXONOMY LEVELS FOR NEW DATA ------------------------------
 
-taxonomyLevels <- read_excel("./utils/config/ReferenceLists/TaxonomyLevels.xlsx", 
-                             sheet = "taxonomylevels")
-
-
-
-
+taxonomy_levels <- read_excel("./utils/config/ReferenceLists/Taxonomy_Levels.xlsx", 
+                             sheet = "Taxonomy_Levels")
 
 # MEDIUMS ---------------------------------------------------------
 mediums <- read_excel("./utils/config/ReferenceLists/Mediums.xlsx", 
                       sheet = "Mediums")
 
-
 # Doing it manually; getting error on AQS's end
-
 
 # RESULT GRADES ---------------------------------------------------------
 # PREPROCESSING TO GENERATE OLDER RESULT GRADES FILES --------------
@@ -230,31 +209,29 @@ run_init = FALSE
 
 if(run_init){
   #Had to run this only once in a lifetime
-  resultGrades <- get_profiles("test", "resultgrades") %>%
+  result_grades <- get_profiles("test", "result_grades") %>%
     dplyr::select(customId)
   
   # Save workbook
-  write_xlsx(list(resultgrades), "./utils/config/ReferenceLists/ResultGrades.xlsx")
+  write_xlsx(list(result_grades), "./utils/config/ReferenceLists/Result_Grades.xlsx")
   
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/ResultGrades.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Result_Grades.xlsx")
   
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "resultgrades")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Result_Grades")
   
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/ResultGrades.xlsx", overwrite = TRUE)
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Result_Grades.xlsx", 
+               overwrite = TRUE)
 }
 
 # PREPROCESSING RESULT GRADES FOR NEW DATA --------------------------------
 
-resultGrades <- read_excel("./utils/config/ReferenceLists/ResultGrades.xlsx", 
-                           sheet = "resultgrades")
-
-
+result_grades <- read_excel("./utils/config/ReferenceLists/Result_Grades.xlsx", 
+                           sheet = "Result_Grades")
 
 # Doing it manually; getting error on AQS's end
-
 
 # RESULT STATUSES ---------------------------------------------------------
 # PREPROCESSING TO GENERATE OLDER RESULT STATUSES FILES ---------------------
@@ -262,61 +239,64 @@ run_init = FALSE
 
 if(run_init){
   #Had to run this only once in a lifetime
-  resultStatuses <- get_profiles("test", "resultstatuses") %>%
+  result_statuses <- get_profiles("test", "result_statuses") %>%
     dplyr::select(customId)
   
   # Save workbook
-  write_xlsx(list(resultstatuses), "./utils/config/ReferenceLists/ResultStatuses.xlsx")
+  write_xlsx(list(result_statuses), "./utils/config/ReferenceLists/Result_Statuses.xlsx")
   
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/ResultStatuses.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Result_Statuses.xlsx")
   
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "resultstatuses")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Result_Statuses")
   
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/ResultStatuses.xlsx", overwrite = TRUE)
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Result_Statuses.xlsx", overwrite = TRUE)
 }
 
 # PREPROCESSING RESULT STATUSES FOR NEW DATA ------------------------------
 
-resultStatuses <- read_excel("./utils/config/ReferenceLists/ResultStatuses.xlsx", 
-                             sheet = "resultstatuses")
-
-
-
+result_statuses <- read_excel("./utils/config/ReferenceLists/Result_Statuses.xlsx", 
+                             sheet = "Result_Statuses")
 
 # FISH TAXONOMY -----------------------------------------------------------
 # PREPROCESSING FISH TAXONS FOR NEW DATA ----------------------------------
 
-taxons <- read_excel("./utils/config/ReferenceLists/FishTaxonomy.xlsx", 
-                     sheet = "Taxonomy")
-
-
-
+taxons <- read_excel("./utils/config/ReferenceLists/Fish_Taxonomy.xlsx", 
+                     sheet = "Taxonomy") %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .)) %>%
+  rename_with(~ gsub(" ", "_", .))
 
 # COLLECTION METHODS ------------------------------------------------------
 # PREPROCESSING COLLECTION METHODS FOR NEW DATA ---------------------------
 
-collectionMethods <- read_excel("./utils/config/ReferenceLists/Collection_methods.xlsx", 
-                                sheet = "CollectionMethods")
+collection_methods <- read_excel("./utils/config/ReferenceLists/Collection_Methods.xlsx", 
+                                sheet = "Collection_Methods") %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .)) %>%
+  rename_with(~ gsub(" ", "_", .))
+  
 
 #remove collection methods we no longer want
-collectionMethods <- collectionMethods %>% filter(`New EnMoDS Short Name/ID` != "DELETE")
+collection_methods <- collection_methods %>% 
+  filter(`new_enmods_short_name/id` != "DELETE")
 
 #select just the needed columns
-collectionMethods <- collectionMethods %>% select(c("New EnMoDS Short Name/ID", "EMS CODE", "Definition"))
+collection_methods <- collection_methods %>% 
+  select(c("new_enmods_short_name/id", "ems_code", "definition"))
 
 #merge ems codes into a long string
-collectionMethods <- collectionMethods %>% 
-  group_by(`New EnMoDS Short Name/ID`) %>% 
-  reframe(merged_codes = paste(`EMS CODE`, collapse = ", "), Definition)
+collection_methods <- collection_methods %>% 
+  group_by(`new_enmods_short_name/id`) %>% 
+  reframe(merged_codes = paste(`ems_code`, collapse = ", "), definition)
 
 #remove duplicates
-collectionMethods<-distinct(collectionMethods)
+collection_methods<-distinct(collection_methods)
 
 #replace EMS code with blanks where its NA
-collectionMethods$merged_codes[collectionMethods$merged_codes == 'NA'] = ""
+collection_methods$merged_codes[collection_methods$merged_codes == 'NA'] = ""
 
 
 
@@ -329,25 +309,30 @@ collectionMethods$merged_codes[collectionMethods$merged_codes == 'NA'] = ""
 run_init <- FALSE
 if(run_init){
   #Had to run this only once in a lifetime
-  locationGroupTypes <- get_profiles("test", "locationgrouptypes") %>%
+  location_group_types <- get_profiles("test", "location_group_types") %>%
     dplyr::select(customId)
   
   # Save workbook
-  write_xlsx(list(locationGroupTypes), "./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+  write_xlsx(list(location_group_types), "./utils/config/ReferenceLists/Location_Group_Types.xlsx")
   
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Location_Group_Types.xlsx")
   
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "locationgrouptypes")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Location_Group_Types")
   
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/LocationGroupTypes.xlsx", overwrite = TRUE)
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Location_Group_Types.xlsx", 
+               overwrite = TRUE)
 }
 
 # PREPROCESSING LOCATION GROUP TYPES FOR NEW DATA -------------------------
 
-locationGroupTypes <- read_excel("./utils/config/ReferenceLists/LocationGroupTypes.xlsx", 
-                                 sheet = "locationgrouptypes")
+location_group_types <- read_excel("./utils/config/ReferenceLists/Location_Group_Types.xlsx", 
+                                  sheet = "Location_Group_Types") 
+  # %>% 
+  # rename_with(tolower) %>%
+  # rename_with(~ gsub("\\.", "_", .)) %>%
+  # rename_with(~ gsub(" ", "_", .))
 
 

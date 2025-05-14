@@ -15,7 +15,7 @@ if (run_init) {
     mutate(code = str_replace(code, "^0+", ""))
   #Only conversions in this file are reliable
   units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% mutate(code = str_replace(code, "^0+", ""))
-  #%>% dplyr::select(c(code, conversion_factor, offset, sample_unit_group, sample_unit_customId, sample_unit_name))
+  #%>% dplyr::select(c(code, conversion_factor, offset, sample_unit_group, sample_unit_customid, sample_unit_name))
   
   # Identify the new columns from units_base
   new_cols <- setdiff(names(units_base), names(units))
@@ -31,7 +31,7 @@ if (run_init) {
   units <- units %>% bind_rows(units_base %>% mutate(results = NA)) %>% unique()
   
   # Columns to move
-  cols_to_move <- c("code", "sample_unit_customId", "sample_unit_name",
+  cols_to_move <- c("code", "sample_unit_customid", "sample_unit_name",
                     "sample_unit_short_name", "sample_unit_group",
                     "sample_unit_modifier", "results", "base unit",
                     "offset", "convertible")
@@ -40,7 +40,7 @@ if (run_init) {
   units <- units %>%
     dplyr::select(all_of(cols_to_move), everything()) %>%
     group_by(code) %>%
-    summarize(across(c(sample_unit_customId, sample_unit_name:conversion_factor), 
+    summarize(across(c(sample_unit_customid, sample_unit_name:conversion_factor), 
                      ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), 
               .groups = "drop") %>%
     mutate(sample_unit_group = case_when(
@@ -49,11 +49,11 @@ if (run_init) {
       short_name == "% (Recovery)" ~ "DimensionlessRatio",
       short_name == "N/A" ~ "None",
       .default = sample_unit_group
-    )) %>% mutate(sample_unit_customId = case_when(
+    )) %>% mutate(sample_unit_customid = case_when(
       short_name == "N/A" ~ "Unknown",
       short_name == "‰" ~ "‰",
       short_name == "mg/dscm" ~ "mg/dscm",
-      .default = sample_unit_customId
+      .default = sample_unit_customid
     )) %>% mutate(sample_unit_name = case_when(
       short_name == "N/A" ~ "Unknown",
       short_name == "‰" ~ "Per mille (0/00 VSMOW, isotope composition)",
@@ -131,7 +131,7 @@ if (run_init) {
                                by = join_by("sample_unit_group" == "customId")) %>%
     dplyr::select(-convertible) %>%
     rename(convertible = supportsConversion,
-           sample_unit_groupID = id)
+           sample_unit_groupid = id)
   
   #fixing the units file for anomalous Count group associated with No/m2
   units <- units %>%
@@ -172,6 +172,8 @@ if (run_init) {
 #Only conversions in this file are reliable
 units_base <- read_excel("./utils/config/ReferenceLists/Consolidated_Units.xlsx", 
                          sheet = "Units") %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .)) %>%
   mutate(code = str_replace(code, "^0+", ""))
 
 file_exists <- length(list.files(pattern = "^Units_ems_jk_")) > 0
@@ -214,7 +216,7 @@ if (length(file_exists) > 0) {
 }
 
 # Columns to move
-cols_to_move <- c("sample_unit_customId", "code", "sample_unit_name",
+cols_to_move <- c("sample_unit_customid", "code", "sample_unit_name",
                   "sample_unit_short_name", "sample_unit_group",
                   "sample_unit_modifier", "results", "base unit",
                   "offset", "convertible")
@@ -251,7 +253,7 @@ units$code[which(is.na(units$code))] <- random_code_num
 units <- units %>%
   dplyr::select(all_of(cols_to_move), everything()) %>%
   group_by(code) %>%
-  summarize(across(c(sample_unit_customId, sample_unit_name:sample_unit_groupID), ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), 
+  summarize(across(c(sample_unit_customid, sample_unit_name:sample_unit_groupid), ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), 
             .groups = "drop") %>% 
   mutate(sample_unit_modifier = as.character(sample_unit_modifier)) %>% 
   mutate(convertible = if_else(is.na(convertible), FALSE, convertible)) %>%
@@ -278,7 +280,7 @@ saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_Units.xlsx",
              overwrite = TRUE)
 
 units <- units %>% 
-  dplyr::select(conversion_factor, sample_unit_name, sample_unit_customId,
+  dplyr::select(conversion_factor, sample_unit_name, sample_unit_customid,
                 convertible, conversion_factor, offset, sample_unit_group) %>%
   unique()
 
@@ -292,11 +294,11 @@ units <- units %>%
 # get_check <- get_profiles("prod", "units")
 # # #
 # # # #no such units
-# #units_na <- units %>% dplyr::filter(is.na(sample_unit_customId))
+# #units_na <- units %>% dplyr::filter(is.na(sample_unit_customid))
 # # #
 # units_missing <- units %>%
 #   anti_join(get_check,
-#             by = join_by("sample_unit_customId" == "customId"))
+#             by = join_by("sample_unit_customid" == "customId"))
 # 
 # PREPROCESSING OF UNIT GROUPS --------------------------------------------
 

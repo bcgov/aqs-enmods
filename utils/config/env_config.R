@@ -21,6 +21,6 @@ prod_token <- Sys.getenv("PROD_TOKEN")
 test_url <- Sys.getenv("TEST_URL")
 prod_url <- Sys.getenv("PROD_URL")
 
-update_baseurl_token <- function(env) {
+update_base_url_token <- function(env) {
   if (env == "prod") list(prod_url, prod_token) else list(test_url, test_token)
 }

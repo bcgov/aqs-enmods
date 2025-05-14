@@ -5,36 +5,39 @@
 run_init <- FALSE
 if(run_init){
 #Had to run this only once in a lifetime
-locationGroupTypes <- get_profiles("test", "locationgrouptypes") %>%
+location_group_types <- get_profiles("test", "location_group_types") %>%
   dplyr::select(customId)
 
 # Save workbook
-write_xlsx(list(locationGroupTypes), "./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+write_xlsx(list(location_group_types), "./utils/config/ReferenceLists/Location_Group_Types.xlsx")
 
 # Load an existing workbook
-wb <- loadWorkbook("./utils/config/ReferenceLists/LocationGroupTypes.xlsx")
+wb <- loadWorkbook("./utils/config/ReferenceLists/Location_Group_Types.xlsx")
 
 # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-renameWorksheet(wb, sheet = "Sheet1", newName = "locationgrouptypes")
+renameWorksheet(wb, sheet = "Sheet1", newName = "Location_Group_Types")
 
 # Save the workbook with the updated sheet name
-saveWorkbook(wb, "./utils/config/ReferenceLists/LocationGroupTypes.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "./utils/config/ReferenceLists/Location_Group_Types.xlsx", 
+             overwrite = TRUE)
 }
 
 # PREPROCESSING LOCATION GROUP TYPES FOR NEW DATA -------------------------
 
-locationGroupTypes <- read_excel("./utils/config/ReferenceLists/LocationGroupTypes.xlsx", 
-                                 sheet = "locationgrouptypes")
-
+location_group_types <- read_excel("./utils/config/ReferenceLists/location_group_types.xlsx", 
+                                 sheet = "Location_Group_Types") 
+# %>% 
+#   rename_with(tolower) %>%
+#   rename_with(~ gsub("\\.", "_", .))
 
 # LOCATION TYPES ---------------------------------------------------------
-locationTypes <- read_excel("./utils/config/ReferenceLists/LocationTypes.xlsx", 
-                            sheet = "locationtypes")
+location_types <- read_excel("./utils/config/ReferenceLists/location_types.xlsx", 
+                            sheet = "Location_Types")
 
-locationTypes <- locationTypes %>% 
-  mutate(customId = case_when(
-    customId == "Land - Fram" ~ "Land - Farm",
-    .default = customId
+location_types <- location_types %>% 
+  mutate(customid = case_when(
+    customid == "Land - Fram" ~ "Land - Farm",
+    .default = customid
   ))
 
 # SAMPLING LOCATION GROUPS AND LOCATIONS-------------------------------------------
@@ -115,10 +118,10 @@ locationGroups$Type = "Authorization"
 #make the groups
 locationGroups <- locationGroups %>% dplyr::select(`Permit ID`, Type, Description)
 
-locationGroupTypes <- get_profiles(env, "locationgrouptypes")
+location_group_types <- get_profiles(env, "location_group_types")
 
 #joing location group guid to location groups table
-locationGroups <- inner_join(locationGroups, locationGroupTypes, 
+locationGroups <- inner_join(locationGroups, location_group_types, 
                              by = join_by(Type == customId)) %>%
   rename(locationgrouptypeID = id)
 
@@ -144,4 +147,36 @@ write.csv(locations_3, file = "./utils/config/ReferenceLists/samplingLocations/3
 locations_4 <- locations[seq(30001, nrow(locations)),]
 write.csv(locations_4, file = "./utils/config/ReferenceLists/samplingLocations/4_Locations_Extract_May6_2025.csv", row.names = F)
 
+
+
+# SAVED FILTERS ----
+# PREPROCESSING TO GENERATE OLDER SAVED FILTERS FILES ---------------
+
+run_init = TRUE
+if(run_init){
+  #Had to run this only once in a lifetime
+  saved_filters <- get_profiles("test", "filters") #%>%
+  #dplyr::select(customId)
+  
+  # Save workbook
+  write_xlsx(saved_filters, "./utils/config/ReferenceLists/Saved_Filters.xlsx")
+  
+  # Load an existing workbook
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Saved_Filters.xlsx")
+  
+  # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Saved_Filters")
+  
+  # Save the workbook with the updated sheet name
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Saved_Filters.xlsx", overwrite = TRUE)
+}
+
+# PREPROCESSING SAVED FILTERS FOR NEW DATA ---------------------------
+
+saved_filters <- read_excel("./utils/config/ReferenceLists/Saved_Filters.xlsx", 
+                            sheet = "Saved_Filters") %>% rename_with(tolower) %>% 
+  rename_with(~ gsub("\\.", "_", .)) %>% 
+  rename_with(~ gsub(" ", "_", .)) %>%
+  rename(observed_properties = observedproperties,
+         sampling_locations = samplinglocations)
 
