@@ -3,9 +3,12 @@
 Naming conventions based on the reference value (SNAKE CASE)
 
   1. For file names/sheets, we follow the format "Snake_Case" 
-  2. For variable names, we follow:
-	 1. the "snake_Case" format (a combination of snake and camel case) if "Case" is a version of the "snake"
+  2. For variable names in coding pipelines, we follow:
+	 1. the "snake_case" format if "case" is a version of the "snake"
 	 2. the "snake.case" format if "case" is an element of the "snake"
+	 3. Column names for tables also follow "snake_case" as dot notation can cause parsing issues in some environments
+	 4. Sometimes, use camelCase for substrings in column names containing words which cannot be separated by an underscore (e.g., customId) 
+	 5. AQI uses "camelCase" so using formatting styles in 1 and 2 will also allow us to differentiate between variables created by BC Gov vs AQI
   
 Starting from a clean environment with no configuration (see how to wipe an environment)...
   1. Run preprocessing steps

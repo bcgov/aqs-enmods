@@ -1,147 +1,147 @@
-﻿"Samples","WHEN_CREATED","Type","SHORT_NAME","NAME","ACTIVE_IND","ADDRESS_1","CITY","CONTACT_NAME","E_MAIL_ADDR","PHONE_NUMBER","WHO_CREATED","WHEN_UPDATED","WHO_UPDATED","First","Last"
-"0","2/2/2010 10:55:20 AM","Ministry","72","Omineca-Peace, Fort St. John","Y","Suite 400 - 10003 110th Avenue","Fort St. John","Cameron Eggleston","Cameron.Eggleston@gov.bc.ca","(250) 787-3217","EMS","2/2/2010 10:57:05 AM","EMS","",""
-"0","3/11/2010 9:38:11 AM","Consultant","PW","Paradox Water & Wastewater Treatment Co.","Y","Box 1302 Station Main","Kamloops","Tyrone McCabe","paradoxwater@shaw.ca","250-320-3329","RDGIBSON","","","",""
-"0","10/15/2013 2:26:18 PM","Ministry","FLNRO","Ministry of Forests, Lands and Natural","Y","4th Floor - 780 Blanshard Street","Victoria","Joanna Runnells","Joanna.Runnells@gov.bc.ca","250 356-5209","RDGIBSON","10/15/2013 2:43:20 PM","RDGIBSON","",""
-"0","1/30/2014 4:42:24 PM","Consultant","BV","Bulkley Valley Research Centre","Y","3883 Third Avenue","Smithers","Kirsteen Laing","kirsteen.laing@bvcentre.ca","(250) 847-2827","RDGIBSON","9/24/2015 1:55:37 PM","RDGIBSON","",""
-"0","6/30/2015 2:22:11 PM","Permittee","SRC","Sona Resources Corp","Y","103 - 145 15th Street West","North Vancouver","John Thompson","jpthompson@sonaresources.com","1-604-684-6677","RDGIBSON","","","",""
-"0","9/17/2015 3:38:28 PM","Consultant","KEL","Keystone Environmental Ltd. (Burnaby)","Y","320 4400 Dominion Street","Burnaby","Jason Christensen","jchristensen@keystoneenvironmental.ca","(604) 430-0671","RDGIBSON","9/17/2015 3:38:49 PM","RDGIBSON","",""
-"0","6/30/2016 3:27:50 PM","Field","BCF","BC Conservation Foundation (BCCF)","Y","#1-7217 Lantzville Road","Lantzville","Jeramy Damborg","jdamborg@bccf.com","(250) 390-2525","RDGIBSON","7/4/2016 8:55:25 AM","RDGIBSON","",""
-"0","7/12/2016 1:41:35 PM","Consultant","AE","Associated Environmental Consultants Inc","Y","#200 - 2800 29th Street","Vernon","Brenda Miskimmin","miskimmisnb@ae.ca","250-545-3672","JAUSTIN","7/19/2017 4:46:32 PM","RDGIBSON","",""
-"0","8/23/2016 11:22:08 AM","Ministry","73","Omineca-Peace, Prince George, FLNRO","Y","499 George St","Prince George","Jun Yin","jun.yin@gov.bc.ca","778-693-3015","RRENTON","","","",""
-"0","4/24/2017 8:16:07 AM","Field","FWF","Freshwater Fisheries","Y","101 80 Regatta Landing","Victoria","Kirstin Gale","Kirstin.gale@gofishbc.com","(250) 414-4217","RRENTON","","","",""
-"0","9/19/2017 9:17:10 AM","Consultant","GHD","GHD Limited","Y","10271 Shellbridge Way","Richmond","James Reid","james.a.reid@ghd.com","(604) 214-0510","JKROGH","","","",""
-"0","10/24/2017 10:45:25 AM","Field","CRD","Capital Regional District","Y","625 Fisgard St","Victoria, BC","Glenn Harris","gharris@crd.bc.ca","250-360-3090","EMS","","","",""
-"0","7/10/2018 2:52:20 PM","Consultant","SYL","SYLVIS Environmental Services","Y","427 Seventh Street","New Westminster","Mike Van Ham","mvanham@sylvis.com","6047779788x105","RDGIBSON","","","",""
-"0","7/30/2019 9:42:47 AM","Consultant","LEPS","Langley Enviro. Partners Society","Y","201-4839 221 St.","Langley","Pina Viola","water@leps.bc.ca","604-546-0340","KATFRASE","7/30/2019 10:09:07 AM","KATFRASE","",""
-"0","2/12/2020 11:18:41 AM","Consultant","AEL","ANCOR ENVIRONMENTAL LTD.","Y","","Surrey","Steve Horvath","steve.horvath@telus.net","604 535-4832","RDGIBSON","","","",""
-"0","8/6/2020 1:13:01 PM","Consultant","GES","Goode Environmental Services Ltd","Y","3786 Belgrave Road","Victoria","Sheena Goode-Jensen BSc.","sheena@goode-enviro.com","250 812-4795","RDGIBSON","","","",""
-"0","2/10/2021 9:00:24 AM","Laboratory","FN","Fort Nelson First Nations","Y","RR 1, Mile 295 Alaska Highway","Fort Nelson","Marilyn Norby","fieldcoordinator@fnnation.ca","250-774-6313","RDGIBSON","2/10/2021 9:55:14 AM","RDGIBSON","",""
-"0","10/6/2021 2:52:05 PM","Laboratory","ALK","ALS Environmental ? Kamloops","Y","2B-1445 McGill Rd","Kamloops","Amanda Lampreau","amanda.lampreau@alsglobal.com","1 250 372 3678","RDGIBSON","","","",""
-"0","10/13/2021 4:25:10 PM","Laboratory","NAL","Northern Analytical Lab Services","Y","Research Laboratory Building (#4-234)","Prince George","Ann Duong","nals@unbc.ca","250-960-5713","RDGIBSON","","","",""
-"0","3/19/2024 1:46:47 PM","Consultant","SLR","SLR Consulting (Canada) Ltd.","Y","#200 -887 Great Northern Way","Vancouver","Ian Young; Commercial Manager","iyoung@slrconsulting.com","(604)-738-2500","RDGIBSON","","","",""
-"0","11/28/2024 3:17:36 PM","Laboratory","ISO","Isobrine Solutions Inc","Y","9330 60 Avenue NW","Edmonton","","queries@isobrine.com","780-433-3699","EMS","12/3/2024 4:14:48 PM","EMS","",""
-"0","3/20/2025 9:16:49 AM","First Nations","KENTEM","K'en T'em Limited Partnership","Y","2025 Granite Ave","Merritt","Brady Utas"," butas@kentem.ca","","EMS","","","",""
-"1","4/12/1996 9:10:05 AM","Laboratory","EPS","E.P.S. Bioassay Lab","N","","","","","","EMS","","","1/17/1995 9:10:00 AM","1/17/1995 9:10:00 AM"
-"1","4/12/1996 9:10:05 AM","Laboratory","NPT","Northwood Pulp and Timber","Y","Pulp Mill Stores","Prince George","Sandra Morrison","","(250)962-3436","EMS","9/30/1997 1:28:40 PM","UMULLER","8/31/1999","8/31/1999"
-"1","11/27/2000 2:02:02 PM","Laboratory","CBK","City of Cranbrook","Y","","Cranbrook","","","","NPEPPIN","11/27/2000 2:02:20 PM","NPEPPIN","8/4/2022 10:30:00 AM","8/4/2022 10:30:00 AM"
-"2","4/12/1996 9:10:05 AM","Laboratory","ATR","Aqua Technical Research Ltd","N","","","","","","EMS","","","9/9/1986","10/8/1986"
-"2","4/12/1996 9:10:05 AM","Laboratory","WTL","Wellington Laboratories","N","","","","","","EMS","","","11/23/1999 8:00:00 AM","3/12/2000 8:00:00 AM"
-"5","7/8/2002 1:18:55 PM","Laboratory","DOL","Danusia Dolecki","Y","1158 Forge Walk","Vancouver","","dolecki@zoology.ubc.ca","(604)738-1548","UMULLER","7/8/2002 1:21:46 PM","UMULLER","10/9/2001 10:00:00 AM","10/9/2001 12:00:00 PM"
-"5","7/30/2019 9:51:23 AM","Laboratory","EDGE","Edge Analytical Laboratories","Y","1620 S Walnut St","Burlington","Lawrence J Henderson","ljh@edgeanalytical.com","360-757-1400","KATFRASE","","","10/19/2015 11:30:00 AM","10/19/2015 12:25:00 PM"
-"6","4/12/1996 9:10:05 AM","Laboratory","KAS","Kimberley Analytical Services","Y","Cominco Ltd. Sullivan","Kimberley","Gerry Ogilvie","","(250)427-8442","EMS","10/2/1997 3:01:35 PM","UMULLER","5/1/1996 2:30:00 PM","12/5/1996"
-"6","5/6/2002 10:23:57 AM","Consultant","BCBC","BCBC","Y","201-32555 Simon Avenue","Abbotsford","Doug Gosling","DGosling@bcbc.bc.ca","(604)870-5008","UMULLER","","","5/22/2007 12:30:00 PM","5/22/2007 12:30:00 PM"
-"7","6/20/1996 11:51:31 AM","Laboratory","PEP","P.L.","N","","","","","","NPEPPIN","2/18/2002 12:49:46 PM","UMULLER","4/7/2003","5/20/2003"
-"8","4/12/1996 9:10:05 AM","Laboratory","PCR","Petro-Canada - Port Moody Refinery","Y","1155 Glenayre Dr.","Port Moody","Ken Mak","","(250)931-9320","EMS","9/30/1997 1:36:52 PM","UMULLER","6/5/2004 12:00:00 PM","7/1/2012 8:00:00 AM"
-"8","4/12/1996 9:10:05 AM","Laboratory","SGS","SGS Canada","Y","1001 East Pender Street","Vancouver","Peter Taylor","","(604)254-1647","EMS","9/30/1997 4:05:53 PM","UMULLER","9/27/2023 9:05:00 AM","10/24/2023 9:15:00 AM"
-"10","4/12/1996 9:10:05 AM","Ministry","60","Skeena","Y","3726 Alfred Avenue, Bag 5000","Smithers","","","(250)847-7260","EMS","6/16/1998 2:37:27 PM","UMULLER","3/27/2010 9:30:00 AM","3/27/2010 9:30:00 AM"
-"11","4/12/1996 9:10:05 AM","Laboratory","ALC","Alcan Analytical Lab","Y","No. I Smeltersite Rd.","Kititmat","Frank Burton","","(250)639-8312","EMS","9/30/1997 8:08:44 AM","UMULLER","2/5/2008 8:50:00 AM","6/15/2023 7:30:00 AM"
-"11","4/12/1996 9:10:05 AM","Ministry","FE","Federal","Y","","","","","","EMS","6/16/1998 2:39:21 PM","UMULLER","6/9/1995","10/31/1996 9:15:00 AM"
-"11","1/9/2001 4:05:13 PM","Laboratory","PS","Pacific Soils","Y","5- 11720 Voyageur Way","Richmond","","","(604)273-8022","NPEPPIN","1/10/2001 8:45:12 AM","NPEPPIN","8/30/2000","10/13/2000 12:05:00 AM"
-"13","4/12/1996 9:10:05 AM","Laboratory","WCE","Westcoast Energy S.P.D.","Y","3025 Industrial Way","Prince George","Victor Kovacs","","(250)561-1670","EMS","10/1/1997 9:00:38 AM","UMULLER","7/10/1997","7/9/1998"
-"15","4/12/1996 9:10:05 AM","Laboratory","SAS","Seakem Analytical Services Ltd","N","","","","","","EMS","","","10/1/1991 7:00:00 AM","6/23/1995 7:00:00 AM"
-"19","3/21/2025 3:25:12 PM","Laboratory","UWAT","Kuncheng Zhao","Y","200 University Ave. W.","Waterloo","Client Services Assistant/Lab Technician","eilab@uwaterloo.ca","","EMS","","","9/29/2024","2/20/2025"
-"23","1/25/2021 1:29:34 PM","Ministry","MEM","Ministry of Energy and Mines","Y","Abandoned Mines Branch","Victoria","Anika Bergen","Anika.Bergen@gov.bc.ca","236-478-2502","RDGIBSON","1/25/2021 1:30:09 PM","RDGIBSON","4/3/2024 12:01:00 PM","4/3/2024 12:01:00 PM"
-"26","4/12/1996 9:10:05 AM","Ministry","WA","Water Quality","Y","P.O.Box 9340","Victoria","","","(250)387-9494","EMS","7/29/1998 1:23:10 PM","UMULLER","5/12/1976 10:00:00 AM","4/7/2011"
-"34","4/12/1996 9:10:05 AM","Laboratory","CRL","Canadian Resource Laboratories","N","","","","","","EMS","","","7/12/1987 12:05:00 PM","9/8/1988 8:30:00 AM"
-"40","4/12/1996 9:10:05 AM","Laboratory","CGL","Chemical & Geological Lab. Inc","Y","14203-129 Ave.","Edmonton","Bob Cleary, Karen Schick","","(403)454-1504","EMS","9/30/1997 8:58:35 AM","UMULLER","5/1/1984","12/11/2024 4:13:00 PM"
-"41","4/12/1996 9:10:05 AM","Laboratory","LAS","Levelton Analytical Services","Y","#1-12791 Clarke Place","Richmond","Tory Ovthrie","","(604)278-1411","EMS","9/30/1997 1:07:08 PM","UMULLER","9/11/2006 12:10:00 PM","12/4/2006 2:50:00 PM"
-"42","1/29/2018 11:04:17 AM","Laboratory","ALA","Mark Lanfranco","Y","Unit #101, 9488","Surrey","","mark.lanfranco@alanfranco.com","(604) 881-2582","JKROGH","","","4/24/2018 12:00:00 PM","10/17/2024 12:00:00 PM"
-"49","4/12/1996 9:10:05 AM","Ministry","90","Headquarters, Victoria","Y","525 Superior Street","Victoria","","","","EMS","7/10/2018 3:18:12 PM","RDGIBSON","6/25/2003 12:00:00 PM","2/12/2004 11:00:00 AM"
-"54","9/30/1997 9:28:15 AM","Laboratory","ENT","Enviro Test Laboratories","Y","9936-67th Avenue","Edmonton","Beth Weitzel","","(403)434-9509","UMULLER","9/30/1997 9:33:01 AM","UMULLER","12/16/1998 8:00:00 AM","2/7/2008 8:00:00 AM"
-"57","2/3/2022 4:08:23 PM","Laboratory","SFU","SFU Earth Sciences","Y","Simon Fraser University","Burnaby","Dirk Kirste","dirk_kirste@sfu.ca","778-882-1911","RDGIBSON","","","9/10/2018 10:36:00 AM","3/1/2019 1:24:00 PM"
-"59","4/12/1996 9:10:05 AM","Laboratory","ASC","Ascent Services","Y","","","","","","EMS","3/8/1996 11:49:17 AM","MPAK","2/19/1992","9/16/2002"
-"61","4/12/1996 9:10:05 AM","Laboratory","WCT","Willis Cunliffe & Tait","Y","","","","","","EMS","","","1/9/1984 12:50:00 PM","8/30/1989"
-"66","4/12/1996 9:10:05 AM","Laboratory","WSH","WSH Laboratories (1989) Ltd.","N","","","","","","EMS","","","1/4/1996","12/5/2000"
-"70","4/4/2019 2:44:51 PM","Laboratory","EXA","Exact Scientific Services","Y","1355 Pacific Place","Ferndale","","lab@exactscientific.com","360-733-1205","RPWILLIA","4/4/2019 2:47:57 PM","RPWILLIA","11/15/2018 9:40:00 AM","3/7/2019 10:26:00 AM"
-"80","4/12/1996 9:10:05 AM","Laboratory","WLL","Wood Laboratory Ltd.","Y","","","","","","EMS","","","1/20/1986 9:00:00 AM","10/21/1997"
-"89","2/10/1998 9:39:04 AM","Laboratory","MAX","Maxxam Labs Ltd.","Y","212 Brooksbank Ave.","North Vancouver","Brenda Canghlin","","(604) 984-0221","UMULLER","3/12/2018 12:40:34 PM","JKROGH","3/24/1997 8:30:00 AM","7/7/2009 12:00:00 PM"
-"116","4/12/1996 9:10:05 AM","Laboratory","CAS","Cominco Analytical Services","Y","Cominco Metals","Trail","Thorpe W. Watson","","(250)364-4403","EMS","9/30/1997 8:55:41 AM","UMULLER","2/27/1989","12/21/2021"
-"124","4/12/1996 9:10:05 AM","Laboratory","LFM","Lakefield Laboratories","Y","","","","","","EMS","","","1/4/1989","3/4/1991"
-"130","6/12/2014 1:19:32 PM","Laboratory","MAC","Maxxam Analytics Calgary","Y","2021 - 41st Ave NE","Calgary","Leslie Lem","llem@maxxam.ca","250 291 3077","RDGIBSON","9/17/2015 3:40:53 PM","RDGIBSON","6/6/2014","5/5/2017"
-"130","7/13/2020 12:39:52 PM","Laboratory","BIO","Biologica Environmental Services Ltd","Y","488-F Bay Street","Victoria","Tara Macdonald PhD RPBio","breanna@biologica.ca","250-479-3868","RDGIBSON","7/14/2020 11:13:38 AM","RDGIBSON","8/19/2020 9:30:00 AM","10/17/2022"
-"138","5/14/2018 9:46:24 AM","Laboratory","SWA","UBC Soil Water and Air Labortory","Y","421-2202 Main Mall","Vancouver","Mark Johnson","mark.johnson@ubc.ca","604 822  7725","RDGIBSON","6/4/2018 1:39:56 PM","RDGIBSON","6/25/2015 12:00:00 PM","6/29/2016 12:00:00 PM"
-"153","4/12/1996 9:10:05 AM","Laboratory","CAV","Cavendish Analytical Lab Ltd.","Y","2225 S. Springer Ave.","Burnaby","Kim Reeves","","(604)299-2560","EMS","11/4/1997 11:43:50 AM","UMULLER","2/10/1999","3/14/2001"
-"164","4/12/1996 9:10:05 AM","Laboratory","NSR","Norwest Soil Research Inc.","Y","Unit 104","Surrey","Thomas Guthrie","","(604)514-3322","EMS","1/11/1999 1:05:41 PM","NPEPPIN","9/30/1998","5/2/2006 11:15:00 AM"
-"177","2/22/2011 11:52:08 AM","Laboratory","MF","Ministry of Environment Lab","Y","4300 North Road","Victoria","Shannon Berch","Shannon.Berch@gov.bc.ca","(250) 952-4122","RDGIBSON","2/22/2011 2:43:14 PM","RDGIBSON","4/3/2024 12:01:00 PM","8/20/2024 10:44:00 AM"
-"190","4/12/1996 9:10:05 AM","Laboratory","AXL","Axys Laboratories","Y","2045 Mills Rd.","Sidney","Dr. M.C. Hamilton","","(250)656-0881","EMS","9/29/1997 4:14:22 PM","UMULLER","8/18/1993","12/11/2024"
-"194","3/5/1997 10:34:11 AM","Consultant","VL","Volunteer","Y","","","","","","NPEPPIN","9/1/1999 11:15:18 AM","UMULLER","2/21/1996","7/10/2007 9:52:00 AM"
-"200","4/12/1996 9:10:05 AM","Laboratory","IGM","IG Micromed Environmental Inc.","Y","","","","","","EMS","3/8/1996 12:14:51 PM","MPAK","11/28/1995","10/22/2015 9:00:00 AM"
-"215","4/12/1996 9:10:05 AM","Laboratory","HCL","HydroQual Lab Ltd.","Y","#3, 6125 - 12th Street S.E.","Calgary","Gordon Balch","","(403)253-7121","EMS","2/19/2001 10:33:16 AM","NPEPPIN","12/29/1997","10/29/2021"
-"237","4/12/1996 9:10:05 AM","Ministry","10","Vancouver Island, Nanaimo","Y","2080-A Labieux Road","Nanaimo","","","(250)751-3100","EMS","4/25/2001 8:59:00 AM","JYAXLEY","6/16/1997 1:47:00 PM","6/28/2007 11:25:00 AM"
-"261","5/14/2020 3:43:41 PM","Laboratory","AT","AquaTox Testing & Consulting Inc.","Y","B-11 Nicholas Beaver Rd.","Puslinch","Lesley Novak; M.ScPresident; Director of Laboratory Services","lnovak@aquatox.ca","1-519-763-4412","RDGIBSON","5/26/2020 9:44:44 AM","RDGIBSON","4/9/2020 7:00:00 AM","2/25/2025 7:00:00 AM"
-"278","4/12/1996 9:10:05 AM","Laboratory","LEL","Env Lab - Modified by Lab","N","","","","","","EMS","3/8/1996 12:17:00 PM","MPAK","2/19/1985 1:30:00 PM","10/30/1988"
-"308","8/18/2010 11:35:24 AM","Laboratory","COR","Cordillera Consulting","Y","Unit 1 13216 Henry Ave","Summerland","Sue Salter","suesalter@shaw.ca","(250) 494-7553","RDGIBSON","8/8/2022 9:34:38 AM","EMS","9/4/2013 12:00:00 PM","10/3/2019 10:15:00 AM"
-"327","4/12/1996 9:10:05 AM","Laboratory","RPS","Radiation Protection Service","N","","","","","","EMS","","","11/25/1987","4/15/1992"
-"354","8/29/2018 3:33:40 PM","Laboratory","ANL","A & L Canada Laboratories","Y","2136 Jetstream Rd.","London","Ian Mclachlin","alcanadalabs@alcanada.com","519 457-2575","RDGIBSON","","","9/30/2016","10/23/2018"
-"503","4/12/1996 9:10:05 AM","Laboratory","SLL","Soilcon Laboratories Ltd.","Y","Unit 275","Richmond","Douglas Chromb","","(604)278-5535","EMS","9/30/1997 4:18:02 PM","UMULLER","3/7/2000 9:35:00 AM","11/8/2001 11:15:00 AM"
-"524","4/12/1996 9:10:05 AM","Laboratory","QTL","Quanta Trace Laboratories","Y","401-3700 Gilmore Way","Burnaby","Walter Brandl","","(604)438-5226","EMS","9/30/1997 3:57:44 PM","UMULLER","7/27/1987 12:10:00 PM","6/24/1997 8:00:00 AM"
-"757","4/21/2023 10:11:07 AM","Permittee","CEI","Chemtrade Electrochem Inc.","Y","100 Amherst Ave.","North Vancouver","Owen Horn","OHorn@chemtradelogistics.com","","EMS","4/21/2023 10:14:20 AM","EMS","10/1/2022","12/31/2024"
-"835","5/21/2020 3:19:24 PM","Laboratory","LAC","Larratt Aquatic Consulting Ltd.","Y","2605 Campbell Rd","West Kelowna","Jamie Self; BSc; RPBio; Aquatic Biologist","jamie.self@lakebiology.ca","250-300-5166","RDGIBSON","","","2/10/2016","9/19/2024"
-"852","4/12/1996 9:10:05 AM","Laboratory","MEL","Env Lab - Modified by Field","N","","","","","","EMS","3/19/2002 2:52:19 PM","UMULLER","10/2/1984 12:00:00 PM","1/30/2025 9:59:00 AM"
-"994","4/12/1996 9:10:05 AM","Laboratory","BEL","Env Lab - Field entered","Y","","","","","","EMS","3/6/1996 3:40:24 PM","EMS","4/12/1978 11:00:00 AM","12/28/1988"
-"1008","4/12/1996 9:10:05 AM","Laboratory","GML","Gibraltar Mines","Y","","","","","","EMS","6/19/1998 2:10:34 PM","UMULLER","3/20/1983","3/31/1992 8:00:00 AM"
-"1015","4/12/1996 9:10:05 AM","Laboratory","EVS","E.V.S. Consultants Ltd.","Y","195 Pemberton Avenue","North Vancouver","Cathy McPherson","","(604)986-4331","EMS","9/30/1997 9:19:55 AM","UMULLER","1/29/1986","11/8/2022 7:00:00 AM"
-"1163","4/12/1996 9:10:05 AM","Laboratory","AGR","Agra Earth & Environmental Ltd.","Y","4810-93 Street","Edmonton","Raynald Le Blanc","","(403)436-2152","EMS","8/21/2007 4:57:08 PM","EMS","3/4/1997","10/18/2016"
-"1180","4/12/1996 9:10:05 AM","Laboratory","COL","Core Laboratories Canada Ltd.","Y","1540-25th Ave. N.E.","Calgary","Terry Harper","","(403)250-4084","EMS","11/4/1997 1:05:16 PM","UMULLER","4/1/1987","6/5/2000 9:45:00 AM"
-"1327","12/14/1998 10:21:52 AM","Laboratory","MXA","Maxxam Analytics Inc.","N","9331 - 48 Street","Edmonton","Forrest Tittle","ftittle@mail.edm.maxxam.ca","(403) 468-3500","UMULLER","9/12/2012 11:52:44 AM","RDGIBSON","4/23/1998","1/27/2025"
-"1646","4/12/1996 9:10:05 AM","Laboratory","MBR","MB Research & Development Ltd.","Y","10115 McDonald Park Road","Sidney","Dr. Harry Hartmann","","(250)656-1334","EMS","9/30/1997 1:08:44 PM","UMULLER","1/24/2001","2/28/2025 5:00:00 AM"
-"1821","11/14/1996 10:30:51 AM","Laboratory","HLT","Health Lab","Y","","","","","","MPAK","11/14/1996 10:32:09 AM","MPAK","1/21/1985","11/3/1993 11:45:00 AM"
-"1937","4/12/1996 9:10:05 AM","Laboratory","NWL","Norwest Labs (Edmonton)","Y","9938-67 Ave.","Edmonton","Randy Neumann","","(403)438-5522","EMS","9/30/1997 1:32:23 PM","UMULLER","5/29/1996","3/22/2023"
-"1990","7/17/2007 5:21:36 PM","Laboratory","ELE","Element Materials Technology (was Exova)","Y","#10; 19575 - 55A Avenue","Surrey","Carol Nam; QA Officer","Carol.Nam@exova.com","(604) 514-3322","RDGIBSON","6/10/2020 2:00:33 PM","RDGIBSON","5/9/2006 5:09:00 AM","10/22/2024"
-"2008","4/12/1996 9:10:05 AM","Laboratory","NHL","Northern Laboratories","Y","780 Alfred Street","Prince Rupert","Charles Armstrong","","(250)627-1906","EMS","9/30/1997 1:26:45 PM","UMULLER","6/17/1981","6/26/2012 12:00:00 PM"
-"2067","4/12/1996 9:10:05 AM","Permittee","OT","Independent Agent or Other","Y","","","","","","EMS","6/16/1998 2:41:12 PM","UMULLER","1/1/1987","10/11/2023 10:23:00 AM"
-"2492","4/12/1996 9:10:05 AM","Laboratory","BZN","Zenon Lab Inc. - Field entered","Y","","","","","","EMS","6/16/1998 2:47:10 PM","UMULLER","6/18/1985","10/10/2000"
-"2611","3/11/2009 2:25:12 PM","Laboratory","BRM","Mine Assay Lab","Y","Bul River Mineral Corporation","Bull River","Graham Jones, Manager of Environmental Services","Graham@bulrivermineralcorp.com","(250) 429 3711","RDGIBSON","","","3/2/2007","1/31/2015"
-"2758","4/12/1996 9:10:05 AM","Laboratory","AGA","Agat Laboratories","Y","3801-21st Street NE","Calgary","Bruce Underwood","","(403)299-2000","EMS","9/29/1997 3:21:58 PM","UMULLER","6/1/1993","12/11/2024"
-"3017","4/12/1996 9:10:05 AM","Laboratory","NIL","North Island Laboratories","Y","#3-2946 Kilpatrick Avenue","Courtenay","Catherine Black","northislandlabs@gmail.com","(250)338-7786","EMS","9/9/2011 2:35:16 PM","RDGIBSON","12/12/1999 12:05:00 PM","4/29/2015 4:01:00 PM"
-"3171","4/12/1996 9:10:05 AM","Laboratory","BAL","Beak Associates (B.C.) Ltd.","Y","","","","","","EMS","11/4/1997 10:22:24 AM","UMULLER","1/19/1988","2/25/2025 6:00:00 AM"
-"3333","8/11/2009 2:30:05 PM","Laboratory","KR","Kemetco Research Inc.","Y","445 5600 Parkwood Way","Richmond","Herb Lanz","hlanz@kemetco.com","(604) 273-3600","RDGIBSON","8/11/2009 2:34:49 PM","RDGIBSON","1/4/2010 7:01:00 AM","2/3/2025 7:00:00 AM"
-"3531","4/12/1996 9:10:05 AM","Laboratory","HGL","Higgins Laboratory","Y","","","","","","EMS","","","4/20/1987 1:00:00 PM","8/2/2011"
-"3546","4/12/1996 9:10:05 AM","Laboratory","CME","Chemac Environmental Services","N","1-368 Industrial Ave.","Kelowna","Jock Hawkey","","(250)763-5090","EMS","11/3/1997 1:55:30 PM","UMULLER","3/7/1986","6/3/2008 9:40:00 AM"
-"3615","4/12/1996 9:10:05 AM","Laboratory","KWW","Kamloops Waste Water Treatment Centre","Y","3300 Mission Flats Road","Kamloops","Leo Albrecht","","(250)828-1874","EMS","9/30/1997 11:26:41 AM","UMULLER","3/29/2022","3/31/2025"
-"3882","6/3/1997 11:22:15 AM","Laboratory","FES","Fraser Environmental Services","Y","","","","","","NPEPPIN","","","7/6/1995","9/11/2019 1:00:00 PM"
-"3952","4/12/1996 9:10:05 AM","Laboratory","CHL","Chemex Labs. Ltd.","N","212 Brooksbank Ave.","North Vancouver","Brenda Canghlin","","(604)984-0221","EMS","2/10/1998 9:37:05 AM","UMULLER","1/7/1987 8:00:00 AM","2/25/2020 6:00:00 AM"
-"4330","4/12/1996 9:10:05 AM","Laboratory","NS","Not specified","N","","","","","","EMS","3/8/1996 12:21:47 PM","MPAK","10/9/1969 1:00:00 PM","3/30/2007 8:00:00 AM"
-"4398","4/12/1996 9:10:05 AM","Laboratory","IRC","Integrated Resource Conslt.Inc","Y","160-14480 River Road","Richmond","Don Larson","","(604)278-7714","EMS","9/30/1997 11:15:04 AM","UMULLER","7/10/1995 12:00:00 PM","3/31/2025 7:00:00 AM"
-"4448","4/12/1996 9:10:05 AM","Ministry","80","Southern Region, Penticton","Y","102 Industrial Place","Penticton","","","","EMS","5/10/2004 1:06:19 PM","UMULLER","6/26/1996 4:05:00 PM","7/11/2010 6:45:00 AM"
-"5139","10/15/2008 5:35:07 PM","Laboratory","NE","Nautilus Environmental","Y","8664 Commerce Court","Burnaby","Armando Tang","armando@nautilusenvironmental.com","604-420-8773","RDGIBSON","10/17/2008 4:58:02 PM","EMS","9/9/2008 7:02:00 AM","2/25/2025 6:00:00 AM"
-"5660","4/12/1996 9:10:05 AM","Laboratory","JBL","JB Laboratories Ltd.","Y","827 Fort Street","Victoria","John Evanhoff","","(250)385-6112","EMS","9/30/1997 11:18:39 AM","UMULLER","1/27/1986 11:00:00 AM","7/5/2005 12:16:00 PM"
-"5858","8/9/2022 3:40:18 PM","Laboratory","TRICH","Trich Analytics","Y","207-1753 Sean Heights","Saanichton","Jennie Christensen","","2505321084","EMS","8/18/2022 8:35:37 PM","EMS","4/13/2022 1:00:00 AM","12/12/2024 3:00:00 PM"
-"6499","4/12/1996 9:10:05 AM","Laboratory","EC","Environment Canada/Fisheries","Y","","","","","","EMS","6/16/1998 2:39:06 PM","UMULLER","9/15/1993","9/4/2007 7:30:00 AM"
-"7155","4/12/1996 9:10:05 AM","Laboratory","NWP","Nanaimo Water Pollution Control Centre","Y","4600 Hammond Bay Road","Nanaimo","Mike Brophy","","(250)758-1157","EMS","9/30/1997 1:19:03 PM","UMULLER","7/1/2015","3/31/2025"
-"7760","4/12/1996 9:10:05 AM","Laboratory","MXC","Methanex Corp.","Y","P.O. Box 176","Kitimat","Jason Galbavy","jgalbavy@methanex.com","250-639-3232","EMS","10/17/2011 11:54:36 AM","RDGIBSON","5/29/1995","3/31/2016"
-"7823","3/17/2009 10:22:15 AM","Laboratory","SEH","UBC School of Environmental Health","Y","UBC Library Processing Centre","Vancouver","Dr. Winnie Chu","winnie.chu@ubc.ca","(604) 822-9580","RDGIBSON","4/3/2009 2:50:45 PM","RDGIBSON","12/14/2008","3/16/2012"
-"7943","10/17/2016 2:43:10 PM","Laboratory","BRK","Brooks Applied Labs","Y","18804 North Creek Parkway, Suite 100","Bothell","Ben Wozniak","info@brooksapplied.com","206-632-6206","RRENTON","","","7/2/2017 9:00:00 AM","12/31/2024 10:35:00 AM"
-"9749","4/30/1997 10:56:12 AM","Laboratory","PLL","Passmore Laboratory Ltd.","Y","4235 Passmore","Winlaw","","","(250)226-7339","MPAK","5/29/2001 9:05:15 AM","NPEPPIN","3/25/1987","3/13/2008"
-"10443","4/12/1996 9:10:05 AM","Field","FDF","Federal - Field","N","","","","","","EMS","3/8/1996 11:52:13 AM","MPAK","1/3/1980 3:50:00 PM","9/30/2011"
-"11023","4/12/1996 9:10:05 AM","Laboratory","FDL","Federal Laboratory","Y","","","","","","EMS","4/22/1997 3:46:05 PM","MPAK","1/3/1980 3:50:00 PM","7/11/2011"
-"11662","4/12/1996 9:10:05 AM","Laboratory","ETL","Eco-Tech Lab Ltd.","Y","10041 ETC Highway","Kamloops","Frank Pezzotti","","(250)573-5700","EMS","11/4/1997 1:28:31 PM","UMULLER","1/1/1984","12/17/2009 3:00:00 PM"
-"13295","12/3/2002 2:47:21 PM","Permittee","AEO","Associated Environmental Operators Inc.","Y","1058 Fraserview Street","Port Coquitlam","David McIntyre","david@aeo.ca","(604)476-1314","UMULLER","","","1/1/2002","5/26/2015 12:25:00 PM"
-"15482","4/12/1996 9:10:05 AM","Laboratory","ECO","Econotec Services Ltd.","Y","852 Derwent Way","New Westminster","T.E. Peel","","(604)526-4221","EMS","9/30/1997 9:21:58 AM","UMULLER","1/1/1989","2/25/2025 6:00:00 AM"
-"15563","4/12/1996 9:10:05 AM","Laboratory","EVE","Elk Valley Environmental Labs","Y","#115 Elk Valley","Sparwood","Pal Sharma","","(250)425-6900","EMS","9/30/1997 9:25:31 AM","UMULLER","5/25/1992","3/26/2025"
-"16833","4/12/1996 9:10:05 AM","Laboratory","PGW","Prince George Wastewater Treatment Ctr","Y","4055 Lansdown Road","Prince George","Norm Gobbi","","(250)562-4578","EMS","11/5/1997 8:34:01 AM","UMULLER","1/1/1995","2/9/2005"
-"20525","4/12/1996 9:10:05 AM","Laboratory","EPP","Eurocan Pulp and Paper Co. Main Lab","Y","P.O. Box 1400","Kitimat","Kathleen Byers","","(250)532-6111","EMS","9/30/1997 9:34:31 AM","UMULLER","8/1/1996","1/31/2010 7:00:00 AM"
-"20621","5/14/2008 4:10:24 PM","Permittee","CX","Corix Utilities - Panorama","Y","Box 36, 2120 Toby Creek Rd","Panorama","Sheree Lancaster","Sheree.Lancaster@corix.com","250 341-6198","RDGIBSON","","","4/1/2008","3/31/2025"
-"21638","1/5/2016 2:31:46 PM","Laboratory","MVQ","Metro Vancouver-Quality Control Lab","Y","4330 Kingsway","Burnaby","Andjela Knezevic-Stevanovic","see comment","778-452-2638","RDGIBSON","","","1/1/2016","2/28/2025 11:59:00 PM"
-"22092","4/12/1996 9:10:05 AM","Laboratory","BCR","B.C. Research Inc.","Y","3650 Wesbrook Mall","Vancouver","Dr. Jim McKinley","","(604)224-4331","EMS","2/4/1998 3:33:48 PM","UMULLER","6/4/1986 8:00:00 AM","2/25/2025 6:00:00 AM"
-"22283","4/12/1996 9:10:05 AM","Laboratory","JRL","JR Laboratories Inc.","Y","#12-3871 North Fraser Way","Burnaby","Clara Faan","","(604)432-9311","EMS","11/4/1997 3:40:32 PM","UMULLER","6/29/1991 12:40:00 PM","2/4/2025 6:00:00 AM"
-"27218","4/12/1996 9:10:05 AM","Laboratory","ASL","ASL Analytical Service Laboratories Ltd.","Y","1988 Triumph Street","Vancouver","Brent Makelki, James R. Downie","","(604)253-4188","EMS","9/29/1997 3:19:07 PM","UMULLER","4/25/1987 12:00:00 PM","9/19/2017 10:10:00 AM"
-"28251","3/5/1997 9:33:04 AM","Laboratory","NTL","National Lab for Environmental Testing","Y","","","","","","NPEPPIN","","","1/21/1991 9:05:00 AM","11/16/2023 10:45:00 AM"
-"28497","4/12/1996 9:10:05 AM","Laboratory","CTL","Can-Test Ltd.","Y","4606 Canada Way","Burnaby","Robert Hunter (Don Enns, Head)","","(604)734-7276","EMS","4/10/2000 1:12:26 PM","NPEPPIN","3/10/1982","11/15/2024 8:00:00 AM"
-"29408","4/12/1996 9:10:05 AM","Laboratory","KPC","Kelowna Pollution Control Centre","Y","951 Raymer Ave.","Kelowna","Sheila Carey","","(250)762-4616","EMS","9/30/1997 11:28:49 AM","UMULLER","1/1/2001","2/28/2025"
-"30071","4/12/1996 9:10:05 AM","Laboratory","CIN","Canadianoxy Industrial Chem. (Nanaimo)","Y","Reserve Mine Road","Nanaimo","Andrew Swocoda","","(250)722-2212","EMS","9/30/1997 8:22:33 AM","UMULLER","4/1/1999 8:00:00 AM","6/30/2022 8:00:00 AM"
-"36256","4/12/1996 9:10:05 AM","Laboratory","EQF","Equis Field","Y","","","","","","EMS","6/16/1998 2:41:44 PM","UMULLER","1/3/1965 12:00:00 PM","9/15/1986 1:58:00 PM"
-"44139","4/12/1996 9:10:05 AM","Permittee","QRP","Quesnel River Pulp Co.","Y","Box 9500","Quesnel","Anna Rankin","","(250)992-8919","EMS","9/30/1997 3:59:32 PM","UMULLER","1/1/1992","2/28/2025 7:00:00 AM"
-"46724","4/12/1996 9:10:05 AM","Permittee","CPP","Cariboo Pulp & Paper Co.","Y","P.O. Box 7500","Quesnel","John Morrison","","(250)992-0211","EMS","9/30/1997 8:33:09 AM","UMULLER","9/1/1991","2/28/2025 6:00:00 AM"
-"47803","4/12/1996 9:10:05 AM","Laboratory","ENL","Environmental Laboratory","N","","","","","","EMS","3/19/2002 2:59:50 PM","UMULLER","1/13/1981 10:30:00 AM","9/12/1996 10:00:00 AM"
-"50130","4/12/1996 9:10:05 AM","Laboratory","EQL","Equis Environmental Lab","Y","","","","","","EMS","6/16/1998 2:42:04 PM","UMULLER","4/23/1971","3/13/1985 11:53:00 AM"
-"58966","11/3/1997 1:58:02 PM","Laboratory","CAR","CARO Environmental Services","Y","1-368 Industrial Ave.","Kelowna","Jock Hawkey","caroenvironmental@shaw.ca","(250)763-5090","UMULLER","4/5/2004 1:23:04 PM","UMULLER","10/8/1996","4/9/2025 7:30:00 AM"
-"67546","4/21/1997 9:17:27 AM","Laboratory","PYLET","Environment Canada (PESC)","Y","Pacific Environmental Science Center","North Vancouver","","","","MPAK","3/12/2018 12:39:39 PM","JKROGH","8/19/1966","8/26/2004"
-"69385","4/12/1996 9:10:05 AM","Field","FLD","Field (MOE)","Y","","","","","","EMS","3/8/1996 11:59:37 AM","MPAK","6/2/1971","3/31/2025 11:49:00 AM"
-"71755","4/12/1996 9:10:05 AM","Laboratory","NPM","Nickel Plate Mine - Assay Lab","Y","Homestake Canada Inc.","Above Hedley","Diane Weiler/Ken Heaton","","(250)292-8224","EMS","9/30/1997 1:22:21 PM","UMULLER","3/13/1987 12:00:00 PM","2/26/2015 12:00:00 PM"
-"76913","4/12/1996 9:10:05 AM","Permittee","EQP","Equis Permittee","Y","","","","","","EMS","6/16/1998 2:48:33 PM","UMULLER","4/1/1966","10/23/1987 10:50:00 AM"
-"94167","4/12/1996 9:10:05 AM","Laboratory","ECC","Elkview Coal Corp. Central Lab","Y","Michel Creek Road (Lab)","Sparwood","Colin Lynch","Colin.Lynch@teck.com","(250)425-8241","EMS","1/22/2014 2:21:03 PM","RDGIBSON","8/16/1995","2/28/2025 12:00:00 PM"
-"120921","5/16/2005 12:53:23 PM","Laboratory","MX","Bureau Veritas Laboratories (Maxxam)","Y","4606 Canada Way","Burnaby","Morgan Melnychuk","customersolutionswest@bvlabs.com","(604)-638-8034","UMULLER","9/16/2020 4:45:25 PM","RDGIBSON","3/7/1999","4/8/2025 9:00:00 AM"
-"121356","4/12/1996 9:10:05 AM","Laboratory","ZN","Philip Analyt. Services (formerly Zenon)","Y","","","","","","EMS","2/24/1997 1:32:39 PM","MPAK","8/17/1980 1:30:00 PM","3/31/2025 7:00:00 AM"
-"195650","4/12/1996 9:10:05 AM","Laboratory","ALS","ALS Global","Y","","","Kenneth Peckham","Kenneth.Peckham@ALSGlobal.com","780 413 5241","EMS","9/10/2015 2:07:09 PM","RDGIBSON","11/3/1981 9:50:00 AM","4/10/2025 10:16:00 AM"
-"916981","4/12/1996 9:10:05 AM","Permittee","PE","Permittee","Y","","","","","","EMS","6/16/1998 2:41:26 PM","UMULLER","1/15/1979 9:00:00 AM","4/1/2025 11:00:00 PM"
+﻿Samples,WHEN_CREATED,Type,SHORT_NAME,NAME,ACTIVE_IND,ADDRESS_1,CITY,CONTACT_NAME,E_MAIL_ADDR,PHONE_NUMBER,WHO_CREATED,WHEN_UPDATED,WHO_UPDATED,First,Last
+0,2/2/2010 10:55:20 AM,Ministry,72,"Omineca-Peace, Fort St. John",Y,Suite 400 - 10003 110th Avenue,Fort St. John,Cameron Eggleston,Cameron.Eggleston@gov.bc.ca,(250) 787-3217,EMS,2/2/2010 10:57:05 AM,EMS,,
+0,3/11/2010 9:38:11 AM,Consultant,PW,Paradox Water & Wastewater Treatment Co.,Y,Box 1302 Station Main,Kamloops,Tyrone McCabe,paradoxwater@shaw.ca,250-320-3329,RDGIBSON,,,,
+0,10/15/2013 2:26:18 PM,Ministry,FLNRO,"Ministry of Forests, Lands and Natural",Y,4th Floor - 780 Blanshard Street,Victoria,Joanna Runnells,Joanna.Runnells@gov.bc.ca,250 356-5209,RDGIBSON,10/15/2013 2:43:20 PM,RDGIBSON,,
+0,1/30/2014 4:42:24 PM,Consultant,BV,Bulkley Valley Research Centre,Y,3883 Third Avenue,Smithers,Kirsteen Laing,kirsteen.laing@bvcentre.ca,(250) 847-2827,RDGIBSON,9/24/2015 1:55:37 PM,RDGIBSON,,
+0,6/30/2015 2:22:11 PM,Permittee,SRC,Sona Resources Corp,Y,103 - 145 15th Street West,North Vancouver,John Thompson,jpthompson@sonaresources.com,1-604-684-6677,RDGIBSON,,,,
+0,9/17/2015 3:38:28 PM,Consultant,KEL,Keystone Environmental Ltd. (Burnaby),Y,320 4400 Dominion Street,Burnaby,Jason Christensen,jchristensen@keystoneenvironmental.ca,(604) 430-0671,RDGIBSON,9/17/2015 3:38:49 PM,RDGIBSON,,
+0,6/30/2016 3:27:50 PM,Field,BCF,BC Conservation Foundation (BCCF),Y,#1-7217 Lantzville Road,Lantzville,Jeramy Damborg,jdamborg@bccf.com,(250) 390-2525,RDGIBSON,7/4/2016 8:55:25 AM,RDGIBSON,,
+0,7/12/2016 1:41:35 PM,Consultant,AE,Associated Environmental Consultants Inc,Y,#200 - 2800 29th Street,Vernon,Brenda Miskimmin,miskimmisnb@ae.ca,250-545-3672,JAUSTIN,7/19/2017 4:46:32 PM,RDGIBSON,,
+0,8/23/2016 11:22:08 AM,Ministry,73,"Omineca-Peace, Prince George, FLNRO",Y,499 George St,Prince George,Jun Yin,jun.yin@gov.bc.ca,778-693-3015,RRENTON,,,,
+0,4/24/2017 8:16:07 AM,Field,FWF,Freshwater Fisheries,Y,101 80 Regatta Landing,Victoria,Kirstin Gale,Kirstin.gale@gofishbc.com,(250) 414-4217,RRENTON,,,,
+0,9/19/2017 9:17:10 AM,Consultant,GHD,GHD Limited,Y,10271 Shellbridge Way,Richmond,James Reid,james.a.reid@ghd.com,(604) 214-0510,JKROGH,,,,
+0,10/24/2017 10:45:25 AM,Field,CRD,Capital Regional District,Y,625 Fisgard St,"Victoria, BC",Glenn Harris,gharris@crd.bc.ca,250-360-3090,EMS,,,,
+0,7/10/2018 2:52:20 PM,Consultant,SYL,SYLVIS Environmental Services,Y,427 Seventh Street,New Westminster,Mike Van Ham,mvanham@sylvis.com,6047779788x105,RDGIBSON,,,,
+0,7/30/2019 9:42:47 AM,Consultant,LEPS,Langley Enviro. Partners Society,Y,201-4839 221 St.,Langley,Pina Viola,water@leps.bc.ca,604-546-0340,KATFRASE,7/30/2019 10:09:07 AM,KATFRASE,,
+0,2/12/2020 11:18:41 AM,Consultant,AEL,ANCOR ENVIRONMENTAL LTD.,Y,,Surrey,Steve Horvath,steve.horvath@telus.net,604 535-4832,RDGIBSON,,,,
+0,8/6/2020 1:13:01 PM,Consultant,GES,Goode Environmental Services Ltd,Y,3786 Belgrave Road,Victoria,Sheena Goode-Jensen BSc.,sheena@goode-enviro.com,250 812-4795,RDGIBSON,,,,
+0,2/10/2021 9:00:24 AM,Laboratory,FN,Fort Nelson First Nations,Y,"RR 1, Mile 295 Alaska Highway",Fort Nelson,Marilyn Norby,fieldcoordinator@fnnation.ca,250-774-6313,RDGIBSON,2/10/2021 9:55:14 AM,RDGIBSON,,
+0,10/6/2021 2:52:05 PM,Laboratory,ALK,ALS Environmental ? Kamloops,Y,2B-1445 McGill Rd,Kamloops,Amanda Lampreau,amanda.lampreau@alsglobal.com,1 250 372 3678,RDGIBSON,,,,
+0,10/13/2021 4:25:10 PM,Laboratory,NAL,Northern Analytical Lab Services,Y,Research Laboratory Building (#4-234),Prince George,Ann Duong,nals@unbc.ca,250-960-5713,RDGIBSON,,,,
+0,3/19/2024 1:46:47 PM,Consultant,SLR,SLR Consulting (Canada) Ltd.,Y,#200 -887 Great Northern Way,Vancouver,Ian Young; Commercial Manager,iyoung@slrconsulting.com,(604)-738-2500,RDGIBSON,,,,
+0,11/28/2024 3:17:36 PM,Laboratory,ISO,Isobrine Solutions Inc,Y,9330 60 Avenue NW,Edmonton,,queries@isobrine.com,780-433-3699,EMS,12/3/2024 4:14:48 PM,EMS,,
+0,3/20/2025 9:16:49 AM,First Nations,KENTEM,K'en T'em Limited Partnership,Y,2025 Granite Ave,Merritt,Brady Utas, butas@kentem.ca,,EMS,,,,
+1,4/12/1996 9:10:05 AM,Laboratory,EPS,E.P.S. Bioassay Lab,N,,,,,,EMS,,,1/17/1995 9:10:00 AM,1/17/1995 9:10:00 AM
+1,4/12/1996 9:10:05 AM,Laboratory,NPT,Northwood Pulp and Timber,Y,Pulp Mill Stores,Prince George,Sandra Morrison,,(250)962-3436,EMS,9/30/1997 1:28:40 PM,UMULLER,8/31/1999,8/31/1999
+1,11/27/2000 2:02:02 PM,Laboratory,CBK,City of Cranbrook,Y,,Cranbrook,,,,NPEPPIN,11/27/2000 2:02:20 PM,NPEPPIN,8/4/2022 10:30:00 AM,8/4/2022 10:30:00 AM
+2,4/12/1996 9:10:05 AM,Laboratory,ATR,Aqua Technical Research Ltd,N,,,,,,EMS,,,9/9/1986,10/8/1986
+2,4/12/1996 9:10:05 AM,Laboratory,WTL,Wellington Laboratories,N,,,,,,EMS,,,11/23/1999 8:00:00 AM,3/12/2000 8:00:00 AM
+5,7/8/2002 1:18:55 PM,Laboratory,DOL,Danusia Dolecki,Y,1158 Forge Walk,Vancouver,,dolecki@zoology.ubc.ca,(604)738-1548,UMULLER,7/8/2002 1:21:46 PM,UMULLER,10/9/2001 10:00:00 AM,10/9/2001 12:00:00 PM
+5,7/30/2019 9:51:23 AM,Laboratory,EDGE,Edge Analytical Laboratories,Y,1620 S Walnut St,Burlington,Lawrence J Henderson,ljh@edgeanalytical.com,360-757-1400,KATFRASE,,,10/19/2015 11:30:00 AM,10/19/2015 12:25:00 PM
+6,4/12/1996 9:10:05 AM,Laboratory,KAS,Kimberley Analytical Services,Y,Cominco Ltd. Sullivan,Kimberley,Gerry Ogilvie,,(250)427-8442,EMS,10/2/1997 3:01:35 PM,UMULLER,5/1/1996 2:30:00 PM,12/5/1996
+6,5/6/2002 10:23:57 AM,Consultant,BCBC,BCBC,Y,201-32555 Simon Avenue,Abbotsford,Doug Gosling,DGosling@bcbc.bc.ca,(604)870-5008,UMULLER,,,5/22/2007 12:30:00 PM,5/22/2007 12:30:00 PM
+7,6/20/1996 11:51:31 AM,Laboratory,PEP,P.L.,N,,,,,,NPEPPIN,2/18/2002 12:49:46 PM,UMULLER,4/7/2003,5/20/2003
+8,4/12/1996 9:10:05 AM,Laboratory,PCR,Petro-Canada - Port Moody Refinery,Y,1155 Glenayre Dr.,Port Moody,Ken Mak,,(250)931-9320,EMS,9/30/1997 1:36:52 PM,UMULLER,6/5/2004 12:00:00 PM,7/1/2012 8:00:00 AM
+8,4/12/1996 9:10:05 AM,Laboratory,SGS,SGS Canada,Y,1001 East Pender Street,Vancouver,Peter Taylor,,(604)254-1647,EMS,9/30/1997 4:05:53 PM,UMULLER,9/27/2023 9:05:00 AM,10/24/2023 9:15:00 AM
+10,4/12/1996 9:10:05 AM,Ministry,60,Skeena,Y,"3726 Alfred Avenue, Bag 5000",Smithers,,,(250)847-7260,EMS,6/16/1998 2:37:27 PM,UMULLER,3/27/2010 9:30:00 AM,3/27/2010 9:30:00 AM
+11,4/12/1996 9:10:05 AM,Laboratory,ALC,Alcan Analytical Lab,Y,No. I Smeltersite Rd.,Kititmat,Frank Burton,,(250)639-8312,EMS,9/30/1997 8:08:44 AM,UMULLER,2/5/2008 8:50:00 AM,6/15/2023 7:30:00 AM
+11,4/12/1996 9:10:05 AM,Ministry,FE,Federal,Y,,,,,,EMS,6/16/1998 2:39:21 PM,UMULLER,6/9/1995,10/31/1996 9:15:00 AM
+11,1/9/2001 4:05:13 PM,Laboratory,PS,Pacific Soils,Y,5- 11720 Voyageur Way,Richmond,,,(604)273-8022,NPEPPIN,1/10/2001 8:45:12 AM,NPEPPIN,8/30/2000,10/13/2000 12:05:00 AM
+13,4/12/1996 9:10:05 AM,Laboratory,WCE,Westcoast Energy S.P.D.,Y,3025 Industrial Way,Prince George,Victor Kovacs,,(250)561-1670,EMS,10/1/1997 9:00:38 AM,UMULLER,7/10/1997,7/9/1998
+15,4/12/1996 9:10:05 AM,Laboratory,SAS,Seakem Analytical Services Ltd,N,,,,,,EMS,,,10/1/1991 7:00:00 AM,6/23/1995 7:00:00 AM
+19,3/21/2025 3:25:12 PM,Laboratory,UWAT,Kuncheng Zhao,Y,200 University Ave. W.,Waterloo,Client Services Assistant/Lab Technician,eilab@uwaterloo.ca,,EMS,,,9/29/2024,2/20/2025
+23,1/25/2021 1:29:34 PM,Ministry,MEM,Ministry of Energy and Mines,Y,Abandoned Mines Branch,Victoria,Anika Bergen,Anika.Bergen@gov.bc.ca,236-478-2502,RDGIBSON,1/25/2021 1:30:09 PM,RDGIBSON,4/3/2024 12:01:00 PM,4/3/2024 12:01:00 PM
+26,4/12/1996 9:10:05 AM,Ministry,WA,Water Quality,Y,P.O.Box 9340,Victoria,,,(250)387-9494,EMS,7/29/1998 1:23:10 PM,UMULLER,5/12/1976 10:00:00 AM,4/7/2011
+34,4/12/1996 9:10:05 AM,Laboratory,CRL,Canadian Resource Laboratories,N,,,,,,EMS,,,7/12/1987 12:05:00 PM,9/8/1988 8:30:00 AM
+40,4/12/1996 9:10:05 AM,Laboratory,CGL,Chemical & Geological Lab. Inc,Y,14203-129 Ave.,Edmonton,"Bob Cleary, Karen Schick",,(403)454-1504,EMS,9/30/1997 8:58:35 AM,UMULLER,5/1/1984,12/11/2024 4:13:00 PM
+41,4/12/1996 9:10:05 AM,Laboratory,LAS,Levelton Analytical Services,Y,#1-12791 Clarke Place,Richmond,Tory Ovthrie,,(604)278-1411,EMS,9/30/1997 1:07:08 PM,UMULLER,9/11/2006 12:10:00 PM,12/4/2006 2:50:00 PM
+42,1/29/2018 11:04:17 AM,Laboratory,ALA,Mark Lanfranco,Y,"Unit #101, 9488",Surrey,,mark.lanfranco@alanfranco.com,(604) 881-2582,JKROGH,,,4/24/2018 12:00:00 PM,10/17/2024 12:00:00 PM
+49,4/12/1996 9:10:05 AM,Ministry,90,"Headquarters, Victoria",Y,525 Superior Street,Victoria,,,,EMS,7/10/2018 3:18:12 PM,RDGIBSON,6/25/2003 12:00:00 PM,2/12/2004 11:00:00 AM
+54,9/30/1997 9:28:15 AM,Laboratory,ENT,Enviro Test Laboratories,Y,9936-67th Avenue,Edmonton,Beth Weitzel,,(403)434-9509,UMULLER,9/30/1997 9:33:01 AM,UMULLER,12/16/1998 8:00:00 AM,2/7/2008 8:00:00 AM
+57,2/3/2022 4:08:23 PM,Laboratory,SFU,SFU Earth Sciences,Y,Simon Fraser University,Burnaby,Dirk Kirste,dirk_kirste@sfu.ca,778-882-1911,RDGIBSON,,,9/10/2018 10:36:00 AM,3/1/2019 1:24:00 PM
+59,4/12/1996 9:10:05 AM,Laboratory,ASC,Ascent Services,Y,,,,,,EMS,3/8/1996 11:49:17 AM,MPAK,2/19/1992,9/16/2002
+61,4/12/1996 9:10:05 AM,Laboratory,WCT,Willis Cunliffe & Tait,Y,,,,,,EMS,,,1/9/1984 12:50:00 PM,8/30/1989
+66,4/12/1996 9:10:05 AM,Laboratory,WSH,WSH Laboratories (1989) Ltd.,N,,,,,,EMS,,,1/4/1996,12/5/2000
+70,4/4/2019 2:44:51 PM,Laboratory,EXA,Exact Scientific Services,Y,1355 Pacific Place,Ferndale,,lab@exactscientific.com,360-733-1205,RPWILLIA,4/4/2019 2:47:57 PM,RPWILLIA,11/15/2018 9:40:00 AM,3/7/2019 10:26:00 AM
+80,4/12/1996 9:10:05 AM,Laboratory,WLL,Wood Laboratory Ltd.,Y,,,,,,EMS,,,1/20/1986 9:00:00 AM,10/21/1997
+89,2/10/1998 9:39:04 AM,Laboratory,MAX,Maxxam Labs Ltd.,Y,212 Brooksbank Ave.,North Vancouver,Brenda Canghlin,,(604) 984-0221,UMULLER,3/12/2018 12:40:34 PM,JKROGH,3/24/1997 8:30:00 AM,7/7/2009 12:00:00 PM
+116,4/12/1996 9:10:05 AM,Laboratory,CAS,Cominco Analytical Services,Y,Cominco Metals,Trail,Thorpe W. Watson,,(250)364-4403,EMS,9/30/1997 8:55:41 AM,UMULLER,2/27/1989,12/21/2021
+124,4/12/1996 9:10:05 AM,Laboratory,LFM,Lakefield Laboratories,Y,,,,,,EMS,,,1/4/1989,3/4/1991
+130,6/12/2014 1:19:32 PM,Laboratory,MAC,Maxxam Analytics Calgary,Y,2021 - 41st Ave NE,Calgary,Leslie Lem,llem@maxxam.ca,250 291 3077,RDGIBSON,9/17/2015 3:40:53 PM,RDGIBSON,6/6/2014,5/5/2017
+130,7/13/2020 12:39:52 PM,Laboratory,BIO,Biologica Environmental Services Ltd,Y,488-F Bay Street,Victoria,Tara Macdonald PhD RPBio,breanna@biologica.ca,250-479-3868,RDGIBSON,7/14/2020 11:13:38 AM,RDGIBSON,8/19/2020 9:30:00 AM,10/17/2022
+138,5/14/2018 9:46:24 AM,Laboratory,SWA,UBC Soil Water and Air Labortory,Y,421-2202 Main Mall,Vancouver,Mark Johnson,mark.johnson@ubc.ca,604 822  7725,RDGIBSON,6/4/2018 1:39:56 PM,RDGIBSON,6/25/2015 12:00:00 PM,6/29/2016 12:00:00 PM
+153,4/12/1996 9:10:05 AM,Laboratory,CAV,Cavendish Analytical Lab Ltd.,Y,2225 S. Springer Ave.,Burnaby,Kim Reeves,,(604)299-2560,EMS,11/4/1997 11:43:50 AM,UMULLER,2/10/1999,3/14/2001
+164,4/12/1996 9:10:05 AM,Laboratory,NSR,Norwest Soil Research Inc.,Y,Unit 104,Surrey,Thomas Guthrie,,(604)514-3322,EMS,1/11/1999 1:05:41 PM,NPEPPIN,9/30/1998,5/2/2006 11:15:00 AM
+177,2/22/2011 11:52:08 AM,Laboratory,MF,Ministry of Environment Lab,Y,4300 North Road,Victoria,Shannon Berch,Shannon.Berch@gov.bc.ca,(250) 952-4122,RDGIBSON,2/22/2011 2:43:14 PM,RDGIBSON,4/3/2024 12:01:00 PM,8/20/2024 10:44:00 AM
+190,4/12/1996 9:10:05 AM,Laboratory,AXL,Axys Laboratories,Y,2045 Mills Rd.,Sidney,Dr. M.C. Hamilton,,(250)656-0881,EMS,9/29/1997 4:14:22 PM,UMULLER,8/18/1993,12/11/2024
+194,3/5/1997 10:34:11 AM,Consultant,VL,Volunteer,Y,,,,,,NPEPPIN,9/1/1999 11:15:18 AM,UMULLER,2/21/1996,7/10/2007 9:52:00 AM
+200,4/12/1996 9:10:05 AM,Laboratory,IGM,IG Micromed Environmental Inc.,Y,,,,,,EMS,3/8/1996 12:14:51 PM,MPAK,11/28/1995,10/22/2015 9:00:00 AM
+215,4/12/1996 9:10:05 AM,Laboratory,HCL,HydroQual Lab Ltd.,Y,"#3, 6125 - 12th Street S.E.",Calgary,Gordon Balch,,(403)253-7121,EMS,2/19/2001 10:33:16 AM,NPEPPIN,12/29/1997,10/29/2021
+237,4/12/1996 9:10:05 AM,Ministry,10,"Vancouver Island, Nanaimo",Y,2080-A Labieux Road,Nanaimo,,,(250)751-3100,EMS,4/25/2001 8:59:00 AM,JYAXLEY,6/16/1997 1:47:00 PM,6/28/2007 11:25:00 AM
+261,5/14/2020 3:43:41 PM,Laboratory,AT,AquaTox Testing & Consulting Inc.,Y,B-11 Nicholas Beaver Rd.,Puslinch,Lesley Novak; M.ScPresident; Director of Laboratory Services,lnovak@aquatox.ca,1-519-763-4412,RDGIBSON,5/26/2020 9:44:44 AM,RDGIBSON,4/9/2020 7:00:00 AM,2/25/2025 7:00:00 AM
+278,4/12/1996 9:10:05 AM,Laboratory,LEL,Env Lab - Modified by Lab,N,,,,,,EMS,3/8/1996 12:17:00 PM,MPAK,2/19/1985 1:30:00 PM,10/30/1988
+308,8/18/2010 11:35:24 AM,Laboratory,COR,Cordillera Consulting,Y,Unit 1 13216 Henry Ave,Summerland,Sue Salter,suesalter@shaw.ca,(250) 494-7553,RDGIBSON,8/8/2022 9:34:38 AM,EMS,9/4/2013 12:00:00 PM,10/3/2019 10:15:00 AM
+327,4/12/1996 9:10:05 AM,Laboratory,RPS,Radiation Protection Service,N,,,,,,EMS,,,11/25/1987,4/15/1992
+354,8/29/2018 3:33:40 PM,Laboratory,ANL,A & L Canada Laboratories,Y,2136 Jetstream Rd.,London,Ian Mclachlin,alcanadalabs@alcanada.com,519 457-2575,RDGIBSON,,,9/30/2016,10/23/2018
+503,4/12/1996 9:10:05 AM,Laboratory,SLL,Soilcon Laboratories Ltd.,Y,Unit 275,Richmond,Douglas Chromb,,(604)278-5535,EMS,9/30/1997 4:18:02 PM,UMULLER,3/7/2000 9:35:00 AM,11/8/2001 11:15:00 AM
+524,4/12/1996 9:10:05 AM,Laboratory,QTL,Quanta Trace Laboratories,Y,401-3700 Gilmore Way,Burnaby,Walter Brandl,,(604)438-5226,EMS,9/30/1997 3:57:44 PM,UMULLER,7/27/1987 12:10:00 PM,6/24/1997 8:00:00 AM
+757,4/21/2023 10:11:07 AM,Permittee,CEI,Chemtrade Electrochem Inc.,Y,100 Amherst Ave.,North Vancouver,Owen Horn,OHorn@chemtradelogistics.com,,EMS,4/21/2023 10:14:20 AM,EMS,10/1/2022,12/31/2024
+835,5/21/2020 3:19:24 PM,Laboratory,LAC,Larratt Aquatic Consulting Ltd.,Y,2605 Campbell Rd,West Kelowna,Jamie Self; BSc; RPBio; Aquatic Biologist,jamie.self@lakebiology.ca,250-300-5166,RDGIBSON,,,2/10/2016,9/19/2024
+852,4/12/1996 9:10:05 AM,Laboratory,MEL,Env Lab - Modified by Field,N,,,,,,EMS,3/19/2002 2:52:19 PM,UMULLER,10/2/1984 12:00:00 PM,1/30/2025 9:59:00 AM
+994,4/12/1996 9:10:05 AM,Laboratory,BEL,Env Lab - Field entered,Y,,,,,,EMS,3/6/1996 3:40:24 PM,EMS,4/12/1978 11:00:00 AM,12/28/1988
+1008,4/12/1996 9:10:05 AM,Laboratory,GML,Gibraltar Mines,Y,,,,,,EMS,6/19/1998 2:10:34 PM,UMULLER,3/20/1983,3/31/1992 8:00:00 AM
+1015,4/12/1996 9:10:05 AM,Laboratory,EVS,E.V.S. Consultants Ltd.,Y,195 Pemberton Avenue,North Vancouver,Cathy McPherson,,(604)986-4331,EMS,9/30/1997 9:19:55 AM,UMULLER,1/29/1986,11/8/2022 7:00:00 AM
+1163,4/12/1996 9:10:05 AM,Laboratory,AGR,Agra Earth & Environmental Ltd.,Y,4810-93 Street,Edmonton,Raynald Le Blanc,,(403)436-2152,EMS,8/21/2007 4:57:08 PM,EMS,3/4/1997,10/18/2016
+1180,4/12/1996 9:10:05 AM,Laboratory,COL,Core Laboratories Canada Ltd.,Y,1540-25th Ave. N.E.,Calgary,Terry Harper,,(403)250-4084,EMS,11/4/1997 1:05:16 PM,UMULLER,4/1/1987,6/5/2000 9:45:00 AM
+1327,12/14/1998 10:21:52 AM,Laboratory,MXA,Maxxam Analytics Inc.,N,9331 - 48 Street,Edmonton,Forrest Tittle,ftittle@mail.edm.maxxam.ca,(403) 468-3500,UMULLER,9/12/2012 11:52:44 AM,RDGIBSON,4/23/1998,1/27/2025
+1646,4/12/1996 9:10:05 AM,Laboratory,MBR,MB Research & Development Ltd.,Y,10115 McDonald Park Road,Sidney,Dr. Harry Hartmann,,(250)656-1334,EMS,9/30/1997 1:08:44 PM,UMULLER,1/24/2001,2/28/2025 5:00:00 AM
+1821,11/14/1996 10:30:51 AM,Laboratory,HLT,Health Lab,Y,,,,,,MPAK,11/14/1996 10:32:09 AM,MPAK,1/21/1985,11/3/1993 11:45:00 AM
+1937,4/12/1996 9:10:05 AM,Laboratory,NWL,Norwest Labs (Edmonton),Y,9938-67 Ave.,Edmonton,Randy Neumann,,(403)438-5522,EMS,9/30/1997 1:32:23 PM,UMULLER,5/29/1996,3/22/2023
+1990,7/17/2007 5:21:36 PM,Laboratory,ELE,Element Materials Technology (was Exova),Y,#10; 19575 - 55A Avenue,Surrey,Carol Nam; QA Officer,Carol.Nam@exova.com,(604) 514-3322,RDGIBSON,6/10/2020 2:00:33 PM,RDGIBSON,5/9/2006 5:09:00 AM,10/22/2024
+2008,4/12/1996 9:10:05 AM,Laboratory,NHL,Northern Laboratories,Y,780 Alfred Street,Prince Rupert,Charles Armstrong,,(250)627-1906,EMS,9/30/1997 1:26:45 PM,UMULLER,6/17/1981,6/26/2012 12:00:00 PM
+2067,4/12/1996 9:10:05 AM,Permittee,OT,Independent Agent or Other,Y,,,,,,EMS,6/16/1998 2:41:12 PM,UMULLER,1/1/1987,10/11/2023 10:23:00 AM
+2492,4/12/1996 9:10:05 AM,Laboratory,BZN,Zenon Lab Inc. - Field entered,Y,,,,,,EMS,6/16/1998 2:47:10 PM,UMULLER,6/18/1985,10/10/2000
+2611,3/11/2009 2:25:12 PM,Laboratory,BRM,Mine Assay Lab,Y,Bul River Mineral Corporation,Bull River,"Graham Jones, Manager of Environmental Services",Graham@bulrivermineralcorp.com,(250) 429 3711,RDGIBSON,,,3/2/2007,1/31/2015
+2758,4/12/1996 9:10:05 AM,Laboratory,AGA,Agat Laboratories,Y,3801-21st Street NE,Calgary,Bruce Underwood,,(403)299-2000,EMS,9/29/1997 3:21:58 PM,UMULLER,6/1/1993,12/11/2024
+3017,4/12/1996 9:10:05 AM,Laboratory,NIL,North Island Laboratories,Y,#3-2946 Kilpatrick Avenue,Courtenay,Catherine Black,northislandlabs@gmail.com,(250)338-7786,EMS,9/9/2011 2:35:16 PM,RDGIBSON,12/12/1999 12:05:00 PM,4/29/2015 4:01:00 PM
+3171,4/12/1996 9:10:05 AM,Laboratory,BAL,Beak Associates (B.C.) Ltd.,Y,,,,,,EMS,11/4/1997 10:22:24 AM,UMULLER,1/19/1988,2/25/2025 6:00:00 AM
+3333,8/11/2009 2:30:05 PM,Laboratory,KR,Kemetco Research Inc.,Y,445 5600 Parkwood Way,Richmond,Herb Lanz,hlanz@kemetco.com,(604) 273-3600,RDGIBSON,8/11/2009 2:34:49 PM,RDGIBSON,1/4/2010 7:01:00 AM,2/3/2025 7:00:00 AM
+3531,4/12/1996 9:10:05 AM,Laboratory,HGL,Higgins Laboratory,Y,,,,,,EMS,,,4/20/1987 1:00:00 PM,8/2/2011
+3546,4/12/1996 9:10:05 AM,Laboratory,CME,Chemac Environmental Services,N,1-368 Industrial Ave.,Kelowna,Jock Hawkey,,(250)763-5090,EMS,11/3/1997 1:55:30 PM,UMULLER,3/7/1986,6/3/2008 9:40:00 AM
+3615,4/12/1996 9:10:05 AM,Laboratory,KWW,Kamloops Waste Water Treatment Centre,Y,3300 Mission Flats Road,Kamloops,Leo Albrecht,,(250)828-1874,EMS,9/30/1997 11:26:41 AM,UMULLER,3/29/2022,3/31/2025
+3882,6/3/1997 11:22:15 AM,Laboratory,FES,Fraser Environmental Services,Y,,,,,,NPEPPIN,,,7/6/1995,9/11/2019 1:00:00 PM
+3952,4/12/1996 9:10:05 AM,Laboratory,CHL,Chemex Labs. Ltd.,N,212 Brooksbank Ave.,North Vancouver,Brenda Canghlin,,(604)984-0221,EMS,2/10/1998 9:37:05 AM,UMULLER,1/7/1987 8:00:00 AM,2/25/2020 6:00:00 AM
+4330,4/12/1996 9:10:05 AM,Laboratory,NS,Not specified,N,,,,,,EMS,3/8/1996 12:21:47 PM,MPAK,10/9/1969 1:00:00 PM,3/30/2007 8:00:00 AM
+4398,4/12/1996 9:10:05 AM,Laboratory,IRC,Integrated Resource Conslt.Inc,Y,160-14480 River Road,Richmond,Don Larson,,(604)278-7714,EMS,9/30/1997 11:15:04 AM,UMULLER,7/10/1995 12:00:00 PM,3/31/2025 7:00:00 AM
+4448,4/12/1996 9:10:05 AM,Ministry,80,"Southern Region, Penticton",Y,102 Industrial Place,Penticton,,,,EMS,5/10/2004 1:06:19 PM,UMULLER,6/26/1996 4:05:00 PM,7/11/2010 6:45:00 AM
+5139,10/15/2008 5:35:07 PM,Laboratory,NE,Nautilus Environmental,Y,8664 Commerce Court,Burnaby,Armando Tang,armando@nautilusenvironmental.com,604-420-8773,RDGIBSON,10/17/2008 4:58:02 PM,EMS,9/9/2008 7:02:00 AM,2/25/2025 6:00:00 AM
+5660,4/12/1996 9:10:05 AM,Laboratory,JBL,JB Laboratories Ltd.,Y,827 Fort Street,Victoria,John Evanhoff,,(250)385-6112,EMS,9/30/1997 11:18:39 AM,UMULLER,1/27/1986 11:00:00 AM,7/5/2005 12:16:00 PM
+5858,8/9/2022 3:40:18 PM,Laboratory,TRICH,Trich Analytics,Y,207-1753 Sean Heights,Saanichton,Jennie Christensen,,2505321084,EMS,8/18/2022 8:35:37 PM,EMS,4/13/2022 1:00:00 AM,12/12/2024 3:00:00 PM
+6499,4/12/1996 9:10:05 AM,Laboratory,EC,Environment Canada/Fisheries,Y,,,,,,EMS,6/16/1998 2:39:06 PM,UMULLER,9/15/1993,9/4/2007 7:30:00 AM
+7155,4/12/1996 9:10:05 AM,Laboratory,NWP,Nanaimo Water Pollution Control Centre,Y,4600 Hammond Bay Road,Nanaimo,Mike Brophy,,(250)758-1157,EMS,9/30/1997 1:19:03 PM,UMULLER,7/1/2015,3/31/2025
+7760,4/12/1996 9:10:05 AM,Laboratory,MXC,Methanex Corp.,Y,P.O. Box 176,Kitimat,Jason Galbavy,jgalbavy@methanex.com,250-639-3232,EMS,10/17/2011 11:54:36 AM,RDGIBSON,5/29/1995,3/31/2016
+7823,3/17/2009 10:22:15 AM,Laboratory,SEH,UBC School of Environmental Health,Y,UBC Library Processing Centre,Vancouver,Dr. Winnie Chu,winnie.chu@ubc.ca,(604) 822-9580,RDGIBSON,4/3/2009 2:50:45 PM,RDGIBSON,12/14/2008,3/16/2012
+7943,10/17/2016 2:43:10 PM,Laboratory,BRK,Brooks Applied Labs,Y,"18804 North Creek Parkway, Suite 100",Bothell,Ben Wozniak,info@brooksapplied.com,206-632-6206,RRENTON,,,7/2/2017 9:00:00 AM,12/31/2024 10:35:00 AM
+9749,4/30/1997 10:56:12 AM,Laboratory,PLL,Passmore Laboratory Ltd.,Y,4235 Passmore,Winlaw,,,(250)226-7339,MPAK,5/29/2001 9:05:15 AM,NPEPPIN,3/25/1987,3/13/2008
+10443,4/12/1996 9:10:05 AM,Field,FDF,Federal - Field,N,,,,,,EMS,3/8/1996 11:52:13 AM,MPAK,1/3/1980 3:50:00 PM,9/30/2011
+11023,4/12/1996 9:10:05 AM,Laboratory,FDL,Federal Laboratory,Y,,,,,,EMS,4/22/1997 3:46:05 PM,MPAK,1/3/1980 3:50:00 PM,7/11/2011
+11662,4/12/1996 9:10:05 AM,Laboratory,ETL,Eco-Tech Lab Ltd.,Y,10041 ETC Highway,Kamloops,Frank Pezzotti,,(250)573-5700,EMS,11/4/1997 1:28:31 PM,UMULLER,1/1/1984,12/17/2009 3:00:00 PM
+13295,12/3/2002 2:47:21 PM,Permittee,AEO,Associated Environmental Operators Inc.,Y,1058 Fraserview Street,Port Coquitlam,David McIntyre,david@aeo.ca,(604)476-1314,UMULLER,,,1/1/2002,5/26/2015 12:25:00 PM
+15482,4/12/1996 9:10:05 AM,Laboratory,ECO,Econotec Services Ltd.,Y,852 Derwent Way,New Westminster,T.E. Peel,,(604)526-4221,EMS,9/30/1997 9:21:58 AM,UMULLER,1/1/1989,2/25/2025 6:00:00 AM
+15563,4/12/1996 9:10:05 AM,Laboratory,EVE,Elk Valley Environmental Labs,Y,#115 Elk Valley,Sparwood,Pal Sharma,,(250)425-6900,EMS,9/30/1997 9:25:31 AM,UMULLER,5/25/1992,3/26/2025
+16833,4/12/1996 9:10:05 AM,Laboratory,PGW,Prince George Wastewater Treatment Ctr,Y,4055 Lansdown Road,Prince George,Norm Gobbi,,(250)562-4578,EMS,11/5/1997 8:34:01 AM,UMULLER,1/1/1995,2/9/2005
+20525,4/12/1996 9:10:05 AM,Laboratory,EPP,Eurocan Pulp and Paper Co. Main Lab,Y,P.O. Box 1400,Kitimat,Kathleen Byers,,(250)532-6111,EMS,9/30/1997 9:34:31 AM,UMULLER,8/1/1996,1/31/2010 7:00:00 AM
+20621,5/14/2008 4:10:24 PM,Permittee,CX,Corix Utilities - Panorama,Y,"Box 36, 2120 Toby Creek Rd",Panorama,Sheree Lancaster,Sheree.Lancaster@corix.com,250 341-6198,RDGIBSON,,,4/1/2008,3/31/2025
+21638,1/5/2016 2:31:46 PM,Laboratory,MVQ,Metro Vancouver-Quality Control Lab,Y,4330 Kingsway,Burnaby,Andjela Knezevic-Stevanovic,see comment,778-452-2638,RDGIBSON,,,1/1/2016,2/28/2025 11:59:00 PM
+22092,4/12/1996 9:10:05 AM,Laboratory,BCR,B.C. Research Inc.,Y,3650 Wesbrook Mall,Vancouver,Dr. Jim McKinley,,(604)224-4331,EMS,2/4/1998 3:33:48 PM,UMULLER,6/4/1986 8:00:00 AM,2/25/2025 6:00:00 AM
+22283,4/12/1996 9:10:05 AM,Laboratory,JRL,JR Laboratories Inc.,Y,#12-3871 North Fraser Way,Burnaby,Clara Faan,,(604)432-9311,EMS,11/4/1997 3:40:32 PM,UMULLER,6/29/1991 12:40:00 PM,2/4/2025 6:00:00 AM
+27218,4/12/1996 9:10:05 AM,Laboratory,ASL,ASL Analytical Service Laboratories Ltd.,Y,1988 Triumph Street,Vancouver,"Brent Makelki, James R. Downie",,(604)253-4188,EMS,9/29/1997 3:19:07 PM,UMULLER,4/25/1987 12:00:00 PM,9/19/2017 10:10:00 AM
+28251,3/5/1997 9:33:04 AM,Laboratory,NTL,National Lab for Environmental Testing,Y,,,,,,NPEPPIN,,,1/21/1991 9:05:00 AM,11/16/2023 10:45:00 AM
+28497,4/12/1996 9:10:05 AM,Laboratory,CTL,Can-Test Ltd.,Y,4606 Canada Way,Burnaby,"Robert Hunter (Don Enns, Head)",,(604)734-7276,EMS,4/10/2000 1:12:26 PM,NPEPPIN,3/10/1982,11/15/2024 8:00:00 AM
+29408,4/12/1996 9:10:05 AM,Laboratory,KPC,Kelowna Pollution Control Centre,Y,951 Raymer Ave.,Kelowna,Sheila Carey,,(250)762-4616,EMS,9/30/1997 11:28:49 AM,UMULLER,1/1/2001,2/28/2025
+30071,4/12/1996 9:10:05 AM,Laboratory,CIN,Canadianoxy Industrial Chem. (Nanaimo),Y,Reserve Mine Road,Nanaimo,Andrew Swocoda,,(250)722-2212,EMS,9/30/1997 8:22:33 AM,UMULLER,4/1/1999 8:00:00 AM,6/30/2022 8:00:00 AM
+36256,4/12/1996 9:10:05 AM,Laboratory,EQF,Equis Field,Y,,,,,,EMS,6/16/1998 2:41:44 PM,UMULLER,1/3/1965 12:00:00 PM,9/15/1986 1:58:00 PM
+44139,4/12/1996 9:10:05 AM,Permittee,QRP,Quesnel River Pulp Co.,Y,Box 9500,Quesnel,Anna Rankin,,(250)992-8919,EMS,9/30/1997 3:59:32 PM,UMULLER,1/1/1992,2/28/2025 7:00:00 AM
+46724,4/12/1996 9:10:05 AM,Permittee,CPP,Cariboo Pulp & Paper Co.,Y,P.O. Box 7500,Quesnel,John Morrison,,(250)992-0211,EMS,9/30/1997 8:33:09 AM,UMULLER,9/1/1991,2/28/2025 6:00:00 AM
+47803,4/12/1996 9:10:05 AM,Laboratory,ENL,Environmental Laboratory,N,,,,,,EMS,3/19/2002 2:59:50 PM,UMULLER,1/13/1981 10:30:00 AM,9/12/1996 10:00:00 AM
+50130,4/12/1996 9:10:05 AM,Laboratory,EQL,Equis Environmental Lab,Y,,,,,,EMS,6/16/1998 2:42:04 PM,UMULLER,4/23/1971,3/13/1985 11:53:00 AM
+58966,11/3/1997 1:58:02 PM,Laboratory,CAR,CARO Environmental Services,Y,1-368 Industrial Ave.,Kelowna,Jock Hawkey,caroenvironmental@shaw.ca,(250)763-5090,UMULLER,4/5/2004 1:23:04 PM,UMULLER,10/8/1996,4/9/2025 7:30:00 AM
+67546,4/21/1997 9:17:27 AM,Laboratory,PYLET,Environment Canada (PESC),Y,Pacific Environmental Science Center,North Vancouver,,,,MPAK,3/12/2018 12:39:39 PM,JKROGH,8/19/1966,8/26/2004
+69385,4/12/1996 9:10:05 AM,Field,FLD,Field (MOE),Y,,,,,,EMS,3/8/1996 11:59:37 AM,MPAK,6/2/1971,3/31/2025 11:49:00 AM
+71755,4/12/1996 9:10:05 AM,Laboratory,NPM,Nickel Plate Mine - Assay Lab,Y,Homestake Canada Inc.,Above Hedley,Diane Weiler/Ken Heaton,,(250)292-8224,EMS,9/30/1997 1:22:21 PM,UMULLER,3/13/1987 12:00:00 PM,2/26/2015 12:00:00 PM
+76913,4/12/1996 9:10:05 AM,Permittee,EQP,Equis Permittee,Y,,,,,,EMS,6/16/1998 2:48:33 PM,UMULLER,4/1/1966,10/23/1987 10:50:00 AM
+94167,4/12/1996 9:10:05 AM,Laboratory,ECC,Elkview Coal Corp. Central Lab,Y,Michel Creek Road (Lab),Sparwood,Colin Lynch,Colin.Lynch@teck.com,(250)425-8241,EMS,1/22/2014 2:21:03 PM,RDGIBSON,8/16/1995,2/28/2025 12:00:00 PM
+120921,5/16/2005 12:53:23 PM,Laboratory,MX,Bureau Veritas Laboratories (Maxxam),Y,4606 Canada Way,Burnaby,Morgan Melnychuk,customersolutionswest@bvlabs.com,(604)-638-8034,UMULLER,9/16/2020 4:45:25 PM,RDGIBSON,3/7/1999,4/8/2025 9:00:00 AM
+121356,4/12/1996 9:10:05 AM,Laboratory,ZN,Philip Analyt. Services (formerly Zenon),Y,,,,,,EMS,2/24/1997 1:32:39 PM,MPAK,8/17/1980 1:30:00 PM,3/31/2025 7:00:00 AM
+195650,4/12/1996 9:10:05 AM,Laboratory,ALS,ALS Global,Y,,,Kenneth Peckham,Kenneth.Peckham@ALSGlobal.com,780 413 5241,EMS,9/10/2015 2:07:09 PM,RDGIBSON,11/3/1981 9:50:00 AM,4/10/2025 10:16:00 AM
+916981,4/12/1996 9:10:05 AM,Permittee,PE,Permittee,Y,,,,,,EMS,6/16/1998 2:41:26 PM,UMULLER,1/15/1979 9:00:00 AM,4/1/2025 11:00:00 PM

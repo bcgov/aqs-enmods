@@ -1,92 +1,92 @@
-﻿"Samples","ID","DISPLAY_NAME","CLIENT_TYP_CD","Type","CLIENT_STS_CD","WHEN_CREATED"
-"1457890","74","Permittee","P","Permittee","A","4/12/1996 9:10:04 AM"
-"187424","105","Elkview Coal Corp. Central Lab","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"125763","349","Contractor","C","Consultant","A","10/21/1997 11:23:59 AM"
-"79951","137","Nickel Plate Mine - Assay Lab","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"71884","52","Southern Region, Penticton","M","Ministry","A","4/12/1996 9:10:04 AM"
-"62184","11","Vancouver Island, Nanaimo","M","Ministry","A","4/12/1996 9:10:04 AM"
-"54649","31","Southern Region, Kamloops","M","Ministry","A","4/12/1996 9:10:04 AM"
-"54137","41","Kootenay, Nelson","M","Ministry","A","4/12/1996 9:10:04 AM"
-"52376","50","Omineca-Peace, Prince George","M","Ministry","A","4/12/1996 9:10:04 AM"
-"50880","79","Water Quality","M","Ministry","A","4/12/1996 9:10:04 AM"
-"43584","20","Lower Mainland, Surrey","M","Ministry","A","4/12/1996 9:10:04 AM"
-"33314","127","Kelowna Pollution Control Centre","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"30071","92","Canadianoxy Industrial Chem. (Nanaimo)","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"24904","63","Field (MOE)","F","Field","A","4/12/1996 9:10:04 AM"
-"22197","49","Skeena Region, Smithers","M","Ministry","A","4/12/1996 9:10:04 AM"
-"22081","1309","Metro Vancouver-Quality Control Laboratory","L","Laboratory","A","1/5/2016 2:31:46 PM"
-"21590","48","Cariboo, Williams Lake","M","Ministry","A","4/12/1996 9:10:04 AM"
-"11604","73","Independent Agent or Other","P","Permittee","A","4/12/1996 9:10:04 AM"
-"8467","43","Kootenay, Cranbrook","M","Ministry","A","4/12/1996 9:10:04 AM"
-"8303","369","CARO Environmental Services","L","Laboratory","A","11/3/1997 1:58:01 PM"
-"8006","134","Methanex Corp.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"7822","10","E.V.S. Consultants Ltd.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"7229","135","Nanaimo Water Pollution Control Centre","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"5626","54","Headquarters, Victoria","M","Ministry","A","4/12/1996 9:10:04 AM"
-"5362","66","Federal/Provincial","M","Ministry","I","4/12/1996 9:10:04 AM"
-"5240","450","Southern Region, Kamloops","M","Ministry","A","4/12/1996 9:10:04 AM"
-"3742","126","Kamloops Waste Water Treatment Centre","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"3545","209","Environment Canada (PESC)","L","Laboratory","A","4/21/1997 9:17:27 AM"
-"3325","61","Environment Canada/Fisheries","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"3159","67","WMB-Groundwater","M","Ministry","A","4/12/1996 9:10:04 AM"
-"3145","65","Fish and Wildlife","M","Ministry","A","4/12/1996 9:10:04 AM"
-"2383","163","Peppins Lab","L","Laboratory","I","6/20/1996 11:50:36 AM"
-"2294","53","Ministry of Health","M","Ministry","A","4/12/1996 9:10:04 AM"
-"1912","80","Philip Analytical Services (formerly called Zenon Laboratories)","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"1883","1449","Capital Regional District","F","Field","A","10/24/2017 10:45:25 AM"
-"1744","167","Water Management","M","Ministry","A","10/21/1996 11:17:16 AM"
-"1705","38","Elk Valley Environmental Labs","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"1397","207","Volunteer","C","Consultant","A","3/5/1997 10:34:11 AM"
-"1274","4","ALS Environmental","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"1021","1069","Eco/Logic Environmental","C","Consultant","A","6/26/2009 1:59:41 PM"
-"788","1809","Chemtrade Electrochem Inc.","P","Permittee","A","4/21/2023 10:11:07 AM"
-"618","81","Agra Earth & Environmental Ltd.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"606","969","Skeena Region, Terrace","M","Ministry","A","7/30/2008 11:00:16 AM"
-"596","1469","A. Lanfranco & Associates Inc.","L","Laboratory","A","1/29/2018 11:04:17 AM"
-"496","1049","UBC Fisheries Science Section","M","Ministry","A","3/31/2009 2:09:13 PM"
-"482","1569","Langley Environmental Partners Society","C","Consultant","A","7/30/2019 9:42:47 AM"
-"385","145","Prince George Wastewater Treatment Ctr","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"380","68","WMB- Public Health Engineering","M","Ministry","I","4/12/1996 9:10:04 AM"
-"354","55","Ministry of Agriculture","M","Ministry","A","4/12/1996 9:10:04 AM"
-"316","40","MB Research & Development Ltd.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"273","1229","Bulkley Valley Research Centre","C","Consultant","A","1/30/2014 4:42:24 PM"
-"239","162","GVRD, Burnaby","M","Ministry","I","4/12/1996 9:10:04 AM"
-"177","1189","Ministry of Environment Lab","L","Laboratory","A","2/22/2011 11:52:08 AM"
-"166","64","Federal","M","Ministry","A","4/12/1996 9:10:04 AM"
-"160","56","Air Resources","M","Ministry","A","4/12/1996 9:10:04 AM"
-"144","3","Can-Test Ltd.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"128","1869","K'en T'em Limited Partnership","N","First Nations","A","3/19/2025 11:46:35 AM"
-"124","1669","Goode Environmental Services Ltd","C","Consultant","A","8/6/2020 1:13:01 PM"
-"113","949","Wetsuweten Hereditary Chiefs","N","First Nations","A","7/15/2008 2:48:33 PM"
-"101","809","Bureau Veritas Laboratories (formerly Maxxam Analytics Inc. Burnaby)","L","Laboratory","A","5/16/2005 12:53:23 PM"
-"74","84","Alcan Analytical Lab","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"71","9","Eco-Tech Lab Ltd.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"65","1409","Freshwater Fisheries","F","Field","A","4/24/2017 8:16:07 AM"
-"62","78","Surveys & Resource Mapping","M","Ministry","I","4/12/1996 9:10:04 AM"
-"60","6","B.C. Research","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"54","629","Health- Water Purveyor","H","Health","A","8/29/2001 11:33:41 AM"
-"46","17","Chemac Environmental Services","L","Laboratory","I","4/12/1996 9:10:04 AM"
-"41","689","BCBC","C","Consultant","A","5/6/2002 10:23:57 AM"
-"36","1429","GHD Limited","C","Consultant","A","9/19/2017 9:17:10 AM"
-"28","1269","Sona Resources Corp","P","Permittee","A","6/30/2015 2:22:10 PM"
-"28","82","ASL Analytical Service Laboratories Ltd.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"27","69","JR Laboratories Inc.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"26","469","Maxxam Analytics Inc.,Edmonton","L","Laboratory","A","12/14/1998 10:21:52 AM"
-"23","28","Quesnel River Pulp Co.","P","Permittee","A","4/12/1996 9:10:04 AM"
-"23","57","B.C.B.C. - Kamloops","M","Ministry","I","4/12/1996 9:10:04 AM"
-"22","142","Norwest Soil Research Inc.","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"18","154","U.B.C. Chemical Engineering","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"16","509","Southern Region, Kamloops","M","Ministry","A","4/12/1996 9:10:04 AM"
-"16","1109","Township of Langley","P","Permittee","A","8/18/2009 10:56:56 AM"
-"15","230","Slocan Valley Watershed Alliance","C","Consultant","A","4/30/1997 11:09:29 AM"
-"11","1129","Omineca-Peace, Fort St. John","M","Ministry","A","2/2/2010 10:54:01 AM"
-"10","709","Dolecki (Taxonomist)","L","Laboratory","A","7/8/2002 1:18:54 PM"
-"10","30","Beak Associates (B.C.) Ltd.","L","Laboratory","I","4/12/1996 9:10:04 AM"
-"8","143","Petro-Canada - Port Moody Refinery","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"8","76","Equis Environmental Lab","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"5","1369","Omineca-Peace, Prince George, FLNRO","M","Ministry","A","8/23/2016 11:22:08 AM"
-"2","1349","Associated Environmental Consultants Inc.","C","Consultant","A","7/12/2016 1:41:35 PM"
-"2","59","B.C.B.C. - Prince George","M","Ministry","I","4/12/1996 9:10:04 AM"
-"1","29","Cariboo Pulp & Paper Co.","P","Permittee","A","4/12/1996 9:10:04 AM"
-"1","15","Federal Laboratory","L","Laboratory","A","4/12/1996 9:10:04 AM"
-"1","123","HydroQual Lab Ltd.","L","Laboratory","A","4/12/1996 9:10:04 AM"
+﻿Samples,ID,DISPLAY_NAME,CLIENT_TYP_CD,Type,CLIENT_STS_CD,WHEN_CREATED
+1457890,74,Permittee,P,Permittee,A,4/12/1996 9:10:04 AM
+187424,105,Elkview Coal Corp. Central Lab,L,Laboratory,A,4/12/1996 9:10:04 AM
+125763,349,Contractor,C,Consultant,A,10/21/1997 11:23:59 AM
+79951,137,Nickel Plate Mine - Assay Lab,L,Laboratory,A,4/12/1996 9:10:04 AM
+71884,52,"Southern Region, Penticton",M,Ministry,A,4/12/1996 9:10:04 AM
+62184,11,"Vancouver Island, Nanaimo",M,Ministry,A,4/12/1996 9:10:04 AM
+54649,31,"Southern Region, Kamloops",M,Ministry,A,4/12/1996 9:10:04 AM
+54137,41,"Kootenay, Nelson",M,Ministry,A,4/12/1996 9:10:04 AM
+52376,50,"Omineca-Peace, Prince George",M,Ministry,A,4/12/1996 9:10:04 AM
+50880,79,Water Quality,M,Ministry,A,4/12/1996 9:10:04 AM
+43584,20,"Lower Mainland, Surrey",M,Ministry,A,4/12/1996 9:10:04 AM
+33314,127,Kelowna Pollution Control Centre,L,Laboratory,A,4/12/1996 9:10:04 AM
+30071,92,Canadianoxy Industrial Chem. (Nanaimo),L,Laboratory,A,4/12/1996 9:10:04 AM
+24904,63,Field (MOE),F,Field,A,4/12/1996 9:10:04 AM
+22197,49,"Skeena Region, Smithers",M,Ministry,A,4/12/1996 9:10:04 AM
+22081,1309,Metro Vancouver-Quality Control Laboratory,L,Laboratory,A,1/5/2016 2:31:46 PM
+21590,48,"Cariboo, Williams Lake",M,Ministry,A,4/12/1996 9:10:04 AM
+11604,73,Independent Agent or Other,P,Permittee,A,4/12/1996 9:10:04 AM
+8467,43,"Kootenay, Cranbrook",M,Ministry,A,4/12/1996 9:10:04 AM
+8303,369,CARO Environmental Services,L,Laboratory,A,11/3/1997 1:58:01 PM
+8006,134,Methanex Corp.,L,Laboratory,A,4/12/1996 9:10:04 AM
+7822,10,E.V.S. Consultants Ltd.,L,Laboratory,A,4/12/1996 9:10:04 AM
+7229,135,Nanaimo Water Pollution Control Centre,L,Laboratory,A,4/12/1996 9:10:04 AM
+5626,54,"Headquarters, Victoria",M,Ministry,A,4/12/1996 9:10:04 AM
+5362,66,Federal/Provincial,M,Ministry,I,4/12/1996 9:10:04 AM
+5240,450,"Southern Region, Kamloops",M,Ministry,A,4/12/1996 9:10:04 AM
+3742,126,Kamloops Waste Water Treatment Centre,L,Laboratory,A,4/12/1996 9:10:04 AM
+3545,209,Environment Canada (PESC),L,Laboratory,A,4/21/1997 9:17:27 AM
+3325,61,Environment Canada/Fisheries,L,Laboratory,A,4/12/1996 9:10:04 AM
+3159,67,WMB-Groundwater,M,Ministry,A,4/12/1996 9:10:04 AM
+3145,65,Fish and Wildlife,M,Ministry,A,4/12/1996 9:10:04 AM
+2383,163,Peppins Lab,L,Laboratory,I,6/20/1996 11:50:36 AM
+2294,53,Ministry of Health,M,Ministry,A,4/12/1996 9:10:04 AM
+1912,80,Philip Analytical Services (formerly called Zenon Laboratories),L,Laboratory,A,4/12/1996 9:10:04 AM
+1883,1449,Capital Regional District,F,Field,A,10/24/2017 10:45:25 AM
+1744,167,Water Management,M,Ministry,A,10/21/1996 11:17:16 AM
+1705,38,Elk Valley Environmental Labs,L,Laboratory,A,4/12/1996 9:10:04 AM
+1397,207,Volunteer,C,Consultant,A,3/5/1997 10:34:11 AM
+1274,4,ALS Environmental,L,Laboratory,A,4/12/1996 9:10:04 AM
+1021,1069,Eco/Logic Environmental,C,Consultant,A,6/26/2009 1:59:41 PM
+788,1809,Chemtrade Electrochem Inc.,P,Permittee,A,4/21/2023 10:11:07 AM
+618,81,Agra Earth & Environmental Ltd.,L,Laboratory,A,4/12/1996 9:10:04 AM
+606,969,"Skeena Region, Terrace",M,Ministry,A,7/30/2008 11:00:16 AM
+596,1469,A. Lanfranco & Associates Inc.,L,Laboratory,A,1/29/2018 11:04:17 AM
+496,1049,UBC Fisheries Science Section,M,Ministry,A,3/31/2009 2:09:13 PM
+482,1569,Langley Environmental Partners Society,C,Consultant,A,7/30/2019 9:42:47 AM
+385,145,Prince George Wastewater Treatment Ctr,L,Laboratory,A,4/12/1996 9:10:04 AM
+380,68,WMB- Public Health Engineering,M,Ministry,I,4/12/1996 9:10:04 AM
+354,55,Ministry of Agriculture,M,Ministry,A,4/12/1996 9:10:04 AM
+316,40,MB Research & Development Ltd.,L,Laboratory,A,4/12/1996 9:10:04 AM
+273,1229,Bulkley Valley Research Centre,C,Consultant,A,1/30/2014 4:42:24 PM
+239,162,"GVRD, Burnaby",M,Ministry,I,4/12/1996 9:10:04 AM
+177,1189,Ministry of Environment Lab,L,Laboratory,A,2/22/2011 11:52:08 AM
+166,64,Federal,M,Ministry,A,4/12/1996 9:10:04 AM
+160,56,Air Resources,M,Ministry,A,4/12/1996 9:10:04 AM
+144,3,Can-Test Ltd.,L,Laboratory,A,4/12/1996 9:10:04 AM
+128,1869,K'en T'em Limited Partnership,N,First Nations,A,3/19/2025 11:46:35 AM
+124,1669,Goode Environmental Services Ltd,C,Consultant,A,8/6/2020 1:13:01 PM
+113,949,Wetsuweten Hereditary Chiefs,N,First Nations,A,7/15/2008 2:48:33 PM
+101,809,Bureau Veritas Laboratories (formerly Maxxam Analytics Inc. Burnaby),L,Laboratory,A,5/16/2005 12:53:23 PM
+74,84,Alcan Analytical Lab,L,Laboratory,A,4/12/1996 9:10:04 AM
+71,9,Eco-Tech Lab Ltd.,L,Laboratory,A,4/12/1996 9:10:04 AM
+65,1409,Freshwater Fisheries,F,Field,A,4/24/2017 8:16:07 AM
+62,78,Surveys & Resource Mapping,M,Ministry,I,4/12/1996 9:10:04 AM
+60,6,B.C. Research,L,Laboratory,A,4/12/1996 9:10:04 AM
+54,629,Health- Water Purveyor,H,Health,A,8/29/2001 11:33:41 AM
+46,17,Chemac Environmental Services,L,Laboratory,I,4/12/1996 9:10:04 AM
+41,689,BCBC,C,Consultant,A,5/6/2002 10:23:57 AM
+36,1429,GHD Limited,C,Consultant,A,9/19/2017 9:17:10 AM
+28,1269,Sona Resources Corp,P,Permittee,A,6/30/2015 2:22:10 PM
+28,82,ASL Analytical Service Laboratories Ltd.,L,Laboratory,A,4/12/1996 9:10:04 AM
+27,69,JR Laboratories Inc.,L,Laboratory,A,4/12/1996 9:10:04 AM
+26,469,"Maxxam Analytics Inc.,Edmonton",L,Laboratory,A,12/14/1998 10:21:52 AM
+23,28,Quesnel River Pulp Co.,P,Permittee,A,4/12/1996 9:10:04 AM
+23,57,B.C.B.C. - Kamloops,M,Ministry,I,4/12/1996 9:10:04 AM
+22,142,Norwest Soil Research Inc.,L,Laboratory,A,4/12/1996 9:10:04 AM
+18,154,U.B.C. Chemical Engineering,L,Laboratory,A,4/12/1996 9:10:04 AM
+16,509,"Southern Region, Kamloops",M,Ministry,A,4/12/1996 9:10:04 AM
+16,1109,Township of Langley,P,Permittee,A,8/18/2009 10:56:56 AM
+15,230,Slocan Valley Watershed Alliance,C,Consultant,A,4/30/1997 11:09:29 AM
+11,1129,"Omineca-Peace, Fort St. John",M,Ministry,A,2/2/2010 10:54:01 AM
+10,709,Dolecki (Taxonomist),L,Laboratory,A,7/8/2002 1:18:54 PM
+10,30,Beak Associates (B.C.) Ltd.,L,Laboratory,I,4/12/1996 9:10:04 AM
+8,143,Petro-Canada - Port Moody Refinery,L,Laboratory,A,4/12/1996 9:10:04 AM
+8,76,Equis Environmental Lab,L,Laboratory,A,4/12/1996 9:10:04 AM
+5,1369,"Omineca-Peace, Prince George, FLNRO",M,Ministry,A,8/23/2016 11:22:08 AM
+2,1349,Associated Environmental Consultants Inc.,C,Consultant,A,7/12/2016 1:41:35 PM
+2,59,B.C.B.C. - Prince George,M,Ministry,I,4/12/1996 9:10:04 AM
+1,29,Cariboo Pulp & Paper Co.,P,Permittee,A,4/12/1996 9:10:04 AM
+1,15,Federal Laboratory,L,Laboratory,A,4/12/1996 9:10:04 AM
+1,123,HydroQual Lab Ltd.,L,Laboratory,A,4/12/1996 9:10:04 AM

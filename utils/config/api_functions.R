@@ -2,9 +2,9 @@
 
 get_profiles_for_url <- function(env, url){
   
-  urlParameters <- update_baseURL_token(env)
-  baseURL <- urlParameters[[1]]
-  token <- urlParameters[[2]]
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
   
   data_body <- list()
   
@@ -25,9 +25,9 @@ get_profiles_for_url <- function(env, url){
       
       cursor = fromJSON(rawToChar(x_temp$content))$cursor
       
-      tempURL = paste0(url, "&cursor=", cursor)
+      temp_url = paste0(url, "&cursor=", cursor)
       
-      x_temp <- GET(tempURL, config = c(add_headers(.headers = 
+      x_temp <- GET(temp_url, config = c(add_headers(.headers = 
                                                       c('Authorization' = token))), body = data_body, encode = 'json')
       
       temp_element <- fromJSON(rawToChar(x_temp$content))$domainObjects
@@ -52,92 +52,92 @@ get_profiles_for_url <- function(env, url){
   
 }
 
-get_profiles <- function(env, dataType){
+get_profiles <- function(env, data_type){
   
   #env <- "test"
   
   #default is "test" and for prod env, use the function parameter "prod"
-  urlParameters <- update_baseURL_token(env)
-  baseURL <- urlParameters[[1]]
-  token <- urlParameters[[2]]
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
   
-  #dataType <- "unitgroups"
+  #data_type <- "unit_groups"
   
-  if(dataType == "units"){
+  if(data_type == "units"){
     
-    url <- str_c(baseURL, "v1/units")
+    url <- str_c(base_url, "v1/units")
     
-  } else if(dataType == "unitgroups"){
+  } else if(data_type == "unit_groups"){
     
-    url <- str_c(baseURL, "v1/unitgroups")
+    url <- str_c(base_url, "v1/unitgroups")
     
-  } else if(dataType == "extendedattributes"){
+  } else if(data_type == "extended_attributes"){
     
-    url <- str_c(baseURL, "v1/extendedattributes")
+    url <- str_c(base_url, "v1/extendedattributes")
     
-  } else if(dataType == "observedproperties"){
+  } else if(data_type == "observed_properties"){
     
-    url <- str_c(baseURL, "v1/observedproperties")
+    url <- str_c(base_url, "v1/observedproperties")
     
-  } else if(dataType == "methods"){
+  } else if(data_type == "methods"){
     
-    url <- str_c(baseURL, "v1/analysismethods")
+    url <- str_c(base_url, "v1/analysismethods")
     
-  } else if(dataType == "labs"){
+  } else if(data_type == "labs"){
     
-    url <- str_c(baseURL, "v1/laboratories")
+    url <- str_c(base_url, "v1/laboratories")
     
-  } else if(dataType == "locationgrouptypes"){
+  } else if(data_type == "location_group_types"){
     
-    url <- str_c(baseURL, "v1/samplinglocationgrouptypes")
+    url <- str_c(base_url, "v1/samplinglocationgrouptypes")
     
-  } else if(dataType == "locationtypes"){
+  } else if(data_type == "location_types"){
     
-    url <- str_c(baseURL, "v1/samplinglocationtypes")
+    url <- str_c(base_url, "v1/samplinglocationtypes")
     
-  } else if(dataType == "locationgroups"){
+  } else if(data_type == "location_groups"){
     
-    url <- str_c(baseURL, "v1/samplinglocationgroups")
+    url <- str_c(base_url, "v1/samplinglocationgroups")
     
-  } else if(dataType == "locations"){
+  } else if(data_type == "locations"){
     
-    url <- str_c(baseURL, "v1/samplinglocations?limit=1000")
+    url <- str_c(base_url, "v1/samplinglocations?limit=1000")
     
-  } else if(dataType == "mediums"){
+  } else if(data_type == "mediums"){
     
-    url <- str_c(baseURL, "v1/mediums")
+    url <- str_c(base_url, "v1/mediums")
     
-  } else if(dataType == "taxonomylevels"){
+  } else if(data_type == "taxonomy_levels"){
     
-    url <- str_c(baseURL, "v1/taxonomylevels")
+    url <- str_c(base_url, "v1/taxonomylevels")
     
-  } else if(dataType == "detectionconditions"){
+  } else if(data_type == "detection_conditions"){
     
-    url <- str_c(baseURL, "v1/detectionconditions")
+    url <- str_c(base_url, "v1/detectionconditions")
     
-  } else if(dataType == "resultgrades"){
+  } else if(data_type == "result_grades"){
     
-    url <- str_c(baseURL, "v1/resultgrades")
+    url <- str_c(base_url, "v1/resultgrades")
     
-  } else if(dataType == "resultstatuses"){
+  } else if(data_type == "result_statuses"){
     
-    url <- str_c(baseURL, "v1/resultstatuses")
+    url <- str_c(base_url, "v1/resultstatuses")
     
-  } else if(dataType == "fishtaxonomy"){
+  } else if(data_type == "fish_taxonomy"){
     
-    url <- str_c(baseURL, "v1/taxons")
+    url <- str_c(base_url, "v1/taxons")
     
-  } else if(dataType == "collectionmethods"){
+  } else if(data_type == "collection_methods"){
     
-    url <- str_c(baseURL, "v1/collectionmethods")
+    url <- str_c(base_url, "v1/collectionmethods")
     
-  } else if(dataType == "filters"){
+  } else if(data_type == "filters"){
     
-    url <- str_c(baseURL, "v1/filters")
+    url <- str_c(base_url, "v1/filters")
     
-  } else if(dataType == "projects"){
+  } else if(data_type == "projects"){
     
-    url <- str_c(baseURL, "v1/projects")
+    url <- str_c(base_url, "v1/projects")
     
   }
   
@@ -149,84 +149,84 @@ get_profiles <- function(env, dataType){
 
 # DELETE FUNCTIONS -----------------------------------------------------------
 
-del_profiles <- function(env, dataType){
+del_profiles <- function(env, data_type){
   
   # env <- "prod"
   # 
-  # dataType <- "taxonomylevels"#labs"#"observedproperties"
+  # data_type <- "taxonomy_levels"#labs"#"observed_properties"
   
-  temp_profile <- get_profiles(env, dataType)
+  temp_profile <- get_profiles(env, data_type)
   
   #default is "test" and for prod env, use the function parameter "prod"
-  urlParameters <- update_baseURL_token(env)
-  baseURL <- urlParameters[[1]]
-  token <- urlParameters[[2]]
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
   
-  if(dataType == "unitgroups"){
+  if(data_type == "unit_groups"){
     
     del_profiles(env, "units")
     
-    url <- str_c(baseURL, "v1/unitgroups/")
+    url <- str_c(base_url, "v1/unitgroups/")
     
-  } else if(dataType == "units"){
+  } else if(data_type == "units"){
     
-    del_profiles(env, "observedproperties")
+    del_profiles(env, "observed_properties")
     
-    url <- str_c(baseURL, "v1/units/")
+    url <- str_c(base_url, "v1/units/")
     
-  } else if(dataType == "extendedattributes"){
+  } else if(data_type == "extended_attributes"){
     
-    url <- str_c(baseURL, "v1/extendedattributes/")
+    url <- str_c(base_url, "v1/extendedattributes/")
     
-  } else if(dataType == "observedproperties"){
+  } else if(data_type == "observed_properties"){
     
-    url <- str_c(baseURL, "v1/observedproperties/")
+    url <- str_c(base_url, "v1/observedproperties/")
     
-  } else if(dataType == "methods"){
+  } else if(data_type == "methods"){
     
-    url <- str_c(baseURL, "v1/analysismethods/")
+    url <- str_c(base_url, "v1/analysismethods/")
     
-  } else if(dataType == "labs"){
+  } else if(data_type == "labs"){
     
-    url <- str_c(baseURL, "v1/laboratories/")
+    url <- str_c(base_url, "v1/laboratories/")
     
-  } else if(dataType == "fishtaxonomy"){
+  } else if(data_type == "fish_taxonomy"){
     
-    url <- str_c(baseURL, "v1/taxons/")
+    url <- str_c(base_url, "v1/taxons/")
     
-  } else if(dataType == "collectionmethods"){
+  } else if(data_type == "collection_methods"){
     
-    url <- str_c(baseURL, "v1/collectionmethods/")
+    url <- str_c(base_url, "v1/collectionmethods/")
     
-  } else if(dataType == "filters"){
+  } else if(data_type == "filters"){
     
-    url <- str_c(baseURL, "v1/filters/")
+    url <- str_c(base_url, "v1/filters/")
     
-  } else if(dataType == "projects"){
+  } else if(data_type == "projects"){
     
-    url <- str_c(baseURL, "v1/projects/")
+    url <- str_c(base_url, "v1/projects/")
     
-  } else if(dataType == "locations"){
+  } else if(data_type == "locations"){
     
-    url <- str_c(baseURL, "v1/samplinglocations/")
+    url <- str_c(base_url, "v1/samplinglocations/")
     
-  } else if(dataType == "locationgroups"){
+  } else if(data_type == "location_groups"){
     
-    url <- str_c(baseURL, "v1/samplinglocationgroups/")
+    url <- str_c(base_url, "v1/samplinglocationgroups/")
     
-  } else if(dataType == "locationgrouptypes"){
+  } else if(data_type == "location_group_types"){
     
-    put_profiles("prod", "locationgrouptypes", tibble(customId = character()))
-    
-    return()
-    
-  } else if(dataType == "locationtypes"){
-    
-    put_profiles("prod", "locationtypes", tibble(customId = character()))
+    put_profiles("prod", "location_group_types", tibble(customId = character()))
     
     return()
     
-  } else if(dataType == "mediums"){
+  } else if(data_type == "location_types"){
+    
+    put_profiles("prod", "location_types", tibble(customId = character()))
+    
+    return()
+    
+  } else if(data_type == "mediums"){
     
     mediums_required <- get_profiles("prod", "mediums") %>%
       dplyr::filter(!is.na(systemCode)) %>% 
@@ -236,25 +236,25 @@ del_profiles <- function(env, dataType){
     
     return()
     
-  } else if(dataType == "taxonomylevels"){
+  } else if(data_type == "taxonomy_levels"){
     
-    put_profiles("prod", "taxonomylevels", tibble(customId = character()))
-    
-    return()
-    
-  } else if(dataType == "detectionconditions"){
-    
-    url <- str_c(baseURL, "v1/detectionconditions/")
-    
-  } else if(dataType == "resultgrades"){
-    
-    put_profiles("prod", "resultgrades", tibble(customId = character()))
+    put_profiles("prod", "taxonomy_levels", tibble(customId = character()))
     
     return()
     
-  } else if(dataType == "resultstatuses"){
+  } else if(data_type == "detection_conditions"){
     
-    put_profiles("prod", "resultstatuses", tibble(customId = character()))
+    url <- str_c(base_url, "v1/detectionconditions/")
+    
+  } else if(data_type == "result_grades"){
+    
+    put_profiles("prod", "result_grades", tibble(customId = character()))
+    
+    return()
+    
+  } else if(data_type == "result_statuses"){
+    
+    put_profiles("prod", "result_statuses", tibble(customId = character()))
     
     return()
     
@@ -288,48 +288,48 @@ del_profiles <- function(env, dataType){
 
 # PUT FUNCTIONS -----------------------------------------------------------
 
-put_profiles <- function(env, dataType, profile){
+put_profiles <- function(env, data_type, profile){
   
   # env <- "prod"
   # 
-  # dataType <- "resultgrades"
+  # data_type <- "result_grades"
   # 
   # profile <- resultgrades
   
   #default is "test" and for prod env, use the function parameter "prod"
-  urlParameters <- update_baseURL_token(env)
-  baseURL <- urlParameters[[1]]
-  token <- urlParameters[[2]]
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
   
-  if(dataType == "taxonomylevels"){
+  if(data_type == "taxonomy_levels"){
     
-    #update url to include dataType
-    url <- str_c(baseURL, "v1/taxonomylevels")
+    #update url to include data_type
+    url <- str_c(base_url, "v1/taxonomylevels")
     
-  } else if(dataType == "locationgrouptypes"){
+  } else if(data_type == "location_group_types"){
     
-    #update url to include dataType
-    url <- str_c(baseURL, "v1/samplinglocationgrouptypes")
+    #update url to include data_type
+    url <- str_c(base_url, "v1/samplinglocationgrouptypes")
     
-  } else if(dataType == "locationtypes"){
+  } else if(data_type == "location_types"){
     
-    #update url to include dataType
-    url <- str_c(baseURL, "v1/samplinglocationtypes")
+    #update url to include data_type
+    url <- str_c(base_url, "v1/samplinglocationtypes")
     
-  } else if(dataType == "mediums"){
+  } else if(data_type == "mediums"){
     
-    #update url to include dataType
-    url <- str_c(baseURL, "v1/mediums")
+    #update url to include data_type
+    url <- str_c(base_url, "v1/mediums")
     
-  } else if(dataType == "resultgrades"){
+  } else if(data_type == "result_grades"){
     
-    #update url to include dataType
-    url <- str_c(baseURL, "v1/resultgrades")
+    #update url to include data_type
+    url <- str_c(base_url, "v1/resultgrades")
     
-  } else if(dataType == "resultstatuses"){
+  } else if(data_type == "result_statuses"){
     
-    #update url to include dataType
-    url <- str_c(baseURL, "v1/resultstatuses")
+    #update url to include data_type
+    url <- str_c(base_url, "v1/resultstatuses")
     
   }
   
@@ -360,27 +360,27 @@ put_profiles <- function(env, dataType, profile){
 
 # POST FUNCTIONS -----------------------------------------------------------
 
-post_profiles <- function(env, dataType, profile){
+post_profiles <- function(env, data_type, profile){
   
   # env = "prod"
   # 
-  # dataType = "methods"
+  # data_type = "methods"
   # 
   # profile <- methods.missing
   
   #Clean the old stuff out of the environment before posting new stuff
-  if(!is.null(dim(get_profiles(env, dataType))[1])){
+  if(!is.null(dim(get_profiles(env, data_type))[1])){
     
-    del_profiles(env, dataType)
+    del_profiles(env, data_type)
     
   }
   
   #default is "test" and for prod env, use the function parameter "prod"
-  urlParameters <- update_baseURL_token(env)
-  baseURL <- urlParameters[[1]]
-  token <- urlParameters[[2]]
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
   
-  if(dataType == "unitgroups"){
+  if(data_type == "unit_groups"){
     
     #Clean the old stuff out of the environment before posting new stuff
     if(!is.null(dim(get_profiles(env, "units"))[1])){
@@ -389,63 +389,63 @@ post_profiles <- function(env, dataType, profile){
       
     }
     
-    url <- paste0(baseURL, "v1/unitgroups")
+    url <- paste0(base_url, "v1/unitgroups")
     
-    rel_var <- c("Sample.Unit.Group", "Convertible")
+    rel_var <- c("sample_unit_group", "Convertible")
     
     #EnMoDS labels: "customId", "supportsConversion"
     
-  } else if(dataType == "units"){
+  } else if(data_type == "units"){
     
     unitGroups <- profile %>% 
-      dplyr::select(Sample.Unit.Group, Convertible) %>%
+      dplyr::select(sample_unit_group, Convertible) %>%
       #group_by(across(everything())) %>%
       #summarize(Count = n()) %>% 
       #ungroup() %>%
-      mutate(Sample.Unit.Group = case_when(
-        Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-        .default = Sample.Unit.Group
+      mutate(sample_unit_group = case_when(
+        sample_unit_group == "Length" ~ "SYS-REQUIRED - Length",
+        .default = sample_unit_group
       )) %>% dplyr::filter(!is.na(Convertible)) %>%
       unique()
     
-    post_check <- post_profiles(env, "unitgroups", unitGroups)
+    post_check <- post_profiles(env, "unit_groups", unitGroups)
     
-    url <- paste0(baseURL, "v1/units")
+    url <- paste0(base_url, "v1/units")
     
     #EnMoDS labels: "customId", "name", "baseMultiplier",
     # "baseOffset", "unitGroup.id", 
     # "unitGroup.supportsConversion"
     
-    unitgroups_profiles <- get_profiles("prod", "unitgroups")
+    unitgroups_profiles <- get_profiles("prod", "unit_groups")
     
     profile <- profile %>%
       left_join(unitgroups_profiles %>% 
                   dplyr::select(id, customId) %>%
-                  rename(Sample.Unit.GroupID = id), 
-                by = join_by(Sample.Unit.Group == customId), 
+                  rename(sample_unit_group_id = id), 
+                by = join_by(sample_unit_group == customId), 
                 keep = FALSE)
     
     rel_var <- c("CONVERSION_FACTOR", "OFFSET", "Convertible",
-                 "Sample.Unit.Group", "Sample.Unit.CustomId",
-                 "Sample.Unit.Name", "Sample.Unit.GroupID")
+                 "sample_unit_group", "Sample.Unit.CustomId",
+                 "Sample.Unit.Name", "sample_unit_group_id")
     
-  } else if(dataType == "extendedattributes"){
+  } else if(data_type == "extended_attributes"){
     
-    url <- paste0(baseURL, "v1/extendedattributes")
+    url <- paste0(base_url, "v1/extendedattributes")
     
-    rel_var <- c("customId", "dataType",
+    rel_var <- c("customId", "data_type",
                  "appliesToType", "description", "dropdownlist")
     
-  } else if(dataType == "observedproperties"){
+  } else if(data_type == "observed_properties"){
     
     #need to get unit group and unit IDs prior to importing observedProperties
-    unitGroups <- get_profiles(env, "unitgroups") %>% 
+    unitGroups <- get_profiles(env, "unit_groups") %>% 
       dplyr::select(id, customId) %>%
       rename("Unit.Group.Id" = "id")
     
     #add GUID to the list of observedProperties for unit groups
     profile <- left_join(profile, unitGroups, 
-                         by = join_by('Sample.Unit.Group' == 'customId'), 
+                         by = join_by('sample_unit_group' == 'customId'), 
                          keep = FALSE)
     
     #units without groups
@@ -459,29 +459,29 @@ post_profiles <- function(env, dataType, profile){
                          keep = FALSE)
     
     
-    url <- paste0(baseURL, "v1/observedproperties")
+    url <- paste0(base_url, "v1/observedproperties")
     
     rel_var <- c("Parm.Code", "NewNameID", "Description", "Analysis.Type",
                  "Unit.Group.Id", "Unit.Id", "CAS")
     
-  } else if(dataType == "methods"){
+  } else if(data_type == "methods"){
     
-    url <- paste0(baseURL, "v1/analysismethods")
+    url <- paste0(base_url, "v1/analysismethods")
     
     rel_var <- c("Method.Code", "Method", "Method.Description", "OPs.list")
     
-  } else if(dataType == "labs"){
+  } else if(data_type == "labs"){
     
-    url <- str_c(baseURL, "v1/laboratories")
+    url <- str_c(base_url, "v1/laboratories")
     
     rel_var <- c("ID", "Name", "Description", "Address", "Point.Of.Contact", 
                  "Email", "Phone.Number")
     
-  } else if(dataType == "fishtaxonomy"){
+  } else if(data_type == "fish_taxonomy"){
     
-    url <- str_c(baseURL, "v1/taxons")
+    url <- str_c(base_url, "v1/taxons")
     
-    taxonomylevels_profiles <- get_profiles("prod", "taxonomylevels")
+    taxonomylevels_profiles <- get_profiles("prod", "taxonomy_levels")
     
     profile <- profile %>%
       left_join(taxonomylevels_profiles %>% 
@@ -493,34 +493,34 @@ post_profiles <- function(env, dataType, profile){
     rel_var <- c("Taxonomy.Level.ID", "Scientific Name", "Common Name", "Source", 
                  "Comments", "ITIS TSN")
     
-  } else if(dataType == "collectionmethods"){
+  } else if(data_type == "collection_methods"){
     
-    url <- str_c(baseURL, "v1/collectionmethods")
+    url <- str_c(base_url, "v1/collectionmethods")
     
     rel_var <- c("New EnMoDS Short Name/ID", "merged_codes", "Definition")
     
-  } else if(dataType == "detectionconditions"){
+  } else if(data_type == "detection_conditions"){
     
-    url <- str_c(baseURL, "v1/detectionconditions")
+    url <- str_c(base_url, "v1/detectionconditions")
     
     rel_var <- c("customId", "name", "description", "systemCode")
     
-  } else if(dataType == "filters"){
+  } else if(data_type == "filters"){
     
-    url <- str_c(baseURL, "v1/filters")
+    url <- str_c(base_url, "v1/filters")
     
     rel_var <- c("customId")
     
-  } else if(dataType == "projects"){
+  } else if(data_type == "projects"){
     
-    url <- str_c(baseURL, "v1/projects")
+    url <- str_c(base_url, "v1/projects")
     
     rel_var <- c("ID", "Name", "Type", "StartDate", "EndDate", 
                  "Comments", "Scope")
     
-  } else if(dataType == "locationgroups"){
+  } else if(data_type == "location_groups"){
     
-    url <- str_c(baseURL, "v1/samplinglocationgroups")
+    url <- str_c(base_url, "v1/samplinglocationgroups")
     
     rel_var <- c("Permit ID", "locationgrouptypeID", "Description")
     
@@ -536,13 +536,13 @@ post_profiles <- function(env, dataType, profile){
       keep(names(.) %in% rel_var) %>% 
       slice(j)
     
-    if(dataType == "unitgroups"){
+    if(data_type == "unit_groups"){
       
       data_body <- list(
-        "customId" = temp_profile$Sample.Unit.Group,
+        "customId" = temp_profile$sample_unit_group,
         "supportsConversion" = temp_profile$Convertible)
       
-    } else if(dataType == "units"){
+    } else if(data_type == "units"){
       
       #If the unit group supports conversion provide conversion factors
       if (temp_profile$Convertible == TRUE) {
@@ -552,32 +552,32 @@ post_profiles <- function(env, dataType, profile){
           "name" = temp_profile$Sample.Unit.Name,
           "baseMultiplier" = 1/temp_profile$CONVERSION_FACTOR,
           "baseOffset" = temp_profile$OFFSET,
-          "unitGroup" = list("id" = temp_profile$Sample.Unit.GroupID))
+          "unitGroup" = list("id" = temp_profile$sample_unit_group_id))
         
       } else { 
         
         data_body <- list(
           "customId" = temp_profile$Sample.Unit.CustomId,
           "name" = temp_profile$Sample.Unit.Name,
-          "unitGroup" = list("id" = temp_profile$Sample.Unit.GroupID))
+          "unitGroup" = list("id" = temp_profile$sample_unit_group_id))
       }
       
-    } else if(dataType == "extendedattributes"){
+    } else if(data_type == "extended_attributes"){
       
       data_body <- list(
         "customId" = temp_profile$customId,
-        "dataType" = temp_profile$dataType,
+        "data_type" = temp_profile$data_type,
         "appliesToType" = temp_profile$appliesToType,
         "description" = temp_profile$description
       )
       
-      if(temp_profile$dataType == 'DROP_DOWN_LIST'){
+      if(temp_profile$data_type == 'DROP_DOWN_LIST'){
         
         data_body$dropDownListItems <- temp_profile$dropdownlist[[1]]
         
       }
       
-    } else if(dataType == "observedproperties"){
+    } else if(data_type == "observed_properties"){
       
       data_body <- list(
         "customId" = temp_profile$NewNameID,
@@ -590,16 +590,16 @@ post_profiles <- function(env, dataType, profile){
         "casNumber" = temp_profile$CAS
       )
       
-    } else if(dataType == "methods"){
+    } else if(data_type == "methods"){
       
       data_body <- list("methodId" = temp_profile$Method.Code,
                         "name" = temp_profile$Method,
                         "description" = temp_profile$Method.Description,
                         "context" = "EMS Migration",
-                        "observedProperties" = temp_profile$OPs.list[[1]]
+                        "observed_properties" = temp_profile$OPs.list[[1]]
       )
       
-    } else if(dataType == "labs"){
+    } else if(data_type == "labs"){
       
       data_body <- list("customId" = temp_profile$ID,
                         "name" = temp_profile$Name,
@@ -609,7 +609,7 @@ post_profiles <- function(env, dataType, profile){
                         "emailAddress" = temp_profile$Email,
                         "phoneNumber" = temp_profile$Phone.Number)
       
-    } else if(dataType == "fishtaxonomy"){
+    } else if(data_type == "fish_taxonomy"){
       
       data_body <- list("scientificName" = temp_profile$`Scientific Name`,
                         "commonName" = temp_profile$`Common Name`,
@@ -619,24 +619,24 @@ post_profiles <- function(env, dataType, profile){
                         "itisTsn" = temp_profile$`ITIS TSN`,
                         "itisURL" = "www.google.ca")
       
-    } else if(dataType == "collectionmethods"){
+    } else if(data_type == "collection_methods"){
       
       data_body <- list("customId" = temp_profile$`New EnMoDS Short Name/ID`,
                         "identifierOrganization" = temp_profile$merged_codes,
                         "name" = temp_profile$Definition)
       
-    } else if(dataType == "detectionconditions"){
+    } else if(data_type == "detection_conditions"){
       
       data_body <- list("customId" = temp_profile$customId,
                         "name" = temp_profile$name,
                         "description" = temp_profile$description,
                         "systemCode" = temp_profile$systemCode)
       
-    } else if(dataType == "filters"){
+    } else if(data_type == "filters"){
       
       data_body <- list("customId" = temp_profile$customId)
       
-    } else if(dataType == "projects"){
+    } else if(data_type == "projects"){
       
       data_body <- list(
         "customId" = temp_profile$ID, 
@@ -647,7 +647,7 @@ post_profiles <- function(env, dataType, profile){
         "description" = temp_profile$Comments,
         "scopeStatement" = temp_profile$Scope)
       
-    } else if(dataType == "locationgroups"){
+    } else if(data_type == "location_groups"){
       
       data_body <- list(
         "name" = temp_profile$`Permit ID`,
@@ -671,7 +671,7 @@ post_profiles <- function(env, dataType, profile){
     
   }
   
-  post_check <- get_profiles(env, dataType)
+  post_check <- get_profiles(env, data_type)
   
   if(dim(post_check)[1] >= dim(profile)[1]){
     

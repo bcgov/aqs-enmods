@@ -6,13 +6,16 @@ run_init <- FALSE
 if (run_init) {
   
   # initialization code
-  units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>%
-    mutate(CODE = as.character(CODE)) %>%
-    dplyr::select(-CONVERSION_FACTOR) %>%
-    mutate(CODE = str_replace(CODE, "^0+", ""))
+  units <- read_csv("./utils/config/ReferenceLists/Units_ems_jk_2025_04_16.csv") %>% 
+    rename_with(tolower) %>%
+    rename_with(~ gsub("\\.", "_", .)) %>%
+    mutate(meas_unit_cd = as.character(meas_unit_cd)) %>%
+    mutate(code = as.character(code)) %>%
+    dplyr::select(-conversion_factor) %>%
+    mutate(code = str_replace(code, "^0+", ""))
   #Only conversions in this file are reliable
-  units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% mutate(CODE = str_replace(CODE, "^0+", ""))
-  #%>% dplyr::select(c(CODE, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group, Sample.Unit.CustomId, Sample.Unit.Name))
+  units_base <- read_excel("./utils/config/ReferenceLists/Units.xlsx", sheet = "Units") %>% mutate(code = str_replace(code, "^0+", ""))
+  #%>% dplyr::select(c(code, conversion_factor, offset, sample_unit_group, sample_unit_customId, sample_unit_name))
   
   # Identify the new columns from units_base
   new_cols <- setdiff(names(units_base), names(units))
@@ -25,37 +28,39 @@ if (run_init) {
   
   units <- units %>% bind_cols(new_data)
   
-  units <- units %>% bind_rows(units_base %>% mutate(Results = NA)) %>% unique()
+  units <- units %>% bind_rows(units_base %>% mutate(results = NA)) %>% unique()
   
   # Columns to move
-  cols_to_move <- c("CODE", "Sample.Unit.CustomId", "Sample.Unit.Name",
-                    "Sample.Unit.Short.Name", "Sample.Unit.Group",
-                    "Sample.Unit.Modifier", "Results", "Base Unit",
-                    "OFFSET", "Convertible")
+  cols_to_move <- c("code", "sample_unit_customId", "sample_unit_name",
+                    "sample_unit_short_name", "sample_unit_group",
+                    "sample_unit_modifier", "results", "base unit",
+                    "offset", "convertible")
   
   # Reorder with selected columns at the end
   units <- units %>%
     dplyr::select(all_of(cols_to_move), everything()) %>%
-    group_by(CODE) %>%
-    summarize(across(c(Sample.Unit.CustomId, Sample.Unit.Name:CONVERSION_FACTOR), ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), .groups = "drop") %>%
-    mutate(Sample.Unit.Group = case_when(
-      SHORT_NAME == "‰" ~ "DimensionlessRatio",
-      SHORT_NAME == "mg/dscm" ~ "AirConcentration",
-      SHORT_NAME == "% (Recovery)" ~ "DimensionlessRatio",
-      SHORT_NAME == "N/A" ~ "None",
-      .default = Sample.Unit.Group
-    )) %>% mutate(Sample.Unit.CustomId = case_when(
-      SHORT_NAME == "N/A" ~ "Unknown",
-      SHORT_NAME == "‰" ~ "‰",
-      SHORT_NAME == "mg/dscm" ~ "mg/dscm",
-      .default = Sample.Unit.CustomId
-    )) %>% mutate(Sample.Unit.Name = case_when(
-      SHORT_NAME == "N/A" ~ "Unknown",
-      SHORT_NAME == "‰" ~ "Per mille (0/00 VSMOW, isotope composition)",
-      SHORT_NAME == "mg/dscm" ~ "Milligrams per dry standard cubic metre",
-      .default = Sample.Unit.Name
+    group_by(code) %>%
+    summarize(across(c(sample_unit_customId, sample_unit_name:conversion_factor), 
+                     ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), 
+              .groups = "drop") %>%
+    mutate(sample_unit_group = case_when(
+      short_name == "‰" ~ "DimensionlessRatio",
+      short_name == "mg/dscm" ~ "AirConcentration",
+      short_name == "% (Recovery)" ~ "DimensionlessRatio",
+      short_name == "N/A" ~ "None",
+      .default = sample_unit_group
+    )) %>% mutate(sample_unit_customId = case_when(
+      short_name == "N/A" ~ "Unknown",
+      short_name == "‰" ~ "‰",
+      short_name == "mg/dscm" ~ "mg/dscm",
+      .default = sample_unit_customId
+    )) %>% mutate(sample_unit_name = case_when(
+      short_name == "N/A" ~ "Unknown",
+      short_name == "‰" ~ "Per mille (0/00 VSMOW, isotope composition)",
+      short_name == "mg/dscm" ~ "Milligrams per dry standard cubic metre",
+      .default = sample_unit_name
     )) %>%
-    mutate(CONVERSION_FACTOR = if_else(SHORT_NAME == "mg/dscm", 1000, CONVERSION_FACTOR))
+    mutate(conversion_factor = if_else(short_name == "mg/dscm", 1000, conversion_factor))
   
   units_new_to_enmods <- read_excel("./utils/config/ReferenceLists/Units_new_to_enmods.xlsx", sheet = "NewUnits")
   
@@ -70,7 +75,7 @@ if (run_init) {
   
   units_new_to_enmods <- units_new_to_enmods %>%
     bind_cols(new_data) %>%
-    mutate(Sample.Unit.Modifier = as.character(Sample.Unit.Modifier))
+    mutate(sample_unit_modifier = as.character(sample_unit_modifier))
   
   units <- units %>%
     bind_rows(units_new_to_enmods) %>%
@@ -96,68 +101,68 @@ if (run_init) {
   #Sentence case in general for sample unit names
   #Accounting for special cases
   units <- units %>%
-    mutate(Sample.Unit.Name = str_to_sentence(Sample.Unit.Name)) %>%
-    mutate(Sample.Unit.Name =
-             str_replace_all(Sample.Unit.Name, replacements)) %>%
-    mutate(Sample.Unit.Name = case_when(
-      Sample.Unit.Name == "Centimetre" ~ "Centimetres",
-      Sample.Unit.Name == "Micrometre" ~ "Micrometres",
-      .default = Sample.Unit.Name)) %>%
-    mutate(DESCRIPTION = str_replace_all(DESCRIPTION, "Tons", "US tons"))
+    mutate(sample_unit_name = str_to_sentence(sample_unit_name)) %>%
+    mutate(sample_unit_name =
+             str_replace_all(sample_unit_name, replacements)) %>%
+    mutate(sample_unit_name = case_when(
+      sample_unit_name == "Centimetre" ~ "Centimetres",
+      sample_unit_name == "Micrometre" ~ "Micrometres",
+      .default = sample_unit_name)) %>%
+    mutate(description = str_replace_all(description, "Tons", "US tons"))
   
   #need to insert unit groups now
-  unitGroups <- units %>%
-    dplyr::select(Sample.Unit.Group, Convertible) %>%
+  unit_groups <- units %>%
+    dplyr::select(sample_unit_group, convertible) %>%
     #group_by(across(everything())) %>%
     #summarize(Count = n()) %>%
     #ungroup() %>%
-    mutate(Sample.Unit.Group = case_when(
-      Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-      .default = Sample.Unit.Group
-    )) %>% dplyr::filter(!is.na(Convertible)) %>%
+    mutate(sample_unit_group = case_when(
+      sample_unit_group == "Length" ~ "SYS-REQUIRED - Length",
+      .default = sample_unit_group
+    )) %>% dplyr::filter(!is.na(convertible)) %>%
     unique()
   
-  post_check <- post_profiles("test", "unitgroups", unitGroups)
+  post_check <- post_profiles("test", "unit_groups", unit_groups)
   
-  unitGroupsProfiles <- get_profiles("test", "unitgroups")
+  unit_groups_profiles <- get_profiles("test", "unit_groups")
   
-  units <- units %>% left_join(unitGroupsProfiles %>%
+  units <- units %>% left_join(unit_groups_profiles %>%
                                  dplyr::select(id, customId, supportsConversion),
-                               by = join_by("Sample.Unit.Group" == "customId")) %>%
-    dplyr::select(-Convertible) %>%
-    rename(Convertible = supportsConversion,
-           Sample.Unit.GroupID = id)
+                               by = join_by("sample_unit_group" == "customId")) %>%
+    dplyr::select(-convertible) %>%
+    rename(convertible = supportsConversion,
+           sample_unit_groupID = id)
   
   #fixing the units file for anomalous Count group associated with No/m2
   units <- units %>%
-    #mutate(Convertible = ifelse(Sample.Unit.Name == "Number per square metre",
-    #                            FALSE, Convertible)) %>%
-    mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
-    mutate(Sample.Unit.Group = case_when(
-      Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-      Sample.Unit.Group == "Apperance" ~ "Appearance",
-      .default = Sample.Unit.Group
+    #mutate(convertible = ifelse(sample_unit_name == "Number per square metre",
+    #                            FALSE, convertible)) %>%
+    mutate(offset = if_else(is.na(offset), 0, offset)) %>%
+    mutate(sample_unit_group = case_when(
+      sample_unit_group == "Length" ~ "SYS-REQUIRED - Length",
+      sample_unit_group == "Apperance" ~ "Appearance",
+      .default = sample_unit_group
     ))
   #
-  units <- units %>% mutate(Convertible = if_else(is.na(Convertible), FALSE, Convertible)) %>% unique() %>% mutate(Convertible = if_else(Sample.Unit.Group == "SYS-REQUIRED - Length", TRUE, Convertible))
+  units <- units %>% mutate(convertible = if_else(is.na(convertible), FALSE, convertible)) %>% unique() %>% mutate(convertible = if_else(sample_unit_group == "SYS-REQUIRED - Length", TRUE, convertible))
   
   #Spell check things before writing
   units_spellcheck <- units %>%
     mutate(
-      words = str_extract_all(DESCRIPTION, "[A-Z][a-z]+"),  # splits CamelCase into words
-      # words = strsplit(Sample.Unit.Name, "\\s+"),  # split text into words
+      words = str_extract_all(description, "[A-Z][a-z]+"),  # splits CamelCase into words
+      # words = strsplit(sample_unit_name, "\\s+"),  # split text into words
       misspelled = map(words, hunspell)
     )
   # # print(units_spellcheck %>% select(misspelled) %>% unnest(misspelled) %>% unlist() %>% unique(), n = 126)
   # #
   
-  write_xlsx(units, "./utils/config/ReferenceLists/Consolidated_units.xlsx")
+  write_xlsx(units, "./utils/config/ReferenceLists/Consolidated_Units.xlsx")
   # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/Consolidated_units.xlsx")
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Consolidated_Units.xlsx")
   # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
   renameWorksheet(wb, sheet = "Sheet1", newName = "Units")
   # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_units.xlsx", 
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_Units.xlsx", 
                overwrite = TRUE)
   
 }
@@ -165,9 +170,9 @@ if (run_init) {
 # PREPROCESSING UNITS FOR NEW DATA ---------------------------------------------
 
 #Only conversions in this file are reliable
-units_base <- read_excel("./utils/config/ReferenceLists/consolidatedUnits.xlsx", 
+units_base <- read_excel("./utils/config/ReferenceLists/Consolidated_Units.xlsx", 
                          sheet = "Units") %>% 
-  mutate(CODE = str_replace(CODE, "^0+", ""))
+  mutate(code = str_replace(code, "^0+", ""))
 
 file_exists <- length(list.files(pattern = "^Units_ems_jk_")) > 0
 
@@ -175,17 +180,19 @@ file_exists <- length(list.files(pattern = "^Units_ems_jk_")) > 0
 file_exists <- list.files(path = "./utils/config/ReferenceLists/", 
                              pattern = "^Units_ems_jk_", full.names = TRUE)
 
-#ADD NEW FILE HERE; IF NO NEW FILE, CONSOLIDATED BASE UNITS FILE WILL BE USED
+#ADD NEW FILE HERE; IF NO NEW FILE, CONSOLIDATED base unitS FILE WILL BE USED
 #picks the latest file of all the files identified
 if (length(file_exists) > 0) {
   latest_file <- file_exists[which.max(file.info(file_exists)$mtime)]
   message("Latest file found: ", latest_file)
   
   units <- read_csv(latest_file) %>% 
-    mutate(MEAS_UNIT_CD = as.character(MEAS_UNIT_CD)) %>%
-    mutate(CODE = as.character(CODE)) %>%
-    dplyr::select(-CONVERSION_FACTOR) %>%
-    mutate(CODE = str_replace(CODE, "^0+", ""))
+    rename_with(tolower) %>%
+    rename_with(~ gsub("\\.", "_", .)) %>%
+    mutate(meas_unit_cd = as.character(meas_unit_cd)) %>%
+    mutate(code = as.character(code)) %>%
+    dplyr::select(-conversion_factor) %>%
+    mutate(code = str_replace(code, "^0+", ""))
   
   # Identify the new columns from units_base
   new_cols <- setdiff(names(units_base), names(units))
@@ -198,7 +205,7 @@ if (length(file_exists) > 0) {
   
   units <- units %>% bind_cols(new_data)
   
-  units <- units %>% bind_rows(units_base %>% mutate(Results = NA)) %>% unique()
+  units <- units %>% bind_rows(units_base %>% mutate(results = NA)) %>% unique()
   
 } else {
   
@@ -207,10 +214,10 @@ if (length(file_exists) > 0) {
 }
 
 # Columns to move
-cols_to_move <- c("Sample.Unit.CustomId", "CODE", "Sample.Unit.Name",
-                  "Sample.Unit.Short.Name", "Sample.Unit.Group",
-                  "Sample.Unit.Modifier", "Results", "Base Unit",
-                  "OFFSET", "Convertible")
+cols_to_move <- c("sample_unit_customId", "code", "sample_unit_name",
+                  "sample_unit_short_name", "sample_unit_group",
+                  "sample_unit_modifier", "results", "base unit",
+                  "offset", "convertible")
 
 # Replacement dictionary as a named vector
 replacements <- c("Ph units" = "pH units",
@@ -231,48 +238,48 @@ replacements <- c("Ph units" = "pH units",
 
 # Count the number of units with NA in code; these are units not in EMS
 units_missing_code <- units %>% 
-  dplyr::filter(is.na(CODE)) %>%
+  dplyr::filter(is.na(code)) %>%
   count() %>% unlist()
 
-#allocating random CODE values to those rows so they do not get removed
+#allocating random code values to those rows so they do not get removed
 set.seed(123)  # optional, for reproducibility
 random_code_num <- sample(-1:-20, units_missing_code)
 
-units$CODE[which(is.na(units$CODE))] <- random_code_num
+units$code[which(is.na(units$code))] <- random_code_num
 
 # Reorder with selected columns at the end
 units <- units %>%
   dplyr::select(all_of(cols_to_move), everything()) %>%
-  group_by(CODE) %>%
-  summarize(across(c(Sample.Unit.CustomId, Sample.Unit.Name:Sample.Unit.GroupID), ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), 
+  group_by(code) %>%
+  summarize(across(c(sample_unit_customId, sample_unit_name:sample_unit_groupID), ~ (if (all(is.na(.x))) NA else .x[!is.na(.x)][1])), 
             .groups = "drop") %>% 
-  mutate(Sample.Unit.Modifier = as.character(Sample.Unit.Modifier)) %>% 
-  mutate(Convertible = if_else(is.na(Convertible), FALSE, Convertible)) %>%
-  mutate(OFFSET = if_else(is.na(OFFSET), 0, OFFSET)) %>%
-  mutate(Sample.Unit.Name = str_to_sentence(Sample.Unit.Name)) %>%
-  mutate(Sample.Unit.Name = 
-           str_replace_all(Sample.Unit.Name, replacements)) %>%
-  dplyr::filter(!is.na(Sample.Unit.Name)) %>%
-  group_by(Sample.Unit.Name) %>%
-  mutate(Results = sum(Results, na.rm = TRUE)) %>% 
+  mutate(sample_unit_modifier = as.character(sample_unit_modifier)) %>% 
+  mutate(convertible = if_else(is.na(convertible), FALSE, convertible)) %>%
+  mutate(offset = if_else(is.na(offset), 0, offset)) %>%
+  mutate(sample_unit_name = str_to_sentence(sample_unit_name)) %>%
+  mutate(sample_unit_name = 
+           str_replace_all(sample_unit_name, replacements)) %>%
+  dplyr::filter(!is.na(sample_unit_name)) %>%
+  group_by(sample_unit_name) %>%
+  mutate(results = sum(results, na.rm = TRUE)) %>% 
   ungroup() %>%
   unique()
 
-write_xlsx(units, "./utils/config/ReferenceLists/consolidatedUnits.xlsx")
+write_xlsx(units, "./utils/config/ReferenceLists/Consolidated_Units.xlsx")
 
 # Load an existing workbook
-wb <- loadWorkbook("./utils/config/ReferenceLists/consolidatedUnits.xlsx")
+wb <- loadWorkbook("./utils/config/ReferenceLists/Consolidated_Units.xlsx")
 
 # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
 renameWorksheet(wb, sheet = "Sheet1", newName = "Units")
 
 # Save the workbook with the updated sheet name
-saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedUnits.xlsx", 
+saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_Units.xlsx", 
              overwrite = TRUE)
 
 units <- units %>% 
-  dplyr::select(CONVERSION_FACTOR, Sample.Unit.Name, Sample.Unit.CustomId,
-                Convertible, CONVERSION_FACTOR, OFFSET, Sample.Unit.Group) %>%
+  dplyr::select(conversion_factor, sample_unit_name, sample_unit_customId,
+                convertible, conversion_factor, offset, sample_unit_group) %>%
   unique()
 
 # # QA/QC for UNITS -------------------------------------------
@@ -285,11 +292,11 @@ units <- units %>%
 # get_check <- get_profiles("prod", "units")
 # # #
 # # # #no such units
-# #units_na <- units %>% dplyr::filter(is.na(Sample.Unit.CustomId))
+# #units_na <- units %>% dplyr::filter(is.na(sample_unit_customId))
 # # #
 # units_missing <- units %>%
 #   anti_join(get_check,
-#             by = join_by("Sample.Unit.CustomId" == "customId"))
+#             by = join_by("sample_unit_customId" == "customId"))
 # 
 # PREPROCESSING OF UNIT GROUPS --------------------------------------------
 
@@ -297,24 +304,24 @@ units <- units %>%
 #sometimes this list may have one less or more unit groups than in ENV
 #This is because AQS automatically creates Length if no unit groups present
 #This added Unit Group may be called "SYS-REQUIRED - Length"
-unitGroups <- units %>% 
-  dplyr::select(Sample.Unit.Group, Convertible) %>% 
+unit_groups <- units %>% 
+  dplyr::select(sample_unit_group, convertible) %>% 
   group_by(across(everything())) %>%
   summarize(Count = n()) %>% 
   ungroup() %>%
-  mutate(Sample.Unit.Group = case_when(
-    Sample.Unit.Group == "Length" ~ "SYS-REQUIRED - Length",
-    .default = Sample.Unit.Group
+  mutate(sample_unit_group = case_when(
+    sample_unit_group == "Length" ~ "SYS-REQUIRED - Length",
+    .default = sample_unit_group
   ))
 
-write_xlsx(unitGroups, "./utils/config/ReferenceLists/consolidatedUnitGroups.xlsx")
+write_xlsx(unit_groups, "./utils/config/ReferenceLists/Consolidated_Unit_Groups.xlsx")
 
 # Load an existing workbook
-wb <- loadWorkbook("./utils/config/ReferenceLists/consolidatedUnitGroups.xlsx")
+wb <- loadWorkbook("./utils/config/ReferenceLists/Consolidated_Unit_Groups.xlsx")
 
 # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-renameWorksheet(wb, sheet = "Sheet1", newName = "UnitGroups")
+renameWorksheet(wb, sheet = "Sheet1", newName = "unit_groups")
 
 # Save the workbook with the updated sheet name
-saveWorkbook(wb, "./utils/config/ReferenceLists/consolidatedUnitGroups.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_Unit_Groups.xlsx", overwrite = TRUE)
 
