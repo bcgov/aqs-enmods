@@ -362,11 +362,11 @@ put_profiles <- function(env, data_type, profile){
 
 post_profiles <- function(env, data_type, profile){
   
-  env = "prod"
-
-  data_type = "filters"
-
-  profile <- saved_filters
+  # env = "prod"
+  # 
+  # data_type = "filters"
+  # 
+  # profile <- saved_filters
   
   #Clean the old stuff out of the environment before posting new stuff
   if(!is.null(dim(get_profiles(env, data_type))[1])){
@@ -530,7 +530,7 @@ post_profiles <- function(env, data_type, profile){
   
   for(j in 1:dim(profile)[1]){
     
-    j <- 1
+    #j <- 1
     
     temp_profile <- profile %>% 
       keep(names(.) %in% rel_var) %>% 
@@ -666,7 +666,7 @@ post_profiles <- function(env, data_type, profile){
     x<-POST(url, config = c(add_headers(.headers = 
                                           c('Authorization' = token))), body = data_body, encode = 'json')
     
-    j <- 1
+    #j <- 1
     
     messages[[j]] <- fromJSON(rawToChar(x$content))
     

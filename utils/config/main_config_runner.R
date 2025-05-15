@@ -1,7 +1,7 @@
 #Set the working environment
 env = "prod"
 
-#main <- function(env){
+main <- function(env){
 
 source("./utils/config/env_config.R")
 source("./utils/config/api_functions.R")
@@ -47,12 +47,9 @@ locationGroups <- get_profiles(env, "locationgroups")
 saved_filters <- post_profiles(env, "filters", saved_filters)
 saved_filters <- get_profiles(env, "filters")
 
-# }
-# 
-# main("prod")
+}
 
-# # Call top-level functions here
-# process_units()
-# process_observed_properties()
-# process_sampling_locations()
+main("prod")
+
+# Call delete functions here that otherwise stay commented
 
