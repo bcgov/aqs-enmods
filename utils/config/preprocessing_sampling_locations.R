@@ -2,9 +2,9 @@
 
 # SAMPLING LOCATION GROUPS AND LOCATIONS ----
 # PREPROCESSING SAMPLING LOCATIONS AND GROUPS FOR NEW DATA --------------------
-non_zero_post_2006 <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025NonzeroSamplesAfter2006Export.xlsx")
-zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx")
-zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_Between2006And2024ZeroSamples.xlsx")
+non_zero_post_2006 <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025NonzeroSamplesAfter2006Export.xlsx")
+zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx")
+zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_Between2006And2024ZeroSamples.xlsx")
 
 non_zero_post_2006 <- non_zero_post_2006 %>% 
   rename_with(tolower) %>% 
@@ -113,92 +113,49 @@ locations <- locations %>%
   mutate(elevation_unit = 
            case_when(#is.na(elevation_unit) ~ "metre", 
              elevation_unit == "metre" ~ "m",
-             .default = elevation_unit))
+             .default = elevation_unit)) %>%
+  rename_with(
+    ~ case_when(
+      .x == "location_id" ~ "Location ID",
+      .x == "name" ~ "Name",
+      .x == "type" ~ "Type",
+      .x == "comment" ~ "Comment",
+      .x == "country" ~ "Country",
+      .x == "state" ~ "State",
+      .x == "county" ~ "County",
+      .x == "latitude" ~ "Latitude",
+      .x == "longitude" ~ "Longitude",
+      .x == "horizontal_datum" ~ "Horizontal Datum",
+      .x == "horizontal_collection_method" ~ "Horizontal Collection Method",
+      .x == "vertical_datum" ~ "Vertical Datum",
+      .x == "vertical_collection_method" ~ "Vertical Collection Method",
+      .x == "location_groups" ~ "Location Groups",
+      .x == "elevation" ~ "Elevation",
+      .x == "elevation_unit" ~ "Elevation Unit",
+      .x == "standards" ~ "Standards",
+      .x == "ea_closed_date" ~ "EA_Closed Date",
+      .x == "ea_ems_when_created" ~ "EA_EMS When Created",
+      .x == "ea_ems_when_updated" ~ "EA_EMS When Updated",
+      .x == "ea_ems_who_created" ~ "EA_EMS Who Created",
+      .x == "ea_ems_who_updated" ~ "EA_EMS Who Updated",
+      .x == "ea_established_date" ~ "EA_Established Date",
+      .x == "ea_well_tag_id" ~ "EA_Well Tag ID",
+      .default = .x
+    )
+  )
 
 #locations have to be pushed manually, 10000 at a time using AQS Import
 locations_1 <- locations[seq(1,10000),]
-write.csv(locations_1, file = "./utils/config/ReferenceLists/samplingLocations/1_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_1, file = "./utils/config/ReferenceLists/Sampling_Locations/1_Locations_Extract_May6_2025.csv", row.names = F)
 
 locations_2 <- locations[seq(10001,20000),]
-write.csv(locations_2, file = "./utils/config/ReferenceLists/samplingLocations/2_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_2, file = "./utils/config/ReferenceLists/Sampling_Locations/2_Locations_Extract_May6_2025.csv", row.names = F)
 
 locations_3 <- locations[seq(20001,30000),]
-write.csv(locations_3, file = "./utils/config/ReferenceLists/samplingLocations/3_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_3, file = "./utils/config/ReferenceLists/Sampling_Locations/3_Locations_Extract_May6_2025.csv", row.names = F)
 
 locations_4 <- locations[seq(30001, nrow(locations)),]
-write.csv(locations_4, file = "./utils/config/ReferenceLists/samplingLocations/4_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_4, file = "./utils/config/ReferenceLists/Sampling_Locations/4_Locations_Extract_May6_2025.csv", row.names = F)
 
 
 
-# SAVED FILTERS ----
-# PREPROCESSING TO GENERATE OLDER SAVED FILTERS FILES ---------------
-
-run_init = FALSE
-if(run_init){
-  
-  # Have to run a renaming code coz file name is too long to import otherwise
-  # List files starting with the old prefix
-  files_to_rename <- list.files(path = "./utils/config/ReferenceLists/", pattern = paste0("^", "EMS_Monitoring_Groups_"), full.names = TRUE)
-  
-  # Generate new file names
-  new_file_names <- file.path(path = "./utils/config/ReferenceLists", "Saved_Filters.xlsx")
-  
-  # Rename the files
-  file.rename(from = files_to_rename, to = new_file_names)
-  
-  #Had to run this only once in a lifetime
-  saved_filters <- read_csv("./utils/config/ReferenceLists/Saved_Filters.xlsx") %>% 
-    rename_with(tolower) %>% 
-    rename_with(~ gsub("\\.", "_", .)) %>% 
-    rename_with(~ gsub("\\-", "_", .)) %>%
-    rename_with(~ gsub(" ", "_", .))
-    
-  #saved_filters <- get_profiles("test", "filters") %>% 
-  #dplyr::select(customId)
-  
-  # Save workbook
-  write_xlsx(saved_filters, "./utils/config/ReferenceLists/Saved_Filters.xlsx")
-  
-  # Load an existing workbook
-  wb <- loadWorkbook("./utils/config/ReferenceLists/Saved_Filters.xlsx")
-  
-  # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-  renameWorksheet(wb, sheet = "Sheet1", newName = "Saved_Filters")
-  
-  # Save the workbook with the updated sheet name
-  saveWorkbook(wb, "./utils/config/ReferenceLists/Saved_Filters.xlsx", overwrite = TRUE)
-
-  }
-
-# PREPROCESSING SAVED FILTERS FOR NEW DATA ---------------------------
-
-locations <- get_profiles(env, "locations")
-
-saved_filters <- read_excel("./utils/config/ReferenceLists/Saved_Filters.xlsx", 
-                            sheet = "Saved_Filters") %>% rename_with(tolower) %>% 
-  rename_with(tolower) %>% 
-  rename_with(~ gsub("\\.", "_", .)) %>% 
-  rename_with(~ gsub("\\-", "_", .)) %>%
-  rename_with(~ gsub(" ", "_", .))
-
-saved_filters <- saved_filters %>% 
-                  inner_join(locations %>% dplyr::select(id, customId, name) %>%
-                               rename(location_guid = id, location_name = name),
-                             by = join_by("location_id" == "customId",
-                                          "location_name")) %>% 
-                  dplyr::select(c(id, name, location_guid, comments)) %>% 
-                  unique()
-                  
-saved_filters <- saved_filters %>%
-  dplyr::select(name, comments, location_guid) %>%
-  mutate(location_guid = as.character(location_guid)) %>%
-  group_by(name, comments) %>%
-  #summarise(sampling_locations = list(id = location_guid), .groups = "drop") %>% 
-  summarise(
-    sampling_locations = list(
-      map(location_guid, ~ list(id = .x))
-    ),
-    .groups = "drop"
-  ) %>%
-  ungroup() %>% 
-  unique()

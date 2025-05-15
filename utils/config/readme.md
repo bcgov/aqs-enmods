@@ -1,23 +1,65 @@
+# EnMoDS - AQS Configuration Pipeline
+
 ## Code Style Standards
 
 Naming conventions based on the reference value (SNAKE CASE)
 
   1. For file names/sheets, we follow the format "Snake_Case" 
   2. For file names coming from EMS, we follow the format "EMS_<Data_Type>_Date"
-  3. For variable names in coding pipelines, we follow:
-	 1. the "snake_case" format if "case" is a version of the "snake"
-	 2. the "snake.case" format if "case" is an element of the "snake"
-	 3. Column names for tables also follow "snake_case" as dot notation can cause parsing issues in some environments
-	 4. AQI uses "camelCase" so using formatting styles in 1 through 3 will also allow us to differentiate between variables created by BC Gov vs AQI
-  
+  3. For variable names in coding pipelines:
+   - Use `snake_case` format if "case" is a version of "snake"
+   - Use `snake.case` format if "case" is an element of the "snake"
+   - Column names for tables also follow `snake_case` to avoid parsing issues
+   - AQI uses `camelCase`, so following these styles helps distinguish BC Gov vs AQI-originated data
+
 ## Steps to configure an instance of EnMoDS - AQS
 
-Starting from a clean environment with no configuration (see how to wipe an environment)...
-  1. Run preprocessing steps
-  2. Run configuration steps
-     1. Support tables are here
-     2. functions are here
-  3. other steps 
+This pipeline sets up a clean configuration environment by systematically loading all relevant domain objects (profiles) into the system via API requests.
 
-## Steps to wipe an instance of EnMoDS - AQS
-  1. Run delete * from all
+To start from a clean environment, first wipe the environment so it has no configuration (see how to wipe an environment below)
+
+### 1. Run the Main Configuration Script
+
+Run the master file `main_config_runner.R`. The source scripts, their generated tables, and function calls have been added in the right order already.
+Details on these components are given below.
+
+     A. Support Preprocessing Scripts and Tables
+     B. Support Functions 
+
+#### A. Support Preprocessing Scripts and Tables
+
+These scripts read, clean, transform, and prepare the datasets required to configure EnMoDS:
+
+- `preprocessing_units_unitsgroups.R`: 
+  - Consolidates EMS unit data with internal references, classifies units, standardizes names, and prepares `units` and `unit_groups` datasets
+  - Generates tables `units` and `unit_groups` needed for uploads that follow
+
+- `preprocessing_observed_properties.R`: 
+  - Merges EMS and custom observed property files, links them with unit/unit group IDs, standardizes labels, and prepares `observed_properties`
+  - Generates table `observed_properties` 
+  
+- `preprocessing_others.R`: 
+  - Prepares other core tables including `methods`, `labs`, `projects`, `taxonomy_levels`, `fish_taxonomy`, `detection_conditions`, `result_grades`, `result_statuses`, `mediums`, and `extended_attributes`
+  - Generates all other tables except location-related
+  
+- `preprocessing_sampling_locations.R`: 
+  - Consolidates non-cancelled sampling locations and joins them with permit data to prepare `locations` and `location_groups`.
+  - Note that locations need to be uploaded manually before saved filters can be uploaded to AQS
+  - Generates `locations` table needed to upload `location_groups`
+  
+- `preprocessing_saved_filters.R`: 
+  - Prepares `filters` by joining saved filter records with location GUIDs and structuring data for API compatibility.
+  - Generates the `saved_filters` table
+  
+#### B. Support Functions
+
+Stylized along the lines of the underlying AQS API, these functions are used to:
+
+
+
+  
+### 2. Steps to wipe an instance of EnMoDS - AQS
+
+Currently, every new setup comes with complete wipe prior to build. This is executed through 
+the function `delete_all_profiles` stored in the source file `preprocessing_delete.R`.
+  

@@ -169,6 +169,8 @@ if (run_init) {
 
 # PREPROCESSING UNITS FOR NEW DATA ---------------------------------------------
 
+run_new <- FALSE
+
 #Only conversions in this file are reliable
 units_base <- read_excel("./utils/config/ReferenceLists/Consolidated_Units.xlsx", 
                          sheet = "Units") %>% 
@@ -176,15 +178,15 @@ units_base <- read_excel("./utils/config/ReferenceLists/Consolidated_Units.xlsx"
   rename_with(~ gsub("\\.", "_", .)) %>%
   mutate(code = str_replace(code, "^0+", ""))
 
-file_exists <- length(list.files(pattern = "^Units_ems_jk_")) > 0
+run_new <- length(list.files(pattern = "^Units_ems_jk_")) > 0
 
-#if file matching pattern exists in this folder, it would be in this list
-file_exists <- list.files(path = "./utils/config/ReferenceLists/", 
-                             pattern = "^Units_ems_jk_", full.names = TRUE)
-
-#ADD NEW FILE HERE; IF NO NEW FILE, CONSOLIDATED base unitS FILE WILL BE USED
+#ADD NEW FILE HERE; IF NO NEW FILE, CONSOLIDATED BASE UNITS FILE WILL BE USED
 #picks the latest file of all the files identified
-if (length(file_exists) > 0) {
+if (run_new) {
+  #if file matching pattern exists in this folder, it would be in this list
+  file_exists <- list.files(path = "./utils/config/ReferenceLists/", 
+                            pattern = "^Units_ems_jk_", full.names = TRUE)
+  
   latest_file <- file_exists[which.max(file.info(file_exists)$mtime)]
   message("Latest file found: ", latest_file)
   
