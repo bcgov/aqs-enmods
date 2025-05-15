@@ -55,8 +55,16 @@ These scripts read, clean, transform, and prepare the datasets required to confi
 
 Stylized along the lines of the underlying AQS API, these functions are used to:
 
+- Post: The function `post_profiles` uploads a profile to the AQS database
+- Put: The function `put_profiles` uploads a profile into the AQS database
+- Get: The function `get_profiles` downloads an AQS profile
+- Get: The function `get_profiles_for_url` downloads an AQS profile if the API URL is known
+- Delete: The function `del_profiles` deletes an AQS profile
+- Delete: The function `delete_all_profiles` deletes all AQS profiles. Note that 
+some data cannot be deleted because they are marked as required by AQS. The current
+code configuration accounts for such required profiles and does not delete them.
 
-
+These functions are all stored in `api_functions.R`
   
 ### 2. Steps to wipe an instance of EnMoDS - AQS
 
