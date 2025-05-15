@@ -151,8 +151,8 @@ get_profiles <- function(env, data_type){
 
 del_profiles <- function(env, data_type){
   
-  # env <- "prod"
-  # 
+  #env <- "prod"
+  #data_type <- "result_grades"
   # data_type <- "taxonomy_levels"#labs"#"observed_properties"
   
   temp_profile <- get_profiles(env, data_type)
@@ -216,29 +216,29 @@ del_profiles <- function(env, data_type){
     
   } else if(data_type == "location_group_types"){
     
-    put_profiles("prod", "location_group_types", tibble(customId = character()))
+    put_profiles(env, "location_group_types", tibble(customId = character()))
     
     return()
     
   } else if(data_type == "location_types"){
     
-    put_profiles("prod", "location_types", tibble(customId = character()))
+    put_profiles(env, "location_types", tibble(customId = character()))
     
     return()
     
   } else if(data_type == "mediums"){
     
-    mediums_required <- get_profiles("prod", "mediums") %>%
-      dplyr::filter(!is.na(systemCode)) %>% 
-      dplyr::select(customId)
+    mediums_required <- get_profiles(env, "mediums") %>% 
+      dplyr::select(customId, systemCode) %>% 
+      dplyr::filter(!is.na(systemCode))
     
-    put_profiles("prod", "mediums", mediums_required)
+    put_profiles(env, "mediums", mediums_required)
     
     return()
     
   } else if(data_type == "taxonomy_levels"){
     
-    put_profiles("prod", "taxonomy_levels", tibble(customId = character()))
+    put_profiles(env, "taxonomy_levels", tibble(customId = "No taxonomy inserted yet"))
     
     return()
     
@@ -248,13 +248,26 @@ del_profiles <- function(env, data_type){
     
   } else if(data_type == "result_grades"){
     
-    put_profiles("prod", "result_grades", tibble(customId = character()))
+    result_grades <- result_grades %>% 
+      dplyr::select(customId, systemCode) %>% 
+      dplyr::filter(!is.na(systemCode))
+    
+    put_profiles(env, "result_grades", result_grades)
+    #Cannot delete result grades with systemCode
+    #put_profiles(env, "result_grades", tibble(customId = character()))
     
     return()
     
   } else if(data_type == "result_statuses"){
     
-    put_profiles("prod", "result_statuses", tibble(customId = character()))
+    result_statuses <- result_statuses %>% 
+      dplyr::select(customId, systemCode) %>% 
+      dplyr::filter(!is.na(systemCode))
+    
+        put_profiles(env, "result_statuses", result_statuses)
+        
+    #Cannot delete result grades with systemCode
+    #put_profiles(env, "result_statuses", tibble(customId = character()))
     
     return()
     
@@ -333,12 +346,26 @@ put_profiles <- function(env, data_type, profile){
     
   }
   
-  # Convert to tibble and then to list of named lists
+  if(!(data_type %in% c("result_grades", "result_statuses", 
+                        "mediums"))){
+  
+    # Convert to tibble and then to list of named lists
   json_list <- profile %>% #tibble(customId = profile)
     mutate(row = row_number()) %>%
     nest(data = c(customId)) %>%
     pull(data) %>%
     map(~.x %>% as.list())
+  
+  } else {
+    
+    # Convert to tibble and then to list of named lists
+    json_list <- profile %>% #tibble(customId = profile)
+      mutate(row = row_number()) %>%
+      nest(data = c(customId, systemCode)) %>%
+      pull(data) %>%
+      map(~.x %>% as.list())
+    
+  }
   
   # Convert to JSON
   data_body <- toJSON(json_list, pretty = TRUE, auto_unbox = TRUE)

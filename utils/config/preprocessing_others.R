@@ -197,11 +197,19 @@ if(run_init){
 taxonomy_levels <- read_excel("./utils/config/ReferenceLists/Taxonomy_Levels.xlsx", 
                              sheet = "Taxonomy_Levels")
 
+# FISH TAXONOMY -----------------------------------------------------------
+# PREPROCESSING FISH TAXONS FOR NEW DATA ----------------------------------
+
+taxons <- read_excel("./utils/config/ReferenceLists/Fish_Taxonomy.xlsx", 
+                     sheet = "Taxonomy") %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .)) %>%
+  rename_with(~ gsub(" ", "_", .))
+
+
 # MEDIUMS ---------------------------------------------------------
 mediums <- read_excel("./utils/config/ReferenceLists/Mediums.xlsx", 
                       sheet = "Mediums")
-
-# Doing it manually; getting error on AQS's end
 
 # RESULT GRADES ---------------------------------------------------------
 # PREPROCESSING TO GENERATE OLDER RESULT GRADES FILES --------------
@@ -229,7 +237,10 @@ if(run_init){
 # PREPROCESSING RESULT GRADES FOR NEW DATA --------------------------------
 
 result_grades <- read_excel("./utils/config/ReferenceLists/Result_Grades.xlsx", 
-                           sheet = "Result_Grades")
+                           sheet = "Result_Grades") #%>% 
+  #mutate(systemCode = str_replace_all(systemCode, "NA", ""))
+
+
 
 # Doing it manually; getting error on AQS's end
 
@@ -259,15 +270,6 @@ if(run_init){
 
 result_statuses <- read_excel("./utils/config/ReferenceLists/Result_Statuses.xlsx", 
                              sheet = "Result_Statuses")
-
-# FISH TAXONOMY -----------------------------------------------------------
-# PREPROCESSING FISH TAXONS FOR NEW DATA ----------------------------------
-
-taxons <- read_excel("./utils/config/ReferenceLists/Fish_Taxonomy.xlsx", 
-                     sheet = "Taxonomy") %>% 
-  rename_with(tolower) %>%
-  rename_with(~ gsub("\\.", "_", .)) %>%
-  rename_with(~ gsub(" ", "_", .))
 
 # COLLECTION METHODS ------------------------------------------------------
 # PREPROCESSING COLLECTION METHODS FOR NEW DATA ---------------------------
