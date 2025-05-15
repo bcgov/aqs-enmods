@@ -136,8 +136,18 @@ write.csv(locations_4, file = "./utils/config/ReferenceLists/samplingLocations/4
 run_init = FALSE
 if(run_init){
   
+  # Have to run a renaming code coz file name is too long to import otherwise
+  # List files starting with the old prefix
+  files_to_rename <- list.files(path = "./utils/config/ReferenceLists/", pattern = paste0("^", "EMS_Monitoring_Groups_"), full.names = TRUE)
+  
+  # Generate new file names
+  new_file_names <- file.path(path = "./utils/config/ReferenceLists", "Saved_Filters.xlsx")
+  
+  # Rename the files
+  file.rename(from = files_to_rename, to = new_file_names)
+  
   #Had to run this only once in a lifetime
-  saved_filters <- read_csv("./utils/config/ReferenceLists/Saved_Filters.csv") %>% 
+  saved_filters <- read_csv("./utils/config/ReferenceLists/Saved_Filters.xlsx") %>% 
     rename_with(tolower) %>% 
     rename_with(~ gsub("\\.", "_", .)) %>% 
     rename_with(~ gsub("\\-", "_", .)) %>%
@@ -183,6 +193,12 @@ saved_filters <- saved_filters %>%
   dplyr::select(name, comments, location_guid) %>%
   mutate(location_guid = as.character(location_guid)) %>%
   group_by(name, comments) %>%
-  summarise(sampling_locations = list(location_guid), .groups = "drop") %>% 
+  #summarise(sampling_locations = list(id = location_guid), .groups = "drop") %>% 
+  summarise(
+    sampling_locations = list(
+      map(location_guid, ~ list(id = .x))
+    ),
+    .groups = "drop"
+  ) %>%
   ungroup() %>% 
   unique()

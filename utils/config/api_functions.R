@@ -655,7 +655,7 @@ post_profiles <- function(env, data_type, profile){
       
       data_body <- list("customId" = temp_profile$name,
                         "description" = temp_profile$comments,
-                        "samplingLocations" = temp_profile$sampling_locations
+                        "samplingLocations" = temp_profile$sampling_locations[[1]]
       )
       
     } 
