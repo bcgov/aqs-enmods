@@ -329,10 +329,20 @@ if(run_init){
 # PREPROCESSING LOCATION GROUP TYPES FOR NEW DATA -------------------------
 
 location_group_types <- read_excel("./utils/config/ReferenceLists/Location_Group_Types.xlsx", 
-                                  sheet = "Location_Group_Types") 
+                                  sheet = "Location_Group_Types")
   # %>% 
   # rename_with(tolower) %>%
   # rename_with(~ gsub("\\.", "_", .)) %>%
   # rename_with(~ gsub(" ", "_", .))
+
+# LOCATION TYPES ---------------------------------------------------------
+location_types <- read_excel("./utils/config/ReferenceLists/Location_Types.xlsx", 
+                             sheet = "Location_Types")
+
+location_types <- location_types %>% 
+  mutate(customId = case_when(
+    customId == "Land - Fram" ~ "Land - Farm",
+    .default = customId
+  ))
 
 

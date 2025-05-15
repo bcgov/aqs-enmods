@@ -198,10 +198,6 @@ del_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/collectionmethods/")
     
-  } else if(data_type == "filters"){
-    
-    url <- str_c(base_url, "v1/filters/")
-    
   } else if(data_type == "projects"){
     
     url <- str_c(base_url, "v1/projects/")
@@ -213,6 +209,10 @@ del_profiles <- function(env, data_type){
   } else if(data_type == "location_groups"){
     
     url <- str_c(base_url, "v1/samplinglocationgroups/")
+    
+  } else if(data_type == "filters"){
+    
+    url <- str_c(base_url, "v1/filters/")
     
   } else if(data_type == "location_group_types"){
     
@@ -362,11 +362,11 @@ put_profiles <- function(env, data_type, profile){
 
 post_profiles <- function(env, data_type, profile){
   
-  # env = "prod"
-  # 
-  # data_type = "methods"
-  # 
-  # profile <- methods.missing
+  env = "prod"
+
+  data_type = "filters"
+
+  profile <- saved_filters
   
   #Clean the old stuff out of the environment before posting new stuff
   if(!is.null(dim(get_profiles(env, data_type))[1])){
@@ -505,13 +505,6 @@ post_profiles <- function(env, data_type, profile){
     
     rel_var <- c("customid", "name", "description", "system_code")
     
-  } else if(data_type == "filters"){
-    
-    url <- str_c(base_url, "v1/filters")
-    
-    rel_var <- c("customid", "sampling_locations", 
-                 "observed_properties", "description")
-    
   } else if(data_type == "projects"){
     
     url <- str_c(base_url, "v1/projects")
@@ -525,13 +518,19 @@ post_profiles <- function(env, data_type, profile){
     
     rel_var <- c("Permit ID", "locationgrouptypeID", "description")
     
+  } else if(data_type == "filters"){
+    
+    url <- str_c(base_url, "v1/filters")
+    
+    rel_var <- c("id", "name", "comments", "sampling_locations")
+    
   }
   
   messages <- list()
   
   for(j in 1:dim(profile)[1]){
     
-    #j <- 1
+    j <- 1
     
     temp_profile <- profile %>% 
       keep(names(.) %in% rel_var) %>% 
@@ -633,11 +632,6 @@ post_profiles <- function(env, data_type, profile){
                         "description" = temp_profile$description,
                         "systemCode" = temp_profile$system_code)
       
-    } else if(data_type == "filters"){
-      
-      data_body <- list("customId" = temp_profile$customid, 
-                        )
-      
     } else if(data_type == "projects"){
       
       data_body <- list(
@@ -657,7 +651,14 @@ post_profiles <- function(env, data_type, profile){
         "LocationGroupType" = list("id" = temp_profile$locationgrouptypeID)
       )
       
-    }
+    } else if(data_type == "filters"){
+      
+      data_body <- list("customId" = temp_profile$name,
+                        "description" = temp_profile$comments,
+                        "samplingLocations" = temp_profile$sampling_locations
+      )
+      
+    } 
     
     #print(data_body)
     
@@ -665,7 +666,7 @@ post_profiles <- function(env, data_type, profile){
     x<-POST(url, config = c(add_headers(.headers = 
                                           c('Authorization' = token))), body = data_body, encode = 'json')
     
-    #j <- 1
+    j <- 1
     
     messages[[j]] <- fromJSON(rawToChar(x$content))
     

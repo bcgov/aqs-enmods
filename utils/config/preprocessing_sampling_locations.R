@@ -1,50 +1,25 @@
-# FILE TO PREPROCESS SAMPLING LOCATION TYPES and LOCATIONS in that order
+# FILE TO PREPROCESS SAMPLING LOCATIONs and LOCATION GROUPS in that order
 
-# PREPROCESSING TO GENERATE OLDER LOCATION GROUP TYPES FILES ------------
-
-run_init <- FALSE
-if(run_init){
-#Had to run this only once in a lifetime
-location_group_types <- get_profiles("test", "location_group_types") %>%
-  dplyr::select(customId)
-
-# Save workbook
-write_xlsx(list(location_group_types), "./utils/config/ReferenceLists/Location_Group_Types.xlsx")
-
-# Load an existing workbook
-wb <- loadWorkbook("./utils/config/ReferenceLists/Location_Group_Types.xlsx")
-
-# Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
-renameWorksheet(wb, sheet = "Sheet1", newName = "Location_Group_Types")
-
-# Save the workbook with the updated sheet name
-saveWorkbook(wb, "./utils/config/ReferenceLists/Location_Group_Types.xlsx", 
-             overwrite = TRUE)
-}
-
-# PREPROCESSING LOCATION GROUP TYPES FOR NEW DATA -------------------------
-
-location_group_types <- read_excel("./utils/config/ReferenceLists/location_group_types.xlsx", 
-                                 sheet = "Location_Group_Types") 
-# %>% 
-#   rename_with(tolower) %>%
-#   rename_with(~ gsub("\\.", "_", .))
-
-# LOCATION TYPES ---------------------------------------------------------
-location_types <- read_excel("./utils/config/ReferenceLists/location_types.xlsx", 
-                            sheet = "Location_Types")
-
-location_types <- location_types %>% 
-  mutate(customid = case_when(
-    customid == "Land - Fram" ~ "Land - Farm",
-    .default = customid
-  ))
-
-# SAMPLING LOCATION GROUPS AND LOCATIONS-------------------------------------------
+# SAMPLING LOCATION GROUPS AND LOCATIONS ----
 # PREPROCESSING SAMPLING LOCATIONS AND GROUPS FOR NEW DATA --------------------
 non_zero_post_2006 <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025NonzeroSamplesAfter2006Export.xlsx")
 zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx")
 zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/samplingLocations/March5_2025_Between2006And2024ZeroSamples.xlsx")
+
+non_zero_post_2006 <- non_zero_post_2006 %>% 
+  rename_with(tolower) %>% 
+  rename_with(~ gsub("\\.", "_", .)) %>% 
+  rename_with(~ gsub(" ", "_", .))
+
+zero_pre_2006_auth <- zero_pre_2006_auth %>%
+  rename_with(tolower) %>% 
+  rename_with(~ gsub("\\.", "_", .)) %>% 
+  rename_with(~ gsub(" ", "_", .))
+
+zero_2006_2024_can <- zero_2006_2024_can %>% 
+  rename_with(tolower) %>% 
+  rename_with(~ gsub("\\.", "_", .)) %>% 
+  rename_with(~ gsub(" ", "_", .))
 
 #Check for identical column names
 if(identical(names(zero_pre_2006_auth), names(non_zero_post_2006))){
@@ -70,10 +45,10 @@ locations <- rbind(non_zero_post_2006, zero_pre_2006_auth)
 
 #remove those locations that were cancelled and never sampled
 locations <- locations %>% 
-  anti_join(zero_2006_2024_can, by = join_by("Location ID"))
+  anti_join(zero_2006_2024_can, by = join_by(location_id))
 
 #remove do not migrate
-locations <- locations %>% dplyr::filter(Type != "DO NOT MIGRATE")
+locations <- locations %>% dplyr::filter(type != "DO NOT MIGRATE")
 
 #remove all NA from data frame!
 locations <- locations %>% 
@@ -89,50 +64,56 @@ download.file(ams_url, "all_ams_authorizations.xlsx", mode = "wb")
 }
 
 #read the AMS data to get location group info
-amsPermits <- read_excel("all_ams_authorizations.xlsx")
+#NEED TO OPEN THE FILE AND TURN OFF THE MACROS 
+#ALSO NEED TO MAKE IT COMPATIBLE WITH LATEST EXL VRSN
+ams_permits <- read_excel("all_ams_authorizations.xlsx") %>% 
+  rename_with(tolower) %>% 
+  rename_with(~ gsub("\\.", "_", .)) %>% 
+  rename_with(~ gsub("\\-", "_", .)) %>%
+  rename_with(~ gsub(" ", "_", .))
 
 #storing relevant records of AMS Permits
-amsPermits <- amsPermits %>% 
-  dplyr::select(`Authorization Number`, Company, `Facility Type - Description`, `Facility Address`)
+ams_permits <- ams_permits %>% 
+  dplyr::select(authorization_number, company, facility_type___description, 
+                facility_address)
 
 #remove duplicates in AMS
-amsPermits <- unique(amsPermits)
+ams_permits <- unique(ams_permits)
 
 #Get the list of permits from locations
-emsPermits <- unique(locations$`Location Groups`)
-emsPermits <- emsPermits[emsPermits != ""]
+ems_permits <- unique(locations$location_groups)
+ems_permits <- ems_permits[ems_permits != ""]
 
-emsPermits <- data.frame("Permit ID" = unlist(strsplit(emsPermits, ";"))) %>% unique()
-colnames(emsPermits) <- "Permit ID"
-emsPermits$`Permit ID` <- as.numeric(emsPermits$`Permit ID`)
-emsPermits <- emsPermits %>% unique()
+ems_permits <- data.frame(permit_id = unlist(strsplit(ems_permits, ";"))) %>% 
+                mutate(permit_id = as.numeric(permit_id)) %>% 
+                unique()
 
 #join EMS with AMS dropping records that are only in the AMS side
-locationGroups <- left_join(emsPermits, amsPermits, 
-                            join_by(`Permit ID` == `Authorization Number`))
+location_groups <- left_join(ems_permits, ams_permits, 
+                            join_by(permit_id == authorization_number))
 
-locationGroups$Description = paste0("", locationGroups$Company)
+location_groups$description = paste0("", location_groups$company)
 
-locationGroups$Type = "Authorization"
+location_groups$type = "Authorization"
 
 #make the groups
-locationGroups <- locationGroups %>% dplyr::select(`Permit ID`, Type, Description)
+location_groups <- location_groups %>% dplyr::select(permit_id, type, description)
 
 location_group_types <- get_profiles(env, "location_group_types")
 
 #joing location group guid to location groups table
-locationGroups <- inner_join(locationGroups, location_group_types, 
-                             by = join_by(Type == customId)) %>%
-  rename(locationgrouptypeID = id)
+location_groups <- inner_join(location_groups, location_group_types, 
+                             by = join_by(type == customId)) %>%
+  rename(location_group_type_id = id)
 
 # could not figure out locations completely
 # generating split files that have to be loaded manually
 # make the files smaller
 locations <- locations %>% 
-  mutate(`Elevation Unit` = 
-           case_when(#is.na(`Elevation Unit`) ~ "metre", 
-             `Elevation Unit` == "metre" ~ "m",
-             .default = `Elevation Unit`))
+  mutate(elevation_unit = 
+           case_when(#is.na(elevation_unit) ~ "metre", 
+             elevation_unit == "metre" ~ "m",
+             .default = elevation_unit))
 
 #locations have to be pushed manually, 10000 at a time using AQS Import
 locations_1 <- locations[seq(1,10000),]
@@ -152,10 +133,17 @@ write.csv(locations_4, file = "./utils/config/ReferenceLists/samplingLocations/4
 # SAVED FILTERS ----
 # PREPROCESSING TO GENERATE OLDER SAVED FILTERS FILES ---------------
 
-run_init = TRUE
+run_init = FALSE
 if(run_init){
+  
   #Had to run this only once in a lifetime
-  saved_filters <- get_profiles("test", "filters") #%>%
+  saved_filters <- read_csv("./utils/config/ReferenceLists/Saved_Filters.csv") %>% 
+    rename_with(tolower) %>% 
+    rename_with(~ gsub("\\.", "_", .)) %>% 
+    rename_with(~ gsub("\\-", "_", .)) %>%
+    rename_with(~ gsub(" ", "_", .))
+    
+  #saved_filters <- get_profiles("test", "filters") %>% 
   #dplyr::select(customId)
   
   # Save workbook
@@ -169,14 +157,32 @@ if(run_init){
   
   # Save the workbook with the updated sheet name
   saveWorkbook(wb, "./utils/config/ReferenceLists/Saved_Filters.xlsx", overwrite = TRUE)
-}
+
+  }
 
 # PREPROCESSING SAVED FILTERS FOR NEW DATA ---------------------------
 
+locations <- get_profiles(env, "locations")
+
 saved_filters <- read_excel("./utils/config/ReferenceLists/Saved_Filters.xlsx", 
                             sheet = "Saved_Filters") %>% rename_with(tolower) %>% 
+  rename_with(tolower) %>% 
   rename_with(~ gsub("\\.", "_", .)) %>% 
-  rename_with(~ gsub(" ", "_", .)) %>%
-  rename(observed_properties = observedproperties,
-         sampling_locations = samplinglocations)
+  rename_with(~ gsub("\\-", "_", .)) %>%
+  rename_with(~ gsub(" ", "_", .))
 
+saved_filters <- saved_filters %>% 
+                  inner_join(locations %>% dplyr::select(id, customId, name) %>%
+                               rename(location_guid = id, location_name = name),
+                             by = join_by("location_id" == "customId",
+                                          "location_name")) %>% 
+                  dplyr::select(c(id, name, location_guid, comments)) %>% 
+                  unique()
+                  
+saved_filters <- saved_filters %>%
+  dplyr::select(name, comments, location_guid) %>%
+  mutate(location_guid = as.character(location_guid)) %>%
+  group_by(name, comments) %>%
+  summarise(sampling_locations = list(location_guid), .groups = "drop") %>% 
+  ungroup() %>% 
+  unique()

@@ -38,12 +38,12 @@ labs <- post_profiles(env, "labs", labs)
 labs <- get_profiles(env, "labs")
 location_group_types <- put_profiles(env, "location_group_types", location_group_types)
 location_group_types <- get_profiles(env, "location_group_types")
+location_types <- put_profiles(env, "location_types", location_types)
+location_types <- get_profiles(env, "location_types")
 source("./utils/config/preprocessing_sampling_locations.R")
-locationTypes <- put_profiles(env, "locationtypes", locationTypes)
-locationTypes <- get_profiles(env, "locationtypes")
+#Need to put locations in before putting in Location groups or Saved Filters
 locationGroups <- post_profiles(env, "locationgroups", locationGroups)
 locationGroups <- get_profiles(env, "locationgroups")
-#Need to put locations in before putting in Saved Filters
 saved_filters <- post_profiles(env, "filters", saved_filters)
 saved_filters <- get_profiles(env, "filters")
 
