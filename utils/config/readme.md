@@ -3,7 +3,8 @@
 Naming conventions based on the reference value (SNAKE CASE)
 
   1. For file names/sheets, we follow the format "Snake_Case" 
-  2. For variable names in coding pipelines, we follow:
+  2. For file names coming from EMS, we follow the format "EMS_<Data_Type>_Date"
+  3. For variable names in coding pipelines, we follow:
 	 1. the "snake_case" format if "case" is a version of the "snake"
 	 2. the "snake.case" format if "case" is an element of the "snake"
 	 3. Column names for tables also follow "snake_case" as dot notation can cause parsing issues in some environments
