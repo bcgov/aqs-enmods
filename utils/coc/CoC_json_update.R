@@ -11,6 +11,7 @@ library(stringr)
 library(httr)
 library(dplyr)
 library(tidyr)
+library(jsonlite)
 
 #get the API token from your environment file
 #readRenviron(paste0(getwd(), "./.Renviron"))
