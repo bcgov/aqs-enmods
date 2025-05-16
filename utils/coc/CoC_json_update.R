@@ -10,26 +10,27 @@ library(readxl)
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-testToken <- Sys.getenv("TEST_READ_ONLY_TOKEN")
-prodToken <- Sys.getenv("PROD_READ_ONLY_TOKEN")
-testURL <- Sys.getenv("TEST_URL")
-prodURL <- Sys.getenv("PROD_URL")
+test_token <- Sys.getenv("TEST_READ_ONLY_TOKEN")
+prod_token <- Sys.getenv("PROD_READ_ONLY_TOKEN")
+test_url <- Sys.getenv("TEST_URL")
+prod_url <- Sys.getenv("PROD_URL")
 
 #set up account access for BC box
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
            "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AWS_SECRET_ACCESS_KEY"),
            "AWS_S3_ENDPOINT" = "nrs.objectstore.gov.bc.ca")
 
-source("./utils/config/ref_functions_json_proc.R")
+source("./utils/config/api_functions.R")
 
-
+update_base_url_token <- function(env) {
+  if (env == "prod") list(prod_url, prod_token) else list(test_url, test_token)
+}
 
 # #example code using the reference functions -------------------------------
 # MEDIUMS -----------------------------------------------------------------
 
 #reading in EnMoDS config
-mediums <- get_profiles("prod", "mediums") %>% 
-  keep(names(.) %in% gen_list_rel_var("mediums"))
+mediums <- get_profiles("prod", "mediums") 
 
 #extracting medium names from the imported mediums file
 jsonMediumsRaw <- mediums %>% dplyr::select(customId)
@@ -79,8 +80,7 @@ put_object(file = "full_enmods_locations_data.json",
 # LABS --------------------------------------------------------------------
 
 #reading in EnMoDS config
-labs <- get_profiles("prod", "labs") %>% 
-  keep(names(.) %in% gen_list_rel_var("labs"))
+labs <- get_profiles("prod", "labs") %>% select(customId, name)
 
 #processing data into JSON format
 jsonLabsProc <- toJSON(list(items = labs), pretty = TRUE)
@@ -96,7 +96,7 @@ put_object(file = "enmods_labs_data.json",
            acl = "public-read")
 
 # SAMPLING AGENCY ---------------------------------------------------------
-
+if (FALSE) {
 # #reading in EnMoDS config
 samplingAgency <- dropdownlist_extended_attributes("prod", "Sampling Agency")
 
@@ -113,12 +113,12 @@ samplingAgency <- samplingAgency$domainObjects
             bucket = "enmods",
             region = "",
             acl = "public-read")
-
+}
 # COLLECTION METHODS ------------------------------------------------------
 
 #reading in EnMoDS config
-collectionMethods <- get_profiles("prod", "collectionmethods") %>% 
-  keep(names(.) %in% gen_list_rel_var("collectionmethods"))
+collectionMethods <- get_profiles("prod", "collection_methods") %>%
+   select(customId, identifierOrganization, name)
 
 #processing data into JSON format
 jsonCollectionMethodsProc <- toJSON(list(items = collectionMethods), pretty = TRUE)
@@ -137,8 +137,8 @@ put_object(file = "enmods_collectionmethods_data.json",
 # PROJECTS ----------------------------------------------------------------
 
 #reading in EnMoDS config
-projects <- get_profiles("prod", "projects") %>%
-  keep(names(.) %in% gen_list_rel_var("projects")) 
+projects <- get_profiles("prod", "projects") %>% 
+  select(customId, name, description, type)
 
 #further selecting relevant columns
 jsonProjectsRaw <- projects %>%
