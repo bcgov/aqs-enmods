@@ -7,6 +7,7 @@
 
 library(aws.s3)
 library(readxl)
+library(stringr)
 
 #get the API token from your environment file
 #readRenviron(paste0(getwd(), "./.Renviron"))
