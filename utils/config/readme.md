@@ -62,7 +62,7 @@ Stylized along the lines of the underlying AQS API, these functions are used to:
 - Delete: The function `del_profiles` deletes an AQS profile
 - Delete: The function `delete_all_profiles` deletes all AQS profiles. Note that 
 some data cannot be deleted because they are marked as required by AQS. The current
-code configuration accounts for such required profiles and does not delete them.
+code configuration accounts for such required data and does not delete them.
 
 These functions are all stored in `api_functions.R`
   

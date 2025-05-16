@@ -162,13 +162,62 @@ methods <- methods %>%
 # 
 # 
 # LABS --------------------------------------------------------------------
-# PREPROCESSING LABS FOR NEW DATA --------------------------------------
+# PREPROCESSING TO GENERATE PARENT LAB FILES ------------------------------
+run_new <- FALSE
 
-labs <- read.csv("./utils/config/ReferenceLists/Labs.csv", stringsAsFactors = F) %>% 
-  rename_with(tolower) %>%
-  rename_with(~ gsub("\\.", "_", .))
+run_new <- length(list.files(path = "./utils/config/ReferenceLists/", 
+                             pattern = "^EMS_Labs")) > 0
 
-labs$description = str_c("Created by ", labs$who_created, " on ", labs$when_created)
+if(run_new){
+
+  #if file matching pattern exists in this folder, it would be in this list
+  file_exists <- list.files(path = "./utils/config/ReferenceLists/", 
+                            pattern = "^EMS_Labs", full.names = TRUE)
+  
+  latest_file <- file_exists[which.max(file.info(file_exists)$mtime)]
+  message("Latest file found: ", latest_file)
+  
+  labs <- read_csv(latest_file) %>% 
+    rename_with(tolower) %>% 
+    rename_with(~ gsub("\\.", "_", .)) %>% 
+    rename_with(~ gsub("\\-", "_", .)) %>%
+    rename_with(~ gsub(" ", "_", .)) %>% 
+    rename_with(
+      ~ case_when(
+        (.x == "address_1" & !any(str_detect(names(labs), "address"))) ~ "address",
+        .x == "short_name" ~ "id",
+        .x == "e_mail_addr" ~ "email",
+        .default = .x
+      )
+    )
+  
+  labs$description = str_c("Created by ", labs$who_created, " on ", labs$when_created)
+ 
+  # Save workbook
+  write_xlsx(labs, "./utils/config/ReferenceLists/Labs.xlsx")
+  
+  # Load an existing workbook
+  wb <- loadWorkbook("./utils/config/ReferenceLists/Labs.xlsx")
+  
+  # Rename a worksheet (e.g., change "OldSheet" to "NewSheet")
+  renameWorksheet(wb, sheet = "Sheet1", newName = "Labs")
+  
+  # Save the workbook with the updated sheet name
+  saveWorkbook(wb, "./utils/config/ReferenceLists/Labs.xlsx", 
+               overwrite = TRUE)
+  
+  # Define destination path
+  destination_file <- file.path("./utils/config/ReferenceLists/Archived_Data", 
+                                basename(latest_file))
+  
+  #move the new file to archived_data
+  file.rename(from = latest_file, to = destination_file)
+}
+
+# LOADING PARENT LAB FILES --------------------------------------
+
+labs <- read_excel("./utils/config/ReferenceLists/Labs.xlsx", 
+                   sheet = "Labs")
 
 # TAXONOMY LEVELS ---------------------------------------------------------
 # PREPROCESSING TO GENERATE OLDER TAXONOMY LEVELS FILES ----------------

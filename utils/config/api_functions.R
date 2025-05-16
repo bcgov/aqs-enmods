@@ -228,11 +228,21 @@ del_profiles <- function(env, data_type){
     
   } else if(data_type == "mediums"){
     
-    mediums_required <- get_profiles(env, "mediums") %>% 
-      dplyr::select(customId, systemCode) %>% 
-      dplyr::filter(!is.na(systemCode))
+    mediums_required <- get_profiles(env, "mediums")
     
-    put_profiles(env, "mediums", mediums_required)
+    if(!is.null(mediums_required)){
+      
+      mediums_required <- mediums_required %>% 
+        dplyr::select(customId, systemCode) %>% 
+        dplyr::filter(!is.na(systemCode))
+      
+      put_profiles(env, "mediums", mediums_required)
+      
+    } else {
+      
+      put_profiles(env, "mediums", tibble(customId = character()))
+      
+    }
     
     return()
     
@@ -248,27 +258,42 @@ del_profiles <- function(env, data_type){
     
   } else if(data_type == "result_grades"){
     
+    result_grades <- get_profiles(env, "result_grades")
+    
+    if(!is.null(result_grades)){
+    
     result_grades <- result_grades %>% 
       dplyr::select(customId, systemCode) %>% 
       dplyr::filter(!is.na(systemCode))
     
     put_profiles(env, "result_grades", result_grades)
-    #Cannot delete result grades with systemCode
-    #put_profiles(env, "result_grades", tibble(customId = character()))
     
+    } else {
+      
+      put_profiles(env, "result_grades", tibble(customId = character()))
+      
+    }
+
     return()
     
   } else if(data_type == "result_statuses"){
     
-    result_statuses <- result_statuses %>% 
+    result_statuses <- get_profiles(env, "result_statuses")
+    
+    if(!is.null(result_statuses)){
+    
+      result_statuses <- result_statuses %>% 
       dplyr::select(customId, systemCode) %>% 
       dplyr::filter(!is.na(systemCode))
     
-        put_profiles(env, "result_statuses", result_statuses)
-        
-    #Cannot delete result grades with systemCode
-    #put_profiles(env, "result_statuses", tibble(customId = character()))
+      put_profiles(env, "result_statuses", result_statuses)
     
+    } else {
+        
+      put_profiles(env, "result_statuses", tibble(customId = character()))
+      
+      }
+      
     return()
     
   }
@@ -501,7 +526,7 @@ post_profiles <- function(env, data_type, profile){
     
     url <- str_c(base_url, "v1/laboratories")
     
-    rel_var <- c("id", "name", "description", "address", "point_of_contact", 
+    rel_var <- c("id", "name", "description", "address", "contact_name", 
                  "email", "phone_number")
     
   } else if(data_type == "fish_taxonomy"){
@@ -543,7 +568,7 @@ post_profiles <- function(env, data_type, profile){
     
     url <- str_c(base_url, "v1/samplinglocationgroups")
     
-    rel_var <- c("Permit ID", "locationgrouptypeID", "description")
+    rel_var <- c("permit_id", "location_group_type_id", "description")
     
   } else if(data_type == "filters"){
     
@@ -632,7 +657,7 @@ post_profiles <- function(env, data_type, profile){
                         "name" = temp_profile$name,
                         "description" = temp_profile$description,
                         "address" = temp_profile$address,
-                        "pointOfContact" = temp_profile$point_of_contact,
+                        "pointOfContact" = temp_profile$contact_name,
                         "emailAddress" = temp_profile$email,
                         "phoneNumber" = temp_profile$phone_number)
       
@@ -673,9 +698,9 @@ post_profiles <- function(env, data_type, profile){
     } else if(data_type == "location_groups"){
       
       data_body <- list(
-        "name" = temp_profile$`Permit ID`,
+        "name" = temp_profile$permit_id,
         "description" = temp_profile$description,
-        "LocationGroupType" = list("id" = temp_profile$locationgrouptypeID)
+        "LocationGroupType" = list("id" = temp_profile$location_group_type_id)
       )
       
     } else if(data_type == "filters"){
