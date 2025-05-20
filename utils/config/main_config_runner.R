@@ -36,9 +36,13 @@ main <- function(env){
 
   collection_methods_post <- post_profiles(env, "collection_methods", collection_methods)
   collection_methods_get <- get_profiles(env, "collection_methods")
+  
+  analytical_groups_get <- get_profiles("test", "analytical_groups")
 
   extended_attributes_post <- post_profiles(env, "extended_attributes", extended_attributes)
   extended_attributes_get <- get_profiles(env, "extended_attributes")
+  
+  sampling_agency_get <- get_profiles(env, "sampling_agency")
 
   detection_conditions_post <- post_profiles(env, "detection_conditions", detection_conditions)
   detection_conditions_get <- get_profiles(env, "detection_conditions")

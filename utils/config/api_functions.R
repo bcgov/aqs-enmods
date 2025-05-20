@@ -107,6 +107,15 @@ get_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/mediums")
     
+  } else if(data_type == "sampling_agency"){
+    
+    ea_type = "Sampling Agency"
+    
+    id_data_type <- get_profiles(env, "extended_attributes") %>%
+      dplyr::filter(customId == ea_type) %>% dplyr::select(id) %>% unlist()
+    
+    url <- str_c(base_url, "v1/extendedattributes/", id_data_type, "/dropdownlistitems")
+    
   } else if(data_type == "taxonomy_levels"){
     
     url <- str_c(base_url, "v1/taxonomylevels")
@@ -130,6 +139,10 @@ get_profiles <- function(env, data_type){
   } else if(data_type == "collection_methods"){
     
     url <- str_c(base_url, "v1/collectionmethods")
+    
+  } else if(data_type == "analytical_groups"){
+    
+    url <- str_c(base_url, "v1/analyticalgroups")
     
   } else if(data_type == "filters"){
     
@@ -516,7 +529,7 @@ post_profiles <- function(env, data_type, profile){
     rel_var <- c("parm_code", "newnameid", "description", "analysis_type",
                  "unit_group_id", "unit_id", "cas")
     
-  } else if(data_type == "methods"){
+  } else if(data_type == "analysis_methods"){
     
     url <- paste0(base_url, "v1/analysismethods")
     
