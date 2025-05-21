@@ -101,11 +101,10 @@ put_object(file = "enmods_labs_data.json",
            acl = "public-read")
 
 # SAMPLING AGENCY ---------------------------------------------------------
-if (FALSE) {
-# #reading in EnMoDS config
-samplingAgency <- dropdownlist_extended_attributes("prod", "Sampling Agency")
 
-samplingAgency <- samplingAgency$domainObjects
+# #reading in EnMoDS config
+samplingAgency <- get_profiles("prod", "sampling_agency") 
+
 # #processing data into JSON format
  jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
 # 
@@ -118,7 +117,7 @@ samplingAgency <- samplingAgency$domainObjects
             bucket = "enmods",
             region = "",
             acl = "public-read")
-}
+
 # COLLECTION METHODS ------------------------------------------------------
 
 #reading in EnMoDS config
