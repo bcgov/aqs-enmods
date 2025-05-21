@@ -79,7 +79,7 @@ get_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/observedproperties")
     
-  } else if(data_type == "methods"){
+  } else if(data_type == "analysis_methods"){
     
     url <- str_c(base_url, "v1/analysismethods")
     
@@ -195,7 +195,7 @@ del_profiles <- function(env, data_type){
     
     url <- str_c(base_url, "v1/observedproperties/")
     
-  } else if(data_type == "methods"){
+  } else if(data_type == "analysis_methods"){
     
     url <- str_c(base_url, "v1/analysismethods/")
     
@@ -210,6 +210,10 @@ del_profiles <- function(env, data_type){
   } else if(data_type == "collection_methods"){
     
     url <- str_c(base_url, "v1/collectionmethods/")
+    
+  } else if(data_type == "analytical_groups"){
+    
+    url <- str_c(base_url, "v1/analyticalgroups/")
     
   } else if(data_type == "projects"){
     
@@ -429,9 +433,9 @@ post_profiles <- function(env, data_type, profile){
   
   # env = "prod"
   # 
-  # data_type = "filters"
+  # data_type = "analytical_groups"
   # 
-  # profile <- saved_filters
+  # profile <- analytical_groups
   
   #Clean the old stuff out of the environment before posting new stuff
   if(!is.null(dim(get_profiles(env, data_type))[1])){
@@ -481,7 +485,7 @@ post_profiles <- function(env, data_type, profile){
     # "baseOffset", "unitGroup.id", 
     # "unitGroup.supportsConversion"
     
-    unitgroups_profiles <- get_profiles("prod", "unit_groups")
+    unitgroups_profiles <- get_profiles(env, "unit_groups")
     
     profile <- profile %>%
       left_join(unitgroups_profiles %>% 
@@ -514,7 +518,7 @@ post_profiles <- function(env, data_type, profile){
                          keep = FALSE)
     
     #units without groups
-    units <- get_profiles("prod", "units") %>% 
+    units <- get_profiles(env, "units") %>% 
       dplyr::select(id, customId) %>%
       rename("unit_id" = "id")
     
@@ -546,7 +550,7 @@ post_profiles <- function(env, data_type, profile){
     
     url <- str_c(base_url, "v1/taxons")
     
-    taxonomylevels_profiles <- get_profiles("prod", "taxonomy_levels")
+    taxonomylevels_profiles <- get_profiles(env, "taxonomy_levels")
     
     profile <- profile %>%
       left_join(taxonomylevels_profiles %>% 
@@ -563,6 +567,28 @@ post_profiles <- function(env, data_type, profile){
     url <- str_c(base_url, "v1/collectionmethods")
     
     rel_var <- c("new_enmods_short_name/id", "merged_codes", "definition")
+    
+  } else if(data_type == "analytical_groups"){
+    
+    url <- str_c(base_url, "v1/analyticalgroups")
+    
+    #observed_properties <- get_profiles(env, "observed_properties")
+    
+    profile <- profile %>%
+      left_join(observed_properties_get %>% 
+                  dplyr::select(id, customId) %>%
+                  rename(observed_property_id = id), 
+                by = join_by(newnameid == customId), 
+                keep = FALSE) %>% dplyr::select(-newnameid) %>% 
+      group_by(op_group) %>% 
+      summarize(
+        analyticalgroupitems = list(
+          map(observed_property_id, ~ list(observedProperty = list("id" = .x)))
+        ),
+        .groups = "drop"
+      )
+      
+    rel_var <- c("op_group", "newnameid", "analyticalgroupitems")
     
   } else if(data_type == "detection_conditions"){
     
@@ -655,7 +681,7 @@ post_profiles <- function(env, data_type, profile){
         "casNumber" = temp_profile$cas
       )
       
-    } else if(data_type == "methods"){
+    } else if(data_type == "analysis_methods"){
       
       data_body <- list("methodId" = temp_profile$method_code,
                         "name" = temp_profile$method,
@@ -690,6 +716,13 @@ post_profiles <- function(env, data_type, profile){
                         "identifierOrganization" = temp_profile$merged_codes,
                         "name" = temp_profile$definition)
       
+    } else if(data_type == "analytical_groups"){
+      
+      data_body <- list("name" = temp_profile$op_group,
+                        "description" = "group description here",
+                        "type" = "UNKNOWN",
+                        "analyticalGroupItems" = temp_profile$analyticalgroupitems[[1]])
+                        
     } else if(data_type == "detection_conditions"){
       
       data_body <- list("customId" = temp_profile$customid,

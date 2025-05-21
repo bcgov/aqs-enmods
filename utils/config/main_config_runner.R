@@ -50,8 +50,13 @@ main <- function(env){
   projects_post <- post_profiles(env, "projects", projects)
   projects_get <- get_profiles(env, "projects")
 
-  methods_post <- post_profiles(env, "methods", methods)
-  methods_get <- get_profiles(env, "methods")
+  analysis_methods <- methods
+  
+  analysis_methods_post <- post_profiles(env, "analysis_methods", analysis_methods)
+  analysis_methods_get <- get_profiles(env, "analysis_methods")
+  
+  analytical_groups_post <- post_profiles(env, "analytical_groups", analytical_groups)
+  analytical_groups_get <- get_profiles(env, "analytical_groups")
 
   labs_post <- post_profiles(env, "labs", labs)
   labs_get <- get_profiles(env, "labs")

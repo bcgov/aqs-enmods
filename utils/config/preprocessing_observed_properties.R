@@ -3,7 +3,7 @@ source("./utils/config/api_functions.R")
 
 # PREPROCESSING TO CONSOLIDATE OLDER OP FILES -----------------------------
 
-run_init <- FALSE
+run_init <- TRUE
 if (run_init) {
 
   #EMS exported observed_properties
@@ -23,39 +23,39 @@ if (run_init) {
   #Keep the core columns at the front
   cols_to_move <- c("newnameid", "parm_code", "description",
                     "analysis_type", "result_type", "sample_unit_group",
-                    "sample_unit","CAS")
+                    "sample_unit","CAS", "OP_Group")
   
   #get the unique list of OP IDs
   observed_properties <- observed_properties %>% unique()
   
   
   ## observed_properties new to EnMoDS not in EMS
-  observed_properties_new_to_EnMoDS <-
-    read_excel("./utils/config/ReferenceLists/New_OPS_not_in_EMS.xlsx",
-               sheet = "observed_properties_new") %>% 
+  observed_properties_new <-
+    read_excel("./utils/config/ReferenceLists/Observed_Properties_New.xlsx",
+               sheet = "Observed_Properties_New") %>% 
     rename_with(tolower) %>%
     rename_with(~ gsub("\\.", "_", .))
   
   #get the unique list of OP IDs
-  observed_properties_new_to_EnMoDS <- observed_properties_new_to_EnMoDS %>% unique()
+  observed_properties_new <- observed_properties_new %>% unique()
   
   #fixing the missing sample group id issue in the list
-  observed_properties_new_to_EnMoDS <- observed_properties_new_to_EnMoDS %>% mutate(sample_unit_group =
+  observed_properties_new <- observed_properties_new %>% mutate(sample_unit_group =
                                                       if_else(newnameid == "Biological Sample Volume (vol.)",
                                                               "Volume", sample_unit_group))
   
   #Identify the new columns compared to observed_properties
-  new_cols <- setdiff(names(observed_properties), names(observed_properties_new_to_EnMoDS))
+  new_cols <- setdiff(names(observed_properties), names(observed_properties_new))
   
   # Create a tibble of just those new columns
   new_data <- observed_properties %>%
     dplyr::select(all_of(new_cols)) %>%
     mutate(across(everything(), ~ NA)) %>%
-    unique() %>% slice(rep(1, nrow(observed_properties_new_to_EnMoDS)))
+    unique() %>% slice(rep(1, nrow(observed_properties_new)))
   
-  observed_properties_new_to_EnMoDS <- observed_properties_new_to_EnMoDS %>% bind_cols(new_data)
+  observed_properties_new <- observed_properties_new %>% bind_cols(new_data)
   
-  observed_properties <- observed_properties %>% bind_rows(observed_properties_new_to_EnMoDS %>% mutate(Results = NA)) %>% unique()
+  observed_properties <- observed_properties %>% bind_rows(observed_properties_new %>% mutate(results = NA)) %>% unique()
   
   ## Taxonomic observed_properties
   observed_properties_taxonomic <- read.csv("./utils/config/ReferenceLists/Taxonomic_OP.csv", 
@@ -77,12 +77,12 @@ if (run_init) {
   
   observed_properties_taxonomic <- observed_properties_taxonomic %>% bind_cols(new_data)
   
-  observed_properties <- observed_properties %>% bind_rows(observed_properties_taxonomic %>% mutate(Results = NA)) %>% unique()
+  observed_properties <- observed_properties %>% bind_rows(observed_properties_taxonomic %>% mutate(results = NA)) %>% unique()
   
   ## Merge all observed_properties and process
   
   observed_properties <- observed_properties %>%
-    #bind_rows(observed_properties, observed_properties_new_to_EnMoDS, observed_properties_taxonomic) %>%
+    #bind_rows(observed_properties, observed_properties_new, observed_properties_taxonomic) %>%
     #        unique() %>%
     group_by(newnameid) %>%
     mutate(count = n()) %>%
@@ -151,6 +151,10 @@ if (run_init) {
   observed_properties$analysis_type <- toupper(observed_properties$analysis_type)
   observed_properties$result_type <- toupper(observed_properties$result_type)
   
+  #remove semicolons from OP
+  observed_properties <- observed_properties %>% 
+    mutate(op_group = str_replace_all(op_group, ";", ""))
+  
   write_xlsx(observed_properties, "./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx")
   
   # Load an existing workbook
@@ -162,7 +166,9 @@ if (run_init) {
   # Save the workbook with the updated sheet name
   saveWorkbook(wb, "./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx", overwrite = TRUE)
   
-  observed_properties <- observed_properties %>% dplyr::select(c("parm_code", "newnameid", "description", "analysis_type", "result_type", "sample_unit_group", "sample_unit","CAS")) %>% unique()
+  observed_properties <- observed_properties %>% 
+    dplyr::select(c("parm_code", "newnameid", "description", "analysis_type", 
+                    "result_type", "sample_unit_group", "sample_unit","cas", "op_group")) %>% unique()
   
 }
 
@@ -198,7 +204,13 @@ if (length(file_exists) > 0) {
   latest_file <- file_exists[which.max(file.info(file_exists)$mtime)]
   message("Latest file found: ", latest_file)
 
-observed_properties_new <- read_excel(latest_file)
+observed_properties_new <- read_excel(latest_file) %>% 
+  rename_with(tolower) %>%
+  rename_with(~ gsub("\\.", "_", .))
+
+#remove semicolons from OP
+observed_properties_new <- observed_properties_new %>% 
+  mutate(op_group = str_replace_all(op_group, ";", ""))
 
 #The units don't matter for non-convertable OP units. For example microbial units. So remove them from consideration.
 observed_properties_new$sample_unit[observed_properties_new$convertable_in_samples == "N"] <- ""
@@ -221,7 +233,7 @@ new_data <- observed_properties_base %>%
 observed_properties_new <- observed_properties_new %>% bind_cols(new_data)
 
 observed_properties <- observed_properties_base %>% 
-  bind_rows(observed_properties_new %>% mutate(Results = NA)) %>% unique()
+  bind_rows(observed_properties_new %>% mutate(results = NA)) %>% unique()
 
 ## Merge all observed_properties
 observed_properties <- observed_properties %>%
@@ -321,7 +333,7 @@ observed_properties <- read_excel("./utils/config/ReferenceLists/Consolidated_Ob
 observed_properties <- observed_properties %>% 
   dplyr::select(c("parm_code", "newnameid", "description", 
                   "analysis_type", "sample_unit_group", "sample_unit",
-                  "cas")) %>% unique()
+                  "cas", "op_group")) %>% unique()
 
 # # QA/QC for observed_properties -----------------------------------------------------------
 # 

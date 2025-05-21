@@ -101,18 +101,18 @@ if(run_init){
              .default =  format(EndDate, "%Y-%m-%dT00:00:00%z")
            ))
 
-# METHODS -----------------------------------------------------------------
-# PREPROCESSING METHODS FOR NEW DATA --------------------------------------
+# ANALYSIS METHODS -----------------------------------------------------------------
+# PREPROCESSING ANALYSIS METHODS FOR NEW DATA --------------------------------------
 
-methods <- read_excel("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx") %>% 
+analysis_methods <- read_excel("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx") %>% 
     rename_with(tolower) %>% 
     rename_with(~ gsub("\\.", "_", .))
 
 #The units don't matter for non convertable OP units. For example microbial units. So remove them from consideration.
-methods$sample_unit[methods$convertable_in_samples == "N"] <- ""
+analysis_methods$sample_unit[analysis_methods$convertable_in_samples == "N"] <- ""
 
 #get the new name (customId) and methods 
-methods <- methods %>% 
+analysis_methods <- analysis_methods %>% 
   dplyr::select(tolower(c("NewNameID", "Method_Code", "Method", 
                   "Method_Description")))
 
@@ -120,13 +120,13 @@ observed_properties.ids <- get_profiles(env, "observed_properties") %>%
   dplyr::select("id", "customId")
 
 #check that nothing has been dropped here!
-methods_problematic <- anti_join(methods, observed_properties.ids, 
+analysis_methods_problematic <- anti_join(analysis_methods, observed_properties.ids, 
                                  by = join_by("newnameid" == "customId")) 
 
-methods <- left_join(methods, observed_properties.ids, 
+analysis_methods <- left_join(analysis_methods, observed_properties.ids, 
                      by = join_by("newnameid" == "customId"))
 
-observed_properties_for_methods <- methods %>%
+observed_properties_for_methods <- analysis_methods %>%
   dplyr::select(id, method_code) %>%
   group_by(method_code) %>%
   summarise(
@@ -136,16 +136,16 @@ observed_properties_for_methods <- methods %>%
     .groups = "drop"
   )
 
-methods <- unique(methods %>% select(-c("newnameid", "id")))
+analysis_methods <- unique(analysis_methods %>% select(-c("newnameid", "id")))
 
-methods <- methods %>%
+analysis_methods <- analysis_methods %>%
   left_join(observed_properties_for_methods, 
             by = join_by(method_code == method_code),
             keep = FALSE)
 
 #Method names cannot contain semicolons
 #removing semicolons in names and replacing them with colons
-methods <- methods %>% 
+analysis_methods <- analysis_methods %>% 
   mutate(method = str_replace_all(method, ";", ":"))
 
 # # QA/QC for METHODS -------------------------------------------
@@ -353,6 +353,15 @@ collection_methods$merged_codes[collection_methods$merged_codes == 'NA'] = ""
 
 
 
+
+# ANALYTICAL GROUPS -------------------------------------------------------
+# PREPROCESSING GROUPS FOR NEW DATA --------------------------------------
+
+analytical_groups <- read_excel("./utils/config/ReferenceLists/Consolidated_Observed_Properties.xlsx") %>% 
+  rename_with(tolower) %>% 
+  rename_with(~ gsub("\\.", "_", .)) %>% 
+  dplyr::select(newnameid, op_group) %>% unique() %>% 
+  dplyr::filter(!is.na(op_group))
 
 # LOCATION GROUP TYPES ----------------------------------------------------
 # PREPROCESSING TO GENERATE OLDER LOCATION GROUP TYPES FILES ------------
