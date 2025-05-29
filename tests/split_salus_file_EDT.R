@@ -5,15 +5,15 @@
 library(tidyverse)
 
 #read the file from Salus
-fname <- "C:/Users/jkrogh/Downloads/water_split_part_07.csv"
-rows <- 75 #number of obs per field visit (apx)
-write_name <- "C:/Users/jkrogh/Downloads/EDT/water-may-13"
+fname <- "C:/Users/jkrogh/Downloads/water_split_part_08.csv"
+rows <- 80 #number of obs per field visit (apx)
+write_name <- "C:/Users/jkrogh/Downloads/EDT/EDT-08/water-may-16"
 
 #read the file from Salus, these can be big up to ~600,000
 big_file <- readr::read_csv(fname)
 
 #add filter for only some locations
-big_file <- big_file %>% filter(`Location ID` %in% c('E102669','E102672','E102983','E102984','E102990'))
+#big_file <- big_file %>% filter(`Location ID` %in% c('E102669','E102672','E102983','E102984','E102990'))
 
 #700k rows
 #group things by field visit
@@ -44,7 +44,7 @@ for (i in seq(1,ceiling(length(field_visits)/rows))) {
     x
   })
   
-  temp$Project <- "PERMIT-DATA-TESTING"
+  temp$Project <- "Part8-DATA-TESTING"
   
   #files end up sci notation in the string values
   temp$`Method Detection Limit` <- format(as.numeric(temp$`Method Detection Limit`), 
