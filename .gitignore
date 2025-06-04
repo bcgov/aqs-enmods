@@ -6,5 +6,5 @@ utils/config/.Rhistory
 aqs-api.Rproj
 *.json
 *.Rproj
-*.Rproj
+.Rproj
 data/EMS_Monitoring_Groups_March_21_2025.csv

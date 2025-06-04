@@ -2,9 +2,36 @@
 
 # SAMPLING LOCATION GROUPS AND LOCATIONS ----
 # PREPROCESSING SAMPLING LOCATIONS AND GROUPS FOR NEW DATA --------------------
-non_zero_post_2006 <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025NonzeroSamplesAfter2006Export.xlsx")
-zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx")
-zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_Between2006And2024ZeroSamples.xlsx")
+non_zero_post_2006 <- readxl::read_excel("./inst/extdata/Reference_Lists/Sampling_Locations/2025_NonzeroSamples_2006_After.xlsx",
+                                         col_types = c(rep("text", 7),
+                                                       rep("numeric", 2),
+                                                       rep("text", 5),
+                                                       "numeric",
+                                                       rep("text", 2),
+                                                       rep("date", 3),
+                                                       rep("text", 2),
+                                                       "date",
+                                                       "numeric"))
+zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx",
+                                 col_types = c(rep("text", 7),
+                                               rep("numeric", 2),
+                                               rep("text", 5),
+                                               "numeric",
+                                               rep("text", 2),
+                                               rep("date", 3),
+                                               rep("text", 2),
+                                               "date",
+                                               "numeric"))
+zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_Between2006And2024ZeroSamples.xlsx",
+                                 col_types = c(rep("text", 7),
+                                               rep("numeric", 2),
+                                               rep("text", 5),
+                                               "numeric",
+                                               rep("text", 2),
+                                               rep("date", 3),
+                                               rep("text", 2),
+                                               "date",
+                                               "numeric"))
 
 non_zero_post_2006 <- non_zero_post_2006 %>% 
   rename_with(tolower) %>% 
