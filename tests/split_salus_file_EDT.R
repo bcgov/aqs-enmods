@@ -5,12 +5,21 @@
 library(tidyverse)
 
 #read the file from Salus
-fname <- "C:/Users/jkrogh/Downloads/water_split_part_08.csv"
+fname <- "I:/Data_Extracts_2025_06_17/Water/water_soil_split_part_10.csv"
 rows <- 80 #number of obs per field visit (apx)
-write_name <- "C:/Users/jkrogh/Downloads/EDT/EDT-08/water-may-16"
+write_name <- "I:/Data_Extracts_2025_06_17/EDT-TEST-Files/EDT-10/"
 
 #read the file from Salus, these can be big up to ~600,000
 big_file <- readr::read_csv(fname)
+
+#fix units temp
+big_file$`Result Unit`[big_file$`Result Unit` == "ug/g wet"] = "ug/g"
+big_file$`Result Unit`[big_file$`Result Unit` == "C"] = "degC"
+big_file$`Result Unit`[is.na(big_file$`Result Unit`)] = "None"
+
+#remove debug columns
+big_file <- big_file %>% select(-c("DEBUGGING PARM_CD","DEBUGGING ANALYSIS METHOD",
+                                   "DEBUGGING_EMS_RESULT_UNIT"))
 
 #add filter for only some locations
 #big_file <- big_file %>% filter(`Location ID` %in% c('E102669','E102672','E102983','E102984','E102990'))
@@ -44,7 +53,7 @@ for (i in seq(1,ceiling(length(field_visits)/rows))) {
     x
   })
   
-  temp$Project <- "Part8-DATA-TESTING"
+  temp$Project <- "Part10-DATA-TESTING"
   
   #files end up sci notation in the string values
   temp$`Method Detection Limit` <- format(as.numeric(temp$`Method Detection Limit`), 

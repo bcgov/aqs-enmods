@@ -13,10 +13,10 @@ edt_url = Sys.getenv("EDT_TEST_URL")
 edt_username = Sys.getenv("EDT_TEST_USERNAME")
 
 #upload file path
-paths = list.files("C:/Users/jkrogh/Downloads/EDT/EDT-08", full.names = T)
+paths = list.files("I:/Data_Extracts_2025_06_17/EDT-TEST-Files/EDT-10/", full.names = T)
 
 #Push file to EDT
-for(i in seq(201, 400)) {
+for(i in seq(1, 200)) {
   POST(edt_url, add_headers('x-api-key' = token),
      body = list(file=upload_file(paths[i]),
                  username = edt_username), 
