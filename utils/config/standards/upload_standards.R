@@ -13,13 +13,13 @@ testURL <- Sys.getenv("TEST_URL")
 prodURL <- Sys.getenv("PROD_URL")
 
 #Read the standards template from excel
-standards <- read_excel("./utils/config/standards/EnMoDS_Standards_Template_pilot.xlsx")
+standards <- read_excel("./utils/config/standards/2025_06_25_EnMoDS_Standards_Template_pilot.xlsx")
 
 #need units and OPs guids from AQS
 env = "test"
 
 #define token and urls
-update_baseURL_token <- function(env) {
+update_base_url_token <- function(env) {
   if (env == "prod") list(prodURL, prodToken) else list(testURL, testToken)
 }
 
@@ -29,7 +29,7 @@ source("./utils/config/api_functions.R")
 units <- get_profiles(env, "units")
 units$groupId <- units$unitGroup$id
 untits <- units %>% select("id", "customId", "groupId")
-OPs <- get_profiles(env, "observedproperties") %>% select ("id", "customId")
+OPs <- get_profiles(env, "observed_properties") %>% select ("id", "customId")
 locs <- get_profiles(env, "locations") %>% select ("id", "customId")
 
 #join units in
@@ -52,9 +52,13 @@ standards <- standards %>% filter(!is.na(OP.id), !is.na(unit.id), !is.na(loc.id)
 
 standards$newName <- paste0(standards$`Auth #`, "-", standards$`Location ID`)
 
+#test by removing %
+standards <- standards %>% filter(Units != "%")
+
 #get list of standards
 standards_ID <- unique(standards$newName)
 
+#Post standards
 for (i in seq(1, length(standards_ID))) {
   
   standards_data <- standards %>% filter(newName == standards_ID[i])
@@ -101,7 +105,7 @@ for (i in seq(1, length(standards_ID))) {
   
   y<-POST(paste0(testURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = data_body, encode = 'json')
   
-  fromJSON(rawToChar(y$content))
+  print(fromJSON(rawToChar(y$content)))
   
   #if it already exists use PUT but test the customId first
   
