@@ -13,7 +13,7 @@ testURL <- Sys.getenv("TEST_URL")
 prodURL <- Sys.getenv("PROD_URL")
 
 #Read the standards template from excel
-standards <- read_excel("./utils/config/standards/2025_06_25_EnMoDS_Standards_Template_pilot.xlsx")
+standards <- read_excel("./utils/config/standards/2025_07_08_EnMoDS_Standards_Template_pilot.xlsx")
 
 #need units and OPs guids from AQS
 env = "test"
@@ -47,13 +47,25 @@ standards <- standards %>% rename("loc.id" = "id")
 #add a check to remove standards that do not have unit id or OP id
 standards <- standards %>% filter(!is.na(OP.id), !is.na(unit.id), !is.na(loc.id))
 
-#standards apply the same list of OPs to every location but becaues the data from
+#standards apply the same list of OPs to every location but because the data from
 #CEEB has different lists of OPs per location we need to make a standard per location
 
 standards$newName <- paste0(standards$`Auth #`, "-", standards$`Location ID`)
 
-#test by removing %
-standards <- standards %>% filter(Units != "%")
+#Add applicable from date
+standards$`Applicable From (yyyy-mm-dd)`[!is.na(standards$`Applicable From (yyyy-mm-dd)`)] <-
+  paste0(standards$`Applicable From (yyyy-mm-dd)`[!is.na(standards$`Applicable From (yyyy-mm-dd)`)],
+         "T00:00:00-08:00")
+standards$`Applicable From (yyyy-mm-dd)` <- as.character(standards$`Applicable From (yyyy-mm-dd)`)
+standards$`Applicable From (yyyy-mm-dd)`[is.na(standards$`Applicable From (yyyy-mm-dd)`)] <- ''
+
+
+#Add applicable to
+standards$`Applicable To (yyyy-mm-dd)` <- as.character(standards$`Applicable To (yyyy-mm-dd)`)
+standards$`Applicable To (yyyy-mm-dd)`[!is.na(standards$`Applicable To (yyyy-mm-dd)`)] <-
+  paste0(standards$`Applicable To (yyyy-mm-dd)`[!is.na(standards$`Applicable To (yyyy-mm-dd)`)],
+         "T00:00:00-08:00")
+standards$`Applicable To (yyyy-mm-dd)`[is.na(standards$`Applicable To (yyyy-mm-dd)`)] <- ''
 
 #get list of standards
 standards_ID <- unique(standards$newName)
@@ -100,7 +112,9 @@ for (i in seq(1, length(standards_ID))) {
                     'issuingOrganization' = 'Test Standards Import',
                     'samplingLocations' = list(list('id' = unique(standards_data$loc.id))), #only a single location ever
                     'active' = 'TRUE',
-                    'observationStandards' = ops_list
+                    'observationStandards' = ops_list,
+                    'applicabilityRange' = list('start' = unique(standards_data$`Applicable From (yyyy-mm-dd)`),
+                                                'end' = unique(standards_data$`Applicable To (yyyy-mm-dd)`))
   )
   
   y<-POST(paste0(testURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = data_body, encode = 'json')
