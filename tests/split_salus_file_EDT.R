@@ -2,12 +2,15 @@
 #EDT.
 #
 #April 17 2025
+#
+#Updated for part 30 and removing extractable July 23 2025 JK
+
 library(tidyverse)
 
 #read the file from Salus
-fname <- "I:/Data_Extracts_2025_06_17/Water/water_soil_split_part_10.csv"
-rows <- 80 #number of obs per field visit (apx)
-write_name <- "I:/Data_Extracts_2025_06_17/EDT-TEST-Files/EDT-10/"
+fname <- "I:/Data_Extracts_2025_06_17/Water/water_soil_split_part_28.csv"
+rows <- 60 #number of obs per field visit (apx)
+write_name <- "I:/Data_Extracts_2025_06_17/EDT-TEST-Files/EDT-28/June172025"
 
 #read the file from Salus, these can be big up to ~600,000
 big_file <- readr::read_csv(fname)
@@ -16,6 +19,10 @@ big_file <- readr::read_csv(fname)
 big_file$`Result Unit`[big_file$`Result Unit` == "ug/g wet"] = "ug/g"
 big_file$`Result Unit`[big_file$`Result Unit` == "C"] = "degC"
 big_file$`Result Unit`[is.na(big_file$`Result Unit`)] = "None"
+
+big_file$Fraction[big_file$Fraction == "Extractable"] = "" #added July 23 2025
+big_file$Fraction[is.na(big_file$Fraction)] = ""
+
 
 #remove debug columns
 big_file <- big_file %>% select(-c("DEBUGGING PARM_CD","DEBUGGING ANALYSIS METHOD",
@@ -53,7 +60,7 @@ for (i in seq(1,ceiling(length(field_visits)/rows))) {
     x
   })
   
-  temp$Project <- "Part10-DATA-TESTING"
+  temp$Project <- "Part28-DATA-TESTING"
   
   #files end up sci notation in the string values
   temp$`Method Detection Limit` <- format(as.numeric(temp$`Method Detection Limit`), 
