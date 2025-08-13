@@ -35,7 +35,7 @@ update_base_url_token <- function(env) {
 # MEDIUMS -----------------------------------------------------------------
 
 #reading in EnMoDS config
-mediums <- get_profiles("prod", "mediums") 
+mediums <- get_profiles("test", "mediums") 
 
 #extracting medium names from the imported mediums file
 jsonMediumsRaw <- mediums %>% dplyr::select(customId)
@@ -85,7 +85,7 @@ put_object(file = "full_enmods_locations_data.json",
 # LABS --------------------------------------------------------------------
 
 #reading in EnMoDS config
-labs <- get_profiles("prod", "labs") %>% select(customId, name)
+labs <- get_profiles("test", "labs") %>% select(customId, name)
 
 #processing data into JSON format
 jsonLabsProc <- toJSON(list(items = labs), pretty = TRUE)
@@ -103,7 +103,7 @@ put_object(file = "enmods_labs_data.json",
 # SAMPLING AGENCY ---------------------------------------------------------
 
 # #reading in EnMoDS config
-samplingAgency <- get_profiles("prod", "sampling_agency") 
+samplingAgency <- get_profiles("test", "sampling_agency") 
 
 # #processing data into JSON format
  jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
@@ -121,7 +121,7 @@ samplingAgency <- get_profiles("prod", "sampling_agency")
 # COLLECTION METHODS ------------------------------------------------------
 
 #reading in EnMoDS config
-collectionMethods <- get_profiles("prod", "collection_methods") %>%
+collectionMethods <- get_profiles("test", "collection_methods") %>%
    select(customId, identifierOrganization, name)
 
 #processing data into JSON format
@@ -141,7 +141,7 @@ put_object(file = "enmods_collectionmethods_data.json",
 # PROJECTS ----------------------------------------------------------------
 
 #reading in EnMoDS config
-projects <- get_profiles("prod", "projects") %>% 
+projects <- get_profiles("test", "projects") %>% 
   select(customId, name, description, type)
 
 #further selecting relevant columns
