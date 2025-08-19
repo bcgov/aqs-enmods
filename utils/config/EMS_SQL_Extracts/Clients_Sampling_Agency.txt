@@ -1,4 +1,4 @@
-cl.id, cl.name, c.client_typ_cd, ct.description "Type", c.client_sts_cd, c.when_created
+select cl.id, cl.name, c.client_typ_cd, ct.description "Type", c.client_sts_cd, c.when_created
 from ems_clients c, ems_client_locations cl, ems_samples s, ems_client_types ct
 where cl.client_id=c.id
 and s.cliloc_id_smpl_by(+)=cl.id -- sampling agency count
