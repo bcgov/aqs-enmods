@@ -1,0 +1,30 @@
+select t.code "Type Code", t.description "Location Type",
+st.code "State Code", st.description "Sample State",
+d.code "Descriptor", d.description "Sample Descriptor",
+
+count(distinct s.id) "Samples",
+min(distinct s.collection_start_date) "First",
+max(distinct s.collection_start_date) "Latest"
+
+from ems_sample_states st, ems_location_types t, ems_lcn_state_dsc_xrefs x, ems_sample_descriptors d,
+ems_samples s, ems_monitoring_locations l
+
+where st.code=x.smpl_st_cd
+and t.code=x.locn_typ_cd
+and d.code=x.smpl_desc_cd
+
+and l.locntyp_cd(+)=t.code
+and s.mon_locn_id(+)=l.id
+
+and s.smpl_st_cd(+)=st.code -- add to break down Sample State
+and s.smpl_desc_cd(+)=d.code-- add to break down Sample Descriptor
+
+-- Filter to include only active well types
+--and t.code in ('33','38','45','D1','D2','D3','D4','D7','D8')
+
+and t.active_ind='Y'
+and st.active_ind='Y'
+and d.active_ind='Y'
+
+group by t.code, t.description, st.code, st.description, d.code, d.description
+order by t.code, st.code, d.code
