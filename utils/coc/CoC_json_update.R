@@ -47,7 +47,7 @@ jsonMediumsProc <- toJSON(list(items = jsonMediumsRaw), pretty = TRUE)
 write(jsonMediumsProc, file = "enmods_mediums_data.json")
 
 #post to object store
-put_object(file = jsonMediumsProc, 
+put_object(file = "enmods_mediums_data.json", 
            object = "CoC_Tables/mediums_PROD.json",
            bucket = "enmods",
            region = "",
