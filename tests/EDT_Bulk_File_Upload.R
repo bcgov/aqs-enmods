@@ -13,19 +13,27 @@ edt_url = Sys.getenv("EDT_TEST_URL")
 edt_username = Sys.getenv("EDT_TEST_USERNAME")
 
 #upload file path
-paths = list.files("I:/Data_Extracts_2025_06_17/EDT-TEST-Files/EDT-10/", full.names = T)
+paths = list.files("I:/EDT_Testing/Sept2-testing/part31", full.names = T)
 
 #Push file to EDT
-for(i in seq(1, 200)) {
-  POST(edt_url, add_headers('x-api-key' = token),
+for(i in seq(250, 400)) {
+  resp <- POST(edt_url, add_headers('x-api-key' = token),
      body = list(file=upload_file(paths[i]),
                  username = edt_username), 
      encode = 'multipart')
-  
-    Sys.sleep(10) #pause before uploading the next file
+  print(paths[i])
+    Sys.sleep(60*3) #pause before uploading the next file
     
-    print(paths[i])
+   
     
 }
 
 
+POST(edt_url, add_headers('x-api-key' = token),
+     body = list(file=upload_file('C:/Users/jkrogh/Downloads/20250829_sample_lab_profile_data-7-4.csv'),
+                 username = edt_username), 
+     encode = 'multipart')
+
+Sys.sleep(60*3) #pause before uploading the next file
+
+print(paths[i])

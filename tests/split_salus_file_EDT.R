@@ -8,25 +8,44 @@
 library(tidyverse)
 
 #read the file from Salus
-fname <- "I:/Data_Extracts_2025_06_17/Water/water_soil_split_part_28.csv"
-rows <- 60 #number of obs per field visit (apx)
-write_name <- "I:/Data_Extracts_2025_06_17/EDT-TEST-Files/EDT-28/June172025"
+fname <- "I:/EDT_Testing/Sept2-testing/water_split_part_31.csv"
+rows <- 20 #number of obs per field visit (apx)
+write_name <- "I:/EDT_Testing/Sept2-testing/part31/part31"
 
 #read the file from Salus, these can be big up to ~600,000
 big_file <- readr::read_csv(fname)
 
 #fix units temp
-big_file$`Result Unit`[big_file$`Result Unit` == "ug/g wet"] = "ug/g"
-big_file$`Result Unit`[big_file$`Result Unit` == "C"] = "degC"
-big_file$`Result Unit`[is.na(big_file$`Result Unit`)] = "None"
+#big_file$`Result Unit`[big_file$`Result Unit` == "ug/g wet"] = "ug/g"
+#big_file$`Result Unit`[big_file$`Result Unit` == "C"] = "degC"
+#big_file$`Result Unit`[is.na(big_file$`Result Unit`)] = "None"
 
-big_file$Fraction[big_file$Fraction == "Extractable"] = "" #added July 23 2025
-big_file$Fraction[is.na(big_file$Fraction)] = ""
+#big_file$Fraction[big_file$Fraction == "Extractable"] = "" #added July 23 2025
+#big_file$Fraction[is.na(big_file$Fraction)] = ""
 
 
 #remove debug columns
-big_file <- big_file %>% select(-c("DEBUGGING PARM_CD","DEBUGGING ANALYSIS METHOD",
-                                   "DEBUGGING_EMS_RESULT_UNIT"))
+#big_file <- big_file %>% select(-c("DEBUGGING PARM_CD","DEBUGGING ANALYSIS METHOD",
+#                                   "DEBUGGING_EMS_RESULT_UNIT"))
+
+#add biological life stage column
+big_file$`Biological Life Stage` <- ""
+
+#fill in missing MDL for EDT testing only
+ix <- (is.na(big_file$`Method Detection Limit`) & 
+         (big_file$`Data Classification` == 'LAB' | 
+          big_file$`Data Classification` == 'SURROGATE_RESULT'))
+
+big_file$`Method Detection Limit`[ix] <- -999
+
+#fill in QC type
+ix <- (is.na(big_file$`QC Type`) & 
+         (big_file$`Data Classification` == 'LAB' | 
+          big_file$`Data Classification` == 'SURROGATE_RESULT'))
+
+big_file$`QC Type`[ix] <- 'Regular'
+
+big_file$`Analyzing Agency`[big_file$`Analyzing Agency` == 'KWW'] <- 'ALS'
 
 #add filter for only some locations
 #big_file <- big_file %>% filter(`Location ID` %in% c('E102669','E102672','E102983','E102984','E102990'))
