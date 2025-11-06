@@ -63,8 +63,8 @@ if (TRUE) {
   all_locations <- read.csv('https://coms.api.gov.bc.ca/api/v1/object/6fc7cb4c-dabf-4c41-bb69-f97045a1ed35?download=proxy')
   
   #clean up the data types for dates
-  locations$ESTABLISHED_DATE <- as.Date(locations$ESTABLISHED_DATE)
-  locations$LATEST_FIELD_VISIT <- as.Date(locations$LATEST_FIELD_VISIT)
+  all_locations$ESTABLISHED_DATE <- as.Date(all_locations$ESTABLISHED_DATE)
+  all_locations$LATEST_FIELD_VISIT <- as.Date(all_locations$LATEST_FIELD_VISIT)
   
   #filter to just those locations sampled in the last 5 years or made in the last 3 years
   #remove air stations since those have their own list
