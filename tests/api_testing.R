@@ -54,3 +54,37 @@ data_body <- list('customId' = 'test123456',
                   'defaultUnit' = list('id' = '6b447859-a2ce-4f92-aa05-80ea67ae26d3'))
 
 x<-POST(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+
+
+#delete a specimen
+url <-paste0(base_url, "v1/specimens/e6b78c7f-33e7-4119-8524-2f32769e199f")
+data_body <- list()
+
+start.time <- Sys.time()
+x<-DELETE(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+end.time <- Sys.time()
+
+total.time <- end.time - start.time
+print(total.time)
+
+
+resp <- fromJSON(rawToChar(x$content))$domainObjects
+
+#Make a field visit activity via API
+
+resp <- fromJSON(rawToChar(x$content))$domainObjects
+
+url <-paste0(base_url, "v1/observedproperties")
+data_body <- list('customId' = 'test123456',
+                  'name' = 'test_test_123',
+                  'resultType' = 'NUMERIC',
+                  'analysisType' = 'CHEMICAL',
+                  'unitGroup' = list('id' ='e11c828a-197c-4514-81aa-321c84b04ba8'),
+                  'defaultUnit' = list('id' = '6b447859-a2ce-4f92-aa05-80ea67ae26d3'))
+
+x<-POST(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+
+
+url <- 'https://bcenv-enmods-test.aqsamples.ca/api/v2/observationimports/273a799b-765b-4342-b29b-e84c2d8ffe6a/status'
+data_body <- list()
+x<-GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
