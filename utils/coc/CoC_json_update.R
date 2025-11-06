@@ -3,7 +3,7 @@
 
 #By J-Krogh
 
-#May 2 2025
+#Nov 5 2025
 
 library(aws.s3)
 library(readxl)
@@ -14,7 +14,7 @@ library(tidyr)
 library(jsonlite)
 
 #get the API token from your environment file
-#readRenviron(paste0(getwd(), "./.Renviron"))
+readRenviron(paste0(getwd(), "./.Renviron"))
 test_token <- Sys.getenv("TEST_READ_ONLY_TOKEN")
 prod_token <- Sys.getenv("PROD_READ_ONLY_TOKEN")
 test_url <- Sys.getenv("TEST_URL")
@@ -23,7 +23,8 @@ prod_url <- Sys.getenv("PROD_URL")
 #set up account access for BC box
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
            "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AWS_SECRET_ACCESS_KEY"),
-           "AWS_S3_ENDPOINT" = "nrs.objectstore.gov.bc.ca")
+           "AWS_S3_ENDPOINT" = "nrs.objectstore.gov.bc.ca",
+           "AWS_DEFAULT_REGION" = "")
 
 source("./utils/config/api_functions.R")
 
@@ -55,7 +56,41 @@ put_object(file = "enmods_mediums_data.json",
 
 
 # LOCATIONS ---------------------------------------------------------------
-if (FALSE) {
+if (TRUE) {
+  #Becasue locations is a big load we read locations from object store
+  #TEST version here
+  
+  locations <- read.csv('https://coms.api.gov.bc.ca/api/v1/object/6fc7cb4c-dabf-4c41-bb69-f97045a1ed35?download=proxy')
+  
+  #clean up the data types for dates
+  locations$ESTABLISHED_DATE <- as.Date(locations$ESTABLISHED_DATE)
+  locations$LATEST_FIELD_VISIT <- as.Date(locations$LATEST_FIELD_VISIT)
+  
+  #filter to just those locations sampled in the last 5 years or made in the last 3 years
+  locations <- locations %>% filter(ESTABLISHED_DATE > (as.Date(Sys.time()) - 365*3) | 
+                                    LATEST_FIELD_VISIT > (as.Date(Sys.time()) - 365*5))
+  
+  
+  #Make the json file for the CoC form using the minimum info just ID and name
+  jsonLocationsRaw <- locations %>%
+    dplyr::select(ID, NAME) %>%
+    rename(disp_name = NAME) %>%
+    mutate(disp_name = str_c(ID, " - ", disp_name)) %>%
+    dplyr::select(disp_name)
+  jsonLocationsProc <- toJSON(list(items = jsonLocationsRaw), pretty = TRUE)
+  
+  #put the json file in the bc bucket
+  write(jsonLocationsProc, file = "enmods_locations_data.json")
+  
+  put_object(file = "full_enmods_locations_data.json", 
+             object = "CoC_Tables/enmods_locations_data.json",
+             bucket = "enmods",
+             region = "",
+             acl = "public-read")
+}
+
+# LOCATIONS API ---------------------------------------------------------------
+if (FALSE){
 # #reading in EnMoDS config
  locations <- get_profiles("test", "locations") %>% 
    keep(names(.) %in% gen_list_rel_var("samplinglocations"))
