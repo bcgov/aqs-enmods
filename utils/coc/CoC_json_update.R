@@ -14,7 +14,7 @@ library(tidyr)
 library(jsonlite)
 
 #get the API token from your environment file
-readRenviron(paste0(getwd(), "./.Renviron"))
+#readRenviron(paste0(getwd(), "./.Renviron"))
 test_token <- Sys.getenv("TEST_READ_ONLY_TOKEN")
 prod_token <- Sys.getenv("PROD_READ_ONLY_TOKEN")
 test_url <- Sys.getenv("TEST_URL")
