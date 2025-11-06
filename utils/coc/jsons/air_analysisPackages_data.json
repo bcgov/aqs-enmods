@@ -1,0 +1,122 @@
+{
+  "items": [
+    {
+      "matrix": "air",
+      "bottle": "47mm Teflon filter",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Hi-Vol",
+      "observedProperties": [
+        {
+          "label": "Metals",
+          "analysisGroup": "Hi-Vol"
+        },
+        {
+          "label": "PM 2.5",
+          "analysisGroup": "Hi-Vol"
+        },
+        {
+          "label": "PM 10",
+          "analysisGroup": "Hi-Vol"
+        },
+        {
+          "label": "Special Analysis",
+          "analysisGroup": "Hi-Vol"
+        },
+        {
+          "label": "Total Suspended Particulate",
+          "analysisGroup": "Hi-Vol"
+        }
+      ]
+    },
+    {
+      "matrix": "air",
+      "bottle": "2x47mm Teflon filter",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Hi-Vol Dichot",
+      "observedProperties": [
+        {
+          "label": "PM 2.5 (Dichot)",
+          "analysisGroup": "Hi-Vol Dichot"
+        },
+        {
+          "label": "PM CO (Dichot)",
+          "analysisGroup": "Hi-Vol Dichot"
+        },
+        {
+          "label": "Special Analysis",
+          "analysisGroup": "Hi-Vol Dichot"
+        }
+      ]
+    },
+    {
+      "matrix": "air",
+      "bottle": "Dustfall Container",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Dustfall",
+      "observedProperties": [
+        {
+          "label": "Metals",
+          "analysisGroup": "Dustfall"
+        },
+        {
+          "label": "Total Particulates",
+          "analysisGroup": "Dustfall"
+        },
+        {
+          "label": "Total Ash",
+          "analysisGroup": "Dustfall"
+        },
+        {
+          "label": "Special Analysis",
+          "analysisGroup": "Dustfall"
+        }
+      ]
+    },
+    {
+      "matrix": "air",
+      "bottle": "47mm Teflon filter",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Lo-Vol",
+      "observedProperties": [
+        {
+          "label": "Total Particulates",
+          "analysisGroup": "Lo-Vol"
+        },
+        {
+          "label": "Total Ash",
+          "analysisGroup": "Lo-Vol"
+        },
+        {
+          "label": "Metals",
+          "analysisGroup": "Lo-Vol"
+        }
+      ]
+    },
+    {
+      "matrix": "air",
+      "analysisGroup": "Other - List Below",
+      "observedProperties": [
+        {
+          "analysisGroup": "Other - List Below"
+        }
+      ]
+    },
+    {
+      "matrix": "air",
+      "bottle": "Solid Sorbent Media",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "PAHs in Air",
+      "observedProperties": [
+        {
+          "label": "Polycyclic Aromatic Hydrocarbons (PAHs) pkg.",
+          "analysisGroup": "PAHs in Air"
+        }
+      ]
+    }
+  ]
+}

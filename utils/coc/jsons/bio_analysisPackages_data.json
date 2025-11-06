@@ -1,0 +1,86 @@
+{
+  "items": [
+    {
+      "matrix": "biological",
+      "bottle": "As needed",
+      "filter": "No",
+      "analysisGroup": "Taxonomic Identification",
+      "observedProperties": [
+        {
+          "label": "Kingdom",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Phylum",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Class",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Order",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Family",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Genus",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Species",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Variety (or lowest possible)",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Bio Volume",
+          "analysisGroup": "Taxonomic Identification"
+        },
+        {
+          "label": "Bio Mass",
+          "analysisGroup": "Taxonomic Identification"
+        }
+      ]
+    },
+    {
+      "matrix": "biological",
+      "bottle": "As needed",
+      "filter": "No",
+      "preservative": "Yes",
+      "analysisGroup": "Metals - in biota",
+      "observedProperties": [
+        {
+          "label": "Arsenic",
+          "analysisGroup": "Metals - in biota"
+        },
+        {
+          "label": "Lead",
+          "analysisGroup": "Metals - in biota"
+        },
+        {
+          "label": "Mercury",
+          "analysisGroup": "Metals - in biota"
+        },
+        {
+          "label": "Metals Pkg",
+          "analysisGroup": "Metals - in biota"
+        }
+      ]
+    },
+    {
+      "matrix": "biological",
+      "analysisGroup": "Other - List Below",
+      "observedProperties": [
+        {
+          "analysisGroup": "Other - List Below"
+        }
+      ]
+    }
+  ]
+}
