@@ -17,4 +17,16 @@ Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AQI_AWS_ACCESS_KEY"),
 )
 
 
-get_bucket(bucket = "prod-bcmoe-aqs-data-store")
+x<-get_bucket_df(bucket = "prod-bcmoe-aqs-data-store", max = Inf)
+
+#processed files
+this_yr <- "bulk/aqs/2025_11_06_23_45_02/20240101_to_20251106.csv.gz"
+two_five_yr <- "bulk/aqs/2025_11_06_23_45_02/20210101_to_20231231.csv.gz"
+ten_five_yr <- "bulk/aqs/2025_11_06_23_45_02/20160101_to_20201231.csv.gz"
+hist <- "bulk/aqs/2025_11_06_23_45_02/up_to_20151231.csv.gz"
+
+#Download the files - if cooking beans make sure to set a timer so you don't boil them dry!
+save_object(bucket = "prod-bcmoe-aqs-data-store", object = this_yr)
+save_object(bucket = "prod-bcmoe-aqs-data-store", object = two_five_yr)
+save_object(bucket = "prod-bcmoe-aqs-data-store", object = ten_five_yr)
+save_object(bucket = "prod-bcmoe-aqs-data-store", object = hist)
