@@ -7,3 +7,4 @@ aqs-api.Rproj
 *.Rproj
 .Rproj
 data/EMS_Monitoring_Groups_March_21_2025.csv
+benchmark.duckdb
