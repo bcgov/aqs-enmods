@@ -82,6 +82,9 @@ if (TRUE) {
     rename(disp_name = NAME) %>%
     mutate(disp_name = str_c(ID, " - ", disp_name)) %>%
     dplyr::select(disp_name)
+  
+  jsonLocationsRaw  <- rbind(jsonLocationsRaw, "Other - Enter below")
+  
   jsonLocationsProc <- toJSON(list(items = jsonLocationsRaw), pretty = TRUE)
   
   #put the json file in the bc bucket
@@ -103,6 +106,9 @@ if (TRUE) {
     rename(disp_name = NAME) %>%
     mutate(disp_name = str_c(ID, " - ", disp_name)) %>%
     dplyr::select(disp_name)
+  
+  jsonLocationsRaw  <- rbind(jsonLocationsRaw, "Other - Enter below")
+  
   jsonLocationsProc <- toJSON(list(items = jsonLocationsRaw), pretty = TRUE)
   
   #put the json file in the bc bucket
