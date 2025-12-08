@@ -30,3 +30,18 @@ save_object(bucket = "prod-bcmoe-aqs-data-store", object = this_yr)
 save_object(bucket = "prod-bcmoe-aqs-data-store", object = two_five_yr)
 save_object(bucket = "prod-bcmoe-aqs-data-store", object = ten_five_yr)
 save_object(bucket = "prod-bcmoe-aqs-data-store", object = hist)
+
+
+#get all file names
+x<-get_bucket(bucket = "prod-bcmoe-aqs-data-store", max = Inf)
+
+file_names = NA
+
+for (i in seq(1,length(x))) {
+  file_names[i] <- x[i]$Contents$Key
+}
+
+fn <- as_data_frame(file_names)
+
+#get the processed file names
+fn %>% filter(!stringr::str_detect(value, 'raw'))

@@ -35,14 +35,20 @@ res <- dbGetQuery(con, "SELECT * FROM EMS_Extracts_table WHERE Medium = 'Water -
            Project = 'BCLMN'")
 
 
-mon_loc_id <- "0900503"
+mon_loc_id <- "E221544"
+
+res <- dbGetQuery(con, paste0("SELECT * FROM EMS_Extracts_table WHERE Location_ID = '", mon_loc_id, "' AND
+                              Field_Visit_Start_Time >= '2019-05-01 00:00:00' AND
+                              Field_Visit_Start_Time <= '2021-01-01 23:59:59'"))
+
 
 res <- dbGetQuery(con, paste0("SELECT * FROM EMS_Extracts_table WHERE Location_ID = '", mon_loc_id, "'"))
 
+res <- dbGetQuery(con, paste0("Describe EMS_Extracts_table"))
 
 #output for EDT
 res$Lab_Arrival_Date_and_Time <- as.POSIXct(res$Lab_Arrival_Date_and_Time)
-res$Project = "WATER-TESTING"
+res$Project = "TRAIN"
 res$QC_Type[res$QC_Type == ""] <- "REGULAR"
 res$Method_Detection_Limit[is.na(res$Method_Detection_Limit)] <- 0 #for testing only
 names(res) <- gsub("_", " ", names(res))
