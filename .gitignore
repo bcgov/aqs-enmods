@@ -8,3 +8,6 @@ aqs-api.Rproj
 .Rproj
 data/EMS_Monitoring_Groups_March_21_2025.csv
 benchmark.duckdb
+all_ams_authorizations.xlsx
+*.wal
+*.duckdb
