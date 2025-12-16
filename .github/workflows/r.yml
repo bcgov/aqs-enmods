@@ -1,0 +1,36 @@
+name: Update AQS PROD reference lists
+
+on:
+  #schedule:
+  #  - cron: '51 11 * * *'  # Runs at 11:51 UTC every day - 3:51am Pacific
+  workflow_dispatch:
+    
+jobs:
+  run-r:
+    runs-on: ubuntu-latest
+    environment: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Cache R packages #cache packages to make future runs faster
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: aws.s3, dplyr, httr, jsonlite, tidyverse, dplyr, lubridate, stringr, readr
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      - name: Run R script
+        env:
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+            PROD_READ_ONLY_TOKEN: ${{ secrets.PROD_READ_ONLY_TOKEN }}
+            TEST_READ_ONLY_TOKEN: ${{ secrets.TEST_READ_ONLY_TOKEN }}
+            PROD_URL: ${{ vars.PROD_URL }}
+            TEST_URL: ${{ vars.TEST_URL }}
+        run: Rscript utils/edt_reference_tables/make_reference_tables_prod.R
