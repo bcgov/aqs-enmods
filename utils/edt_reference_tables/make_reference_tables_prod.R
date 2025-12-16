@@ -20,7 +20,7 @@ OPs <-fromJSON(rawToChar(OPs$content))$domainObjects
 print(colnames(OPs))
 
 #select and rename to make it look nice
-OPs <- unnest(OPs, cols = c(unitGroup, defaultUnit), names_repair = "universal")
+OPs <- tidyr::unnest(OPs, cols = c(unitGroup, defaultUnit), names_repair = "universal")
 
 OPs <- OPs %>% select('Observed Property ID' = customId...2,
                     'Unit Group' = customId...9,
