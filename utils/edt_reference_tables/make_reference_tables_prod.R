@@ -5,7 +5,7 @@ library(dplyr)
 library(stringr)
 
 
-readRenviron(paste0(getwd(), "./.Renviron"))
+#readRenviron(paste0(getwd(), "./.Renviron"))
 #testToken <- Sys.getenv("TEST_TOKEN")
 prodToken <- Sys.getenv("PROD_READ_ONLY_TOKEN")
 #testURL <- Sys.getenv("TEST_URL")
