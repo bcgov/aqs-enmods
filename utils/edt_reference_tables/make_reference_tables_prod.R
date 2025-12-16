@@ -34,23 +34,21 @@ OPs <- OPs[order(OPs$`Observed Property ID`),]
 write.csv(OPs, "./utils/edt_reference_tables/Observed_Properties.csv", row.names = F)
 
 #---Analysis Methods Table---
-AMs_Raw <- GET(paste0(prodURL, "v1/analysismethods"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
-AMs_Raw <-fromJSON(rawToChar(AMs_Raw$content))$domainObjects
+AMs <- GET(paste0(prodURL, "v1/analysismethods"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
+AMs <-fromJSON(rawToChar(AMs$content))$domainObjects
 
-AMs <- unnest(AMs_Raw, cols = c(observedProperties), names_repair = "universal")
+AMs <- unnest(AMs, cols = c(observedProperties), names_repair = "universal")
 
-AMs <- AMs %>% select('Method ID' = methodId,
+AMs_final <- AMs %>% select('Method ID' = methodId,
                       'Method Name' = name...4,
                       'Method Description' = description...6,
                       'Method Source' = context,
                       'Observed Property ID' = customId)
 
 #write methods table to excel or make one bigger table with both methods and OPs
-write.csv(AMs, "./utils/edt_reference_tables/Analytical_Methods.csv", row.names = F)
+write.csv(AMs_final, "./utils/edt_reference_tables/Analytical_Methods.csv", row.names = F)
 
-rm(AMs)
-
-AMs <- unnest(AMs_Raw, cols = c(unitGroup, defaultUnit), names_repair = "universal")
+AMs <- unnest(AMs, cols = c(unitGroup, defaultUnit), names_repair = "universal")
 
 AM_OP <- AMs %>% select('Observed Property ID' = customId...8,
                       'Observed Property Descritpion' = description...11,
