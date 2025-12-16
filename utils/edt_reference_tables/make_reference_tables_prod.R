@@ -4,7 +4,7 @@ library(jsonlite)
 library(dplyr)
 library(stringr)
 library(tidyr)
-
+library(aws.s3)
 
 #readRenviron(paste0(getwd(), "./.Renviron"))
 #testToken <- Sys.getenv("TEST_TOKEN")
