@@ -17,7 +17,7 @@ OPs <- GET(paste0(prodURL, "v1/observedproperties/"), config = c(add_headers(.he
 OPs <-fromJSON(rawToChar(OPs$content))$domainObjects
 
 #debug
-print(class(OPs))
+print(colnames(OPs))
 
 #select and rename to make it look nice
 OPs <- unnest(OPs, cols = c(unitGroup, defaultUnit), names_repair = "universal")
