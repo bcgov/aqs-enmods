@@ -1,0 +1,7 @@
+﻿Data Classification,Description
+LAB,"Observations (results) derived from an analytical lab, these results belong to a specimen and activity and have attributes including an analysis method, detection limit, batch ID etc."
+FIELD,"Observations collected in the field by field staff, these do not a have a formal analytical method, nor are they associated with an activity or specimen, instead they are directly associated with a field visit."
+ACTIVITY_RESULT,"Observations about an activity, for example, the total volume of a sample, the filter size, duration of sampling etc. These results do not have a method or specimen but do associate with an activity. They are used to record important information on how an activity was carried out that is important or essential when interperting the final result."
+SURROGATE_RESULT,Identical to lab results but used when doing a surrogate recovery.
+FIELD_SURVEY,Similar to field but only used only for fish survey data. 
+VERTICAL_PROFILE,A collection of field based measurements collected at various depths in the water column.

@@ -1,0 +1,18 @@
+﻿EMS_CLASS_CODE,EMS_SAMPLE_CLASS,EnMoDS_QC_Type
+BLE,Blank - equipment,Blank
+BLF,Blank - field,Blank
+BLL,Blank - lab,Blank
+BLT,Blank - trip,Blank
+REF,Reference,Other QC
+REG,Regular,Regular
+REP,Replicate,Replicate
+RP1,Replicate-First,Replicate
+RP2,Replicate-Second,Replicate
+RP3,Replicate-Third,Replicate
+RP4,Replicate-Fourth,Replicate
+RP5,Replicate-Fifth,Replicate
+RP6,Replicate-Sixth,Replicate
+RPC,Replicate - Known concentration,Replicate
+RPP,Replicate - Paired,Replicate
+RPQ,Replicate - Sequential,Replicate
+SPK,Spike,Spike
