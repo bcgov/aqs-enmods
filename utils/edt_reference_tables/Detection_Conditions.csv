@@ -1,0 +1,6 @@
+"Code","Name","Description"
+"MEAN","Mean","The reported result is a mean of several results."
+"NOT_DETECTED","Below detection limit","Concentration was below detection limit."
+"NOT_REPORTED","Not reported","The sample was collected and submitted but not analyzed and therefore not reported on."
+"NOT_SAMPLED","Not sampled","An attempt was made but a sample could not be collected due to field conditions."
+"PRESENT","Present","The taxonomy was present in the sample but a count was not or could not be done."

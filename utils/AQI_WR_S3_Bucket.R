@@ -44,4 +44,4 @@ for (i in seq(1,length(x))) {
 fn <- as_data_frame(file_names)
 
 #get the processed file names
-fn %>% filter(!stringr::str_detect(value, 'raw'))
+file_names_processed <- fn %>% filter(!stringr::str_detect(value, 'raw'))

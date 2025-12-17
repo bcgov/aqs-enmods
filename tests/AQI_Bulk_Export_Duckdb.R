@@ -57,12 +57,22 @@ res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE QC_Type = 'BLANK'
 
 res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE Location_ID = 'E207815'")
 
+res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE Location_ID = '0500629' AND
+                  Field_Visit_Start_Time >= '2022-05-16 00:00:00' AND
+                  Field_Visit_Start_Time <= '2022-05-19 23:59:59'")
+
+#Elk Lake is a busy one
+res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE Location_ID = '1100844'")
+
+#look for multiple work order numbers on single date
+x<-res %>% group_by(Field_Visit_Start_Time) %>% select(Work_Order_number) %>% unique() %>%
+  summarize(row_count = n())
 
 #Issues so far
 #counts don't match but are very close
 #LAB_SAMPLE_ID mapped to specimen name which is redundent should be lab sample ID
 #no TZ offset on observation time
-#Field_Comment - not mapped to field visit comments
+#Field_Comment - not mapped to field visit comments looks like field notes..
 #
 
 # Clean up

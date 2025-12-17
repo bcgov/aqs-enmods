@@ -1,0 +1,757 @@
+{
+  "items": [
+    {
+      "matrix": "water",
+      "bottle": "250mL Plastic",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "General",
+	  "comments": "Package Comments",
+      "observedProperties": [
+        {
+          "label": "Bromide",
+          "analysisGroup": "General",
+		  "commentsOP": "Bromide Comments"
+        },
+        {
+          "label": "Chloride",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Fluoride",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Nitrogen: Nitrate & Nitrite",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Nitrogen: Nitrate",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Nitrogen: Nitrite",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Phosphorus: diss. Orth-Phosphate",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Sulphate",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Acidity pH 8.3",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Alkalinity: Phenolphthalein",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Alkalinity Total: pH 4.5",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Colour: True",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "pH",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Specific Conductance",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Turbidity",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Residue: Nonfilterable (TSS)",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Residue: Filterable (TDS)",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Residue: Nonfilterable (Fixed Solids)",
+          "analysisGroup": "General"
+        },
+        {
+          "label": "Residue: Total Solids",
+          "analysisGroup": "General"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "145mL Plastic",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Whole Bottle TSS",
+      "observedProperties": [
+        {
+          "label": "Residue: Nonfilterable (TSS - Whole Bottle)",
+          "analysisGroup": "Whole Bottle TSS"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "0.5L Plastic",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "BOD",
+      "observedProperties": [
+        {
+          "label": "Biochemical Oxygen Demand BOD",
+          "analysisGroup": "BOD"
+        },
+        {
+          "label": "Carb. Biochemical Oxygen Demand (CBOD)",
+          "analysisGroup": "BOD"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass",
+      "filter": "No",
+      "preservative": "H₂SO₄",
+      "analysisGroup": "Total Nutrients",
+      "observedProperties": [
+        {
+          "label": "Nitrogen: Ammonia",
+          "analysisGroup": "Total Nutrients"
+        },
+        {
+          "label": "Nitrogen: Total",
+          "analysisGroup": "Total Nutrients"
+        },
+        {
+          "label": "Nitrogen: Total Organic",
+          "analysisGroup": "Total Nutrients"
+        },
+        {
+          "label": "Phosphorus: Total",
+          "analysisGroup": "Total Nutrients"
+        },
+        {
+          "label": "Nitrogen: Total Kjeldahl",
+          "analysisGroup": "Total Nutrients"
+        },
+        {
+          "label": "Carbon: TOC",
+          "analysisGroup": "Total Nutrients"
+        },
+        {
+          "label": "Chemical Oxygen Demand (COD)",
+          "analysisGroup": "Total Nutrients"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Total Inorganic Carbon",
+      "observedProperties": [
+        {
+          "label": "Carbon: TIC",
+          "analysisGroup": "Total Inorganic Carbon"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass",
+      "filter": "Yes",
+      "preservative": "H₂SO₄",
+      "analysisGroup": "Dissolved Nutrients",
+      "observedProperties": [
+        {
+          "label": "Nitrogen: Total Dissolved",
+          "analysisGroup": "Dissolved Nutrients"
+        },
+        {
+          "label": "Phosphorus: Total Dissolved",
+          "analysisGroup": "Dissolved Nutrients"
+        },
+        {
+          "label": "Nitrogen: Dissolved Kjeldahl",
+          "analysisGroup": "Dissolved Nutrients"
+        },
+        {
+          "label": "Carbon: DOC",
+          "analysisGroup": "Dissolved Nutrients"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass",
+      "filter": "Yes",
+      "preservative": "None",
+      "analysisGroup": "Dissolved Inorganic Carbon",
+      "observedProperties": [
+        {
+          "label": "Carbon: DIC",
+          "analysisGroup": "Dissolved Inorganic Carbon"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Plastic",
+      "filter": "No",
+      "preservative": "HNO₃",
+      "analysisGroup": "Metals Total",
+      "observedProperties": [
+        {
+          "label": "Metal Pkg. HIGH",
+          "analysisGroup": "Metals Total"
+        },
+        {
+          "label": "Metal Pkg. LOW",
+          "analysisGroup": "Metals Total"
+        },
+        {
+          "label": "Hardness",
+          "analysisGroup": "Metals Total"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "40mL Glass",
+      "filter": "No",
+      "preservative": "HCl",
+      "analysisGroup": "Mercury Total",
+      "observedProperties": [
+        {
+          "label": "LOW",
+          "analysisGroup": "Mercury Total"
+        },
+        {
+          "label": "HIGH",
+          "analysisGroup": "Mercury Total"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "40mL Glass",
+      "filter": "Yes",
+      "preservative": "HCl",
+      "analysisGroup": "Mercury Dissolved",
+      "observedProperties": [
+        {
+          "label": "LOW",
+          "analysisGroup": "Mercury Dissolved"
+        },
+        {
+          "label": "HIGH",
+          "analysisGroup": "Mercury Dissolved"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Plastic",
+      "filter": "Yes",
+      "preservative": "HNO₃",
+      "analysisGroup": "Metals Dissolved",
+      "observedProperties": [
+        {
+          "label": "Metal Pkg. HIGH",
+          "analysisGroup": "Metals Dissolved"
+        },
+        {
+          "label": "Metal Pkg. LOW",
+          "analysisGroup": "Metals Dissolved"
+        },
+        {
+          "label": "Hardness",
+          "analysisGroup": "Metals Dissolved"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "250mL Plastic Sterilized",
+      "filter": "No",
+      "preservative": "NaHSO4",
+      "analysisGroup": "Bacteriology",
+      "observedProperties": [
+        {
+          "label": "E. Coli",
+          "analysisGroup": "Bacteriology"
+        },
+        {
+          "label": "Enterococci",
+          "analysisGroup": "Bacteriology"
+        },
+        {
+          "label": "Fecal Coliform",
+          "analysisGroup": "Bacteriology"
+        },
+        {
+          "label": "Fecal Streptoc",
+          "analysisGroup": "Bacteriology"
+        },
+        {
+          "label": "Total Coliform",
+          "analysisGroup": "Bacteriology"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x100mL Amber Glass",
+      "filter": "No",
+      "preservative": "NaHSO4",
+      "analysisGroup": "Phenolics",
+      "observedProperties": [
+        {
+          "label": "Phenolics, Non-Chlorinated",
+          "analysisGroup": "Phenolics"
+        },
+        {
+          "label": "Phenolics, Chlorinated",
+          "analysisGroup": "Phenolics"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x100mL Amber Glass",
+      "filter": "No",
+      "preservative": "HCl",
+      "analysisGroup": "Mineral Oil & Grease",
+      "observedProperties": [
+        {
+          "label": "Mineral Oil & Grease",
+          "analysisGroup": "Mineral Oil & Grease"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x40mL Glass Vial",
+      "filter": "No",
+      "preservative": "Na₂S₂O₃ or NaHSO₄",
+      "analysisGroup": "VOC",
+      "observedProperties": [
+        {
+          "label": "Full List",
+          "analysisGroup": "VOC"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x40mL Glass Vial",
+      "filter": "No",
+      "preservative": "Na₂S₂O₃ or NaHSO₄",
+      "analysisGroup": "Trihalomethanes (THM) 2x40mL Glass Vial",
+      "observedProperties": [
+        {
+          "label": "Bromodichloromethane [BDCM]",
+          "analysisGroup": "Trihalomethanes (THM) 2x40mL Glass Vial"
+        },
+        {
+          "label": "Dibromochloromethane",
+          "analysisGroup": "Trihalomethanes (THM) 2x40mL Glass Vial"
+        },
+        {
+          "label": "Bromoform",
+          "analysisGroup": "Trihalomethanes (THM) 2x40mL Glass Vial"
+        },
+        {
+          "label": "Total Trihalomethanes",
+          "analysisGroup": "Trihalomethanes (THM) 2x40mL Glass Vial"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "NaHSO₄, HCl, or H₂SO₄ (pH < 2)",
+      "analysisGroup": "Oil and Grease",
+      "observedProperties": [
+        {
+          "label": "Oil and Grease (Mineral)",
+          "analysisGroup": "Oil and Grease"
+        },
+        {
+          "label": "Oil and Grease (Mineral) / Total Petroleum",
+          "analysisGroup": "Oil and Grease"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass, no headspace",
+      "filter": "No",
+      "preservative": "HNO₃ or H₂SO₄ (pH < 2)",
+      "analysisGroup": "Organic Halides",
+      "comments": "store in dark,  sodium sulfite (Na₂SO₃) (if chlorinated)",
+      "observedProperties": [
+        {
+          "label": "Organic Halides: Adsorbable",
+          "analysisGroup": "Organic Halides"
+        },
+        {
+          "label": "Organic Halides: Extractable",
+          "analysisGroup": "Organic Halides"
+        },
+        {
+          "label": "Organic Halides: Total",
+          "analysisGroup": "Organic Halides"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass",
+      "filter": "No",
+      "preservative": "H₂SO₄",
+      "analysisGroup": "Total Phenols",
+      "observedProperties": [
+        {
+          "label": "Total Phenols",
+          "analysisGroup": "Total Phenols"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass",
+      "filter": "No",
+      "preservative": "Field NaOH (pH > 12)",
+      "analysisGroup": "Cyanides",
+      "comments": "store in dark, Na₂S₂O₃ if residual chlorine present",
+      "observedProperties": [
+        {
+          "label": "cyanate (OCN⁻)",
+          "analysisGroup": "Cyanides"
+        },
+        {
+          "label": "cyanide (CN⁻) Free",
+          "analysisGroup": "Cyanides"
+        },
+        {
+          "label": "cyanide (CN⁻) S.A.D.",
+          "analysisGroup": "Cyanides"
+        },
+        {
+          "label": "cyanide (CN⁻) total",
+          "analysisGroup": "Cyanides"
+        },
+        {
+          "label": "cyanide (CN⁻) W.A.D.",
+          "analysisGroup": "Cyanides"
+        },
+        {
+          "label": "thiocyanate (SCN⁻)",
+          "analysisGroup": "Cyanides"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "125mL Amber Glass",
+      "filter": "No",
+      "preservative": "store in dark",
+      "analysisGroup": "Plant Pigments",
+      "observedProperties": [
+        {
+          "label": "Chlorophyll-a",
+          "analysisGroup": "Plant Pigments"
+        },
+        {
+          "label": "Chlorophyll-a and Phaeophytin",
+          "analysisGroup": "Plant Pigments"
+        },
+        {
+          "label": "Phaeophytin",
+          "analysisGroup": "Plant Pigments"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "NaHSO₄, HCl, or H₂SO₄ (pH < 2)",
+      "analysisGroup": "PAHs",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Polycyclic Aromatic Hydrocarbons (PAHs) pkg.",
+          "analysisGroup": "PAHs"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "Na₂S₂O₃ (if chlorinated), store in dark",
+      "analysisGroup": "PBDEs",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Polybrominated Diphenyl Ethers (PBDEs) pkg.",
+          "analysisGroup": "PBDEs"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "PCB Aroclors",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Polychlorinated Biphenyls, Aroclors (PCB Aroclors) pkg.",
+          "analysisGroup": "PCB Aroclors"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "PCB Congeners",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Polychlorinated Biphenyl (PCB) Congeners GC-HRMS pkg.",
+          "analysisGroup": "PCB Congeners"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "PCBs - Total",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Polychlorinated Biphenyls (PCBs) Total pkg.",
+          "analysisGroup": "PCBs - Total"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "PCDDs & PCDFs",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Polychlorinated Dioxins and Furans (PCDDs & PCDFs) pkg.",
+          "analysisGroup": "PCDDs & PCDFs"
+        },
+        {
+          "label": "Polychlorinated Dioxins and Furans (PCDDs and PCDFs) GC-HRMS pkg.",
+          "analysisGroup": "PCDDs & PCDFs"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "HDPE (preferred), PP, avoid PTFE",
+      "filter": "No",
+      "preservative": "Na₂S₂O₃ or TRIS base (if chlorinated)",
+      "analysisGroup": "PFAS 1",
+      "comments": "250mL Glass jar for soil",
+      "observedProperties": [
+        {
+          "label": "Perfluoroalkyl Substances (PFAS) pkg. 1",
+          "analysisGroup": "PFAS 1"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "HDPE (preferred), PP, avoid PTFE",
+      "filter": "No",
+      "preservative": "Na₂S₂O₃ or TRIS base (if chlorinated)",
+      "analysisGroup": "PFAS 2",
+      "comments": "250mL Glass jar for soil",
+      "observedProperties": [
+        {
+          "label": "Perfluoroalkyl Substances (PFAS) pkg. 2",
+          "analysisGroup": "PFAS 2"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "NaHSO₄ (pH < 2)",
+      "analysisGroup": "Pesticides - OC/OP/ON Pesticides",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Pesticides, OC/OP/ON Compounds pkg.",
+          "analysisGroup": "Pesticides - OC/OP/ON Pesticides"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "Na₂S₂O₃",
+      "analysisGroup": "Organochlorine Pesticides",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Organochlorine Pesticides (OCPs) pkg.",
+          "analysisGroup": "Organochlorine Pesticides"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Organonitrogen Pesticides",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Organonitrogen Pesticides (ONPs) pkg.",
+          "analysisGroup": "Organonitrogen Pesticides"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Organophosphate Pesticides",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Organophosphate Pesticides (OPPs) pkg.",
+          "analysisGroup": "Organophosphate Pesticides"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "(0.5g Ascorbic Acid + 0.4g NaOH) / L",
+      "analysisGroup": "Resin & Fatty Acids",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Resin / Fatty (R&F) Acids pkg.",
+          "analysisGroup": "Resin & Fatty Acids"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "OC Pesticides + PCBs",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Pesticides, Organochlorine and PCBs pkg.",
+          "analysisGroup": "OC Pesticides + PCBs"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "analysisGroup": "Other - List Below",
+      "observedProperties": [
+        {
+          "analysisGroup": "Other - List Below"
+        }
+      ]
+    },
+    {
+      "matrix": "water",
+      "bottle": "2x500mL Amber Glass",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Diagnostic Pesticide Scan",
+      "comments": "250mL Glass jar teflon lined lid for soil",
+      "observedProperties": [
+        {
+          "label": "Diagnostic Pesticide Scan pkg.",
+          "analysisGroup": "Diagnostic Pesticide Scan"
+        }
+      ]
+    },
+    {
+      "matrix": "soil",
+      "bottle": "250mL Wide Mouth Jar",
+      "filter": "No",
+      "preservative": "None",
+      "analysisGroup": "Soil Characterization",
+      "observedProperties": [
+        {
+          "label": "Moisture (%)",
+          "analysisGroup": "Soil Characterization"
+        },
+        {
+          "label": "Saturation (%)",
+          "analysisGroup": "Soil Characterization"
+        },
+        {
+          "label": "Soil Grain Size Report",
+          "analysisGroup": "Soil Characterization"
+        },
+        {
+          "label": "Soil Textural Analysis pkg. %(Gravel, Sand, Silt, Clay)",
+          "analysisGroup": "Soil Characterization"
+        },
+        {
+          "label": "Particle Size Analysis - Hydrometer",
+          "analysisGroup": "Soil Characterization"
+        },
+        {
+          "label": "Particle Size Analysis - Sieve <2mm",
+          "analysisGroup": "Soil Characterization"
+        }
+      ]
+    },
+    {
+      "matrix": "soil",
+      "bottle": "250mL Wide Mouth Jar",
+      "filter": "No",
+      "analysisGroup": "Soil Characterization",
+      "observedProperties": [
+        {
+          "label": "Particle Size Analysis - Sieve >2mm",
+          "analysisGroup": "Soil Characterization"
+        }
+      ]
+    }
+  ]
+}

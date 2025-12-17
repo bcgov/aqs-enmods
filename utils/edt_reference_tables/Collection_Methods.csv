@@ -1,0 +1,27 @@
+"Name","Description","EMS Collection Method Code"
+"Autosampler: Peristaltic Pump","Automated sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump.","25"
+"Continuous: Peristaltic Pump","Continuous sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump.",NA
+"DELETE","DELETE","AQI-Bill-Chen-Prefinal"
+"Electrofishing","A scientific fishing technique utilizing a high voltage submerged cathode and anode. The electric field affects fish movements causing them to swim towards the anode where they can be caught with a net.","ELECTR"
+"Flow Proportional Composite","A sample consisting of a composite of sub-samples collected at a rate proportional to flow.","FCFLOW, FCTIME"
+"Grab","A discrete sampling method. Depending on what is being sampled, grab samples may be collected by simply dipping a sample bottle in a water body, or they may require the use of other specific sampling devices.","GRB, GEL, 16, 8"
+"Grab: Peristaltic Pump","Discrete sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump.",NA
+"Invertebrate Kicknetting","A sampling technique for collecting biological specimens, primarily freshwater benthic macroinvertebrates using a fine mesh net that is positioned downstream of the area sampled.","IVKICK"
+"Minnow Trapping","Minnow trapping is a technique for capturing small fish, typically minnows, using baited traps placed in water. The traps allow fish to enter but not exit. The traps are typically set for a set amount of time such as 12 or 24 hours.","MNWTRP"
+"Netting (gill net or other)","A gill net or other similar net hung vertically in the water used to capture fish that can swim forward into the mesh trapping their gills so they cannot back out. The mesh size determines the size of fish captured.","NET"
+"Paper Weighed on Scale","To record the total daily production rate of all paper machines at the paper mill (air-dried tonnes/day (ADt/d)).","C04"
+"Spatial Composite","Historic data has been converted from Spatial Composite: Pooled.","SCPOOL"
+"Spatial Composite: Horizontal Tow","Sampling method which filters a column of water at a specific depth by submerging a net to the desired depth and maintaining that depth for a specified horizontal distance.","SCHTOW"
+"Spatial Composite: Random Cluster","A composite of grab samples collected by dividing the population into clusters, then randomly select clusters for sampling.",NA
+"Spatial Composite: Random Stratified","A composite of grab samples collected at randomly selected, mutually exclusive sub-sections or strata of the total area.",NA
+"Spatial Composite: Simple Random","A composite of grab samples collected using a simple random sampling pattern (e.g. soil layer at depth).","SCSRAM"
+"Spatial Composite: Systematic","A composite of grab samples collected at regular intervals over an entire area.",NA
+"Spatial Composite: Tow Vertical","Sampling method which filters a column of water at a specific location by lowering a net to a desired depth and raising vertically to the surface.",NA
+"Spatial Composite: Transect","Sampling at set distances along a transect.","SCTRAN"
+"Spatial Composite: Vertical","A composite of grab samples collected at multiple depths vertically.","SCVERT"
+"Time Composite: Continuous Monitor","An inline flow-thru sampling system consists of a full flow process diameter sample valve that allows for continuous flow through a pipeline.","CMON, C03, C01"
+"Time Composite: Discrete","A time composite sample consists of equal volume discrete samples collected at constant time intervals into one container. A time composite sample can be collected either manually or with an automatic sampler.","TCDIS, 31, 14, H01, H02"
+"Time Composite: HiVol","Continuous high volume (HiVol) sampling of air particulate using various instruments that load filters.","TCCON"
+"Time Composite: Segmented Discrete","A representative sample via a series of discrete samples over a period of time collected in different time segments.","TCSEG"
+"Unknown","Used for historical records only where the collection method was not recorded.",NA
+"Variable Well Sampling","Monitoring well sampling at variable depths using equipment such as PVC Bailers and/or Submersible Pumps.","VRBL, 29, 32"

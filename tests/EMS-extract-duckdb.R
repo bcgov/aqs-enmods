@@ -5,14 +5,17 @@ library(duckdb)
 library(dplyr)
 library(tidyr)
 
+#set wd to I
+setwd("I:/EMS-Exports-2025-12-08")
+
 # Set your data folder path
-data_folder <- "I:/EMS-Exports-2025-11-12"
+data_folder <- "I:/EMS-Exports-2025-12-08"
 
 # List all CSV files
 all_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
 
 # Connect to DuckDB (creates a new DB file)
-con <- dbConnect(duckdb::duckdb(), dbdir = "EMS-Extract-2025-11-12_3.duckdb")
+con <- dbConnect(duckdb::duckdb(), dbdir = "EMS-Extract-2025-12-08.duckdb")
 
 # Loop through sample files and write to DuckDB
 for (file in all_files) {
@@ -25,7 +28,7 @@ for (file in all_files) {
 
 #if db already exists
 
-con <- dbConnect(duckdb::duckdb(), dbdir = "EMS-Extract-2025-11-12_3.duckdb")
+con <- dbConnect(duckdb::duckdb(), dbdir = "EMS-Extract-2025-12-08.duckdb")
 
 dbGetQuery(con, "SELECT COUNT(*) FROM EMS_Extracts_table")
 
@@ -35,14 +38,18 @@ res <- dbGetQuery(con, "SELECT * FROM EMS_Extracts_table WHERE Medium = 'Water -
            Project = 'BCLMN'")
 
 
-mon_loc_id <- "E221544"
+mon_loc_id <- "E275463"
 
 res <- dbGetQuery(con, paste0("SELECT * FROM EMS_Extracts_table WHERE Location_ID = '", mon_loc_id, "' AND
-                              Field_Visit_Start_Time >= '2019-05-01 00:00:00' AND
-                              Field_Visit_Start_Time <= '2021-01-01 23:59:59'"))
+                              Field_Visit_Start_Time >= '2022-09-13 00:00:00' AND
+                              Field_Visit_Start_Time <= '2022-09-14 23:59:59'"))
 
 
 res <- dbGetQuery(con, paste0("SELECT * FROM EMS_Extracts_table WHERE Location_ID = '", mon_loc_id, "'"))
+
+res <- dbGetQuery(con, paste0("SELECT * FROM EMS_Extracts_table WHERE Data_Classification = 'VERTICAL_PROFILE'"))
+
+res <- dbGetQuery(con, "SELECT DISTINCT Location_ID FROM EMS_Extracts_table")
 
 res <- dbGetQuery(con, paste0("Describe EMS_Extracts_table"))
 

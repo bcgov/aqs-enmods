@@ -28,11 +28,14 @@ for(i in seq(250, 400)) {
     
 }
 
-
-POST(edt_url, add_headers('x-api-key' = token),
-     body = list(file=upload_file('C:/Users/jkrogh/Downloads/20250829_sample_lab_profile_data-7-4.csv'),
+for (i in seq(1,50)) {
+resp <- POST(edt_url, add_headers('x-api-key' = token),
+     body = list(file=upload_file('C:/Users/jkrogh/Downloads/ALS_Test4.csv'),
                  username = edt_username), 
      encode = 'multipart')
+  Sys.sleep(5)
+print(resp$status_code)
+}
 
 Sys.sleep(60*3) #pause before uploading the next file
 
