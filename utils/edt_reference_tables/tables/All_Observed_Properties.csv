@@ -1,4 +1,4 @@
-"Observed Property ID","Unit Group","default Unit","Supports Unit Conversion","EMS Code","Description","Result Type","Analysis Type","CAS Number"
+"Observed Property ID","Unit Group","Default Unit","Supports Unit Conversion","EMS Code","Description","Result Type","Analysis Type","CAS Number"
 "% sand by hydrometer (ratio)","DimensionlessRatio","% - Percent",TRUE,"SAND","Sediment Size; EMS code: SAND","NUMERIC","CHEMICAL",NA
 "% saturation (ratio)","DimensionlessRatio","% - Percent",TRUE,"SATPR","Physical Properties; EMS code: SATPR","NUMERIC","CHEMICAL",NA
 "% silt by hydrometer (ratio)","DimensionlessRatio","% - Percent",TRUE,"SILT","Sediment Size; EMS code: SILT","NUMERIC","PHYSICAL",NA
