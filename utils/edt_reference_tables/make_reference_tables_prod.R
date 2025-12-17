@@ -165,6 +165,21 @@ TAX <- TAX %>% select("Scientific Name" = scientificName,
                     "ITIS TSN" = itisTsn) 
 write.csv(TAX, "./utils/edt_reference_tables/tables/Fish_Taxons.csv", row.names = F)
 
+#--Projects
+PR <- GET(paste0(prodURL, "v1/projects"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
+PR <-fromJSON(rawToChar(PR$content))$domainObjects
+
+PR <- PR %>% select("Name" = name,
+                      "Description" = description,
+                      "Scope" = scopeStatement,
+                      "Type" = type)
+
+PR <- PR %>% mutate(Type = case_when(Type == "STUDY" ~ "Government Monitoring",
+                                     Type == "ROUTINE_MONITORING" ~ "Authorization"))
+
+
+write.csv(PR, "./utils/edt_reference_tables/tables/Projects.csv", row.names = F)
+
 #set up account access for BC box
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
            "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AWS_SECRET_ACCESS_KEY"),
@@ -248,6 +263,12 @@ put_object(file = "./utils/edt_reference_tables/tables/Biological_Life_Stage.csv
 
 put_object(file = "./utils/edt_reference_tables/tables/Fish_Taxons.csv", 
            object = "Reference_Lists/Fish_Taxons.csv",
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
+put_object(file = "./utils/edt_reference_tables/tables/Projects.csv", 
+           object = "Reference_Lists/Projects.csv",
            bucket = "enmods",
            region = "",
            acl = "public-read")
