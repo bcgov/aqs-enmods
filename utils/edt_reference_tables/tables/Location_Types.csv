@@ -1,0 +1,27 @@
+﻿Location Type,Description
+In-Plant ,"An area located within the operational boundaries of the industrial activity—such as inside a building, structure, or within the fenced perimeter and that is not more accurately classified under another location type. "
+Lake or Pond ,"A natural or artificially constructed (reservoir) static body of fresh water, not predominantly used for wastewater storage or disposal. "
+Infiltration Pond ,"A natural or artificially constructed, depression meant to capture water or runoff to disperse into the underlying soil, typically for pollution abatement. Infiltration ponds are not lined or otherwise designed to inhibit infiltration of liquid waste. "
+Combined Sewer ,"A sewer system that carries a mixture of stormwater and sanitary sewage, prior to entering treatment works. "
+Marine ,"Aquatic environments having high levels of dissolved salts and include bays, channels, sea and the open-ocean.  "
+Terrestrial ,"Used when collecting soil, soil vapor or plant material for analysis. "
+Spring or Hot Spring ,A location where groundwater naturally emerges at the surface. Flows may be continuous or ephemeral. 
+Well ,"Any type of groundwater well not used for waste water disposal, see waste water injection well. "
+Storm Sewer ,"A drainage system that only carries stormwater runoff from snow melt and or precipitation. It does not transport wastewater and is not a combined sewer. Typically, these discharge to natural surface waters without any or only minimal forms of treatment. Stormwater detention ponds are considered to be part of the storm sewer system. "
+Estuary ,A brackish water zone where a river meets the ocean. 
+Seepage or Seepage Pools ,"A location that experiences the localized accumulation of water, sometimes forming pools downstream of a dam or containment structure caused by seepage discharge. Examples are liquid wastes leaching from tailings facilities, landfills or other similar works. "
+Sanitary Sewer ,"A drainage system that exclusively conveys wastewater from a prescribed industry, municipal, trade, or business to a treatment system or facility. It does not transport stormwater and is not a combined sewer. "
+Landfill ,A site containing refuse or related solids. This location type is used appropriately when referring to a place within the active or non-active disposal area of the facility and should not be used to refer to the type of facility. 
+"River, Stream, or Creek ","A naturally flowing body of fresh water, either permanent or ephemeral. This does not include ditches. "
+Stack ,A point where air emissions are sampled near or at their release into the atmosphere. 
+Ditch or Culvert ,"An artificial trench or pipe used to drain stormwater, natural sources (i.e. streams or groundwater) or non-contact water from industrial activities or facilities. "
+Land - Farm ,Similar to a terrestrial location but specifically used for agricultural purposes. 
+Outfall ,A location at or very near (i.e. the last accessible sampling point prior to waste being released) where wastewater is discharged into the receiving environment. Environmental monitoring near an outfall (within the IDZ) should be of the type reflecting the receiving environment. 
+Tile Field ,An area with buried perforated pipes used to distribute effluent over an absorption area.   
+Air Quality ,A specialized site equipped with instruments and sensors designed to monitor and measure the concentration of pollutants and atmospheric conditions in the surrounding air. 
+Irrigation Spray/Sludge ,An area where water or solids are applied to land for irrigation or disposal.  
+Detention Pond ,An artificial or altered natural pond designed to temporarily hold runoff and slowly release it into downstream systems. These ponds are  typically used for stormwater management or  pollution control. 
+Storage ,"This refers to a place for the temporary holding of waste pending treatment or disposal. Storage methods include containers, tanks, waste piles, and (natural or artificial) surface impoundments. "
+Waste Water Injection Well ,A well-used to dispose of treated or untreated liquid waste by injecting it underground below drinking water aquifers.  
+Open Burning ,The specific location at which the burning of waste or vegetation (slash) takes place in the open air.  
+Septic Tank ,A storage container or system tank used by commercial or industrial activities to provide primary treatment of wastewater by separating and collecting solids from liquid. 
