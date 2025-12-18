@@ -169,7 +169,8 @@ write.csv(TAX, "./utils/edt_reference_tables/tables/Fish_Taxons.csv", row.names 
 PR <- GET(paste0(prodURL, "v1/projects"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
 PR <-fromJSON(rawToChar(PR$content))$domainObjects
 
-PR <- PR %>% select("Name" = name,
+PR <- PR %>% select("Code" = customId,
+                    "Name" = name,
                       "Description" = description,
                       "Scope" = scopeStatement,
                       "Type" = type)
