@@ -11,3 +11,4 @@ benchmark.duckdb
 all_ams_authorizations.xlsx
 *.wal
 *.duckdb
+*.gz

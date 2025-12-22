@@ -1,10 +1,10 @@
 
 library(aws.s3)
 #library(readxl)
-#library(stringr)
+library(stringr)
 library(httr)
 library(dplyr)
-#library(tidyr)
+library(tidyr)
 library(jsonlite)
 library(lubridate)
 
@@ -22,7 +22,8 @@ current_date <- Sys.Date()
 
 # Calculate the last Saturday
 days_to_subtract <- (wday(current_date) - 7) %% 7
-last_saturday <- as.string(current_date - days_to_subtract)
+last_saturday <- as.character(current_date - days_to_subtract)
+last_saturday <- gsub("-","_",last_saturday)
 
 #calculate the end date of the file
 last_saturday_end <- gsub("-", "", last_saturday)
@@ -36,12 +37,63 @@ ten_five_yr <- paste0("bulk/aqs/", last_saturday, "/", current_year - 9, "0101_t
 hist <- paste0("bulk/aqs/", last_saturday, "/up_to_", current_year - 10, "1231.csv.gz")
 
 #Download the files - if cooking beans make sure to set a timer so you don't boil them dry!
+print("Downloading current file")
 save_object(bucket = "prod-bcmoe-aqs-data-store", object = this_yr)
+
+print("Downloading 2 - 5 year file")
 save_object(bucket = "prod-bcmoe-aqs-data-store", object = two_five_yr)
+
+print("Downloading 5 - 10 year file")
 save_object(bucket = "prod-bcmoe-aqs-data-store", object = ten_five_yr)
+
+prting("Downloading Histroic File")
 save_object(bucket = "prod-bcmoe-aqs-data-store", object = hist)
 
+#Upload to BC Box
+#set up account access for BC box
+Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
+           "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AWS_SECRET_ACCESS_KEY"),
+           "AWS_S3_ENDPOINT" = "nrs.objectstore.gov.bc.ca",
+           "AWS_DEFAULT_REGION" = "")
 
+
+#post to object store
+print("Uploading current file")
+put_object(file = paste0(current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"),
+           object = paste0("Data_Catalogue/", current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"),
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
+print("Uploading 2 - 5 year file")
+put_object(file = paste0(current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"),
+           object = paste0("Data_Catalogue/",current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"),
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
+print("Uploading 5 - 10 year file")
+put_object(file = paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"),
+           object = paste0("Data_Catalogue/", current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"),
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
+print("Uploading historic file")
+put_object(file = paste0("up_to_", current_year - 10, "1231.csv.gz"),
+           object = paste0("Data_Catalogue/up_to_", current_year - 10, "1231.csv.gz"),
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
+#Clean up by removing downloaded files
+print("Deleting Downloaded Copies")
+file.remove(paste0(current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"))
+file.remove(paste0(current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"))
+file.remove(paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"))
+file.remove(paste0("up_to_", current_year - 10, "1231.csv.gz"))
+
+if (FALSE) {
 #get all file names
 x<-get_bucket(bucket = "prod-bcmoe-aqs-data-store", max = Inf)
 
@@ -55,3 +107,4 @@ fn <- as_data_frame(file_names)
 
 #get the processed file names
 file_names_processed <- fn %>% filter(!stringr::str_detect(value, 'raw'))
+}
