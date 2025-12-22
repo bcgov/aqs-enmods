@@ -39,7 +39,7 @@ write.csv(OPs, "./utils/edt_reference_tables/tables/All_Observed_Properties.csv"
 
 #Also write only the taxonomic OPs
 OPs_Taxa <- OPs %>% filter(`Analysis Type` == "BIOLOGICAL")
-write.csv(OPs, "./utils/edt_reference_tables/tables/Taxonomic_Observed_Properties.csv", row.names = F)
+write.csv(OPs_Taxa, "./utils/edt_reference_tables/tables/Taxonomic_Observed_Properties.csv", row.names = F)
 
 #---Analysis Methods Table---
 AMs <- GET(paste0(prodURL, "v1/analysismethods"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
