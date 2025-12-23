@@ -1,0 +1,588 @@
+{
+  "items": [
+    {
+      "customId": "10",
+      "name": "Vancouver Island, Nanaimo"
+    },
+    {
+      "customId": "60",
+      "name": "Skeena"
+    },
+    {
+      "customId": "72",
+      "name": "Omineca-Peace, Fort St. John"
+    },
+    {
+      "customId": "73",
+      "name": "Omineca-Peace, Prince George, FLNRO"
+    },
+    {
+      "customId": "80",
+      "name": "Southern Region, Penticton"
+    },
+    {
+      "customId": "90",
+      "name": "Headquarters, Victoria"
+    },
+    {
+      "customId": "AE",
+      "name": "Associated Environmental Consultants Inc"
+    },
+    {
+      "customId": "AEL",
+      "name": "ANCOR ENVIRONMENTAL LTD."
+    },
+    {
+      "customId": "AEO",
+      "name": "Associated Environmental Operators Inc."
+    },
+    {
+      "customId": "AGA",
+      "name": "Agat Laboratories"
+    },
+    {
+      "customId": "AGR",
+      "name": "Agra Earth & Environmental Ltd."
+    },
+    {
+      "customId": "ALA",
+      "name": "Mark Lanfranco"
+    },
+    {
+      "customId": "ALC",
+      "name": "Alcan Analytical Lab"
+    },
+    {
+      "customId": "ALK",
+      "name": "ALS Environmental ? Kamloops"
+    },
+    {
+      "customId": "ALS",
+      "name": "ALS Global"
+    },
+    {
+      "customId": "ANL",
+      "name": "A & L Canada Laboratories"
+    },
+    {
+      "customId": "ASC",
+      "name": "Ascent Services"
+    },
+    {
+      "customId": "ASL",
+      "name": "ASL Analytical Service Laboratories Ltd."
+    },
+    {
+      "customId": "AT",
+      "name": "AquaTox Testing & Consulting Inc."
+    },
+    {
+      "customId": "ATR",
+      "name": "Aqua Technical Research Ltd"
+    },
+    {
+      "customId": "AXL",
+      "name": "Axys Laboratories"
+    },
+    {
+      "customId": "BAL",
+      "name": "Beak Associates (B.C.) Ltd."
+    },
+    {
+      "customId": "BCBC",
+      "name": "BCBC"
+    },
+    {
+      "customId": "BCF",
+      "name": "BC Conservation Foundation (BCCF)"
+    },
+    {
+      "customId": "BCR",
+      "name": "B.C. Research Inc."
+    },
+    {
+      "customId": "BEL",
+      "name": "Env Lab - Field entered"
+    },
+    {
+      "customId": "BIO",
+      "name": "Biologica Environmental Services Ltd"
+    },
+    {
+      "customId": "BRK",
+      "name": "Brooks Applied Labs"
+    },
+    {
+      "customId": "BRM",
+      "name": "Mine Assay Lab"
+    },
+    {
+      "customId": "BV",
+      "name": "Bulkley Valley Research Centre"
+    },
+    {
+      "customId": "BZN",
+      "name": "Zenon Lab Inc. - Field entered"
+    },
+    {
+      "customId": "CAR",
+      "name": "CARO Environmental Services"
+    },
+    {
+      "customId": "CAS",
+      "name": "Cominco Analytical Services"
+    },
+    {
+      "customId": "CAV",
+      "name": "Cavendish Analytical Lab Ltd."
+    },
+    {
+      "customId": "CBK",
+      "name": "City of Cranbrook"
+    },
+    {
+      "customId": "CEI",
+      "name": "Chemtrade Electrochem Inc."
+    },
+    {
+      "customId": "CGL",
+      "name": "Chemical & Geological Lab. Inc"
+    },
+    {
+      "customId": "CHL",
+      "name": "Chemex Labs. Ltd."
+    },
+    {
+      "customId": "CIN",
+      "name": "Canadianoxy Industrial Chem. (Nanaimo)"
+    },
+    {
+      "customId": "CME",
+      "name": "Chemac Environmental Services"
+    },
+    {
+      "customId": "COL",
+      "name": "Core Laboratories Canada Ltd."
+    },
+    {
+      "customId": "COR",
+      "name": "Cordillera Consulting"
+    },
+    {
+      "customId": "CPP",
+      "name": "Cariboo Pulp & Paper Co."
+    },
+    {
+      "customId": "CRD",
+      "name": "Capital Regional District"
+    },
+    {
+      "customId": "CRL",
+      "name": "Canadian Resource Laboratories"
+    },
+    {
+      "customId": "CTL",
+      "name": "Can-Test Ltd."
+    },
+    {
+      "customId": "CX",
+      "name": "Corix Utilities - Panorama"
+    },
+    {
+      "customId": "DOL",
+      "name": "Danusia Dolecki"
+    },
+    {
+      "customId": "EC",
+      "name": "Environment Canada/Fisheries"
+    },
+    {
+      "customId": "ECC",
+      "name": "Elkview Coal Corp. Central Lab"
+    },
+    {
+      "customId": "ECO",
+      "name": "Econotec Services Ltd."
+    },
+    {
+      "customId": "EDGE",
+      "name": "Edge Analytical Laboratories"
+    },
+    {
+      "customId": "ELE",
+      "name": "Element Materials Technology (was Exova)"
+    },
+    {
+      "customId": "ENL",
+      "name": "Environmental Laboratory"
+    },
+    {
+      "customId": "ENT",
+      "name": "Enviro Test Laboratories"
+    },
+    {
+      "customId": "EPP",
+      "name": "Eurocan Pulp and Paper Co. Main Lab"
+    },
+    {
+      "customId": "EPS",
+      "name": "E.P.S. Bioassay Lab"
+    },
+    {
+      "customId": "EQF",
+      "name": "Equis Field"
+    },
+    {
+      "customId": "EQL",
+      "name": "Equis Environmental Lab"
+    },
+    {
+      "customId": "EQP",
+      "name": "Equis Permittee"
+    },
+    {
+      "customId": "ETL",
+      "name": "Eco-Tech Lab Ltd."
+    },
+    {
+      "customId": "EVE",
+      "name": "Elk Valley Environmental Labs"
+    },
+    {
+      "customId": "EVS",
+      "name": "E.V.S. Consultants Ltd."
+    },
+    {
+      "customId": "EXA",
+      "name": "Exact Scientific Services"
+    },
+    {
+      "customId": "FDF",
+      "name": "Federal - Field"
+    },
+    {
+      "customId": "FDL",
+      "name": "Federal Laboratory"
+    },
+    {
+      "customId": "FE",
+      "name": "Federal"
+    },
+    {
+      "customId": "FES",
+      "name": "Fraser Environmental Services"
+    },
+    {
+      "customId": "FLD",
+      "name": "Field (MOE)"
+    },
+    {
+      "customId": "FLNRO",
+      "name": "Ministry of Forests, Lands and Natural"
+    },
+    {
+      "customId": "FN",
+      "name": "Fort Nelson First Nations"
+    },
+    {
+      "customId": "FWF",
+      "name": "Freshwater Fisheries"
+    },
+    {
+      "customId": "GES",
+      "name": "Goode Environmental Services Ltd"
+    },
+    {
+      "customId": "GHD",
+      "name": "GHD Limited"
+    },
+    {
+      "customId": "GML",
+      "name": "Gibraltar Mines"
+    },
+    {
+      "customId": "HCL",
+      "name": "HydroQual Lab Ltd."
+    },
+    {
+      "customId": "HGL",
+      "name": "Higgins Laboratory"
+    },
+    {
+      "customId": "HLT",
+      "name": "Health Lab"
+    },
+    {
+      "customId": "IGM",
+      "name": "IG Micromed Environmental Inc."
+    },
+    {
+      "customId": "IRC",
+      "name": "Integrated Resource Conslt.Inc"
+    },
+    {
+      "customId": "ISO",
+      "name": "Isobrine Solutions Inc"
+    },
+    {
+      "customId": "JBL",
+      "name": "JB Laboratories Ltd."
+    },
+    {
+      "customId": "JRL",
+      "name": "JR Laboratories Inc."
+    },
+    {
+      "customId": "KAS",
+      "name": "Kimberley Analytical Services"
+    },
+    {
+      "customId": "KEL",
+      "name": "Keystone Environmental Ltd. (Burnaby)"
+    },
+    {
+      "customId": "KENTEM",
+      "name": "K'en T'em Limited Partnership"
+    },
+    {
+      "customId": "KPC",
+      "name": "Kelowna Pollution Control Centre"
+    },
+    {
+      "customId": "KR",
+      "name": "Kemetco Research Inc."
+    },
+    {
+      "customId": "KWW",
+      "name": "Kamloops Waste Water Treatment Centre"
+    },
+    {
+      "customId": "LAC",
+      "name": "Larratt Aquatic Consulting Ltd."
+    },
+    {
+      "customId": "LAS",
+      "name": "Levelton Analytical Services"
+    },
+    {
+      "customId": "LEL",
+      "name": "Env Lab - Modified by Lab"
+    },
+    {
+      "customId": "LEPS",
+      "name": "Langley Enviro. Partners Society"
+    },
+    {
+      "customId": "LFM",
+      "name": "Lakefield Laboratories"
+    },
+    {
+      "customId": "MAC",
+      "name": "Maxxam Analytics Calgary"
+    },
+    {
+      "customId": "MAX",
+      "name": "Maxxam Labs Ltd."
+    },
+    {
+      "customId": "MBR",
+      "name": "MB Research & Development Ltd."
+    },
+    {
+      "customId": "MEL",
+      "name": "Env Lab - Modified by Field"
+    },
+    {
+      "customId": "MEM",
+      "name": "Ministry of Energy and Mines"
+    },
+    {
+      "customId": "MF",
+      "name": "Ministry of Environment Lab"
+    },
+    {
+      "customId": "MVQ",
+      "name": "Metro Vancouver-Quality Control Lab"
+    },
+    {
+      "customId": "MX",
+      "name": "Bureau Veritas Laboratories (Maxxam)"
+    },
+    {
+      "customId": "MXA",
+      "name": "Maxxam Analytics Inc."
+    },
+    {
+      "customId": "MXC",
+      "name": "Methanex Corp."
+    },
+    {
+      "customId": "NAL",
+      "name": "Northern Analytical Lab Services"
+    },
+    {
+      "customId": "NE",
+      "name": "Nautilus Environmental"
+    },
+    {
+      "customId": "NHL",
+      "name": "Northern Laboratories"
+    },
+    {
+      "customId": "NIL",
+      "name": "North Island Laboratories"
+    },
+    {
+      "customId": "NPM",
+      "name": "Nickel Plate Mine - Assay Lab"
+    },
+    {
+      "customId": "NPT",
+      "name": "Northwood Pulp and Timber"
+    },
+    {
+      "customId": "NS",
+      "name": "Not specified"
+    },
+    {
+      "customId": "NSR",
+      "name": "Norwest Soil Research Inc."
+    },
+    {
+      "customId": "NTL",
+      "name": "National Lab for Environmental Testing"
+    },
+    {
+      "customId": "NWL",
+      "name": "Norwest Labs (Edmonton)"
+    },
+    {
+      "customId": "NWP",
+      "name": "Nanaimo Water Pollution Control Centre"
+    },
+    {
+      "customId": "OT",
+      "name": "Independent Agent or Other"
+    },
+    {
+      "customId": "PCR",
+      "name": "Petro-Canada - Port Moody Refinery"
+    },
+    {
+      "customId": "PE",
+      "name": "Permittee"
+    },
+    {
+      "customId": "PEP",
+      "name": "P.L."
+    },
+    {
+      "customId": "PGW",
+      "name": "Prince George Wastewater Treatment Ctr"
+    },
+    {
+      "customId": "PLL",
+      "name": "Passmore Laboratory Ltd."
+    },
+    {
+      "customId": "PS",
+      "name": "Pacific Soils"
+    },
+    {
+      "customId": "PW",
+      "name": "Paradox Water & Wastewater Treatment Co."
+    },
+    {
+      "customId": "PYLET",
+      "name": "Environment Canada (PESC)"
+    },
+    {
+      "customId": "QRP",
+      "name": "Quesnel River Pulp Co."
+    },
+    {
+      "customId": "QTL",
+      "name": "Quanta Trace Laboratories"
+    },
+    {
+      "customId": "RPS",
+      "name": "Radiation Protection Service"
+    },
+    {
+      "customId": "SAS",
+      "name": "Seakem Analytical Services Ltd"
+    },
+    {
+      "customId": "SEH",
+      "name": "UBC School of Environmental Health"
+    },
+    {
+      "customId": "SFU",
+      "name": "SFU Earth Sciences"
+    },
+    {
+      "customId": "SGS",
+      "name": "SGS Canada"
+    },
+    {
+      "customId": "SLL",
+      "name": "Soilcon Laboratories Ltd."
+    },
+    {
+      "customId": "SLR",
+      "name": "SLR Consulting (Canada) Ltd."
+    },
+    {
+      "customId": "SRC",
+      "name": "Sona Resources Corp"
+    },
+    {
+      "customId": "SWA",
+      "name": "UBC Soil Water and Air Labortory"
+    },
+    {
+      "customId": "SYL",
+      "name": "SYLVIS Environmental Services"
+    },
+    {
+      "customId": "TRICH",
+      "name": "Trich Analytics"
+    },
+    {
+      "customId": "UWAT",
+      "name": "Kuncheng Zhao"
+    },
+    {
+      "customId": "VL",
+      "name": "Volunteer"
+    },
+    {
+      "customId": "WA",
+      "name": "Water Quality"
+    },
+    {
+      "customId": "WCE",
+      "name": "Westcoast Energy S.P.D."
+    },
+    {
+      "customId": "WCT",
+      "name": "Willis Cunliffe & Tait"
+    },
+    {
+      "customId": "WLL",
+      "name": "Wood Laboratory Ltd."
+    },
+    {
+      "customId": "WSH",
+      "name": "WSH Laboratories (1989) Ltd."
+    },
+    {
+      "customId": "WTL",
+      "name": "Wellington Laboratories"
+    },
+    {
+      "customId": "ZN",
+      "name": "Philip Analyt. Services (formerly Zenon)"
+    }
+  ]
+}

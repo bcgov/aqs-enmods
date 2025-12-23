@@ -1,0 +1,132 @@
+{
+  "items": [
+    {
+      "customId": "Autosampler: Peristaltic Pump",
+      "identifierOrganization": "25",
+      "name": "Automated sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump."
+    },
+    {
+      "customId": "Continuous: Peristaltic Pump",
+      "name": "Continuous sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump."
+    },
+    {
+      "customId": "DELETE",
+      "identifierOrganization": "AQI-Bill-Chen-Prefinal",
+      "name": "DELETE"
+    },
+    {
+      "customId": "Electrofishing",
+      "identifierOrganization": "ELECTR",
+      "name": "A scientific fishing technique utilizing a high voltage submerged cathode and anode. The electric field affects fish movements causing them to swim towards the anode where they can be caught with a net."
+    },
+    {
+      "customId": "Flow Proportional Composite",
+      "identifierOrganization": "FCFLOW, FCTIME",
+      "name": "A sample consisting of a composite of sub-samples collected at a rate proportional to flow."
+    },
+    {
+      "customId": "Grab",
+      "identifierOrganization": "GRB, GEL, 16, 8",
+      "name": "A discrete sampling method. Depending on what is being sampled, grab samples may be collected by simply dipping a sample bottle in a water body, or they may require the use of other specific sampling devices."
+    },
+    {
+      "customId": "Grab: Peristaltic Pump",
+      "name": "Discrete sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump."
+    },
+    {
+      "customId": "Invertebrate Kicknetting",
+      "identifierOrganization": "IVKICK",
+      "name": "A sampling technique for collecting biological specimens, primarily freshwater benthic macroinvertebrates using a fine mesh net that is positioned downstream of the area sampled."
+    },
+    {
+      "customId": "Minnow Trapping",
+      "identifierOrganization": "MNWTRP",
+      "name": "Minnow trapping is a technique for capturing small fish, typically minnows, using baited traps placed in water. The traps allow fish to enter but not exit. The traps are typically set for a set amount of time such as 12 or 24 hours."
+    },
+    {
+      "customId": "Netting (gill net or other)",
+      "identifierOrganization": "NET",
+      "name": "A gill net or other similar net hung vertically in the water used to capture fish that can swim forward into the mesh trapping their gills so they cannot back out. The mesh size determines the size of fish captured."
+    },
+    {
+      "customId": "Paper Weighed on Scale",
+      "identifierOrganization": "C04",
+      "name": "To record the total daily production rate of all paper machines at the paper mill (air-dried tonnes/day (ADt/d))."
+    },
+    {
+      "customId": "Spatial Composite",
+      "identifierOrganization": "SCPOOL",
+      "name": "Historic data has been converted from Spatial Composite: Pooled."
+    },
+    {
+      "customId": "Spatial Composite: Horizontal Tow",
+      "identifierOrganization": "SCHTOW",
+      "name": "Sampling method which filters a column of water at a specific depth by submerging a net to the desired depth and maintaining that depth for a specified horizontal distance."
+    },
+    {
+      "customId": "Spatial Composite: Random Cluster",
+      "name": "A composite of grab samples collected by dividing the population into clusters, then randomly select clusters for sampling."
+    },
+    {
+      "customId": "Spatial Composite: Random Stratified",
+      "name": "A composite of grab samples collected at randomly selected, mutually exclusive sub-sections or strata of the total area."
+    },
+    {
+      "customId": "Spatial Composite: Simple Random",
+      "identifierOrganization": "SCSRAM",
+      "name": "A composite of grab samples collected using a simple random sampling pattern (e.g. soil layer at depth)."
+    },
+    {
+      "customId": "Spatial Composite: Systematic",
+      "name": "A composite of grab samples collected at regular intervals over an entire area."
+    },
+    {
+      "customId": "Spatial Composite: Tow Vertical",
+      "name": "Sampling method which filters a column of water at a specific location by lowering a net to a desired depth and raising vertically to the surface."
+    },
+    {
+      "customId": "Spatial Composite: Transect",
+      "identifierOrganization": "SCTRAN",
+      "name": "Sampling at set distances along a transect."
+    },
+    {
+      "customId": "Spatial Composite: Vertical",
+      "identifierOrganization": "SCVERT",
+      "name": "A composite of grab samples collected at multiple depths vertically."
+    },
+    {
+      "customId": "SYS-REQUIRED",
+      "identifierOrganization": "",
+      "name": ""
+    },
+    {
+      "customId": "Time Composite: Continuous Monitor",
+      "identifierOrganization": "CMON, C03, C01",
+      "name": "An inline flow-thru sampling system consists of a full flow process diameter sample valve that allows for continuous flow through a pipeline."
+    },
+    {
+      "customId": "Time Composite: Discrete",
+      "identifierOrganization": "TCDIS, 31, 14, H01, H02",
+      "name": "A time composite sample consists of equal volume discrete samples collected at constant time intervals into one container. A time composite sample can be collected either manually or with an automatic sampler."
+    },
+    {
+      "customId": "Time Composite: HiVol",
+      "identifierOrganization": "TCCON",
+      "name": "Continuous high volume (HiVol) sampling of air particulate using various instruments that load filters."
+    },
+    {
+      "customId": "Time Composite: Segmented Discrete",
+      "identifierOrganization": "TCSEG",
+      "name": "A representative sample via a series of discrete samples over a period of time collected in different time segments."
+    },
+    {
+      "customId": "Unknown",
+      "name": "Used for historical records only where the collection method was not recorded."
+    },
+    {
+      "customId": "Variable Well Sampling",
+      "identifierOrganization": "VRBL, 29, 32",
+      "name": "Monitoring well sampling at variable depths using equipment such as PVC Bailers and/or Submersible Pumps."
+    }
+  ]
+}
