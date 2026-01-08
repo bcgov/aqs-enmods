@@ -28,7 +28,7 @@ for (file in all_files) {
 
 #if db already exists
 
-con <- dbConnect(duckdb::duckdb(), dbdir = "EMS-Extract-2025-12-08.duckdb")
+con <- dbConnect(duckdb::duckdb(), dbdir = "EMS-Extract-2025-11-12_3.duckdb")
 
 dbGetQuery(con, "SELECT COUNT(*) FROM EMS_Extracts_table")
 
@@ -38,7 +38,7 @@ res <- dbGetQuery(con, "SELECT * FROM EMS_Extracts_table WHERE Medium = 'Water -
            Project = 'BCLMN'")
 
 
-mon_loc_id <- "E275463"
+mon_loc_id <- "E285129"
 
 res <- dbGetQuery(con, paste0("SELECT * FROM EMS_Extracts_table WHERE Location_ID = '", mon_loc_id, "' AND
                               Field_Visit_Start_Time >= '2022-09-13 00:00:00' AND
