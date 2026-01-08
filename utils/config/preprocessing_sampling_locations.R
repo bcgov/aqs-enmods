@@ -1,37 +1,15 @@
 # FILE TO PREPROCESS SAMPLING LOCATIONs and LOCATION GROUPS in that order
+library(readxl)
+
+#https://github.com/bcgov/nr-enmods-dar/blob/main/data%20conversion/locationExtractQueries.sql
 
 # SAMPLING LOCATION GROUPS AND LOCATIONS ----
 # PREPROCESSING SAMPLING LOCATIONS AND GROUPS FOR NEW DATA --------------------
-non_zero_post_2006 <- readxl::read_excel("./inst/extdata/Reference_Lists/Sampling_Locations/2025_NonzeroSamples_2006_After.xlsx",
-                                         col_types = c(rep("text", 7),
-                                                       rep("numeric", 2),
-                                                       rep("text", 5),
-                                                       "numeric",
-                                                       rep("text", 2),
-                                                       rep("date", 3),
-                                                       rep("text", 2),
-                                                       "date",
-                                                       "numeric"))
-zero_pre_2006_auth <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_ZeroSamplesBefore2006ActiveSuspended.xlsx",
-                                 col_types = c(rep("text", 7),
-                                               rep("numeric", 2),
-                                               rep("text", 5),
-                                               "numeric",
-                                               rep("text", 2),
-                                               rep("date", 3),
-                                               rep("text", 2),
-                                               "date",
-                                               "numeric"))
-zero_2006_2024_can <- read_excel("./utils/config/ReferenceLists/Sampling_Locations/March5_2025_Between2006And2024ZeroSamples.xlsx",
-                                 col_types = c(rep("text", 7),
-                                               rep("numeric", 2),
-                                               rep("text", 5),
-                                               "numeric",
-                                               rep("text", 2),
-                                               rep("date", 3),
-                                               rep("text", 2),
-                                               "date",
-                                               "numeric"))
+non_zero_post_2006 <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/Jan8_2026_NonzeroSamplesAfter2006Export.csv")
+
+zero_pre_2006_auth <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/Jan8_2026_ZeroSamplesBefore2006ActiveSuspended.csv")
+
+zero_2006_2024_can <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/Jan8_2026_Between2006And2024ZeroSamples.csv")
 
 non_zero_post_2006 <- non_zero_post_2006 %>% 
   rename_with(tolower) %>% 
@@ -83,7 +61,7 @@ locations <- locations %>%
          across(where(is.numeric), ~ replace(., is.na(.), "")),
          across(where(is.logical), ~ replace(., is.na(.), "")),)
 
-run_init <- FALSE
+run_init <- TRUE
 
 if(run_init){
 ams_url <- "https://www2.gov.bc.ca/assets/gov/environment/waste-management/waste-discharge-authorization/datamart/all_ams_authorizations.xlsx"
@@ -173,16 +151,16 @@ locations <- locations %>%
 
 #locations have to be pushed manually, 10000 at a time using AQS Import
 locations_1 <- locations[seq(1,10000),]
-write.csv(locations_1, file = "./utils/config/ReferenceLists/Sampling_Locations/1_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_1, file = "./utils/config/ReferenceLists/Sampling_Locations/1_Locations_Extract_Jan8_2026.csv", row.names = F)
 
 locations_2 <- locations[seq(10001,20000),]
-write.csv(locations_2, file = "./utils/config/ReferenceLists/Sampling_Locations/2_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_2, file = "./utils/config/ReferenceLists/Sampling_Locations/2_Locations_Extract_Jan8_2026.csv", row.names = F)
 
 locations_3 <- locations[seq(20001,30000),]
-write.csv(locations_3, file = "./utils/config/ReferenceLists/Sampling_Locations/3_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_3, file = "./utils/config/ReferenceLists/Sampling_Locations/3_Locations_Extract_Jan8_2026.csv", row.names = F)
 
 locations_4 <- locations[seq(30001, nrow(locations)),]
-write.csv(locations_4, file = "./utils/config/ReferenceLists/Sampling_Locations/4_Locations_Extract_May6_2025.csv", row.names = F)
+write.csv(locations_4, file = "./utils/config/ReferenceLists/Sampling_Locations/4_Locations_Extract_Jan8_2026.csv", row.names = F)
 
 
 
