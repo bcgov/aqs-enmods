@@ -26,7 +26,7 @@ last_saturday <- as.character(current_date - days_to_subtract)
 last_saturday <- gsub("-","_",last_saturday)
 
 #calculate the end date of the file
-last_saturday_end <- gsub("-", "", last_saturday)
+last_saturday_end <- gsub("_", "", last_saturday)
 
 current_year <- year(Sys.Date())
 
