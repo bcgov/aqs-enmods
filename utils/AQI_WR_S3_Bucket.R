@@ -1,6 +1,10 @@
+#This script connects to AQI's S3 bucket and downloads the latest bulk data exports.
+#It then uploads them to a public BC Box repository. The files are large (several GB) 
+#and take awhile to download and upload.
+#
+#This script should be run once per week as the files are updates once a week on Saturaday.
 
 library(aws.s3)
-#library(readxl)
 library(stringr)
 library(httr)
 library(dplyr)
@@ -17,7 +21,7 @@ Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AQI_AWS_ACCESS_KEY"),
            "AWS_DEFAULT_REGION" = "ca-central-1"
 )
 
-#get the date of the files, the files are always run starting on a friday so get the date of the last saturday
+#get the date of the files, the files are always run starting on a Friday so get the date of the last Saturday
 current_date <- Sys.Date()
 
 # Calculate the last Saturday
