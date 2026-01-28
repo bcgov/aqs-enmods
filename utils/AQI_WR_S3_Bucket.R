@@ -2,7 +2,8 @@
 #It then uploads them to a public BC Box repository. The files are large (several GB) 
 #and take awhile to download and upload.
 #
-#This script should be run once per week as the files are updates once a week on Saturaday.
+#This script should be run once per week as the files are updates once a week on Saturday.
+#add library path here if needed .libpath()
 
 library(aws.s3)
 library(stringr)
@@ -11,6 +12,9 @@ library(dplyr)
 library(tidyr)
 library(jsonlite)
 library(lubridate)
+
+#set working directory
+setwd("C:/EnMoDS")
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
@@ -41,20 +45,45 @@ ten_five_yr <- paste0("bulk/aqs/", last_saturday, "/", current_year - 9, "0101_t
 hist <- paste0("bulk/aqs/", last_saturday, "/up_to_", current_year - 10, "1231.csv.gz")
 
 #Download the files - if cooking beans make sure to set a timer so you don't boil them dry!
-print("Downloading current file")
-save_object(bucket = "prod-bcmoe-aqs-data-store", object = this_yr)
 
-print("Downloading 2 - 5 year file")
-save_object(bucket = "prod-bcmoe-aqs-data-store", object = two_five_yr)
+if (!file.exists(paste0(current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"))) {
+  print("Downloading current file")
+  save_object(bucket = "prod-bcmoe-aqs-data-store", object = this_yr, multipart = TRUE, show_progress=TRUE)
+} else {
+  print(paste0(current_year - 1, "0101_to_", last_saturday_end, ".csv.gz already exists!"))
+}
 
-print("Downloading 5 - 10 year file")
-save_object(bucket = "prod-bcmoe-aqs-data-store", object = ten_five_yr)
+if (!file.exists(paste0(current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"))) {
+  print("Downloading 2 - 5 year file")
+  save_object(bucket = "prod-bcmoe-aqs-data-store", object = two_five_yr, multipart = TRUE, show_progress=TRUE)
+} else {
+  print(paste0(current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz already exists!"))
+}
 
-prting("Downloading Histroic File")
-save_object(bucket = "prod-bcmoe-aqs-data-store", object = hist)
+if (!file.exists(paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"))) {
+  print("Downloading 5 - 10 year file")
+  save_object(bucket = "prod-bcmoe-aqs-data-store", object = ten_five_yr, multipart = TRUE, show_progress=TRUE)
+} else {
+  print(paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz already exists!"))
+}
+
+if (!file.exists(paste0("up_to_", current_year - 10, "1231.csv.gz"))) {
+  print("Downloading Histroic File")
+  save_object(bucket = "prod-bcmoe-aqs-data-store", object = hist, multipart = TRUE, show_progress=TRUE)
+} else {
+  print(paste0("up_to_", current_year - 10, "1231.csv.gz already exists!"))
+}
+
+#Clear system env for AQI AWS
+Sys.unsetenv(c("AWS_ACCESS_KEY_ID",
+               "AWS_SECRET_ACCESS_KEY",
+               "AWS_S3_ENDPOINT",
+               "AWS_DEFAULT_REGION"))
+
 
 #Upload to BC Box
 #set up account access for BC box
+readRenviron(paste0(getwd(), "./.Renviron"))
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
            "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AWS_SECRET_ACCESS_KEY"),
            "AWS_S3_ENDPOINT" = "nrs.objectstore.gov.bc.ca",
@@ -64,31 +93,39 @@ Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
 #post to object store
 print("Uploading current file")
 put_object(file = paste0(current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"),
-           object = paste0("Data_Catalogue/", current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"),
+           #object = paste0("Data_Catalogue/", current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"),
+           object = "Data_Catalogue/this_yr.csv.gz",
            bucket = "enmods",
            region = "",
-           acl = "public-read")
+           acl = "public-read",
+           show_progress = TRUE)
 
 print("Uploading 2 - 5 year file")
 put_object(file = paste0(current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"),
-           object = paste0("Data_Catalogue/",current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"),
+           #object = paste0("Data_Catalogue/",current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"),
+           object = "Data_Catalogue/two_to_five_yr.csv.gz",
            bucket = "enmods",
            region = "",
-           acl = "public-read")
+           acl = "public-read",
+           show_progress = TRUE)
 
 print("Uploading 5 - 10 year file")
 put_object(file = paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"),
-           object = paste0("Data_Catalogue/", current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"),
+           #object = paste0("Data_Catalogue/", current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"),
+           object = "Data_Catalogue/five_to_ten_yr.csv.gz",
            bucket = "enmods",
            region = "",
-           acl = "public-read")
+           acl = "public-read",
+           show_progress = TRUE)
 
 print("Uploading historic file")
 put_object(file = paste0("up_to_", current_year - 10, "1231.csv.gz"),
-           object = paste0("Data_Catalogue/up_to_", current_year - 10, "1231.csv.gz"),
+           #object = paste0("Data_Catalogue/up_to_", current_year - 10, "1231.csv.gz"),
+           object = "Data_Catalogue/historic.csv.gz",
            bucket = "enmods",
            region = "",
-           acl = "public-read")
+           acl = "public-read",
+           show_progress = TRUE)
 
 #Clean up by removing downloaded files
 print("Deleting Downloaded Copies")
@@ -98,17 +135,17 @@ file.remove(paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"
 file.remove(paste0("up_to_", current_year - 10, "1231.csv.gz"))
 
 if (FALSE) {
-#get all file names
-x<-get_bucket(bucket = "prod-bcmoe-aqs-data-store", max = Inf)
-
-file_names = NA
-
-for (i in seq(1,length(x))) {
-  file_names[i] <- x[i]$Contents$Key
-}
-
-fn <- as_data_frame(file_names)
-
-#get the processed file names
-file_names_processed <- fn %>% filter(!stringr::str_detect(value, 'raw'))
+  #get all file names
+  x<-get_bucket(bucket = "prod-bcmoe-aqs-data-store", max = Inf)
+  
+  file_names = NA
+  
+  for (i in seq(1,length(x))) {
+    file_names[i] <- x[i]$Contents$Key
+  }
+  
+  fn <- as_data_frame(file_names)
+  
+  #get the processed file names
+  file_names_processed <- fn %>% filter(!stringr::str_detect(value, 'raw'))
 }
