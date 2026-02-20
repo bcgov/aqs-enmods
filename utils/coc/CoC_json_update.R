@@ -58,9 +58,9 @@ put_object(file = "enmods_mediums_data.json",
 # LOCATIONS ---------------------------------------------------------------
 if (TRUE) {
   #Because locations is a big load we read locations from object store
-  #TEST version here
+  #prod version here
   
-  all_locations <- read.csv('https://coms.api.gov.bc.ca/api/v1/object/6fc7cb4c-dabf-4c41-bb69-f97045a1ed35?download=proxy')
+  all_locations <- read.csv('https://coms.api.gov.bc.ca/api/v1/object/e4e1829d-c1a1-4932-b275-de6e423a6d71')
   
   #debug
   class(all_locations)
