@@ -8,13 +8,15 @@ library(stringr)
 library(tidyr)
 library(aws.s3)
 
-#readRenviron(paste0(getwd(), "./.Renviron"))
-testToken <- Sys.getenv("TEST_TOKEN")
+readRenviron(paste0(getwd(), "./.Renviron"))
+#testToken <- Sys.getenv("TEST_TOKEN")
+trainToken <- Sys.getenv("TRAIN_TOKEN")
 #prodToken <- Sys.getenv("PROD_READ_ONLY_TOKEN")
-testURL <- Sys.getenv("TEST_URL")
+#testURL <- Sys.getenv("TEST_URL")
 #prodURL <- Sys.getenv("PROD_URL")
+trainURL <- Sys.getenv("TRAIN_URL") 
 
-locationsMadeAfter <- "2025-12-01T00:01:00.000-08:00"
+locationsMadeAfter <- "2026-02-05T00:01:00.000-08:00"
 
 #Set up connection to BC box
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
@@ -51,7 +53,7 @@ jsonLocationsRaw <- locations %>%
 jsonLocationsRaw  <- rbind(jsonLocationsRaw, "Other - Enter below")
 
 #--- add new locations made since x date
-locs <- GET(paste0(testURL, "v1/samplinglocations?startModificationTime=", locationsMadeAfter), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = list(), encode = 'json')
+locs <- GET(paste0(trainURL, "v1/samplinglocations?startModificationTime=", locationsMadeAfter), config = c(add_headers(.headers = c('Authorization' = trainToken ))), body = list(), encode = 'json')
 locs <-fromJSON(rawToChar(locs$content))$domainObjects
 
 locs <- locs %>% select(customId, name)
