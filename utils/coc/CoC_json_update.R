@@ -66,7 +66,7 @@ if (TRUE) {
   class(all_locations)
   
   #clean up the data types for dates
-  all_locations$ESTABLISHED_DATE <- as.Date(all_locations$ESTABLISHED_DATE)
+  all_locations$ESTABLISHED_DATE <- as.Date(all_locations$ESTABLISHED_DATE, format = "%m/%d/%Y")
   all_locations$LATEST_FIELD_VISIT <- as.Date(all_locations$LATEST_FIELD_VISIT)
   
   #filter to just those locations sampled in the last 5 years or made in the last 3 years
