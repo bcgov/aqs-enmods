@@ -14,7 +14,7 @@ library(jsonlite)
 library(lubridate)
 
 #set working directory
-setwd("C:/EnMoDS")
+#setwd("C:/EnMoDS")
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
