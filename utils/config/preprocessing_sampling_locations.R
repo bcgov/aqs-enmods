@@ -1,15 +1,16 @@
 # FILE TO PREPROCESS SAMPLING LOCATIONs and LOCATION GROUPS in that order
 library(readxl)
+library(dplyr)
 
 #https://github.com/bcgov/nr-enmods-dar/blob/main/data%20conversion/locationExtractQueries.sql
 
 # SAMPLING LOCATION GROUPS AND LOCATIONS ----
 # PREPROCESSING SAMPLING LOCATIONS AND GROUPS FOR NEW DATA --------------------
-non_zero_post_2006 <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/Jan8_2026_NonzeroSamplesAfter2006Export.csv")
+non_zero_post_2006 <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/location_after_2006_with_samples_20260116.csv")
 
-zero_pre_2006_auth <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/Jan8_2026_ZeroSamplesBefore2006ActiveSuspended.csv")
+zero_pre_2006_auth <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/location_no_samples_pre_2006_active_and_suspended_20260116.csv")
 
-zero_2006_2024_can <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/Jan8_2026_Between2006And2024ZeroSamples.csv")
+zero_2006_2024_can <- read.csv("./utils/config/ReferenceLists/Sampling_Locations/location_created_2006-2024_no_samples_20260116.csv")
 
 non_zero_post_2006 <- non_zero_post_2006 %>% 
   rename_with(tolower) %>% 
@@ -148,6 +149,18 @@ locations <- locations %>%
       .default = .x
     )
   )
+
+#Make the data-time format nicer'
+locations_when_created <- as.POSIXct(locations$`EA_EMS When Created`, tz= 'America/Vancouver', '%m/%d/%Y %I:%M:%S %p')
+
+#For this migration the cut off is 5:15 PST on January 15th 2026
+#checked and last locations was made at 11:38 PST on 15th 2026 so no need to filter anything
+
+#total count is 32,240
+write.csv(locations, file = "./utils/config/ReferenceLists/Sampling_Locations/LocationsExtraction_202601151715.csv", row.names = F)
+
+#total locations group is count is 3,065 public ams source data from Oct 28 2025
+write.csv(location_groups, "./utils/config/ReferenceLists/Sampling_Locations/LocationsGroups_202601151715.csv", row.names = F)
 
 #locations have to be pushed manually, 10000 at a time using AQS Import
 locations_1 <- locations[seq(1,10000),]

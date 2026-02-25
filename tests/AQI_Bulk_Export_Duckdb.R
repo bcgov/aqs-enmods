@@ -10,7 +10,7 @@ data_folder <- "I:/AQI_Export"
 all_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
 
 # Connect to DuckDB (creates a new DB file)
-con <- dbConnect(duckdb::duckdb(), dbdir = "benchmark.duckdb")
+con <- dbConnect(duckdb::duckdb(), dbdir = "AQI_Export_20260110.duckdb")
 
 # Start timing
 start_time <- Sys.time()
@@ -22,7 +22,7 @@ for (file in all_files) {
 }
 
 #Connect to an exisitng db
-con <- dbConnect(duckdb::duckdb(), dbdir = "benchmark.duckdb")
+con <- dbConnect(duckdb::duckdb(), dbdir = "AQI_Export_20260110.duckdb")
 
 #Test queries against the data
 res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE Ministry_Contact = 'Jeremy Krogh'")
@@ -55,7 +55,7 @@ res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE QC_Type = 'BLANK'
                   AND Observed_Property_ID = 'Nickel Total (fl. conc.)'")
 #count pass
 
-res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE Location_ID = 'E207815'")
+res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE Location_ID = 'E300096'")
 
 res <- dbGetQuery(con, "SELECT * FROM benchmark_table WHERE Location_ID = '0500629' AND
                   Field_Visit_Start_Time >= '2022-05-16 00:00:00' AND
