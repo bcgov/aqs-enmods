@@ -8,23 +8,22 @@ WITH core_data AS (
         smpl.mon_locn_id                                             AS "Location ID",
         to_char(eal.earlieststarttime, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'    AS "Field Visit Start Time",
         case -- if earlieststarttime = latestendtime, Jeremy requested that we don't display the end date and time
-            when eal.earlieststarttime = eal.latestendtime
-                then null
+            when eal.earlieststarttime = eal.latestendtime then null
             else
 				CASE 
 					WHEN to_char(eal.latestendtime, 'YYYY-MM-DD"T"HH24:MI:SS') = 'NA' THEN ''
 					ELSE to_char(eal.latestendtime, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'
 				END
-                --to_char(eal.latestendtime, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'
+                -- to_char(eal.latestendtime, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'
         end AS "Field Visit End Time",
         smpl.sampler                                                 AS "Field Visit Participants",
-        REPLACE(smpl.field_comment , CHR(0), '')                     AS "Activity Comments",
+        REPLACE(smpl.field_comment , CHR(0), '') AS "Activity Comments",
         NULL                                                         AS "Field Filtered", -- blank, doesn't exist in ems
         NULL                                                         AS "Field Filtered Comment", -- blank, doesn't exist in ems
         epc.description                                              AS "Field Preservative",-- updated to use descrsiption  note that only 3800 records of ~ 2 million records have a field preservative
         NULL                                                         AS "Sampling Context Tag", -- blank, doesn't exist in ems
         smpl.clct_methd_cd,
-        CASE
+                CASE
             WHEN cm.code = '25' THEN 'Autosampler: Peristaltic Pump'
             WHEN cm.code = '025' THEN 'Autosampler: Peristaltic Pump'
             WHEN cm.code = 'FCFLOW' THEN 'Flow Proportional Composite'
@@ -80,8 +79,7 @@ WITH core_data AS (
         end AS "Depth Unit",
         to_char(smpl.collection_start_date, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00' AS "Observed DateTime",
         case -- if earlieststarttime = latestendtime, Jeremy requested that we don't display the end date and time
-            when smpl.collection_start_date = smpl.collection_end_date
-                then null
+            when smpl.collection_start_date = smpl.collection_end_date then null
             else
 				CASE 
 					WHEN to_char(smpl.collection_end_date, 'YYYY-MM-DD"T"HH24:MI:SS') = 'NA' THEN ''
@@ -92,7 +90,6 @@ WITH core_data AS (
         CASE 
 			WHEN result.result_text = '''C''' THEN null
 			--WHEN result.result_numeric = 'NA' THEN ''
-				
             ELSE result.result_numeric 
         END AS "Result Value",
         result.method_detect_limit                                   AS "Method Detection Limit",
@@ -108,12 +105,9 @@ WITH core_data AS (
         mu_mdl.short_name                                            AS "MDL Unit",
         result.result_text,
         CASE
-            WHEN result.result_letter = '<' THEN
-                'NOT_DETECTED'
-            WHEN result.result_text = '''C''' then
-                'NOT_SAMPLED'
-            ELSE
-                NULL
+            WHEN result.result_letter = '<' THEN 'NOT_DETECTED'
+            WHEN result.result_text = '''C''' then 'NOT_SAMPLED'
+            ELSE NULL
         END                                                          AS "Detection Condition",
         NULL                                                         AS "Limit Type",
         NULL                                                         AS "Source of Rounded Value", -- can be blank
@@ -148,7 +142,7 @@ WITH core_data AS (
 					ELSE to_char(smpl.lab_arrival_date, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'
 				END
 				--to_char(smpl.lab_arrival_date, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'      
-        END AS "Lab Arrival Date and Time",       
+        END AS "Lab Arrival Date and Time",        
         NULL                                                         AS "Lab Prepared DateTime",-- leave blank
         result.lab_sample_id                                         AS "Lab Sample ID",
         NULL                                                         AS "Lab Dilution Factor",-- leave blank
@@ -259,8 +253,9 @@ WITH core_data AS (
                  AND trunc(smpl.collection_start_date) = eal.dateonly
     WHERE
         mloc.locntyp_cd NOT LIKE 'D%' -- needed for all queries
-        AND mloc.locntyp_cd NOT LIKE 'P%'
+        AND mloc.locntyp_cd NOT LIKE 'P%' 
         AND smpl.when_created > TIMESTAMP '2026-01-15 17:15:00'
+        --AND smpl.id = '3515886'
 ),
 sample_data AS (
     SELECT DISTINCT
@@ -281,7 +276,7 @@ sample_data AS (
                 --to_char(eal.latestendtime, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'
         end AS "Field Visit End Time",
         smpl.sampler                                                 AS "Field Visit Participants",
-        REPLACE(smpl.field_comment , CHR(0), '')                     AS "Activity Comments",
+        REPLACE(smpl.field_comment , CHR(0), '') AS "Activity Comments",
         NULL                                                         AS "Field Filtered", -- blank, doesn't exist in ems
         NULL                                                         AS "Field Filtered Comment", -- blank, doesn't exist in ems
         epc.description                                              AS "Field Preservative",-- updated to use descrsiption  note that only 3800 records of ~ 2 million records have a field preservative
@@ -493,10 +488,7 @@ select "Observation ID",
         "Sampling Agency",
         "Project",
         "Work Order Number",
-        CASE 
-            WHEN "Location ID" IS NOT NULL THEN LPAD("Location ID", 7, '0')
-            ELSE NULL
-        END AS "Location ID",
+        "Location ID",
         "Field Visit Start Time", -- required
         "Field Visit End Time",
         "Field Visit Participants",
@@ -520,6 +512,7 @@ select "Observation ID",
             ) + NUMTODSINTERVAL (duplicate_row_number - 1, 'SECOND'),
             'YYYY-MM-DD"T"HH24:MI:SS'
         ) || '-08:00' AS "Observed DateTime",
+        --duplicate_row_number,
         "Observed Date Time End",
         "Observed Property ID",-- based on the analytical method and parameter code and unit
         "Result Value",
@@ -533,13 +526,17 @@ select "Observation ID",
         "Source of Rounded Value",
         "Rounded Value",
         "Rounding Specification",
+        --"Analyzing Agency", CHANGE 20251118: Analyzing Agency NULL for vertical profiles
+        --case when "Data Classification" = 'VERTICAL_PROFILE' then NULL else "Analyzing Agency" end as "Analyzing Agency", 
+        --case when "Data Classification" IN ('FIELD_RESULT', 'VERTICAL_PROFILE') then NULL else "Analysis Method" end as "Analysis Method",
         "Analyzing Agency",
-        case when "Data Classification" = 'FIELD_RESULT' then null else "Analysis Method" end as "Analysis Method",
+        "Analysis Method",
         "Analyzed Date Time", -- add date/time mask
         "Result Status",
         "Result Grade",
         "Activity ID",
-        case when "Data Classification" = 'FIELD_RESULT' then null else "Activity Name" end as "Activity Name",
+        "Activity Name",
+        --case when "Data Classification" IN ('FIELD_RESULT', 'VERTICAL_PROFILE') then NULL else "Activity Name" end as "Activity Name",
         "Tissue Type",
         "Lab Arrival Temperature",
         CASE
@@ -559,10 +556,9 @@ select "Observation ID",
         "QC Source Activity Name",
         "Composite Stat",
         '' as "Biological Life Stage"
-        --        "DEBUGGING PARM_CD",
+        --"DEBUGGING PARM_CD",
         --"DEBUGGING ANALYSIS METHOD",
         --"DEBUGGING_EMS_RESULT_UNIT"
-
 from(
 select "Observation ID",
         "Ministry Contact",
@@ -570,6 +566,10 @@ select "Observation ID",
         "Project",
         "Work Order Number",
         "Location ID",
+--        CASE 
+--            WHEN "Location ID" IS NOT NULL THEN LPAD("Location ID", 7, '0')
+--            ELSE NULL
+--        END AS "Location ID",
         "Field Visit Start Time", -- required
         "Field Visit End Time",
         "Field Visit Participants",
@@ -600,9 +600,17 @@ select "Observation ID",
         "Source of Rounded Value",
         "Rounded Value",
         "Rounding Specification",
-        "Analyzing Agency",
-        "Analysis Method", -- removed as per request from Jeremy.  The METHOD name was moved to field device type column
-        "Analyzed Date Time", -- add date/time mask
+        --"Analyzing Agency", CHANGE 20251118: Analyzing Agency NULL for vertical profiles
+        "Analyzing Agency", 
+        "Analysis Method",
+        CASE 
+            WHEN upper("Data Classification") IN ('LAB', 'SURROGATE_RESULT')
+                THEN COALESCE(
+                    "Analyzed Date Time",
+                    "Observed DateTime"
+                )
+            ELSE "Analyzed Date Time"
+        END AS "Analyzed Date Time", -- add date/time mask
         "Result Status",
         "Result Grade",
         "Activity ID",
@@ -620,6 +628,7 @@ select "Observation ID",
         "QC Type",
         "QC Source Activity Name",
         "Composite Stat",
+        '' as "Biological Life Stage",
         ROW_NUMBER() OVER (
             PARTITION BY 
                 "Location ID", 
@@ -627,7 +636,7 @@ select "Observation ID",
                 "Medium", 
                 "Depth Upper", 
                 CASE 
-                    WHEN "Data Classification" IN ('FIELD_RESULT') THEN ''
+                    WHEN "Data Classification" IN ('FIELD_RESULT', 'VERTICAL_PROFILE') THEN ''
                     ELSE COALESCE(to_char("Activity Name"), '')
                 END, 
                 COALESCE("Specimen Name", ''),
@@ -639,14 +648,86 @@ select "Observation ID",
                 "Observed Property ID"
             ORDER BY TO_TIMESTAMP(SUBSTR("Observed DateTime", 1, 19), 'YYYY-MM-DD"T"HH24:MI:SS')
         ) AS duplicate_row_number
-        ,
+        --"DEBUGGING PARM_CD",
+        --"DEBUGGING ANALYSIS METHOD",
+        --"DEBUGGING_EMS_RESULT_UNIT"
+
+from(
+select "Observation ID",
+        "Ministry Contact",
+        "Sampling Agency",
+        "Project",
+        "Work Order Number",
+        CASE 
+            WHEN "Location ID" IS NOT NULL THEN LPAD("Location ID", 7, '0')
+            ELSE NULL
+        END AS "Location ID",
+        "Field Visit Start Time", -- required
+        "Field Visit End Time",
+        "Field Visit Participants",
+        "Activity Comments" as "Field Visit Comments",
+        "Activity Comments",
+        "Field Filtered",
+        "Field Filtered Comment",
+        "Field Preservative",
+        "Field Device ID",-- leave as blank
+        "Field Device Type",
+        "Sampling Context Tag",
+        "Collection Method",
+        "Medium",
+        "Depth Upper",
+        "Depth Lower",
+        "Depth Unit",
+        "Observed DateTime",
+        "Observed Date Time End",
+        "Observed Property ID",-- based on the analytical method and parameter code and unit
+        "Result Value",
+        "Method Detection Limit", 
+        "Method Reporting Limit",
+        "Result Unit",
+        "Detection Condition",
+        "Limit Type",-- doesn't exist in ems  
+        "Fraction",
+        "Data Classification",
+        "Source of Rounded Value",
+        "Rounded Value",
+        "Rounding Specification",
+        case when "Data Classification" = 'VERTICAL_PROFILE' then NULL else "Analyzing Agency" end as "Analyzing Agency", 
+        case when "Data Classification" IN ('FIELD_RESULT', 'VERTICAL_PROFILE') then NULL else "Analysis Method" end as "Analysis Method",
+       -- "Analyzing Agency",
+       -- "Analysis Method", -- removed as per request from Jeremy.  The METHOD name was moved to field device type column
+        --"Analyzed Date Time", -- add date/time mask
+        --EDIT 20251118 Pushing Analyzed Date Time Calculation one layer above Data Classification calculation
+        "Analyzed Date Time",
+        "Result Status",
+        "Result Grade",
+        "Activity ID",
+         case when "Data Classification" IN ('FIELD_RESULT', 'VERTICAL_PROFILE') then NULL else "Activity Name" end as "Activity Name",
+        --"Activity Name",
+        "Tissue Type",
+        "Lab Arrival Temperature",
+        CASE
+            WHEN "Data Classification" IN ('FIELD_RESULT', 'VERTICAL_PROFILE', 'FIELD_SURVEY') 
+            THEN '' 
+            ELSE "Specimen Name" 
+        END AS "Specimen Name",
+        "Lab Quality Flag",
+        "Lab Arrival Date and Time",
+        "Lab Prepared DateTime",
+        "Lab Sample ID",
+        "Lab Dilution Factor" as "Lab Dilution Factor",
+        "Lab Comment" as "Lab Comment",
+        "Lab Batch ID",
+        "QC Type",
+        "QC Source Activity Name",
+        "Composite Stat",
         "DEBUGGING PARM_CD",
         "DEBUGGING ANALYSIS METHOD",
         "DEBUGGING_EMS_RESULT_UNIT"
 from (
 
 -- water data
-/*
+
 SELECT
         ''  as "Observation ID",
         core."Ministry Contact",
@@ -670,7 +751,7 @@ SELECT
         core."Depth Upper",
         core."Depth Lower",
         core."Depth Unit",
-        core."Observed DateTime",
+        --core."Observed DateTime",
         core."Observed Date Time End",
         ed.NewNameID AS "Observed Property ID",-- based on the analytical method and parameter code and unit
         core."Result Value",
@@ -682,43 +763,43 @@ SELECT
             WHEN core."Method Detection Limit" is null THEN core."Method Detection Limit Source 2"
             WHEN core."MDL Unit" <> core."Result Unit" THEN
                 core."Method Detection Limit" / unit_conversion.conversion_factor
-                --unit_conversion.conversion_factor
+			--WHEN core."Method Detection Limit" = 'NA' THEN ''
         ELSE core."Method Detection Limit" -- No conversion needed
         END AS "Method Detection Limit", 
         --core."Method Detection Limit" as "Method Detection Limit OG", -- debugging
         --unit_conversion.conversion_factor, -- debugging,
         --core."MDL Unit", core."Result Unit", -- debugging
-        core."Method Reporting Limit",
-        
+        core."Method Reporting Limit",        
         core."Result Unit",
         core."Detection Condition",
-        core."Limit Type",-- doesn't exist in ems  
-        ed.Fraction as "Fraction",
-        ed.Classification as "Data Classification",
+        core."Limit Type",-- doesn't exist in ems
+		CASE
+			WHEN ed.Fraction is null then ''
+			WHEN ed.Fraction = 'Extractable' then ''
+			ELSE ed.Fraction 
+		END AS "Fraction",
+    CASE
+      WHEN core."Depth Upper" is not null AND core."Depth Lower" is not null AND core."Location ID" = to_char (v.EMS_ID)
+                    and core."Observed DateTime" = to_char (v.collection_date_time, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'
+                    and core.parm_cd = v.parm_cd
+	  then 'VERTICAL_PROFILE'
+      ELSE ed.Classification 
+    END AS "Data Classification",
+    --ed.Classification as "Data Classification",
+        RTRIM(ed.OP_Group, '; ') AS "Specimen Name",
         core."Source of Rounded Value",
         core."Rounded Value",
         core."Rounding Specification",
         core."Analyzing Agency",
         core."Analysis Method",
-        CASE 
-            WHEN upper(ed.Classification) IN ('LAB', 'SURROGATE_RESULT')
-                THEN COALESCE(
-                    "Analyzed Date Time",
-                    core."Observed DateTime"
-                )
-            ELSE core."Analyzed Date Time"
-        END AS "Analyzed Date Time",
+        core."Observed DateTime", 
+        core."Analyzed Date Time",
         core."Result Status",
         core."Result Grade",
         core."Activity ID",
         core."Activity Name",
         core."Tissue Type",
         core."Lab Arrival Temperature",
-        CASE
-            WHEN ed.Classification IN ('FIELD_RESULT', 'VERTICAL_PROFILE', 'FIELD_SURVEY') 
-            THEN '' 
-            ELSE RTRIM(ed.OP_Group, '; ') 
-        END AS "Specimen Name",
         core."Lab Quality Flag",
         core."Lab Arrival Date and Time",
         core."Lab Prepared DateTime",
@@ -740,26 +821,35 @@ FROM -- water data
     left outer JOIN OBSERVED_PROPERTIES_FOR_ETL ed on core.parm_cd = ed.Parm_code
         and core."Analysis Method" = ed.Analysis_Method_Code
         and core."EMS Result Unit" = ed.Unit
-left outer join ems.unit_conversions_temp unit_conversion on core.result_unit_code = unit_conversion.target_unit_id and core.mdl_unit_code = unit_conversion.source_unit_id      
-where core.result_unit_code is not null and core.mdl_unit_code is not null
+    left outer JOIN EMS.VERTICAL_PROFILES V on core."Location ID" = to_char (v.EMS_ID)
+                    and core."Observed DateTime" = to_char (v.collection_date_time, 'YYYY-MM-DD"T"HH24:MI:SS') || '-08:00'
+                    and core.parm_cd = v.parm_cd
+left outer join ems.unit_conversions_temp unit_conversion on core.result_unit_code = unit_conversion.target_unit_id 
+	and core.mdl_unit_code = unit_conversion.source_unit_id      
+where core.result_unit_code is not null 
+	and core.mdl_unit_code is not null 
+	AND ed.NewNameID is not null	
     AND (
-        upper(core."Medium") LIKE '%WATER%' 
-        OR core."Medium" = 'Solids - Soil'
+        upper(core."Medium") LIKE '%SOLIDS%' 
+        AND core."Medium" <> 'Solids - Soil'
+        --when adding vertical profiles explicitly in this script, did not have to change this core.medium filter because
+        --vertical data is captured in water or in soils
     )
     --AND core."Work Order Number" IN ( -- remove this to get all results
     --        SELECT
     --            to_char(l.req_id)
     --        FROM
     --            ems.reqs_to_load l)
-    AND ed.NewNameID is not null
+    
     and ((core."Result Value" is not null) or (core.result_text = '''C'''))
-                order by core."Location ID" asc, core."Observed DateTime" asc
+                --order by core."Location ID" asc, core."Observed DateTime" asc
+
+--*/
 
 -- end water data
-*/
+
 /*
 union all -- air data
-*/
 
 SELECT
         ''  as "Observation ID",
@@ -806,12 +896,7 @@ SELECT
         core."Result Unit",
         core."Detection Condition",
         core."Limit Type",-- doesn't exist in ems  
-		CASE
-			WHEN ed.Fraction is null then ''
-			WHEN ed.Fraction = 'Extractable' then ''
-			ELSE ed.Fraction 
-		END AS "Fraction",
-        --ed.Fraction as "Fraction",
+        ed.Fraction as "Fraction",
         ed.Classification as "Data Classification",
         core."Source of Rounded Value",
         core."Rounded Value",
@@ -909,12 +994,7 @@ SELECT
         core."Air Flow Unit Code" as "Result Unit", -- for when air flow volume is not null use the air flow unit code
         core."Detection Condition",
         core."Limit Type",-- doesn't exist in ems  
-		CASE
-			WHEN ed.Fraction is null then ''
-			WHEN ed.Fraction = 'Extractable' then ''
-			ELSE ed.Fraction 
-		END AS "Fraction",
-        --ed.Fraction as "Fraction",
+        ed.Fraction as "Fraction",
         'ACTIVITY_RESULT' as "Data Classification",
         core."Source of Rounded Value",
         core."Rounded Value",
@@ -1005,12 +1085,7 @@ SELECT
         'um' as "Result Unit", -- for when air flow volume is not null use the air flow unit code
         core."Detection Condition",
         core."Limit Type",-- doesn't exist in ems  
-		CASE
-			WHEN ed.Fraction is null then ''
-			WHEN ed.Fraction = 'Extractable' then ''
-			ELSE ed.Fraction 
-		END AS "Fraction",
-        --ed.Fraction as "Fraction",
+        ed.Fraction as "Fraction",
         'ACTIVITY_RESULT' as "Data Classification",
         core."Source of Rounded Value",
         core."Rounded Value",
@@ -1054,11 +1129,12 @@ where upper(core."Medium") like '%AIR%' -- try WATER-MARINE for a subset
     and core."Air Flow Unit Code" is not null
     and core."Air Filter Size" is not null
     --AND ed.NewNameID is not null
+*/
+
 -- end air filter size
 
 /*
 union -- taxonomic data - bio sample area
-
 
 SELECT
         ''  as "Observation ID",
@@ -1921,11 +1997,30 @@ where --upper(core."Medium") like '%WATER - WASTE%' -- try WATER-MARINE for a su
 */
 -- end continuous
 
-))
+)))
         --where duplicate_row_number =1
-        where "Observed Property ID" is not null
-        --AND "Location ID" = 'E338984'
-        --The inequality sign only works if there is no data at that date: so make sure to keep it consistent
-        --if just date (and no time) is used for comparison, it automatically adds 00:00 in terms of HH::MM to it
-        --AND "Observed DateTime" > '2025-09-13'
+        where 
+        --"Location ID" = 'E100666'
+         --AND TO_DATE(SUBSTR("Field Visit Start Time", 1, 10), 'YYYY-MM-DD') = TO_DATE('2017-08-23', 'YYYY-MM-DD') 
+        --"Location ID" = '1100141' --Bill test 3
+         --"Location ID" = 'E334334' --Bill test 8 (no longer analyzing 4)
+        --"Location ID" = 'E225771' --Bill test 5 
+        --"Location ID" = 'E218879' --Bill test 9 (no longer analyzing 6) "Location ID" = '0500456' --Bill test 6
+        --"Location ID" = 'E290484' --Bill test 7
+        --AND 
+        --AND 
+        "Observed Property ID" is not null
+        --AND "Observed DateTime" > '2025-12-31'
+        --AND "Location ID" = '0200102'
+        --AND "Observed Property ID" = 'pH (acidity)'
+/*        AND ((
+                -- Extra filter applies only to these classifications
+                "Data Classification" = 'VERTICAL_PROFILE'
+                AND (("Result Value" is not null) or ("Detection Condition" = 'NOT_SAMPLED'))
+            )
+            OR
+            (
+            -- Everyone else passes through untouched
+            "Data Classification" <> 'VERTICAL_PROFILE'))*/
         --order by "Location ID" asc, "Observed DateTime" asc
+        

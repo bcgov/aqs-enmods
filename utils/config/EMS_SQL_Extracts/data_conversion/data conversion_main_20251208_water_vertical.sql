@@ -20,7 +20,7 @@ WITH core_data AS (
         REPLACE(smpl.field_comment , CHR(0), '') AS "Activity Comments",
         NULL                                                         AS "Field Filtered", -- blank, doesn't exist in ems
         NULL                                                         AS "Field Filtered Comment", -- blank, doesn't exist in ems
-        epc.description                                              AS "Field Preservative",-- updated to use descrsiption  note that only 3800 records of ~ 2 million records have a field preservative
+        epc.description                                              AS "Field Preservative",-- updated to use description note that only 3800 records of ~ 2 million records have a field preservative
         NULL                                                         AS "Sampling Context Tag", -- blank, doesn't exist in ems
         smpl.clct_methd_cd,
                 CASE
@@ -254,6 +254,7 @@ WITH core_data AS (
     WHERE
         mloc.locntyp_cd NOT LIKE 'D%' -- needed for all queries
         AND mloc.locntyp_cd NOT LIKE 'P%' 
+        AND smpl.when_created > TIMESTAMP '2026-01-15 17:15:00'
         --AND smpl.id = '3515886'
 ),
 sample_data AS (
@@ -2009,6 +2010,8 @@ where --upper(core."Medium") like '%WATER - WASTE%' -- try WATER-MARINE for a su
         --AND 
         --AND 
         "Observed Property ID" is not null
+        --AND "Location ID" = 'E338984'
+        --AND "Observed DateTime" > '2025-12-31'
         --AND "Observed Property ID" = 'pH (acidity)'
 /*        AND ((
                 -- Extra filter applies only to these classifications

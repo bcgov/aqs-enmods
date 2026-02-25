@@ -260,6 +260,7 @@ WITH core_data AS (
     WHERE
         mloc.locntyp_cd NOT LIKE 'D%' -- needed for all queries
         AND mloc.locntyp_cd NOT LIKE 'P%'
+        AND smpl.when_created > TIMESTAMP '2026-01-15 17:15:00'
 ),
 sample_data AS (
     SELECT DISTINCT
@@ -1913,4 +1914,6 @@ where --upper(core."Medium") like '%WATER - WASTE%' -- try WATER-MARINE for a su
 ))
         --where duplicate_row_number =1
         where "Observed Property ID" is not null
+                --AND "Location ID" = 'E338984'
+        --AND "Observed DateTime" > '2025-07-01'
         --order by "Location ID" asc, "Observed DateTime" asc
