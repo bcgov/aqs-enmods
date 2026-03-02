@@ -1,6 +1,10 @@
 # FILE TO PREPROCESS SAMPLING LOCATIONs and LOCATION GROUPS in that order
 library(readxl)
 library(dplyr)
+library(httr)
+library(jsonlite)
+
+#This is the code that ran on Feb 27 to capture all location and location groups added to EMS between Jan 15 and Feb 26 at 5pm
 
 #https://github.com/bcgov/nr-enmods-dar/blob/main/data%20conversion/locationExtractQueries.sql
 
@@ -62,7 +66,7 @@ locations <- locations %>%
          across(where(is.numeric), ~ replace(., is.na(.), "")),
          across(where(is.logical), ~ replace(., is.na(.), "")),)
 
-run_init <- TRUE
+run_init <- FALSE
 
 if(run_init){
   ams_url <- "https://www2.gov.bc.ca/assets/gov/environment/waste-management/waste-discharge-authorization/datamart/all_ams_authorizations.xlsx"
@@ -108,25 +112,23 @@ location_groups <- location_groups %>% dplyr::select(permit_id, type, descriptio
 
 #get location groups from prod
 readRenviron(paste0(getwd(), "./.Renviron"))
-testToken <- Sys.getenv("TEST_TOKEN")
 prodToken <- Sys.getenv("PROD_TOKEN")
-testURL <- Sys.getenv("TEST_URL")
 prodURL <- Sys.getenv("PROD_URL")
 data_body = list()
 
 y<-GET(paste0(prodURL, "v1/samplinglocationgroups"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = data_body, encode = 'json')
 sys_loc_grps <- fromJSON(rawToChar(y$content))$domainObjects
 
-#get the new location groups
+#get the new location groups that aren't in prod
 ix <- !(location_groups$permit_id %in% sys_loc_grps$name)
 new_groups <- location_groups[ix,]
 
-location_group_types <- get_profiles(env, "location_group_types") #feb 26 3073 vs 3065 in prod
+location_group_types <- get_profiles(env, "location_group_types") #feb 26 3073 vs 3065 in prod so 8 new groups
 
 #joing location group guid to location groups table
-location_groups <- inner_join(location_groups, location_group_types, 
-                              by = join_by(type == customId)) %>%
-  rename(location_group_type_id = id)
+#location_groups <- inner_join(location_groups, location_group_types, 
+#                              by = join_by(type == customId)) %>%
+#  rename(location_group_type_id = id)
 
 # could not figure out locations completely
 # generating split files that have to be loaded manually
@@ -177,6 +179,14 @@ aqs_locations <- read.csv("https://coms.api.gov.bc.ca/api/v1/object/e4e1829d-c1a
 
 #get those ID's that in EMS and NOT in AQS
 new_loc_ids <- !(locations$'Location ID' %in% aqs_locations$ID)
+
+new_locations <- locations[new_loc_ids,] #184
+
+#write cut over locations
+write.csv(new_locations, file = "./utils/config/ReferenceLists/Sampling_Locations/LocationsExtract_CutOver_20260227.csv", row.names = F)
+
+#write cut over location groups
+write.csv(new_groups, file = "./utils/config/ReferenceLists/Sampling_Locations/Locations_Groups_CutOver_20260227.csv", row.names = F)
 
 
 

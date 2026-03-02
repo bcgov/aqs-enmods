@@ -1,0 +1,3664 @@
+{
+  "items": [
+    {
+      "disp_name": "0110000 - VICTORIA AIR 1"
+    },
+    {
+      "disp_name": "0110004 - VICTORIA AT GOODWILL IND. BAY ST"
+    },
+    {
+      "disp_name": "0110030 - VICTORIA PAPS 1250 QUADRA ST"
+    },
+    {
+      "disp_name": "0110031 - VICTORIA ROYAL ROADS UNIVERSITY"
+    },
+    {
+      "disp_name": "0110101 - PORT ALICE HOSPITAL"
+    },
+    {
+      "disp_name": "0110200 - GOLD RIVER; GULF BULK STN"
+    },
+    {
+      "disp_name": "0110251 - PORT ALBERNI AT HEALTH UNIT"
+    },
+    {
+      "disp_name": "0110254 - PORT ALBERNI AT FIREHALL"
+    },
+    {
+      "disp_name": "0110255 - PORT ALBERNI AT POST OFFICE"
+    },
+    {
+      "disp_name": "0110258 - PORT ALBERNI TRS AT SOMASS AUTO COURT"
+    },
+    {
+      "disp_name": "0110263 - PORT ALBERNI AT AUTO MARINE ELECTRIC"
+    },
+    {
+      "disp_name": "0110264 - PORT ALBERNI AIR; ROOF OF COURTHOUSE"
+    },
+    {
+      "disp_name": "0110411 - CAMPBELL R AIR AT HAGEN`S"
+    },
+    {
+      "disp_name": "0110413 - CAMPELL R AIR AT EARLY`S"
+    },
+    {
+      "disp_name": "0110415 - CAMPBELL R AIR AT PRIVATE PROPERTY"
+    },
+    {
+      "disp_name": "0110417 - CAMPBELL R AIR AT THOMAS"
+    },
+    {
+      "disp_name": "0110500 - PORT ALICE TOWN HALL ROOF"
+    },
+    {
+      "disp_name": "0110501 - PORT ALICE-AIR TRAILER BELOW PR1634 LANDFIL"
+    },
+    {
+      "disp_name": "0111503 - HARMAC AT M&B ARBORETUM"
+    },
+    {
+      "disp_name": "0111505 - HARMAC AT CAN OXY PARKING LOT"
+    },
+    {
+      "disp_name": "0111518 - NANAIMO AIR; TOMMY TUCKERS WALLACE ST."
+    },
+    {
+      "disp_name": "0111520 - NANAIMO AIR; WOOBANK SCHOOL"
+    },
+    {
+      "disp_name": "0220204 - POWELL RIVER CRANBERRY LAKE"
+    },
+    {
+      "disp_name": "0220205 - POWELL RIVER WILDWOOD"
+    },
+    {
+      "disp_name": "0220206 - POWELL RIVER HOSPITAL"
+    },
+    {
+      "disp_name": "0250003 - CASTLEGAR; CENTENNIAL LIBRARY"
+    },
+    {
+      "disp_name": "0250009 - TRAIL BUTLER PARK - TECK SMELTER"
+    },
+    {
+      "disp_name": "0250017 - ELKVIEW COAL (PA1807) SPARWOOD CIVIC BUILDING"
+    },
+    {
+      "disp_name": "0250041 - PACIFIC ABRASIVES GRAND FORKS CLARK"
+    },
+    {
+      "disp_name": "0250044 - PARTA GRAND FORKS NORTH (PA02258)"
+    },
+    {
+      "disp_name": "0250050 - CANAL FLATS SCHOOL ROOF; CF1"
+    },
+    {
+      "disp_name": "0250051 - CANAL FLATS TEXACO ROOF; CF2"
+    },
+    {
+      "disp_name": "0250066 - KIMBERLEY; UPPER LOIS CREEK 824-8TH AVE."
+    },
+    {
+      "disp_name": "0250085 - WESTAR BALMER; MICHEL S.T.P. AIR STN. (OLD)"
+    },
+    {
+      "disp_name": "0250087 - ELKVIEW COAL (PA-1807) ELKVIEW PUMPHOUSE"
+    },
+    {
+      "disp_name": "0250088 - ELKVIEW COAL (PA1807) CENTRAL LAB"
+    },
+    {
+      "disp_name": "0250090 - WESTAR BALMER; D/F PREP PLANT SECURITY (OLD)"
+    },
+    {
+      "disp_name": "0250092 - ELKVIEW COAL PA1807 1.6KM N OF ELKVIEW PLANT"
+    },
+    {
+      "disp_name": "0250093 - ELKVIEW COAL PA1807 1.2KM NW OF ELKVIEW PLANT"
+    },
+    {
+      "disp_name": "0250097 - ELKVIEW COAL (PA1807) NEAR HYDRAULIC PONDS"
+    },
+    {
+      "disp_name": "0250098 - SPARWOOD AT SEWAGE TREATMENT PLANT"
+    },
+    {
+      "disp_name": "0250100 - ELKVIEW COAL (PA1807) 3.2 KM S OF SPARWOOD"
+    },
+    {
+      "disp_name": "0250117 - KIMBERLEY; COMINCO GARD. NEAR KIMBERLEY HOSP."
+    },
+    {
+      "disp_name": "0250123 - KIMBERLEY; NORTH STAR MTN. MANAGER`S RESID."
+    },
+    {
+      "disp_name": "0250124 - KIMBERLEY; COMINCO COOLING POND"
+    },
+    {
+      "disp_name": "0250125 - KIMBERLEY; COMINCO WEST GYPSUM POND CORNER"
+    },
+    {
+      "disp_name": "0250126 - KIMBERLEY; COMINCO WEST GYPSUM POND"
+    },
+    {
+      "disp_name": "0250127 - KIMBERLEY; COMINCO EAST GYPSUM POND"
+    },
+    {
+      "disp_name": "0250128 - FORDING FRO (PA1501) WATER WELL SITE"
+    },
+    {
+      "disp_name": "0250129 - FORDING FRO (PA1501) R.R. OVERPASS"
+    },
+    {
+      "disp_name": "0250130 - FORDING COAL; D/F & H/V MINE DRY ROOF (OLD)"
+    },
+    {
+      "disp_name": "0250131 - FORDING COAL; D/F GATEHOUSE ROOF (OLD)"
+    },
+    {
+      "disp_name": "0250132 - FORDING COAL; D/F EAST OF CATHEDRAL BLDG(OLD)"
+    },
+    {
+      "disp_name": "0250133 - FORDING COAL; D/F NW EAGLE POND (OLD)"
+    },
+    {
+      "disp_name": "0250134 - BYRON CREEK; SAMPLING TOWER ROOF"
+    },
+    {
+      "disp_name": "0250135 - ELK VALLEY COAL CMO (PA4751) ROZYCKI HOUSE"
+    },
+    {
+      "disp_name": "0250136 - BYRON CREEK; LOADOUT TOWER"
+    },
+    {
+      "disp_name": "0250137 - ELK VALLEY COAL CMO (PA4751) NW OF ANDY GOOD CREEK"
+    },
+    {
+      "disp_name": "0250138 - ELK VALLEY COAL  CMO (PA4751) MICHEL CR S OF CORBIN CR"
+    },
+    {
+      "disp_name": "0250140 - WESTAR BALMER; 0.8 KM NW ELKVIEW PLANT (OLD)"
+    },
+    {
+      "disp_name": "0250141 - WESTAR BALMER; 0.4 KM NNE ELKVIEW PLANT (OLD)"
+    },
+    {
+      "disp_name": "0250142 - WESTAR BALMER; 0.4 KM E OF ELKVIEW PLANT(OLD)"
+    },
+    {
+      "disp_name": "0250143 - WESTAR BALMER; 1.2 KM SE ELKVIEW PLANT (OLD)"
+    },
+    {
+      "disp_name": "0250144 - WESTAR BALMER; D/F HYD. MINE PUMPHOUSE (OLD)"
+    },
+    {
+      "disp_name": "0250145 - BYRON CREEK; LOADOUT CONVEYOR NORTH"
+    },
+    {
+      "disp_name": "0250153 - FORDING COAL; D/F NORTH GREENHILLS"
+    },
+    {
+      "disp_name": "0250154 - FORDING COAL; CLODE CREEK"
+    },
+    {
+      "disp_name": "0250155 - FORDING COAL; SOUTH GREENHILLS"
+    },
+    {
+      "disp_name": "0250156 - FORDING COAL; D/F LOWER KILMARNOCK CREEK(OLD)"
+    },
+    {
+      "disp_name": "0250157 - FORDING COAL; UPPER KILMARNOCK CR."
+    },
+    {
+      "disp_name": "0250158 - FORDING FRO (PA1501) CHAUNCEY CR AT MINE ROAD"
+    },
+    {
+      "disp_name": "0250159 - FORDING FRO (PA1501) HENRETTA CREEK"
+    },
+    {
+      "disp_name": "0250164 - ELK VALLEY COAL  G/H (PA6249) NORTH OF WOLFRAM CREEK"
+    },
+    {
+      "disp_name": "0250167 - LINE CR RES; D/F MINE SERVICES AREA (OLD)"
+    },
+    {
+      "disp_name": "0250168 - LINE CR RES; D/F WEST LINE CREEK (OLD)"
+    },
+    {
+      "disp_name": "0250169 - LINE CR RES; D/F EAST SNOW SHED (OLD)"
+    },
+    {
+      "disp_name": "0250170 - LINE CR RES; D/F & H/V SECURITY BLDG (OLD)"
+    },
+    {
+      "disp_name": "0250171 - LINE CR RES; D/F PLANT REFUSE SITE (OLD)"
+    },
+    {
+      "disp_name": "0250172 - WESTAR G/H; GATEHOUSE (OLD SITE)"
+    },
+    {
+      "disp_name": "0250173 - ELK VALLEY COAL G/H (PA6249) DRYER AREA DUSTFALL"
+    },
+    {
+      "disp_name": "0250174 - WESTAR G/H; LOADOUT STATION (OLD SITE)"
+    },
+    {
+      "disp_name": "0250175 - ELK VALLEY COAL  G/H (PA6249) RAW COAL SILOS DUSTFALL"
+    },
+    {
+      "disp_name": "0250176 - ELK VALLEY COAL  G/H (PA6249) MAINTENANCE COMPLEX"
+    },
+    {
+      "disp_name": "0250177 - WESTAR G/H; EAST END RAW COAL (OLD SITE)"
+    },
+    {
+      "disp_name": "0250178 - WESTAR G/H; NORTH END RAW COAL SILO (OLDSITE)"
+    },
+    {
+      "disp_name": "0250179 - ELK VALLEY COAL  G/H (PA6249) PREP PLANT ROAD JUNCTION"
+    },
+    {
+      "disp_name": "0250180 - WESTAR G/H; KM 5 SWITCHBACK (OLD SITE)"
+    },
+    {
+      "disp_name": "0250181 - WESTAR G/H; CUT THROUGH RIDGE ROAD (OLD SITE)"
+    },
+    {
+      "disp_name": "0250182 - ELKFORD RESIDENTIAL AREA"
+    },
+    {
+      "disp_name": "0250184 - ELKVIEW COAL (PA1807) WHISPERING WINDS PARK"
+    },
+    {
+      "disp_name": "0260004 - TRAIL BIRCHBANK DUSTFALL - TECK SMELTER"
+    },
+    {
+      "disp_name": "0260009 - TRAIL; DANIEL ST. PARK"
+    },
+    {
+      "disp_name": "0260010 - TRAIL DOWNTOWN - TECK SMELTER"
+    },
+    {
+      "disp_name": "0260011 - WARFIELD ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "0260012 - TRAIL COLUMBIA GARDENS - TECK SMELTER"
+    },
+    {
+      "disp_name": "0260022 - TRAIL OASIS - TECK SMELTER"
+    },
+    {
+      "disp_name": "0260023 - TRAIL HOSPITAL - TECK SMELTER"
+    },
+    {
+      "disp_name": "0260025 - TRAIL SUNNINGDALE"
+    },
+    {
+      "disp_name": "0260026 - TRAIL GLENMERRY - TECK SMELTER"
+    },
+    {
+      "disp_name": "0260033 - PACIFIC ABRASIVES; GRAND FORKS; HOODIKOFF"
+    },
+    {
+      "disp_name": "0260043 - WARFIELD; KORPACK"
+    },
+    {
+      "disp_name": "0260044 - HEARN BROS.; PARK SIDING; DUST"
+    },
+    {
+      "disp_name": "0260100 - WARFIELD POOL"
+    },
+    {
+      "disp_name": "0260101 - FAIRVIEW UNITED CHURCH; NELSON"
+    },
+    {
+      "disp_name": "0260102 - GENELLE; RECREATION HALL ROOF"
+    },
+    {
+      "disp_name": "0260103 - PRIVATE RESIDENCE NEAR YMIR FOREST PRODUCTS"
+    },
+    {
+      "disp_name": "0260104 - W.E. GRAHAM SCHOOL ROOF; SLOCAN"
+    },
+    {
+      "disp_name": "0310069 - MAPLE RI DUNBAR ROOF"
+    },
+    {
+      "disp_name": "0310071 - MISSION MEMORIAL HOSPITAL"
+    },
+    {
+      "disp_name": "0310072 - MISSION LIQUOR STORE"
+    },
+    {
+      "disp_name": "0310075 - HARRSN DEWDNEY ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "0310076 - HARRSN DEWDNEY FIRE HALL"
+    },
+    {
+      "disp_name": "0310077 - CHWK HOSPITAL"
+    },
+    {
+      "disp_name": "0310078 - LANG LIQUOR STORE"
+    },
+    {
+      "disp_name": "0310079 - HOPE HEALTH UNIT"
+    },
+    {
+      "disp_name": "0310080 - SQU HEALTH UNIT"
+    },
+    {
+      "disp_name": "0310081 - ABBOTSFORD AIRPORT GVRD T11"
+    },
+    {
+      "disp_name": "0310099 - SQU PA1711 CELL ROOM AREA"
+    },
+    {
+      "disp_name": "0310100 - SQU PA1711 PEMBERTON STR"
+    },
+    {
+      "disp_name": "0310101 - SQU PA1711 PLANT BOUNDARY"
+    },
+    {
+      "disp_name": "0310168 - PORT MOODY ROCKY POINT PARK"
+    },
+    {
+      "disp_name": "0310172 - SQUAMISH GOVERNMENT BLDG"
+    },
+    {
+      "disp_name": "0310174 - VANCOUVER ROBSON SQUARE"
+    },
+    {
+      "disp_name": "0310175 - VANCOUVER KITSILANO"
+    },
+    {
+      "disp_name": "0310176 - VANCOUVER MARPOLE"
+    },
+    {
+      "disp_name": "0310177 - BURNABY KENSINGTON PARK"
+    },
+    {
+      "disp_name": "0310178 - BURNABY CONFEDERATION PARK"
+    },
+    {
+      "disp_name": "0310179 - NORTH VANCOUVER SECOND NARROWS"
+    },
+    {
+      "disp_name": "0310180 - WEST VANCOUVER LIONS GATE"
+    },
+    {
+      "disp_name": "0415148 - DAWSON CREEK ACID RAIN SAMPLER R.D. BLD."
+    },
+    {
+      "disp_name": "0435005 - ALCAN AIR STATION #3"
+    },
+    {
+      "disp_name": "0435006 - ALCAN AIR STATION #5"
+    },
+    {
+      "disp_name": "0435029 - ALCAN AIR NORTHLAND DOCK"
+    },
+    {
+      "disp_name": "0435031 - ALCAN AIR OLD TOUR BUILDING"
+    },
+    {
+      "disp_name": "0435037 - KITIMAT POLLUTION CONTROL CENTRE"
+    },
+    {
+      "disp_name": "0435077 - TERRACE AIR AT ALLIANCE CHURCH"
+    },
+    {
+      "disp_name": "0435079 - TERRACE AIR AT FIREHALL"
+    },
+    {
+      "disp_name": "0435083 - TERRACE - ROOFTOP OF NORTHWEST COMM. COLLEGE"
+    },
+    {
+      "disp_name": "0440401 - KIMBERLEY LOIS CREEK"
+    },
+    {
+      "disp_name": "0440402 - KIMBERLEY MINE SHAFT 24"
+    },
+    {
+      "disp_name": "0440403 - SCOTTIES MARINA"
+    },
+    {
+      "disp_name": "0450007 - NORTHWOOD PA01543 NORTHEAST CANNISTER 2"
+    },
+    {
+      "disp_name": "0450008 - NORTHWOOD PA01543 SOUTHEAST CANNISTER 3"
+    },
+    {
+      "disp_name": "0450009 - NORTHWOOD PA01543 NORTHWEST CANNISTER 4"
+    },
+    {
+      "disp_name": "0450016 - NORTHWOOD PA01543 SOUTHWEST CANNISTER 1"
+    },
+    {
+      "disp_name": "0450044 - PRINCE GEORGE COMMUNITY CENTRE ROOF"
+    },
+    {
+      "disp_name": "0450114 - DUSTFALL #1 GROOT LOGGING PA01884 SMITHERS"
+    },
+    {
+      "disp_name": "0450115 - DUSTFALL #2 GROOT LOGGING PA01884 SMITHERS"
+    },
+    {
+      "disp_name": "0450116 - DUSTFALL #3 GROOT LOGGING PA01884 SMITHERS"
+    },
+    {
+      "disp_name": "0450117 - DUSTFALL #4 GROOT LOGGING PA01884 SMITHERS"
+    },
+    {
+      "disp_name": "0450232 - PRINCE GEORGE VAN BIEN SCHOOL"
+    },
+    {
+      "disp_name": "0450270 - PRINCE GEORGE GLADSTONE SCHOOL"
+    },
+    {
+      "disp_name": "0450276 - P.G. AMBIENT AIR STATION HUSKY OIL"
+    },
+    {
+      "disp_name": "0450278 - P.G. AMBIENT AIR STATION OLD FRASER R BR"
+    },
+    {
+      "disp_name": "0450282 - P.G. AMBIENT AIR STATION NTHWD PULP"
+    },
+    {
+      "disp_name": "0450294 - DUSTFALL; PIR OFFICE ROOF"
+    },
+    {
+      "disp_name": "0450295 - DUSTFALL; PIR LOG STORAGE YARD"
+    },
+    {
+      "disp_name": "0450296 - DUSTFALL; PIR CHIP STOCK PILE"
+    },
+    {
+      "disp_name": "0450297 - DUSTFALL; PIR PLANER BUILDING ROOF"
+    },
+    {
+      "disp_name": "0450307 - PRINCE GEORGE PLAZA 400"
+    },
+    {
+      "disp_name": "0450322 - PRINCE GEORGE JAIL"
+    },
+    {
+      "disp_name": "0450324 - PRINCE GEORGE LAKEWOOD"
+    },
+    {
+      "disp_name": "0450325 - PG AMB AIR PROG FOREMAN FLATS"
+    },
+    {
+      "disp_name": "0451001 - CASSIAR AIR - CARMACK ST."
+    },
+    {
+      "disp_name": "0451002 - CASSIAR AIR - STEAM HOUSE"
+    },
+    {
+      "disp_name": "0451003 - CASSIAR AIR - TRUCK LOT"
+    },
+    {
+      "disp_name": "0451307 - PRINCE GEORGE PLAZA 400 URG"
+    },
+    {
+      "disp_name": "0500134 - LUMBY AIR - SOUTH (PA02019)"
+    },
+    {
+      "disp_name": "0500156 - PENTICTON AIR - PA01916 - STP"
+    },
+    {
+      "disp_name": "0500157 - PENTICTON AIR - PA01916 - AIRPORT"
+    },
+    {
+      "disp_name": "0500396 - LUMBY AIR - CZ"
+    },
+    {
+      "disp_name": "0500439 - LAVINGTON AIR - PA02001 - HARBOR"
+    },
+    {
+      "disp_name": "0500520 - OK FALLS AIR - LYNN ACRES"
+    },
+    {
+      "disp_name": "0500523 - LAVINGTON PLANER - PA02001 - DUSTFALL  1"
+    },
+    {
+      "disp_name": "0500524 - LAVINGTON PLANNER - PA02001 -DUSTFALL - 2"
+    },
+    {
+      "disp_name": "0500526 - LAVINGTON PLANER - PA02001 - DUSTFALL- 4"
+    },
+    {
+      "disp_name": "0500527 - RIVERSIDE LUMBY - PA02011 - PERM DATA - 1"
+    },
+    {
+      "disp_name": "0500528 - RIVERSIDE LUMBY - PA02011 - PERM DATA - 2"
+    },
+    {
+      "disp_name": "0500529 - GORMAN BROS LAVINGTON - PA02002 - PERM DATA 1"
+    },
+    {
+      "disp_name": "0500530 - GORMAN BROS. LAVINGTON PA02002 PERM DATA 1"
+    },
+    {
+      "disp_name": "0500531 - GREENWOOD - PENT - PA01916 - DUSTFALL 1"
+    },
+    {
+      "disp_name": "0500532 - GREENWOOD - PENT - PA01916 - DUSTFALL 2"
+    },
+    {
+      "disp_name": "0500538 - WEYCO OK FALLS PA01847 DUSTFALL 1"
+    },
+    {
+      "disp_name": "0500539 - WEYCO OK FALLS PA01847 DUSTFALL 2"
+    },
+    {
+      "disp_name": "0500540 - WEYCO OK FALLS PA01847 DUSTFALL 3"
+    },
+    {
+      "disp_name": "0500541 - WEYCO LUMBY - PA02019 - PERM DATA - 1"
+    },
+    {
+      "disp_name": "0500542 - WEYCO LUMBY - PA02019 - PERM DATA - 2"
+    },
+    {
+      "disp_name": "0500543 - WEYCO LUMBY - PA02019 - S.W. CORNER OF MILL PROPERTY -DUSTFALL"
+    },
+    {
+      "disp_name": "0500544 - WEYCO LUMBY - PA02019 - DUSTFALL  S.E. CORNER OF MILL PROPERTY"
+    },
+    {
+      "disp_name": "0500568 - BELL POLE - LUMBY - PA01990 - PERMIT DATA - 1"
+    },
+    {
+      "disp_name": "0500569 - BELL POLE - LUMBY - PA01990 - PERM DATA - 2"
+    },
+    {
+      "disp_name": "0500618 - RIVERSIDE - ARMSTRONG; PA2717; EAST DUSTFALL"
+    },
+    {
+      "disp_name": "0500619 - RIVERSIDE; ARMSTRONG; PA-2717; N/W DUSTFALL"
+    },
+    {
+      "disp_name": "0500620 - RIVERSIDE; ARMSTRONG; PA-2717; SOUTH DUSTFALL"
+    },
+    {
+      "disp_name": "0500655 - LUMBY AIR - PRIVATE RESIDENCE"
+    },
+    {
+      "disp_name": "0500698 - LAVINGTON AIR - PA02001 - EAST"
+    },
+    {
+      "disp_name": "0500738 - PRIVATE RESIDENCE PRINCETON"
+    },
+    {
+      "disp_name": "0500762 - PARTA GRAND FORKS MAKAOFF (PA02258)"
+    },
+    {
+      "disp_name": "0500763 - PARTA GRAND FORKS MAYFLOWER MOTEL (PA2258)"
+    },
+    {
+      "disp_name": "0500783 - PINES TRAILER COURT PRINCETON"
+    },
+    {
+      "disp_name": "0500825 - OK FALLS AIR - PA01847 - SOUTH"
+    },
+    {
+      "disp_name": "0500826 - OK FALLS AIR - PA01847 - CONTROL"
+    },
+    {
+      "disp_name": "0500827 - VERNON AIR: GENIERS(TO 1985) RCMP BLDG.(1986)"
+    },
+    {
+      "disp_name": "0500869 - PENTICTON AIR CARMI SCHOOL"
+    },
+    {
+      "disp_name": "0500886 - KELOWNA COLLEGE"
+    },
+    {
+      "disp_name": "0500910 - COMO RD.; GRAND FORKS"
+    },
+    {
+      "disp_name": "0550501 - QUESNEL WEST FRASER"
+    },
+    {
+      "disp_name": "0550502 - WILLIAMS LAKE COLUMNEETZA SCHOOL"
+    },
+    {
+      "disp_name": "0605001 - KAMLOOPS AIRPORT"
+    },
+    {
+      "disp_name": "0605008 - KAMLOOPS FEDERAL BUILDING"
+    },
+    {
+      "disp_name": "0605009 - EAST OF WEYCAN CHIPS"
+    },
+    {
+      "disp_name": "0605020 - WILLIAMS LAKE SKYLINE SCHOOL"
+    },
+    {
+      "disp_name": "0605022 - WLMS LK - FORESTRY MAINT. B."
+    },
+    {
+      "disp_name": "0605028 - N.W. OF WEST FRASER - DUSTFALL"
+    },
+    {
+      "disp_name": "0605040 - MERRITT TOWNHALL"
+    },
+    {
+      "disp_name": "0605046 - INTERNATIONQAL FOREST PRODUCTS LIMITED (PA3446) - DUSTFALL STN 1."
+    },
+    {
+      "disp_name": "0605047 - INTERNATIONAL FOREST PRODUCTS LIMITED (PA3446) - DUSTFALL STN 2."
+    },
+    {
+      "disp_name": "0605048 - INTERNATIONAL FOREST PRODUCTS LIMITED (PA3446) - DUSTFALL STN 3."
+    },
+    {
+      "disp_name": "0605061 - WOODLAND TRAILER PARK"
+    },
+    {
+      "disp_name": "0605093 - QUESNEL; KAL TIRE"
+    },
+    {
+      "disp_name": "0605096 - BC TEL VALLEYVIEW"
+    },
+    {
+      "disp_name": "0605099 - MCARTHUR ISLAND PARK"
+    },
+    {
+      "disp_name": "0605104 - CHERRY CREEK RANCH"
+    },
+    {
+      "disp_name": "0605105 - SIX MILE VIEWPOINT"
+    },
+    {
+      "disp_name": "0605113 - GREEN ACRES TRAILER COURT - DUSTFALL"
+    },
+    {
+      "disp_name": "0605114 - COMER HILL - DUSTFALL"
+    },
+    {
+      "disp_name": "0605115 - WELDWOOD (PA01764)"
+    },
+    {
+      "disp_name": "0605116 - ANNE STEVENSON JR. SEC. SCHOOL - DUSTFALL"
+    },
+    {
+      "disp_name": "0605123 - MALAKWA TRAILER PARK WEST OF DREW"
+    },
+    {
+      "disp_name": "0605124 - CANA-MARA TRAILER PARK EAST OF DREW"
+    },
+    {
+      "disp_name": "0605201 - 4.8 MILE EAST OF AFTON - SULFATION PLATE"
+    },
+    {
+      "disp_name": "0605206 - 3.7 MILE WEST OF AFTON - SULFATION PLATE"
+    },
+    {
+      "disp_name": "0605207 - EAST OF KAMLOOPS LAGOONS - SULFATION PLATE"
+    },
+    {
+      "disp_name": "0660601 - KITIMAT KILDALA SCHOOL"
+    },
+    {
+      "disp_name": "0660602 - KITIMAT SAUNDERS"
+    },
+    {
+      "disp_name": "0660605 - KITIMAT COLUMBIA R. LODGE"
+    },
+    {
+      "disp_name": "0660606 - PORT EDWARD ELEMENTARY"
+    },
+    {
+      "disp_name": "0660607 - PRINCE RUPERT"
+    },
+    {
+      "disp_name": "0700000 - SOUTH DUSTFALL CANISTER"
+    },
+    {
+      "disp_name": "0700001 - WEST DUSTFALL CANISTER"
+    },
+    {
+      "disp_name": "0700002 - NORTH DUSTFALL CANISTER"
+    },
+    {
+      "disp_name": "0700003 - EAST DUSTFALL CANISTER"
+    },
+    {
+      "disp_name": "0700165 - TELKWA HI-VOL AT VILLAGE OFFICE"
+    },
+    {
+      "disp_name": "0700183 - SMITHERS PRECIPITATION CHEMISTRY"
+    },
+    {
+      "disp_name": "0770701 - PINE RIVER AIRPORT"
+    },
+    {
+      "disp_name": "0770702 - PINE RIVER BEND RIVER RANCH"
+    },
+    {
+      "disp_name": "0770703 - PINE RIVER GAS PLANT"
+    },
+    {
+      "disp_name": "0770704 - FORT NELSON MUSKWA INDUSTRIAL AREA"
+    },
+    {
+      "disp_name": "0770705 - FORT NELSON TOWNSITE "
+    },
+    {
+      "disp_name": "0770706 - FORT NELSON JACKFISH "
+    },
+    {
+      "disp_name": "0770707 - TAYLOR FARMHOUSE"
+    },
+    {
+      "disp_name": "0770708 - TAYLOR TOWNSITE"
+    },
+    {
+      "disp_name": "0770709 - MACKENZIE"
+    },
+    {
+      "disp_name": "0805000 - RESIDENCE - QUESNEL"
+    },
+    {
+      "disp_name": "E206112 - WILLIAMS LAKE FIREHALL BORLAND STREET"
+    },
+    {
+      "disp_name": "E206113 - QUESNEL (PA02576) DUSTFALL STATION; CITY HALL"
+    },
+    {
+      "disp_name": "E206164 - HORSESHOE BAY W VAN FIRE HALL NO 2"
+    },
+    {
+      "disp_name": "E206166 - SECHELT MASON ROAD"
+    },
+    {
+      "disp_name": "E206168 - AGASSIZ CDA"
+    },
+    {
+      "disp_name": "E206169 - PITT MEADOWS AIRPORT"
+    },
+    {
+      "disp_name": "E206181 - SPECTACLE LAKE ACID RAIN STATION"
+    },
+    {
+      "disp_name": "E206183 - NANOOSE ACID RAIN SITE"
+    },
+    {
+      "disp_name": "E206186 - LINE CR (PA5352) D/F SOUTH OF PLANT REFUSE"
+    },
+    {
+      "disp_name": "E206187 - LINE CR (PA5352) D/F EAST OF RAILROAD LOOP"
+    },
+    {
+      "disp_name": "E206188 - LINE CR (PA5352) D/F AT WATER SURVEY BRIDGE"
+    },
+    {
+      "disp_name": "E206189 - LINE CR (PA5352) D/F; H/V AT DORMANT STP POND"
+    },
+    {
+      "disp_name": "E206190 - ELK VALLEY COAL  G/H (PA6249) PUMPHOUSE NEAR POND"
+    },
+    {
+      "disp_name": "E206191 - ELK VALLEY COAL  G/H (PA6249) SOUTH OF LOADOUT SILOS"
+    },
+    {
+      "disp_name": "E206192 - ELKVIEW COAL (PA1807) SPARWOOD DAYCARE"
+    },
+    {
+      "disp_name": "E206193 - ELKVIEW COAL (PA1807) NORTH OF MICHEL HOTEL"
+    },
+    {
+      "disp_name": "E206194 - ELKVIEW COAL (PA1807) EAST OF ELKVIEW PLANT"
+    },
+    {
+      "disp_name": "E206195 - FORDING COAL; ENVIRONMENTAL CENTRE"
+    },
+    {
+      "disp_name": "E206196 - ELK VALLEY COAL  CMO (PA4751) WEST INTERCEPTOR DITCH"
+    },
+    {
+      "disp_name": "E206197 - ELK VALLEY COAL  CMO (PA4751) EAST OF MINE DRY"
+    },
+    {
+      "disp_name": "E206198 - LINE CR (PA5352) D/F 300M NNE MINE SERVICES"
+    },
+    {
+      "disp_name": "E206199 - LINE CR (PA5352) D/F & H/V WEST OF ANFO BLDG"
+    },
+    {
+      "disp_name": "E206204 - CRANBROOK AIRPORT PRECIPITATION MONITOR"
+    },
+    {
+      "disp_name": "E206205 - SLOCAN INN"
+    },
+    {
+      "disp_name": "E206206 - REMCO;COOPER CREEK"
+    },
+    {
+      "disp_name": "E206237 - CRANBROOK;915C CRANBROOK STREET NORTH"
+    },
+    {
+      "disp_name": "E206238 - CRANBROOK;1807 TENTH STREET NORTH"
+    },
+    {
+      "disp_name": "E206239 - CRANBROOK;2001 THEATER ROAD"
+    },
+    {
+      "disp_name": "E206240 - CRANBROOK;917 INDUSTRIAL ROAD #1"
+    },
+    {
+      "disp_name": "E206241 - CRANBROOK;AMY WOODLAND SCHOOL"
+    },
+    {
+      "disp_name": "E206242 - CRANBROOK;FIRE HALL #2"
+    },
+    {
+      "disp_name": "E206243 - CRANBROOK SWIMMING POOL"
+    },
+    {
+      "disp_name": "E206250 - SPARWOOD AIRPORT"
+    },
+    {
+      "disp_name": "E206269 - ANNACIS ISLAND GVRD SITE - T13"
+    },
+    {
+      "disp_name": "E206270 - BURNABY MOUNTAIN"
+    },
+    {
+      "disp_name": "E206271 - SURREY EAST"
+    },
+    {
+      "disp_name": "E206291 - TERRACE AIRPORT-PRECIPITATION CHEMISTRY"
+    },
+    {
+      "disp_name": "E206295 - PENDER ISLAND ACID RAIN SITE"
+    },
+    {
+      "disp_name": "E206296 - VICTORIA  KINGS ROAD ACID RAIN SITE"
+    },
+    {
+      "disp_name": "E206301 - LUMBY-CHARLES BLOOM SEC. SCHOOL"
+    },
+    {
+      "disp_name": "E206302 - LUMBY HOME FURNISHINGS"
+    },
+    {
+      "disp_name": "E206303 - LUMBY-WEYERHAEUSER WEST (PA02019)"
+    },
+    {
+      "disp_name": "E206304 - KELOWNA - OKANAGAN COLLEGE"
+    },
+    {
+      "disp_name": "E206310 - VICTORIA  GONZALES ACID RAIN SITE"
+    },
+    {
+      "disp_name": "E206373 - CRANBROOK;MURIEL BAXTER SCHOOL"
+    },
+    {
+      "disp_name": "E206375 - NELSON GOVERNMENT BUILDING"
+    },
+    {
+      "disp_name": "E206376 - CROFTON AIR;  MCDONALD RESIDENCE WEST OF MILL"
+    },
+    {
+      "disp_name": "E206377 - CROFTON AIR; CHLORINATION PLANT ROOF"
+    },
+    {
+      "disp_name": "E206378 - CROFTON AIR; AT VERNON AND SHASTA STREETS"
+    },
+    {
+      "disp_name": "E206379 - CROFTON AIR; COMMUNITY HALL ROOF"
+    },
+    {
+      "disp_name": "E206380 - CROFTON AIR;  BCFP OFFICE ROOF  CHAPLAIN ST"
+    },
+    {
+      "disp_name": "E206381 - CROFTON AIR; SCHMIDT RESIDENCE 1353 ADELAIDE"
+    },
+    {
+      "disp_name": "E206382 - CROFTON AIR AT SWALLOWFIELD FARM"
+    },
+    {
+      "disp_name": "E206383 - CROFTON AIR; ROOF OF CROFTON ARMS APART."
+    },
+    {
+      "disp_name": "E206458 - MCABEE PIT ACCESS ROAD"
+    },
+    {
+      "disp_name": "E206459 - MCABEE PIT CNR STOCKPILE"
+    },
+    {
+      "disp_name": "E206502 - BEAU-J`S SAWMILL DUSTFALL #1"
+    },
+    {
+      "disp_name": "E206503 - INDIAN POINT RESORT"
+    },
+    {
+      "disp_name": "E206504 - FED CO-OP BULK PLANT"
+    },
+    {
+      "disp_name": "E206506 - MICA CREEK HYDRO OFFICE"
+    },
+    {
+      "disp_name": "E206508 - WILLIAMS LAKE; D.HEBERT RESIDENCE"
+    },
+    {
+      "disp_name": "E206509 - WILLIAMS LAKE; J.BOS RESIDENCE"
+    },
+    {
+      "disp_name": "E206515 - HARMAC AIR; DOUGS`S MOBILE MARINE"
+    },
+    {
+      "disp_name": "E206518 - CANAL FLATS COLUMBIA INN"
+    },
+    {
+      "disp_name": "E206562 - TIES RD./YELLOW POINT RD. STATION"
+    },
+    {
+      "disp_name": "E206567 - KAMLOOPS WESTSYDE ACID RAIN"
+    },
+    {
+      "disp_name": "E206588 - SMITHERS AIR QUALITY AT BCBC GARAGE"
+    },
+    {
+      "disp_name": "E206589 - SMITHERS ST JOSEPHS SCHOOL"
+    },
+    {
+      "disp_name": "E206617 - LINE CR RES; D/F S.T.P. LAGOON (OLD)"
+    },
+    {
+      "disp_name": "E206671 - KITIMAT NECHAKO DOCK"
+    },
+    {
+      "disp_name": "E206707 - LANGLEY - AIR - SITE-PETERSON ROAD"
+    },
+    {
+      "disp_name": "E206725 - KAMLOOPS FED BLDG"
+    },
+    {
+      "disp_name": "E206759 - SKAHA AIR - SOUTH STN"
+    },
+    {
+      "disp_name": "E206760 - SKAHA AIR - EAST STN"
+    },
+    {
+      "disp_name": "E206761 - SKAHA AIR - NORTH STN"
+    },
+    {
+      "disp_name": "E206762 - SKAHA AIR - WEST STN"
+    },
+    {
+      "disp_name": "E206781 - VANCOUVER INTERNATIONAL AIRPORT"
+    },
+    {
+      "disp_name": "E206782 - SEYMOUR DAM -GVRD"
+    },
+    {
+      "disp_name": "E206783 - PORT HARDY AIRPORT"
+    },
+    {
+      "disp_name": "E206784 - KELOWNA AIRPORT"
+    },
+    {
+      "disp_name": "E206786 - SKOOKUMCHUCK AT BRADFORD RANCH"
+    },
+    {
+      "disp_name": "E206787 - FORT STEELE-MAUS CREEK AT PRIVATE RESIDENCE"
+    },
+    {
+      "disp_name": "E206869 - SUMMERLAND FOREST PROD 20M N OF CYCLONES"
+    },
+    {
+      "disp_name": "E206870 - SUMMERLAND FOREST PROD 30M NNW OF CYCLONES"
+    },
+    {
+      "disp_name": "E206872 - SEWAGE TRMT PLANT - RTI"
+    },
+    {
+      "disp_name": "E206873 - EASTERN SHORE RIDLEY ISL. - RTI"
+    },
+    {
+      "disp_name": "E206874 - RIDLEY TERMINALS--CHIP UNLOADING FACILITY"
+    },
+    {
+      "disp_name": "E206875 - PT. EDWARD VILLAGE OFFICE - RTI"
+    },
+    {
+      "disp_name": "E206876 - DUSTFALL CANISTER #4 PA 3010"
+    },
+    {
+      "disp_name": "E206890 - TREPANIER BENCH RD. @ HYDRO R/W"
+    },
+    {
+      "disp_name": "E206891 - TREPANIER BENCH RD. @ CHLORINATION BLDG."
+    },
+    {
+      "disp_name": "E206892 - TREPANIER COURT @ TREPANIER BENCH RD."
+    },
+    {
+      "disp_name": "E206893 - TREPANIER BENCH RD. @ PARADISE VALLEY RD."
+    },
+    {
+      "disp_name": "E206894 - TREPANIER-PARADISE VALLEY RD 400M S CL. BLDG"
+    },
+    {
+      "disp_name": "E206895 - TREPANIER CR.-MAXWELL RD @ LOT 17 RD"
+    },
+    {
+      "disp_name": "E206898 - KAMLOOPS BROCKLEHURST"
+    },
+    {
+      "disp_name": "E206931 - CASTLEGAR AT SENIOR CITIZEN LOUNGE"
+    },
+    {
+      "disp_name": "E206987 - LANGDALE CAMP ELPHINSTONE"
+    },
+    {
+      "disp_name": "E207069 - PEERLESS ROAD INCINERATOR #1"
+    },
+    {
+      "disp_name": "E207070 - KOKSILAH ROAD INCINERATOR #1"
+    },
+    {
+      "disp_name": "E207071 - PENDER ISLAND - ALLISON FARM"
+    },
+    {
+      "disp_name": "E207182 - KITIMAT MINETTE SUB-STATION"
+    },
+    {
+      "disp_name": "E207251 - ROYS CAMPGROUND NEAR HIDDEN CREEK"
+    },
+    {
+      "disp_name": "E207252 - HUNTERS RESIDENCE"
+    },
+    {
+      "disp_name": "E207262 - SUMMERLAND FOREST PROD 120M NE OF CYCLONES"
+    },
+    {
+      "disp_name": "E207263 - SUMMERLAND FOREST PROD 120M NW OF CYCLONES"
+    },
+    {
+      "disp_name": "E207283 - PURITY"
+    },
+    {
+      "disp_name": "E207284 - KINEGARD"
+    },
+    {
+      "disp_name": "E207286 - POWELL RIVER CRANBERRY CENTRE"
+    },
+    {
+      "disp_name": "E207306 - DUSTFALL MONITORING SITE #1 EAST"
+    },
+    {
+      "disp_name": "E207307 - DUSTFALL MONITORING SITE #2 SOUTH"
+    },
+    {
+      "disp_name": "E207308 - DUSTFALL MONITORING SITE #3 WEST"
+    },
+    {
+      "disp_name": "E207309 - DUSTFALL MONITORING SITE #4 NORTH"
+    },
+    {
+      "disp_name": "E207312 - KALAMALKA AIR SOUTH"
+    },
+    {
+      "disp_name": "E207313 - KALAMALKA AIR WEST"
+    },
+    {
+      "disp_name": "E207314 - KALAMALKA AIR NORTH-EAST"
+    },
+    {
+      "disp_name": "E207326 - KALAMALKA AIR NW"
+    },
+    {
+      "disp_name": "E207380 - MT. SEYMOUR PARKING LOT#2"
+    },
+    {
+      "disp_name": "E207381 - DEEP COVE LOOKOUT"
+    },
+    {
+      "disp_name": "E207389 - EAST RICHMOND"
+    },
+    {
+      "disp_name": "E207417 - RICHMOND SOUTH"
+    },
+    {
+      "disp_name": "E207418 - BURNABY SOUTH"
+    },
+    {
+      "disp_name": "E207428 - SECHELT ST MARYS HOSPITAL"
+    },
+    {
+      "disp_name": "E207438 - 2816 GLEN ROSA RD."
+    },
+    {
+      "disp_name": "E207439 - GORMAN BRO. N FENCE LINE"
+    },
+    {
+      "disp_name": "E207520 - CITY HALL; GRAND FORKS"
+    },
+    {
+      "disp_name": "E207547 - KIMBERLEY AT MARYSVILLE POST OFFICE"
+    },
+    {
+      "disp_name": "E207563 - PAVILION SUBDIVISION - WEST OF STEEL BROS."
+    },
+    {
+      "disp_name": "E207564 - PAVILION IR4 - EAST BOUNDARY - E OF STEEL BRO"
+    },
+    {
+      "disp_name": "E207565 - PAVILION RODEO GROUNDS - S OF STEEL BROS."
+    },
+    {
+      "disp_name": "E207566 - HAT CREEK ROAD"
+    },
+    {
+      "disp_name": "E207661 - OK. PALLET AND CONTAINER 100 M S"
+    },
+    {
+      "disp_name": "E207662 - HAVERKAMP; SUMMERLAND"
+    },
+    {
+      "disp_name": "E207663 - OK PALLET AND CONTAINER 10 M S"
+    },
+    {
+      "disp_name": "E207723 - NORTH DELTA"
+    },
+    {
+      "disp_name": "E207741 - PEACHCLIFF- TOWNSEND"
+    },
+    {
+      "disp_name": "E207751 - SEYMOUR MOUNTAIN AT CHQM TOWER"
+    },
+    {
+      "disp_name": "E207875 - TRAIL; COMINCO ARSENIC STORAGR AREA"
+    },
+    {
+      "disp_name": "E207876 - TRAIL; TADANAC WATER TREATMENT PLANT"
+    },
+    {
+      "disp_name": "E207877 - TRAIL STONEY CREEK DUSTFALL - TECK SMELTER"
+    },
+    {
+      "disp_name": "E207879 - ROBSON"
+    },
+    {
+      "disp_name": "E207880 - F. MCCONNELL"
+    },
+    {
+      "disp_name": "E207908 - SMITHERS AT CHANDLER SCHOOL"
+    },
+    {
+      "disp_name": "E207909 - SMITHERS AT RAILWAY AVE"
+    },
+    {
+      "disp_name": "E207910 - COMINCO AIR STATION 38; KIMBERLEY"
+    },
+    {
+      "disp_name": "E207911 - COMINCO AIR STATION 39; KIMBERLEY"
+    },
+    {
+      "disp_name": "E207912 - COMINCO AIR STATION 41; KIMBERLEY"
+    },
+    {
+      "disp_name": "E207913 - COMINCO AIR STATION 45; KIMBERLEY"
+    },
+    {
+      "disp_name": "E207914 - SKOOKUMCHUCK JOHNSON LAKE"
+    },
+    {
+      "disp_name": "E207920 - SATURNA ISLAND PRECIPITATION"
+    },
+    {
+      "disp_name": "E208037 - PARTA HOLDINGS NORTH BOUNDARY"
+    },
+    {
+      "disp_name": "E208072 - MACKAY RESIDENCE; PRINCETON"
+    },
+    {
+      "disp_name": "E208073 - PAGE RESIDENCE CROFTON"
+    },
+    {
+      "disp_name": "E208074 - SUBSTATION CROFTON"
+    },
+    {
+      "disp_name": "E208083 - MERRITT SCHU"
+    },
+    {
+      "disp_name": "E208096 - QUESNEL SENIOR SECONDARY"
+    },
+    {
+      "disp_name": "E208298 - PE-1133 RAINFALL"
+    },
+    {
+      "disp_name": "E208332 - KILSBY RESIDENCE - QUESNEL"
+    },
+    {
+      "disp_name": "E208537 - EAST SITE"
+    },
+    {
+      "disp_name": "E208543 - NORTH SITE (PA 08266)"
+    },
+    {
+      "disp_name": "E208546 - WEST SITE"
+    },
+    {
+      "disp_name": "E208805 - WESTSYDE BC TEL"
+    },
+    {
+      "disp_name": "E209013 - DUSTFALL NORTH (W) PA4122"
+    },
+    {
+      "disp_name": "E209026 - DUSTFALL WEST (SW) PA4122"
+    },
+    {
+      "disp_name": "E209027 - DUSTFALL SOUTH (SE) PA4122"
+    },
+    {
+      "disp_name": "E209029 - DUSTFALL EAST (NE) PA4122"
+    },
+    {
+      "disp_name": "E209044 - TEXADA LIME PA07189 TOPLEY LIME DUSTFALL"
+    },
+    {
+      "disp_name": "E209062 - KITWANGA LUMBER PA04171 DUSTFALL SOUTH"
+    },
+    {
+      "disp_name": "E209063 - KITWANGA LUMBER PA04171 DUSTFALL WEST"
+    },
+    {
+      "disp_name": "E209065 - KITWANGA LUMBER PA04171 DUSTFALL NORTH"
+    },
+    {
+      "disp_name": "E209066 - KITWANGA LUMBER PA04171 DUSTFALL EAST"
+    },
+    {
+      "disp_name": "E209177 - NORTH VANCOUVER MAHON PARK"
+    },
+    {
+      "disp_name": "E209179 - PRINCE GEORGE CBC TRANSMITTER"
+    },
+    {
+      "disp_name": "E209558 - PA-1644 MACKENZIE PULP AMBIENT PM10"
+    },
+    {
+      "disp_name": "E209816 - QUESNEL; QRP (PA-05804) TRS AMBIENT MONITOR"
+    },
+    {
+      "disp_name": "E210546 - CHAPMAN CEDAR EAST"
+    },
+    {
+      "disp_name": "E210547 - CHAPMAN CEDAR WEST"
+    },
+    {
+      "disp_name": "E210549 - ROCKLAND WYND TRAILER PARK"
+    },
+    {
+      "disp_name": "E210586 - PA-1955: DUSTFALL CANISTER #1"
+    },
+    {
+      "disp_name": "E210587 - PA-1955: DUSTFALL CANISTER #2"
+    },
+    {
+      "disp_name": "E210588 - PA-1955: DUSTFALL CANISTER #3"
+    },
+    {
+      "disp_name": "E210606 - PA-3403: DUSTFALL STN #1"
+    },
+    {
+      "disp_name": "E210607 - DUSTFALL STN#2"
+    },
+    {
+      "disp_name": "E210608 - PA-3403: DUSTFALL STN #3"
+    },
+    {
+      "disp_name": "E210609 - PA-3403: DUSTFALL STN #4"
+    },
+    {
+      "disp_name": "E210757 - PA 1555 MON. STN #1"
+    },
+    {
+      "disp_name": "E210758 - PA 1555 MON. STA. #2"
+    },
+    {
+      "disp_name": "E210759 - PA 1555 MON. STA. #3"
+    },
+    {
+      "disp_name": "E211086 - UNKNOWN"
+    },
+    {
+      "disp_name": "E211940 - DOWNIE TIMBER (PA-1997) DUSTFALL #1"
+    },
+    {
+      "disp_name": "E211941 - DOWNIE TIMBER (PA-1997) DUSTFALL #2"
+    },
+    {
+      "disp_name": "E211943 - DOWNIE TIMBER (PA-1997) DUSTFALL #3"
+    },
+    {
+      "disp_name": "E211947 - DOWNIE TIMBER (PA-1997) DUSTFALL #4"
+    },
+    {
+      "disp_name": "E211958 - SLOCAN GROUP (PA-1842) DUSTFALL #1"
+    },
+    {
+      "disp_name": "E211960 - SLOCAN GROUP (PA-1842) DUSTFALL #2"
+    },
+    {
+      "disp_name": "E211961 - SLOCAN GROUP (PA-1842) DUSTFALL #3"
+    },
+    {
+      "disp_name": "E211980 - SLOCAN GROUP (PA-1842) DUSTFALL #4"
+    },
+    {
+      "disp_name": "E211982 - SLOCAN GROUP (PA-1842) DUSTFALL #5"
+    },
+    {
+      "disp_name": "E212522 - GORMAN BROS. WESTBANK N. PROP. LINE"
+    },
+    {
+      "disp_name": "E212524 - GORMAN BROS. WESTBANK OPPOSITE MTCE. SHOP"
+    },
+    {
+      "disp_name": "E212525 - GORMAN BROS. WESTBANK JACOBSON PROPERTY"
+    },
+    {
+      "disp_name": "E212526 - GORMAN BROS. WESTBANK 3905 GLENDELL CRES."
+    },
+    {
+      "disp_name": "E212528 - GORMAN BROS. LUMBER; WESTBANK - 3936 WOODELL"
+    },
+    {
+      "disp_name": "E212850 - PACIFIC ABRASIVES WEST DUSTFALL (NO.1)"
+    },
+    {
+      "disp_name": "E212851 - PACIFIC ABRASIVES NORTH DUSTFALL (NO.2)"
+    },
+    {
+      "disp_name": "E212852 - PACIFIC ABRASIVES EAST DUSTFALL; NO.3"
+    },
+    {
+      "disp_name": "E212853 - SOUTH DUSTFALL; NO. 4"
+    },
+    {
+      "disp_name": "E212854 - PACIFIC ABRASIVES; DUSTFALL N OF NO.1 (NO.5)"
+    },
+    {
+      "disp_name": "E213002 - WEYERHAEUSER CANADA LTD.  DUSTFALL #1"
+    },
+    {
+      "disp_name": "E213003 - WEYERHAEUSER CANADA LTD. DUSTFALL #2"
+    },
+    {
+      "disp_name": "E213004 - WEYERHAEUSER CANADA LTD.   DUSTFALL #3"
+    },
+    {
+      "disp_name": "E213005 - WEYERHAEUSER CANADA LTD. DUSTFALL #5"
+    },
+    {
+      "disp_name": "E213006 - WEYERHAEUSER CANADA LTD.-  PRINCTON -  UNKNOWN SITE"
+    },
+    {
+      "disp_name": "E213027 - CONSTRUCTION AGGREGATES; SOUTH PROPERTY LINE"
+    },
+    {
+      "disp_name": "E213028 - YACHT RD.; SECHELT"
+    },
+    {
+      "disp_name": "E213029 - SALMON DR.; SECHELT"
+    },
+    {
+      "disp_name": "E213032 - PINECREST SCHOOL"
+    },
+    {
+      "disp_name": "E213056 - CRESTON HOSPITAL"
+    },
+    {
+      "disp_name": "E213075 - QUESNEL; WEST FRASER (PA-03725) Q-PLY DUSTFALL #1"
+    },
+    {
+      "disp_name": "E213076 - QUESNEL; WEST FRASER (PA-03725) Q-PLY DUSTFALL #2"
+    },
+    {
+      "disp_name": "E213077 - QUESNEL; WEST FRASER (PA-03725) Q-PLY DUSTFALL #3"
+    },
+    {
+      "disp_name": "E213093 - WMS LK; TOLKO LAKEVIEW (PA-03283) DUSTFALL STN #2"
+    },
+    {
+      "disp_name": "E213094 - WMS LK; TOLKO LAKEVIEW (PA-03283) DUSTFALL STN. #1"
+    },
+    {
+      "disp_name": "E213095 - WMS LK; TOLKO LAKEVIEW (PA-03283) DUSTFALL STN #3"
+    },
+    {
+      "disp_name": "E213098 - 100 MILE; WEST FRASER MILLS (PA-01615) #2 DUSTFALL"
+    },
+    {
+      "disp_name": "E213099 - 100 MILE; WEST FRASER MILLS (PA-01615) #3 DUSTFALL"
+    },
+    {
+      "disp_name": "E213100 - 100 MILE; WEST FRASER MILLS (PA-01615) #1 DUSTFALL"
+    },
+    {
+      "disp_name": "E213114 - CHILLIWACK - MERTINS"
+    },
+    {
+      "disp_name": "E213144 - DUSTFALL CANISTER #1 (PA03010)"
+    },
+    {
+      "disp_name": "E213145 - DUSTFALL CANISTER #2 (PA03010)"
+    },
+    {
+      "disp_name": "E213146 - DUSTFALL CANISTER #3 (PA03010)"
+    },
+    {
+      "disp_name": "E213175 - DUSTFALL CANISTER #1 (PA7864)"
+    },
+    {
+      "disp_name": "E213176 - DUSTFALL CANISTER #2 (PA7864)"
+    },
+    {
+      "disp_name": "E213177 - DUSTFALL CANISTER #3 (PA7864)"
+    },
+    {
+      "disp_name": "E213196 - DUSTFALL CANISTER #1 PA 2198"
+    },
+    {
+      "disp_name": "E213197 - DUSTFALL CANISTER #2 PA 2198"
+    },
+    {
+      "disp_name": "E213198 - DUSTFALL CANISTER #3 PA 2198"
+    },
+    {
+      "disp_name": "E213204 - DUSTFALL CANISTER #1 PA 3008"
+    },
+    {
+      "disp_name": "E213205 - DUSTFALL CANISTER #2 PA 3008"
+    },
+    {
+      "disp_name": "E213206 - DUSTFALL CANISTER #3 PA 3008"
+    },
+    {
+      "disp_name": "E213207 - DUSTFALL CANISTER #4 PA 3008"
+    },
+    {
+      "disp_name": "E213274 - PA-1955: DUSTFALL CANISTER #4"
+    },
+    {
+      "disp_name": "E213365 - DUST CANISTER #1"
+    },
+    {
+      "disp_name": "E213366 - DUST CANISTER #2"
+    },
+    {
+      "disp_name": "E213367 - DUST CANISTER #3"
+    },
+    {
+      "disp_name": "E213368 - DUST CANISTER #4"
+    },
+    {
+      "disp_name": "E213381 - AMBIENT AIR MONITORING"
+    },
+    {
+      "disp_name": "E213682 - LOWER ARROW LAKE WEST OF KEENLEYSIDE DAM"
+    },
+    {
+      "disp_name": "E213726 - PA-3260 PLANT"
+    },
+    {
+      "disp_name": "E214081 - PA-7596:DUSTFALL CANISTER #1"
+    },
+    {
+      "disp_name": "E214082 - PA-7596:DUSTFALL CANISTER #2"
+    },
+    {
+      "disp_name": "E214083 - PA-7596:DUSTFALL CANISTER #3"
+    },
+    {
+      "disp_name": "E214084 - PA-7596:DUSTFALL CANISTER #4"
+    },
+    {
+      "disp_name": "E214615 - HOPE FIRE HALL"
+    },
+    {
+      "disp_name": "E214810 - FORT STEELE HISTORIC PARK AIR STATION"
+    },
+    {
+      "disp_name": "E215984 - D.F. CANISTER 20M S.E. PROPERTY LINE"
+    },
+    {
+      "disp_name": "E215985 - D.F. CANISTER 20M S.W. PROPERTY LINE"
+    },
+    {
+      "disp_name": "E216112 - POPE & TALBOT CORNER OF 5TH AND 6TH"
+    },
+    {
+      "disp_name": "E216113 - POPE & TALBOT COMO RD. GRAND FORKS"
+    },
+    {
+      "disp_name": "E216114 - POPE AND TALBOT EAST FENCELINE"
+    },
+    {
+      "disp_name": "E216115 - CHRISTINA AT END OF KIMURA RD."
+    },
+    {
+      "disp_name": "E216116 - CHRISTINA AT CLIFTON`S WHARF"
+    },
+    {
+      "disp_name": "E216117 - 6316 MARMOT DR.; SECHELT"
+    },
+    {
+      "disp_name": "E216119 - PORPOISE BAY PROVINCIAL PARK"
+    },
+    {
+      "disp_name": "E216121 - 4 - 5746 MARINE WAY; SECHELT"
+    },
+    {
+      "disp_name": "E216123 - CONSTRUCTION AGGREGATES; EAST PROPERTY LINE"
+    },
+    {
+      "disp_name": "E216145 - CHRISTINA LK AT SCHULLIS RESORT"
+    },
+    {
+      "disp_name": "E216334 - SPOONER - 14TH AVENUE"
+    },
+    {
+      "disp_name": "E216462 - SMITHERS AT GOVERNMENT BUILDING"
+    },
+    {
+      "disp_name": "E216667 - QUESNEL MAPLE DRIVE"
+    },
+    {
+      "disp_name": "E216669 - KITIMAT - SAUNDER`S ROAD (9TH)"
+    },
+    {
+      "disp_name": "E216670 - KITIMAT RIVERLODGE"
+    },
+    {
+      "disp_name": "E216700 - GOLDEN PM10 AND PUF LADY GREY SCHOOL"
+    },
+    {
+      "disp_name": "E216730 - WILLIAMS LAKE GOLF AND TENNIS CLUB"
+    },
+    {
+      "disp_name": "E216736 - GRISDALE RESIDENCE"
+    },
+    {
+      "disp_name": "E216751 - CEDAR SITE AT NICHOLL`S FARM (HARMAC)"
+    },
+    {
+      "disp_name": "E216752 - CANOXY SITE (HARMAC)"
+    },
+    {
+      "disp_name": "E216754 - ROSS RESIDENCE - WILLIAMS LAKE"
+    },
+    {
+      "disp_name": "E216767 - HODGSON RESIDENCE - WILLIAMS LAKE"
+    },
+    {
+      "disp_name": "E216772 - DECKER LAKE FOR. PROD. PA03019 #1 DUSTFALL"
+    },
+    {
+      "disp_name": "E216773 - DECKER LAKE FOR. PROD. PA03019 #2 DUSTFALL"
+    },
+    {
+      "disp_name": "E216774 - DECKER LAKE FOR. PROD. PA03019 #3 DUSTFALL"
+    },
+    {
+      "disp_name": "E216775 - DECKER LAKE FOR. PROD. PA03019 #4 DUSTFALL"
+    },
+    {
+      "disp_name": "E217029 - DOWNTOWN ABBOTSFORD"
+    },
+    {
+      "disp_name": "E217049 - DUSTFALL; TATLOW RD CANNISTER #5"
+    },
+    {
+      "disp_name": "E217050 - DUSTFALL; FAR NE CANNISTER #6"
+    },
+    {
+      "disp_name": "E217051 - DUSTFALL; FAR NW CANNISTER #7"
+    },
+    {
+      "disp_name": "E217052 - DUSTFALL; CHIP CAR LOADER CANNISTER #8"
+    },
+    {
+      "disp_name": "E217116 - WAARDEN AUTOMOTIVE"
+    },
+    {
+      "disp_name": "E217118 - MISSION MARINA"
+    },
+    {
+      "disp_name": "E217119 - TIMBERWOOD TRUCK"
+    },
+    {
+      "disp_name": "E217225 - PA-3449:MISCELLANEOUS"
+    },
+    {
+      "disp_name": "E217226 - PA-3448: MISCELLANEOUS"
+    },
+    {
+      "disp_name": "E217227 - PA-3457: MISCELLANEOUS"
+    },
+    {
+      "disp_name": "E217255 - WASA INS. CO."
+    },
+    {
+      "disp_name": "E217256 - PNR CAR PARK"
+    },
+    {
+      "disp_name": "E217257 - PNR YARD"
+    },
+    {
+      "disp_name": "E217258 - REIMER R.V."
+    },
+    {
+      "disp_name": "E217319 - ALBION ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E217320 - MISSION PIONEER"
+    },
+    {
+      "disp_name": "E217364 - GLENDALE GARDEN SHOP - WILLIAMS LAKE"
+    },
+    {
+      "disp_name": "E217367 - SILVERTONE"
+    },
+    {
+      "disp_name": "E217431 - MAEBELLE"
+    },
+    {
+      "disp_name": "E217680 - REVELSTOKE FIRE HALL"
+    },
+    {
+      "disp_name": "E218444 - 100 MILE BC ACCESS CENTRE"
+    },
+    {
+      "disp_name": "E218458 - HOUSTON-SILVERTHORN SCHOOL"
+    },
+    {
+      "disp_name": "E218535 - PA-3095 HSPP POINT OF IMPINGEMENT"
+    },
+    {
+      "disp_name": "E218578 - NEW HAZELTON DFO BUILDING"
+    },
+    {
+      "disp_name": "E218687 - LINE CR RES; WATER INF. GALLERY AT WELL"
+    },
+    {
+      "disp_name": "E218688 - LINE CR RES; 240 M E LINE CREEK ROCK DRAIN"
+    },
+    {
+      "disp_name": "E218771 - PRINCE GEORGE CN RAIL"
+    },
+    {
+      "disp_name": "E218772 - BCR ENGINEERING BLDG SITE"
+    },
+    {
+      "disp_name": "E218880 - CASTLEGAR ACID PRECIPITATION"
+    },
+    {
+      "disp_name": "E219330 - RDKB; BEAVERDELL LANDFILL OPEN BURN - WOODWASTE"
+    },
+    {
+      "disp_name": "E219361 - GOLD RIVER"
+    },
+    {
+      "disp_name": "E219446 - NORD; LUMBY LANDFILL; PR15282 OPEN BURNING OF WOODWASTE"
+    },
+    {
+      "disp_name": "E219592 - BURNS LAKE"
+    },
+    {
+      "disp_name": "E219639 - INVERMERE PM10 BRIDGEWATER"
+    },
+    {
+      "disp_name": "E219940 - POLLUTION CONTROL CTR (0435008)"
+    },
+    {
+      "disp_name": "E219941 - NORTHLAND DOCK ROAD (0435010)"
+    },
+    {
+      "disp_name": "E219942 - ANDERSON CREEK BRIDGE (0435011)"
+    },
+    {
+      "disp_name": "E219943 - WATER TOWER (0435012)"
+    },
+    {
+      "disp_name": "E219944 - OLD TRAILER COURT"
+    },
+    {
+      "disp_name": "E219945 - HYDRO SUB-STATION (0435014)"
+    },
+    {
+      "disp_name": "E219946 - C.N. CROSSING (0435015)"
+    },
+    {
+      "disp_name": "E219947 - EUROCAN BURNER (0435016)"
+    },
+    {
+      "disp_name": "E219948 - DOC`S CARTAGE (0435017)"
+    },
+    {
+      "disp_name": "E219949 - SAUNDERS WORKSHOP (0435018)"
+    },
+    {
+      "disp_name": "E219950 - MILE 3 EUROCAN ROAD (0435019)"
+    },
+    {
+      "disp_name": "E219951 - CABLE CAR SUBDIVISION (0435020)"
+    },
+    {
+      "disp_name": "E219952 - END OF VALLEY (0435021)"
+    },
+    {
+      "disp_name": "E219953 - STANDARD STATION (0435022)"
+    },
+    {
+      "disp_name": "E219954 - WATER PUMPHOUSE (0435023)"
+    },
+    {
+      "disp_name": "E219955 - KILDALA SCHOOL (0435024)"
+    },
+    {
+      "disp_name": "E219956 - PUBLIC SAFTEY BUILDING (0435025)"
+    },
+    {
+      "disp_name": "E219957 - LAHAKAS & NALABILA ((0435026)"
+    },
+    {
+      "disp_name": "E219958 - ALEXANDER ELEMENTARY SCHOOL (0435027)"
+    },
+    {
+      "disp_name": "E219960 - NORTHLAND DOCK (0435028)"
+    },
+    {
+      "disp_name": "E219961 - ALCAN TOUR BUILDING (0435040)"
+    },
+    {
+      "disp_name": "E219962 - KITIMAT VILLAGE (0435041)"
+    },
+    {
+      "disp_name": "E219963 - MINETTE BAY MIDWAY (0435042)"
+    },
+    {
+      "disp_name": "E219965 - MINETTE BAY MARINA (0435043)"
+    },
+    {
+      "disp_name": "E219966 - BISH CREEK (0435044)"
+    },
+    {
+      "disp_name": "E219968 - KITIMAT ARM (0435045)"
+    },
+    {
+      "disp_name": "E219969 - MILE 6 EUROCAN ROAD (0435046)"
+    },
+    {
+      "disp_name": "E219970 - MILE 9 EUROCAN ROAD (0435047)"
+    },
+    {
+      "disp_name": "E219972 - IRON MOUNTAIN (0435048)"
+    },
+    {
+      "disp_name": "E220049 - DUSTFALL CANISTER (D15)"
+    },
+    {
+      "disp_name": "E220085 - GOLD RIVER BAND OFFICE"
+    },
+    {
+      "disp_name": "E220202 - INVERMERE PM10 FOREST SERVICE COMPOUND"
+    },
+    {
+      "disp_name": "E220203 - CRANBROOK PR3"
+    },
+    {
+      "disp_name": "E220217 - CROFTON SUBSTATION"
+    },
+    {
+      "disp_name": "E220567 - BC ENVIRONMENT COVERED COMPOUND; CRANBROOK"
+    },
+    {
+      "disp_name": "E220621 - TERRACE AIRPORT"
+    },
+    {
+      "disp_name": "E220891 - CHILLIWACK AIRPORT"
+    },
+    {
+      "disp_name": "E221080 - BC ENVIRONMENT OFFICE; CRANBROOK"
+    },
+    {
+      "disp_name": "E221197 - WILLIAMS LAKE COLUMNEETZA SCHOOL PARTISOL"
+    },
+    {
+      "disp_name": "E221199 - CRESTON PC SCHOOL"
+    },
+    {
+      "disp_name": "E221200 - CAMPBELL RIVER AIRPORT"
+    },
+    {
+      "disp_name": "E221544 - HOUSTON FH"
+    },
+    {
+      "disp_name": "E221821 - RUMBLE BEACH HOSPITAL"
+    },
+    {
+      "disp_name": "E221822 - PORT ALICE LAKE ROAD"
+    },
+    {
+      "disp_name": "E221885 - QUESNEL PINECREST CENTRE"
+    },
+    {
+      "disp_name": "E222082 - ANN CAMERON; SLOCAN"
+    },
+    {
+      "disp_name": "E222140 - GENELLE"
+    },
+    {
+      "disp_name": "E222141 - TRAIL WEST DUSTFALL - TECK SMELTER"
+    },
+    {
+      "disp_name": "E222142 - NAKUSP HIGH SCHOOL"
+    },
+    {
+      "disp_name": "E222242 - WILLIAMS LAKE WATER TOWER"
+    },
+    {
+      "disp_name": "E222520 - ELK FALLS DOGWOOD"
+    },
+    {
+      "disp_name": "E222523 - SAANICH FIREHALL NO.1"
+    },
+    {
+      "disp_name": "E222524 - SAANICH FIREHALL NO.3"
+    },
+    {
+      "disp_name": "E222636 - BC HYDRO BUILDING"
+    },
+    {
+      "disp_name": "E222689 - COMINCO STATION AT NORTHPORT"
+    },
+    {
+      "disp_name": "E222759 - EAST PLANER ROOF"
+    },
+    {
+      "disp_name": "E222760 - NORTH SIDE RESERVIOR"
+    },
+    {
+      "disp_name": "E222775 - 724 MISSION ROAD - VERNON"
+    },
+    {
+      "disp_name": "E222778 - LANGDALE ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E222782 - PA-13654 DAY SILO BAGHOUSE DISCHARGE"
+    },
+    {
+      "disp_name": "E222783 - PA-13654 NORTH FLYASH BAGHOUSE DISCHARGE"
+    },
+    {
+      "disp_name": "E222784 - PA-13654 SOUTH FLYASH BAGHOUSE DISCHARGE"
+    },
+    {
+      "disp_name": "E222818 - CLARENCE MICHAEL SCHOOL"
+    },
+    {
+      "disp_name": "E222857 - DAWSON CK"
+    },
+    {
+      "disp_name": "E222858 - CHETWYND"
+    },
+    {
+      "disp_name": "E222859 - FORT ST JAMES"
+    },
+    {
+      "disp_name": "E222923 - CAP ABILITIES EMBROIDERY"
+    },
+    {
+      "disp_name": "E223128 - PRINCE GEORGE BCR WAREHOUSE"
+    },
+    {
+      "disp_name": "E223615 - KITIMAT WHITESAIL"
+    },
+    {
+      "disp_name": "E223616 - KITIMAT HAUL ROAD"
+    },
+    {
+      "disp_name": "E223756 - HOPE AIRPORT"
+    },
+    {
+      "disp_name": "E223827 - KITIMAT RAIL"
+    },
+    {
+      "disp_name": "E224013 - PRINCE GEORGE BC RAIL WAREHOUSE"
+    },
+    {
+      "disp_name": "E224014 - PRINCE GEORGE GLENVIEW SCHOOL"
+    },
+    {
+      "disp_name": "E224512 - OAK BAY RECREATION CENTRE"
+    },
+    {
+      "disp_name": "E224515 - CAMOSUN COLLEGE"
+    },
+    {
+      "disp_name": "E224517 - COLWOOD; CRD"
+    },
+    {
+      "disp_name": "E225184 - PORT EDWARD PACIFIC"
+    },
+    {
+      "disp_name": "E225267 - BURNS LAKE FIRE CENTRE"
+    },
+    {
+      "disp_name": "E225285 - NEW AIYANSH"
+    },
+    {
+      "disp_name": "E225377 - HARMAC CEDAR WOOBANK"
+    },
+    {
+      "disp_name": "E225378 - QUADRA ISLAND LIGHTHOUSE"
+    },
+    {
+      "disp_name": "E225868 - PG HART HIGHLANDS"
+    },
+    {
+      "disp_name": "E226268 - QUICK_MOBILE"
+    },
+    {
+      "disp_name": "E226579 - STUART LK - DUSTFALL PA3337 NE DRESSER LUMBER YARD"
+    },
+    {
+      "disp_name": "E226580 - STUART LAKE - DUSTFALL PA3337 SW LOG YARD"
+    },
+    {
+      "disp_name": "E226581 - STUART LAKE - DUSTFALL PA3337 NW DRY LUMBER YARD"
+    },
+    {
+      "disp_name": "E226582 - DUNKLEY - DUSTFALL SE CORNER - PA3898"
+    },
+    {
+      "disp_name": "E226583 - DUNKLEY - DUSTFALL SW CORNER - PA3898"
+    },
+    {
+      "disp_name": "E226584 - DUNKLEY - DUSTFALL NE CORNER - PA3898"
+    },
+    {
+      "disp_name": "E226585 - DUNKLEY - DUSTFALL NW CORNER - PA3898"
+    },
+    {
+      "disp_name": "E226586 - CANFOR - DUSTFALL WEST LOCATION - PA2268"
+    },
+    {
+      "disp_name": "E226587 - CANFOR - DUSTFALL NORTH LOCATION - PA2268"
+    },
+    {
+      "disp_name": "E226588 - CANFOR - DUSTFALL EAST LOCATION - PA2268"
+    },
+    {
+      "disp_name": "E226589 - CANFOR - DUSTFALL SOUTH LOCATION - PA2268"
+    },
+    {
+      "disp_name": "E226869 - TERRACE BC ACCESS CENTRE (A)"
+    },
+    {
+      "disp_name": "E226983 - HARMAC TREATMENT POND"
+    },
+    {
+      "disp_name": "E227431 - WHISTLER MEADOW PARK"
+    },
+    {
+      "disp_name": "E228064 - QUESNEL WEST CORRELIEU SCHOOL"
+    },
+    {
+      "disp_name": "E228065 - PORT ALBERNI TOWNSITE"
+    },
+    {
+      "disp_name": "E228085 - RAIN GUAGE HUCKLEBERRY PE-14483"
+    },
+    {
+      "disp_name": "E229217 - PENTICTON AIR MOE OFFICE"
+    },
+    {
+      "disp_name": "E229457 - WILLIAMS LAKE 168 MILE ROAD"
+    },
+    {
+      "disp_name": "E229537 - MISSION SECONDARY SCHOOL"
+    },
+    {
+      "disp_name": "E229566 - MONITORING WELL #BJ"
+    },
+    {
+      "disp_name": "E229797 - NANAIMO LABIEUX ROAD"
+    },
+    {
+      "disp_name": "E229798 - CAMPBELL RIVER TYEE SPIT"
+    },
+    {
+      "disp_name": "E229817 - VERNON COLDSTREAM RANCH"
+    },
+    {
+      "disp_name": "E229900 - AIRCURE 484 BAGHOUSE #1"
+    },
+    {
+      "disp_name": "E230065 - TOWNSITE DUSTFALL PARTICULATE"
+    },
+    {
+      "disp_name": "E230066 - RAIL LOADOUT STOCKPILE"
+    },
+    {
+      "disp_name": "E230067 - RAIL LOADOUT LOOP"
+    },
+    {
+      "disp_name": "E230077 - HGW NORTH OF MINE ACCESS ROAD"
+    },
+    {
+      "disp_name": "E230078 - MINE ACCESS ROAD"
+    },
+    {
+      "disp_name": "E230079 - UPPER W. BULLMOOSE CR. VALLEY"
+    },
+    {
+      "disp_name": "E230080 - RAIL LAODOUT LOOP FOR BULLMOOSE HIVOL"
+    },
+    {
+      "disp_name": "E230081 - HIVOL ADJACENT TO TALISMAN PLANTSITE"
+    },
+    {
+      "disp_name": "E230380 - TOWNSITE DUSTFALL CANISTER"
+    },
+    {
+      "disp_name": "E230381 - DUSTFALL AIRSTRIP CANISTER"
+    },
+    {
+      "disp_name": "E230382 - DUSTFALL CAMPSITE CANISTER"
+    },
+    {
+      "disp_name": "E230383 - INDUSTRIAL PARK HIVOL"
+    },
+    {
+      "disp_name": "E230384 - TUMBLER RIDGE HIVOL"
+    },
+    {
+      "disp_name": "E230557 - TELKWA"
+    },
+    {
+      "disp_name": "E230617 - AINSWORTH 100 MILE"
+    },
+    {
+      "disp_name": "E230657 - VERNON STP; PE-12215; DELLCLIFF WATER UTILITY INTAKE"
+    },
+    {
+      "disp_name": "E231457 - BC HYDRO;  CRD"
+    },
+    {
+      "disp_name": "E231477 - ESQUIMALT GRAVING DOCK LOOKOUT; PWC"
+    },
+    {
+      "disp_name": "E231478 - ESQUIMALT GRAVING DOCK"
+    },
+    {
+      "disp_name": "E231479 - 860 ISBISTER ESQUIMALT PWC"
+    },
+    {
+      "disp_name": "E231657 - PRINCE RUPERT SEAL COVE"
+    },
+    {
+      "disp_name": "E231817 - BUTLER PARK PM2.5 PARTISOL"
+    },
+    {
+      "disp_name": "E231818 - BUTLER PARK PM10 PARTISOL"
+    },
+    {
+      "disp_name": "E231838 - PRINCE RUPERT GALLOWAY RAPIDS"
+    },
+    {
+      "disp_name": "E231866 - VICTORIA TOPAZ"
+    },
+    {
+      "disp_name": "E232244 - PITT MEADOWS MEADOWLANDS ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E232245 - MAPLE RIDGE GOLDEN EARS ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E232246 - VANCOUVER INTERNATIONAL AIRPORT #2"
+    },
+    {
+      "disp_name": "E232263 - ABERDEEN ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E232982 - RADIUM PM10"
+    },
+    {
+      "disp_name": "E233567 - POLAR BEAR LK (PA03034) - PM10/PM2.5 MONITOR"
+    },
+    {
+      "disp_name": "E234230 - TAYLOR SOUTH HILL"
+    },
+    {
+      "disp_name": "E234293 - VALEMOUNT FIREHALL"
+    },
+    {
+      "disp_name": "E234670 - DUNCAN DEYKIN AVENUE"
+    },
+    {
+      "disp_name": "E235070 - GOLDEN HOSPITAL"
+    },
+    {
+      "disp_name": "E237631 - PINE RIVER HASLER"
+    },
+    {
+      "disp_name": "E237978 - SECHELT TRAIL BAY MALL"
+    },
+    {
+      "disp_name": "E238019 - MERRITT AIRPORT NORTH FIELD"
+    },
+    {
+      "disp_name": "E238020 - MERRITT RI PONDS"
+    },
+    {
+      "disp_name": "E238212 - ABBOTSFORD CENTRAL"
+    },
+    {
+      "disp_name": "E238240 - BOSTON BAR RCMP STATION"
+    },
+    {
+      "disp_name": "E238321 - CYRIL ST. - FVCDC"
+    },
+    {
+      "disp_name": "E238322 - FRASER ST -"
+    },
+    {
+      "disp_name": "E238323 - W. RAILWAY - FIREHALL # 6"
+    },
+    {
+      "disp_name": "E238798 - LINDA ADAMS HOUSE; SLOCAN"
+    },
+    {
+      "disp_name": "E239498 - KITAMAAT VILLAGE"
+    },
+    {
+      "disp_name": "E240301 - SALMON ARM FIREHALL"
+    },
+    {
+      "disp_name": "E240336 - STEWART"
+    },
+    {
+      "disp_name": "E240337 - COLWOOD CITY HALL"
+    },
+    {
+      "disp_name": "E240881 - SAANICH KEATING ELEMENTARY"
+    },
+    {
+      "disp_name": "E240882 - VICTORIA BRAEFOOT ELEMENTARY"
+    },
+    {
+      "disp_name": "E241747 - DND HOSPITAL AIR STATION - ESQUIMALT"
+    },
+    {
+      "disp_name": "E242892 - COQUITLAM DOUGLAS COLLEGE"
+    },
+    {
+      "disp_name": "E242930 - OLIVER STP AIR"
+    },
+    {
+      "disp_name": "E243003 - GOLDEN LADY GREY SCHOOL"
+    },
+    {
+      "disp_name": "E243513 - FT ST JOHN FEHR RESIDENCE"
+    },
+    {
+      "disp_name": "E243514 - DUNCAN CRAN SCHOOL"
+    },
+    {
+      "disp_name": "E243516 - FT ST JOHN NP CULTURAL CENTRE"
+    },
+    {
+      "disp_name": "E243520 - OSOYOOS EC WEATHER STN"
+    },
+    {
+      "disp_name": "E243617 - CASTLEGAR FIRE HALL"
+    },
+    {
+      "disp_name": "E243618 - CRANBROOK GREEN"
+    },
+    {
+      "disp_name": "E243897 - PRIVATE PROPERTY AIR SITE"
+    },
+    {
+      "disp_name": "E243949 - PORT EDWARD MILL"
+    },
+    {
+      "disp_name": "E244515 - BURNABY BURMOUNT"
+    },
+    {
+      "disp_name": "E244516 - NORTH BURNABY CAPITOL HILL"
+    },
+    {
+      "disp_name": "E244517 - BURNABY NORTH ETON"
+    },
+    {
+      "disp_name": "E244775 - OSOYOOS SHAW GARDENS"
+    },
+    {
+      "disp_name": "E245362 - KOKANEE PARK"
+    },
+    {
+      "disp_name": "E246240 - ABBOTSFORD AIRPORT WALMSLEY ROAD"
+    },
+    {
+      "disp_name": "E247662 - BRACKENDALE ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E247663 - SQUAMISH GARIBALDI HIGHLANDS"
+    },
+    {
+      "disp_name": "E248021 - REVELSTOKE MT BEGBIE SCHOOL"
+    },
+    {
+      "disp_name": "E248797 - WILLIAMS LAKE CRD LIBRARY"
+    },
+    {
+      "disp_name": "E249335 - ELKVIEW COAL (PA1807) FUNKY`S PIZZA"
+    },
+    {
+      "disp_name": "E249492 - VERNON SCIENCE CENTRE"
+    },
+    {
+      "disp_name": "E249735 - LANGFORD DOGWOOD SCHOOL"
+    },
+    {
+      "disp_name": "E249992 - FORT NELSON FIRST NATIONS"
+    },
+    {
+      "disp_name": "E250350 - FORT NELSON CHALO SCHOOL"
+    },
+    {
+      "disp_name": "E250449 - PAVILLION IR#1 BAND OFFICE"
+    },
+    {
+      "disp_name": "E250450 - PAVILION MARBLE CANYON IR#3"
+    },
+    {
+      "disp_name": "E251469 - REVELSTOKE MT. BEGBIE"
+    },
+    {
+      "disp_name": "E252370 - HUDSON`S HOPE HI-VOL"
+    },
+    {
+      "disp_name": "E253229 - CENTRAL SAANICH STELLY`S CROSS ROAD"
+    },
+    {
+      "disp_name": "E253329 - LUMBY GREENRIDGE SUPPLY"
+    },
+    {
+      "disp_name": "E253330 - SPALLUMCHEEN TOWNSHIP OFFICE"
+    },
+    {
+      "disp_name": "E253890 - ENDERBY FIREHALL"
+    },
+    {
+      "disp_name": "E254190 - SKOOKUMCHUCK FARSTAD WAY"
+    },
+    {
+      "disp_name": "E254350 - VICTORIA ROYAL ROADS HI-VOL"
+    },
+    {
+      "disp_name": "E254953 - KAMLOOPS DUNES"
+    },
+    {
+      "disp_name": "E254954 - KAMLOOPS PACIFIC WAY"
+    },
+    {
+      "disp_name": "E255713 - HAZELTON NWCC"
+    },
+    {
+      "disp_name": "E255714 - KITWANGA SCHOOL"
+    },
+    {
+      "disp_name": "E256101 - VANDERHOOF"
+    },
+    {
+      "disp_name": "E256315 - GOLDEN TOWNSITE"
+    },
+    {
+      "disp_name": "E256894 - GOLDEN CPR"
+    },
+    {
+      "disp_name": "E256895 - GOLDEN GOLF COURSE"
+    },
+    {
+      "disp_name": "E257415 - OSOYOOS CANADA CUSTOMS"
+    },
+    {
+      "disp_name": "E257435 - TRAIL BIRCHBANK GOLF COURSE - TECK SMELTER"
+    },
+    {
+      "disp_name": "E257555 - APMSS - CHERRY CREEK"
+    },
+    {
+      "disp_name": "E257556 - APMSS - ALBERNI ELEMENTRY"
+    },
+    {
+      "disp_name": "E257557 - APMSS - FOURTH AVENUE"
+    },
+    {
+      "disp_name": "E257558 - APMSS - ELEVENTH AVENUE"
+    },
+    {
+      "disp_name": "E258315 - NELSON KUTENAI PLACE"
+    },
+    {
+      "disp_name": "E258637 - LILLOOET T`IT`Q`ET"
+    },
+    {
+      "disp_name": "E259127 - BINNS STREET 264 DUSTFALL"
+    },
+    {
+      "disp_name": "E259128 - TRAIL COLUMBIA AVENUE DUSTFALL - TECK SMELTER"
+    },
+    {
+      "disp_name": "E259129 - MONTROSE DUSTFALL"
+    },
+    {
+      "disp_name": "E259130 - SHAVERS BENCH 8TH AVENUE DUSTFALL"
+    },
+    {
+      "disp_name": "E259131 - TRAIL TADANAC DUSTFALL - TECK SMELTER"
+    },
+    {
+      "disp_name": "E259132 - TRAIL TRIMAC DUSTFALL - TECK SMELTER"
+    },
+    {
+      "disp_name": "E259277 - PG WESTERN ACRES; BACKGROUND"
+    },
+    {
+      "disp_name": "E259398 - CRESTON PIPER FARMS"
+    },
+    {
+      "disp_name": "E259717 - ARMSTRONG RIVERSIDE"
+    },
+    {
+      "disp_name": "E260397 - NEW HAZELTON SCHOOL"
+    },
+    {
+      "disp_name": "E260557 - PEMBERTON SIGNAL HILL ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E260701 - VICTORIA CHRISTOPHER POINT"
+    },
+    {
+      "disp_name": "E261157 - SECHELT EBBTIDE WORKS YARD"
+    },
+    {
+      "disp_name": "E261178 - KAMLOOPS WILDLIFE PARK"
+    },
+    {
+      "disp_name": "E262137 - 127 CENTENNIAL SQ.; SPARWOOD COMMUNITY SQUARE"
+    },
+    {
+      "disp_name": "E262277 - CRESTON SOUTH HANSON FARM"
+    },
+    {
+      "disp_name": "E262278 - GRAND FORKS AIRPORT"
+    },
+    {
+      "disp_name": "E262779 - GRAND FORKS AIRPORT MET"
+    },
+    {
+      "disp_name": "E262799 - CRESTON SOUTH - HANSON FARM"
+    },
+    {
+      "disp_name": "E263562 - KIMBERLEY MCKIM SCHOOL"
+    },
+    {
+      "disp_name": "E263701 - GRAND FORKS CITY HALL"
+    },
+    {
+      "disp_name": "E264161 - MERRITT GILLIS HOUSE"
+    },
+    {
+      "disp_name": "E264682 - MERRITT PARCEL STREET"
+    },
+    {
+      "disp_name": "E264842 - MERRITT TOLKO SW"
+    },
+    {
+      "disp_name": "E264882 - LANGFORD LAKEWOOD SCHOOL"
+    },
+    {
+      "disp_name": "E265062 - INVERMERE - OLD TOWN HALL"
+    },
+    {
+      "disp_name": "E265082 - LILLOOET T`IT`Q`ET PUMPHOUSE"
+    },
+    {
+      "disp_name": "E265523 - CHETWYND WINDREM SCHOOL"
+    },
+    {
+      "disp_name": "E266222 - KAMLOOPS DALHOUSIE"
+    },
+    {
+      "disp_name": "E266302 - QUADRA ISLAND CAPE MUDGE VILLAGE"
+    },
+    {
+      "disp_name": "E267442 - NORTH NECHAKO"
+    },
+    {
+      "disp_name": "E268363 - KIMBERLEY MOUNT MCKIM SCHOOL"
+    },
+    {
+      "disp_name": "E269123 - TRAIL AQUATIC CENTRE"
+    },
+    {
+      "disp_name": "E269223 - VANDERHOOF COURTHOUSE"
+    },
+    {
+      "disp_name": "E269343 - GIBRLATAR-COARSE ORE DUST FALL"
+    },
+    {
+      "disp_name": "E269344 - GIBRALTAR COARSE ORE STOCKPILE DUSTFALL"
+    },
+    {
+      "disp_name": "E269345 - GIBRALTAR COARSE ORE STOCKPILE DUSTFALL MONITORING"
+    },
+    {
+      "disp_name": "E269346 - GIBRALTAR COARSE ORE STORAGE DUSTFALL MONITORING"
+    },
+    {
+      "disp_name": "E269687 - GIBRALTAR TAILINGS DUSTFALL MONITORING"
+    },
+    {
+      "disp_name": "E269703 - GIBRALTAR TAILINGS DUSTFALL MONITORING T-DF8"
+    },
+    {
+      "disp_name": "E269704 - GIBRALTAR TAILINGS DUSTFALL MONITORING T-DF9"
+    },
+    {
+      "disp_name": "E269705 - GIBRALTAR TAILINGS DUSTFALL MONITORING T-DF10"
+    },
+    {
+      "disp_name": "E269706 - GIBRALTAR TAILINGS DUSTFALL MONITORING T-DF11"
+    },
+    {
+      "disp_name": "E269707 - GIBRALTAR MACALISTER DUSTFALL MONITORING MC DF -1"
+    },
+    {
+      "disp_name": "E269708 - GIBRALTAR MACALISTER DUSTFALL MONITORING MC DF-2"
+    },
+    {
+      "disp_name": "E269709 - GIBRALTAR MACALISTER DUSTFALL MONITORING MC DF-3"
+    },
+    {
+      "disp_name": "E269710 - GIBRALTAR MACALISTER DUSTFALL MONITORING MC DF-4"
+    },
+    {
+      "disp_name": "E269853 - FORT NELSON BC HYDRO"
+    },
+    {
+      "disp_name": "E270064 - INVERMERE OLD TOWNHALL"
+    },
+    {
+      "disp_name": "E270643 - OLIVER FIREHALL"
+    },
+    {
+      "disp_name": "E270644 - SUMMERLAND MUNICIPAL HALL"
+    },
+    {
+      "disp_name": "E270963 - PRINCE GEORGE MARSULEX ACID PLANT"
+    },
+    {
+      "disp_name": "E271563 - GIBSONS PARKS OFFICE"
+    },
+    {
+      "disp_name": "E271963 - POWELL RIVER JAMES THOMSON SCHOOL"
+    },
+    {
+      "disp_name": "E271964 - POWELL RIVER TOWNSITE HELIPAD"
+    },
+    {
+      "disp_name": "E272247 - BEAR LAKE FIREHALL"
+    },
+    {
+      "disp_name": "E272963 - KEREMEOS MUNICIPAL OFFICE"
+    },
+    {
+      "disp_name": "E273223 - QUEEN CHARLOTTE SCHOOL"
+    },
+    {
+      "disp_name": "E273323 - CVRD BLDG AIR STATION"
+    },
+    {
+      "disp_name": "E273443 - CROFTON ESCARPMENT WAY"
+    },
+    {
+      "disp_name": "E273483 - PORT ALBERNI ELEMENTARY"
+    },
+    {
+      "disp_name": "E273763 - CRANBROOK BC AMBULANCE BUILDING"
+    },
+    {
+      "disp_name": "E274083 - PINNACLE PELLET MEADOWBANK INC - NON CONTINUOUS AMBIENT MONITORING STATION"
+    },
+    {
+      "disp_name": "E274084 - PINNACLE PELLET MEADOWBANK PLANT - CONTINUOUS AA PARTICULATE MONITOR"
+    },
+    {
+      "disp_name": "E274205 - VALEMOUNT COURTHOUSE"
+    },
+    {
+      "disp_name": "E274406 - CASTLEGAR COLUMBIA BASIN TRUST BUILDING"
+    },
+    {
+      "disp_name": "E274803 - WOODEX INDUSTRIES SHAVINGS PLANER CYCLONE"
+    },
+    {
+      "disp_name": "E275843 - HORSESHOE BAY"
+    },
+    {
+      "disp_name": "E276083 - MERRITT HOSPITAL"
+    },
+    {
+      "disp_name": "E276403 - MAML JAMES BAY"
+    },
+    {
+      "disp_name": "E276964 - WAUKESHA F18GL"
+    },
+    {
+      "disp_name": "E277063 - VICTORIA JAMES BAY MAML"
+    },
+    {
+      "disp_name": "E277329 - DUNCAN CAIRNSMORE"
+    },
+    {
+      "disp_name": "E277370 - PRINCE GEORGE HWY 16/97 MAML"
+    },
+    {
+      "disp_name": "E277529 - KITIMAT RIO TINTO ALCAN KMP CAMP"
+    },
+    {
+      "disp_name": "E277629 - MORICETOWN MAML"
+    },
+    {
+      "disp_name": "E278429 - STRATHNAVER MEADOWBANK"
+    },
+    {
+      "disp_name": "E278629 - PA-100532: HIGH PRESSURE STACK"
+    },
+    {
+      "disp_name": "E278652 - WHISTLER FUNCTION JUNCTION MAML"
+    },
+    {
+      "disp_name": "E278829 - PRINCE GEORGE MARSULEX MET"
+    },
+    {
+      "disp_name": "E278830 - HAZELTON GITKSAN EDUCATIONAL CENTRE"
+    },
+    {
+      "disp_name": "E279269 - VICTORIA LEGISLATURE BUILDINGS"
+    },
+    {
+      "disp_name": "E279629 - TOMSLAKE MAML"
+    },
+    {
+      "disp_name": "E282169 - UCLUELET AMPHITRITE POINT"
+    },
+    {
+      "disp_name": "E282349 - GOLDSTREAM PROVINCIAL PARK"
+    },
+    {
+      "disp_name": "E282369 - GROUNDBIRCH MAML"
+    },
+    {
+      "disp_name": "E282711 - KITIMAT HAISLA VILLAGE"
+    },
+    {
+      "disp_name": "E282769 - ROLLA MAML"
+    },
+    {
+      "disp_name": "E283029 - KAMLOOPS MISSION FLATS"
+    },
+    {
+      "disp_name": "E283242 - FARMINGTON MAML"
+    },
+    {
+      "disp_name": "E283260 - FLARE STACK"
+    },
+    {
+      "disp_name": "E283369 - PRINCE GEORGE EXPLORATION PLACE TRAILER"
+    },
+    {
+      "disp_name": "E283370 - PRINCE GEORGE DENICOLA RANCH"
+    },
+    {
+      "disp_name": "E283510 - KITIMAT CITY CENTRE MAML"
+    },
+    {
+      "disp_name": "E283549 - TSAWWASSEN"
+    },
+    {
+      "disp_name": "E284410 - TAHTSA TIMBER CANTING LINE SAW"
+    },
+    {
+      "disp_name": "E284411 - TAHTSA TIMBER WOOD CHIPPER"
+    },
+    {
+      "disp_name": "E284550 - PA-105289: EIGHT (8) POWER GENERATORS"
+    },
+    {
+      "disp_name": "E284552 - PA-105289: ONE (1)  6506 KW HEAT MEDIUM; PETRO-TECH (BU-11200)"
+    },
+    {
+      "disp_name": "E284553 - PA-105289: ONE (1) 1758 KW HEAT MEDIUM HETER"
+    },
+    {
+      "disp_name": "E284554 - PA-105289: ONE HP/LP FLARE STACK; FLARETECH (FS-10130)"
+    },
+    {
+      "disp_name": "E284555 - PA-105289: ONE ACID GAS FLARE STACK"
+    },
+    {
+      "disp_name": "E284750 - WHISTLER CHEAKAMUS CROSSING"
+    },
+    {
+      "disp_name": "E284829 - PRINCETON COS COMPOUND"
+    },
+    {
+      "disp_name": "E284909 - KELLY LAKE MAML"
+    },
+    {
+      "disp_name": "E284969 - CHEMAINUS BARE POINT"
+    },
+    {
+      "disp_name": "E285559 - VICTORIA JAMES BAY DANIELS ELECTRONICS"
+    },
+    {
+      "disp_name": "E285829 - COURTENAY ELEMENTARY SCHOOL"
+    },
+    {
+      "disp_name": "E286009 - KAMLOOPS FIRE STATION #2"
+    },
+    {
+      "disp_name": "E286269 - KITIMAT YACHT CLUB"
+    },
+    {
+      "disp_name": "E286369 - CASTLEGAR ZINIO PARK"
+    },
+    {
+      "disp_name": "E288013 - DAWSON CREEK FRANK ROSS ELEMENTARY"
+    },
+    {
+      "disp_name": "E288014 - DAWSON CREEK SOUTH PEACE SENIOR SECONDARY"
+    },
+    {
+      "disp_name": "E288015 - TUMBLER RIDGE COMMUNITY CENTRE"
+    },
+    {
+      "disp_name": "E288169 - WILLIAMS LAKE GOLF COURSE"
+    },
+    {
+      "disp_name": "E288469 - PRINCE RUPERT ROOSEVELT PARK SCHOOL"
+    },
+    {
+      "disp_name": "E288890 - ALEX FRASER BRIDGE T37"
+    },
+    {
+      "disp_name": "E288989 - DF #1 TOLKO ARMSTRONG  PA 2717 NE CORNER OF LOGYARD"
+    },
+    {
+      "disp_name": "E288990 - DF#2  TOLKO ARMSTRONG PA2717 ; N OF LANDFILL"
+    },
+    {
+      "disp_name": "E288991 - DF#3  TOLKO AMRSTONG  PA 2717   CENTRAL LOG YARD"
+    },
+    {
+      "disp_name": "E288992 - DF#4 TOLKO ARMSTRONG PA 2717  BY THE INFILTRATION BASINS"
+    },
+    {
+      "disp_name": "E289169 - TECK COAL LINE CREEK OPERATION (PA5352)DF/HV AT THE INFILTRATION GALLERY"
+    },
+    {
+      "disp_name": "E289309 - ABBOTSFORD AIRPORT COLUMBIA STREET (T45)"
+    },
+    {
+      "disp_name": "E289310 - ANNACIS ISLAND METRO VAN INSTRUMENT SHOP (T38)"
+    },
+    {
+      "disp_name": "E289629 - KAMLOOPS GOOSE LAKE"
+    },
+    {
+      "disp_name": "E289749 - NORTH PEACE REGIONAL MUNICPAL SOLID WASTE LANDFILL (AIR CURTAIN)"
+    },
+    {
+      "disp_name": "E289770 - NORTH PEACE REGIONAL MUNICIPAL SOLID WASTE LANDFILL (AIR)"
+    },
+    {
+      "disp_name": "E290309 - COUGAR NORTH HIGHWALL AMBIENT STATION; GREENHILLS"
+    },
+    {
+      "disp_name": "E290310 - ELKFORD ROCKY MOUNTAIN ELEMENTARY SCHOOL; ELKFORD"
+    },
+    {
+      "disp_name": "E290363 - HUSKY OIL OPERATIONS LIMITED (106091)"
+    },
+    {
+      "disp_name": "E290529 - KITIMAT SMELTERSITE ROAD"
+    },
+    {
+      "disp_name": "E290989 - WILLIAMS LAKE FIREHALL HODGSON ROAD"
+    },
+    {
+      "disp_name": "E291309 - WESTSHORE"
+    },
+    {
+      "disp_name": "E291989 - SECHELT EAST PORPOISE BAY"
+    },
+    {
+      "disp_name": "E292149 - GOLDEN HELIPAD"
+    },
+    {
+      "disp_name": "E292249 - STEWART YOUTH CENTRE"
+    },
+    {
+      "disp_name": "E292669 - BURNS LAKE SHERATON EAST"
+    },
+    {
+      "disp_name": "E292729 - KAMLOOPS NEW GOLD EAST GATE"
+    },
+    {
+      "disp_name": "E293071 - KAMLOOPS UPPER ABERDEEN"
+    },
+    {
+      "disp_name": "E293649 - PRINCE RUPERT WESTVIEW MAML"
+    },
+    {
+      "disp_name": "E293670 - PRINCE GEORGE EXPLORATION PLACE"
+    },
+    {
+      "disp_name": "E293810 - AGASSIZ MUNICIPAL HALL"
+    },
+    {
+      "disp_name": "E293909 - KAMLOOPS STRANDE RANCH"
+    },
+    {
+      "disp_name": "E294389 - 43403 OHMAN ROAD"
+    },
+    {
+      "disp_name": "E294390 - 43821 LOCH ROAD"
+    },
+    {
+      "disp_name": "E294391 - RUMBLE BEACH FIREHALL"
+    },
+    {
+      "disp_name": "E294838 - GIBRALTAR (PA-1595) DF7 DUMP 7 DUSTFALL STATION"
+    },
+    {
+      "disp_name": "E295549 - STRATHNAVER PELLET PLANT"
+    },
+    {
+      "disp_name": "E295729 - BESSBOROUGH 237 ROAD"
+    },
+    {
+      "disp_name": "E295891 - TOMSLAKE 197 RD"
+    },
+    {
+      "disp_name": "E295892 - FARMINGTON COMMUNITY HALL"
+    },
+    {
+      "disp_name": "E295893 - DOIG RIVER CULTURAL CENTRE"
+    },
+    {
+      "disp_name": "E295949 - FRASER LAKE ENDAKO MINES"
+    },
+    {
+      "disp_name": "E295970 - FRASER LAKE ENDAKO MINES MET"
+    },
+    {
+      "disp_name": "E296090 - PORT ALBERNI FIREHALL MAML"
+    },
+    {
+      "disp_name": "E296117 - CLEARWATER CREEK (SW1)"
+    },
+    {
+      "disp_name": "E296118 - ONION CREEK (SW2)"
+    },
+    {
+      "disp_name": "E296370 - CROFTON GEORGIA HTS"
+    },
+    {
+      "disp_name": "E296510 - ASHCROFT RANCH - GVRD T36"
+    },
+    {
+      "disp_name": "E297050 - PLANT WEATHER STATION"
+    },
+    {
+      "disp_name": "E297052 - MSA WEATHER STATION"
+    },
+    {
+      "disp_name": "E297170 - GREENHILLS OFFICE"
+    },
+    {
+      "disp_name": "E297190 - VICTORIA JAMES BAY THE REEF"
+    },
+    {
+      "disp_name": "E297250 - GREENHILLS WEST"
+    },
+    {
+      "disp_name": "E297251 - COAL MOUNTAIN ANDY GOOD"
+    },
+    {
+      "disp_name": "E298710 - BARSKI INDUSTRIESLTD. AIR EXHAUST"
+    },
+    {
+      "disp_name": "E298711 - EXHAUST "
+    },
+    {
+      "disp_name": "E298712 - BARSKI INDUSTRIES LTS EXHAUST"
+    },
+    {
+      "disp_name": "E298713 - BARSKIT INDUSTIRES LIMITED"
+    },
+    {
+      "disp_name": "E299550 - TREND-ROMAN MINE FUGITIVE DUST"
+    },
+    {
+      "disp_name": "E299790 - HARMAC NANAIMO DUKE POINT"
+    },
+    {
+      "disp_name": "E299830 - FORT ST JOHN KEY LEARNING CENTRE"
+    },
+    {
+      "disp_name": "E299970 - CHETWYND SW BCOGC MAML"
+    },
+    {
+      "disp_name": "E300012 - BRISCO WOOD PRESERVER (2760)"
+    },
+    {
+      "disp_name": "E300350 - TERRACE SKEENA MIDDLE SCHOOL"
+    },
+    {
+      "disp_name": "E300512 - RED CHRIS DUST WX-1 PE-106668"
+    },
+    {
+      "disp_name": "E300513 - RED CHRIS DUST RSA - PE-106668"
+    },
+    {
+      "disp_name": "E300514 - RED CHRIS DUST MILL - PE-106668"
+    },
+    {
+      "disp_name": "E300515 - RED CHRIS DUST TIA - PE-106668"
+    },
+    {
+      "disp_name": "E300516 - RED CHRIS DUST CRUSHER - PE-106668"
+    },
+    {
+      "disp_name": "E300517 - RED CHRIS DUST WX2 - PE-106668"
+    },
+    {
+      "disp_name": "E300518 - RED CHRIS DUST - ISKUT 1 - PE-106668"
+    },
+    {
+      "disp_name": "E300519 - RED CHRIS DUST - ISKUT 2 - PE-106668"
+    },
+    {
+      "disp_name": "E300520 - RED CHRIS DUST - ISKUT 3 - PE-106668"
+    },
+    {
+      "disp_name": "E300590 - DIESEL GENERATORS"
+    },
+    {
+      "disp_name": "E300694 - SLEEMAN BREWERIES LTD."
+    },
+    {
+      "disp_name": "E300710 - SLEEMANS BREWERY"
+    },
+    {
+      "disp_name": "E301291 - FUGITIVE DUST SOURCES"
+    },
+    {
+      "disp_name": "E301710 - SQUAMISH PORT FIRE MAML"
+    },
+    {
+      "disp_name": "E302130 - MISSION SCHOOL WORKS YARD"
+    },
+    {
+      "disp_name": "E302492 - FUGITIVE DUST - BRUCEJACK MINE SITE"
+    },
+    {
+      "disp_name": "E302510 - BRUCEJACK MINE: FUGITIVE DUST SOURCES AT KNIPPLE TRANSFER AREA"
+    },
+    {
+      "disp_name": "E302511 - BRUCEJACK MINE: FUGITIVE DUST SOURCES AT BOWSER AERODROME"
+    },
+    {
+      "disp_name": "E302530 - BRUCEJACK MINE: FUGITIVE DUST SOURCES AT WILDFIRE CAMP"
+    },
+    {
+      "disp_name": "E303350 - COPPER MTN (105340) PORTABLE CRUSHER PLANT"
+    },
+    {
+      "disp_name": "E303717 - BAKED ANODE CHAMFERING"
+    },
+    {
+      "disp_name": "E303793 - SHAWNIGAN LAKE DISCOVERY ELEMENTARY"
+    },
+    {
+      "disp_name": "E303794 - LAKE COWICHAN FIRE HALL"
+    },
+    {
+      "disp_name": "E303935 - KAMLOOPS ABERDEEN"
+    },
+    {
+      "disp_name": "E304350 - KELOWNA JOHNSON BENTLEY POOL"
+    },
+    {
+      "disp_name": "E304453 - PEACE VALLEY ATTACHIE FLAT UPPER TERRACE"
+    },
+    {
+      "disp_name": "E304470 - FORT ST JOHN OLD FORT"
+    },
+    {
+      "disp_name": "E304550 - FORT ST JOHN 85TH AVENUE"
+    },
+    {
+      "disp_name": "E304570 - SQUAMISH ELEMENTARY"
+    },
+    {
+      "disp_name": "E304590 - LAVINGTON BAPTIST CHURCH"
+    },
+    {
+      "disp_name": "E304612 - TECK COAL LINE CREEK OPERATIONS (PA5352) DF/HV NEAR MSA OFFICE"
+    },
+    {
+      "disp_name": "E304684 - ROLLA 213 ROAD"
+    },
+    {
+      "disp_name": "E304685 - TAYLOR LONE WOLF GOLF COURSE"
+    },
+    {
+      "disp_name": "E304990 - DF-01"
+    },
+    {
+      "disp_name": "E304991 - DF-02"
+    },
+    {
+      "disp_name": "E304992 - DR-03"
+    },
+    {
+      "disp_name": "E304993 - DF-04 COPPER MOUNTAIN MINE"
+    },
+    {
+      "disp_name": "E304994 - DF-08"
+    },
+    {
+      "disp_name": "E304995 - DF-09 COPPER MOUNTAIN MINE"
+    },
+    {
+      "disp_name": "E304996 - DF-10"
+    },
+    {
+      "disp_name": "E304997 - DF-11"
+    },
+    {
+      "disp_name": "E304998 - DF-13"
+    },
+    {
+      "disp_name": "E304999 - DF-05"
+    },
+    {
+      "disp_name": "E305000 - DF-06"
+    },
+    {
+      "disp_name": "E305001 - DF-07"
+    },
+    {
+      "disp_name": "E305002 - DF-12"
+    },
+    {
+      "disp_name": "E305292 - PORT ALBERNI SECOND AVENUE"
+    },
+    {
+      "disp_name": "E305372 - MT MILLIGAN MINE AQ1"
+    },
+    {
+      "disp_name": "E305373 - MT MILLIGAN MINE AQ2"
+    },
+    {
+      "disp_name": "E305375 - MT MILLIGAN MINE AQ4"
+    },
+    {
+      "disp_name": "E305376 - MT MILLIGAN MINE AQ5"
+    },
+    {
+      "disp_name": "E305377 - MT MILLIGAN MINE AQ6"
+    },
+    {
+      "disp_name": "E305392 - MT MILLIGAN MINE AQ3"
+    },
+    {
+      "disp_name": "E306063 - BLUEBERRY RIVER FIRST NATION SCHOOL"
+    },
+    {
+      "disp_name": "E306334 - KAMLOOPS BLACKWELL DAIRY BIOSOLIDS"
+    },
+    {
+      "disp_name": "E306480 - FORT ST JOHN NORTH CAMP"
+    },
+    {
+      "disp_name": "E306481 - CUMBERLAND FIREHALL"
+    },
+    {
+      "disp_name": "E306482 - LADYSMITH HEALTH CENTRE"
+    },
+    {
+      "disp_name": "E307124 - POUCE COUPE 200 ROAD BCOGC CAMEL"
+    },
+    {
+      "disp_name": "E307813 - PA 108537 KELOWNA/VERNON COMPOST FACILITY"
+    },
+    {
+      "disp_name": "E308306 - GIBSONS MUNICIPAL HALL"
+    },
+    {
+      "disp_name": "E308566 - NEW WESTMINSTER SAPPERTON PARK"
+    },
+    {
+      "disp_name": "E309446 - PRINCE GEORGE DISTRICT ENERGY BUILDING"
+    },
+    {
+      "disp_name": "E309527 - FORT ST. JOHN NORTH CAMP C"
+    },
+    {
+      "disp_name": "E309666 - PRINCE GEORGE 18TH AVENUE MAML"
+    },
+    {
+      "disp_name": "E310188 - PACIFIC SUBSTRATE AIR DISCHARGE "
+    },
+    {
+      "disp_name": "E310508 - LAVINGTON PINNACLE PELLETS"
+    },
+    {
+      "disp_name": "E310612 - PORT ALBERNI PORT AUTHORITY"
+    },
+    {
+      "disp_name": "E311128 - DUNCAN COLLEGE STREET"
+    },
+    {
+      "disp_name": "E312188 - AIR DISCHARGE LOCATION"
+    },
+    {
+      "disp_name": "E312208 - KEMESS AIR DISCHARGE"
+    },
+    {
+      "disp_name": "E312248 - KUG FUGATIVE AIR"
+    },
+    {
+      "disp_name": "E312330 - PRINCE RUPERT PINERIDGE ELEMENTARY"
+    },
+    {
+      "disp_name": "E312331 - PRINCE RUPERT FAIRVIEW"
+    },
+    {
+      "disp_name": "E312830 - PARKSVILLE BALLENAS SCHOOL"
+    },
+    {
+      "disp_name": "E313510 - CRANBROOK MURIEL BAXTER"
+    },
+    {
+      "disp_name": "E313970 - DIESEL STORAGE TANKS"
+    },
+    {
+      "disp_name": "E313971 - MINERAL OIL STORAGE TANK"
+    },
+    {
+      "disp_name": "E313972 - EMULSION SILO"
+    },
+    {
+      "disp_name": "E313973 - AMMONIUM NITRATE SOLUTION TANKS"
+    },
+    {
+      "disp_name": "E313990 - MINERAL OIL/DIESEL MIX TANK"
+    },
+    {
+      "disp_name": "E313991 - EMULSIFIER STORAGE TANK"
+    },
+    {
+      "disp_name": "E314370 - QUESNEL REDWOOD"
+    },
+    {
+      "disp_name": "E314971 - QRDF1 DUSTFALL MONITORING STATION"
+    },
+    {
+      "disp_name": "E314972 - QRDF2 DUSTFALL MONITORING STATION"
+    },
+    {
+      "disp_name": "E314973 - QRDF3 DUSTFALL MONITORING STATION"
+    },
+    {
+      "disp_name": "E315110 - SMITHERS MUHEIM MEMORIAL"
+    },
+    {
+      "disp_name": "E315895 - METEOROLOGICAL STN KOOTENAY WEST MINE (PE 109087)"
+    },
+    {
+      "disp_name": "E316070 - CROFTON ELEMENTARY"
+    },
+    {
+      "disp_name": "E316370 - VANCOUVER CLARK DRIVE"
+    },
+    {
+      "disp_name": "E316371 - VANCOUVER PANDORA PARK"
+    },
+    {
+      "disp_name": "E316938 - KELOWNA RAYMER AVE WWTP"
+    },
+    {
+      "disp_name": "E317070 - ANSWER GARDEN AIR DISCHARGES"
+    },
+    {
+      "disp_name": "E317370 - TEMPORARY SOURCES"
+    },
+    {
+      "disp_name": "E317390 - PENTICTON MOE COMPOUND"
+    },
+    {
+      "disp_name": "E317850 - KELOWNA KLO ROAD"
+    },
+    {
+      "disp_name": "E318450 - QUESNEL ANDERSON DRIVE"
+    },
+    {
+      "disp_name": "E319412 - 109932 Dicklands - Biogas Membrane Upgrader"
+    },
+    {
+      "disp_name": "E319571 - 110025 Arrow Ingerbelle Composting Facility Air Emissions"
+    },
+    {
+      "disp_name": "E320051 - KITIMAT INDUSTRIAL AVE"
+    },
+    {
+      "disp_name": "E320071 - QUESNEL KINCHANT ST MAML"
+    },
+    {
+      "disp_name": "E320131 - AIRCURE484 BAGHOUSE #2"
+    },
+    {
+      "disp_name": "E321251 - NZWA P-109121 AIR EMISSIONS FROM COMPOSTING"
+    },
+    {
+      "disp_name": "E321651 - LAKELSE LAKE - AMBIENT AIR STATION"
+    },
+    {
+      "disp_name": "E321652 - INDUSTRIAL AVE - AMBIENT AIR MONITORING STATION"
+    },
+    {
+      "disp_name": "E321691 - Air Contaminants from Various Areas of the Wood Waste Processing Facility"
+    },
+    {
+      "disp_name": "E321711 - HUDSONS HOPE DUDLEY DRIVE"
+    },
+    {
+      "disp_name": "E325271 - VERNON AIRPORT PM10 MONITORING"
+    },
+    {
+      "disp_name": "E325551 - Revolution P-108529 AIR EMISSIONS FROM COMPOSTING"
+    },
+    {
+      "disp_name": "E326011 - TAYLOR FARM 247 ROAD"
+    },
+    {
+      "disp_name": "E326405 - QUESNEL JOHNSTON AVENUE"
+    },
+    {
+      "disp_name": "E326684 - NON-POINT SOURCES OF EMISSIONS"
+    },
+    {
+      "disp_name": "E326685 - Lined Aeration Lagoon"
+    },
+    {
+      "disp_name": "E326931 - LC_02 NEAR GRAVE LAKE"
+    },
+    {
+      "disp_name": "E327112 - COMUMA COAL LIMITED (PA-17043) PARTICULATE MATTER MONITORING"
+    },
+    {
+      "disp_name": "E327172 - FUGITIVE DUST - PREMIER HAUL ROADS"
+    },
+    {
+      "disp_name": "E327176 - Ascot Premier Mine 101103 Zone A Exhaust"
+    },
+    {
+      "disp_name": "E327178 - Ascot Premier MIne 101103 OPEN BURNING PIT"
+    },
+    {
+      "disp_name": "E327591 - MERRITT NICOLA AVE MAML"
+    },
+    {
+      "disp_name": "E327691 - SOOKE ELEMENTARY"
+    },
+    {
+      "disp_name": "E327924 - PORT EDWARD SUNSET DRIVE"
+    },
+    {
+      "disp_name": "E328031 - CONUMA RESOURCES LIMITED (PA 17043) MET STATION"
+    },
+    {
+      "disp_name": "E328051 - A-6"
+    },
+    {
+      "disp_name": "E328052 - B-1"
+    },
+    {
+      "disp_name": "E328053 - B-2"
+    },
+    {
+      "disp_name": "E328054 - B-3"
+    },
+    {
+      "disp_name": "E328055 - B-4"
+    },
+    {
+      "disp_name": "E328056 - B-5"
+    },
+    {
+      "disp_name": "E328057 - MET STATION"
+    },
+    {
+      "disp_name": "E328231 - NEWCREST (PA-106668) CAMP MET STN"
+    },
+    {
+      "disp_name": "E328232 - NEWCREST (PA-106668) TIA SOUTH MET STN"
+    },
+    {
+      "disp_name": "E328233 - NEWCREST (PA-106668) PIT MET STN"
+    },
+    {
+      "disp_name": "E328234 - NEWCREST (PA-106668) GATEHOUSE MET STN"
+    },
+    {
+      "disp_name": "E328532 - WILLOW FLATS COMPRESSOR STATION 2"
+    },
+    {
+      "disp_name": "E329247 - BRULE MINE SITE (PA-17680) FUGITIVE AUTH WORKS"
+    },
+    {
+      "disp_name": "E329248 - PREMIER ELUTION HEATER"
+    },
+    {
+      "disp_name": "E329811 - Fugitive Dust"
+    },
+    {
+      "disp_name": "E329812 - Fugitive Dust "
+    },
+    {
+      "disp_name": "E330191 - CROFTON - CROFTON ELEMENTARY SCHOOL- AMB AIR & MET STATION"
+    },
+    {
+      "disp_name": "E330192 - DUNCAN - DEYKIN AVE - AMB AIR STATION - CROFTON MILL"
+    },
+    {
+      "disp_name": "E330193 - CROFTON - SUBSTATION AMB AIR & MET STATION AT PULP MILL GATE"
+    },
+    {
+      "disp_name": "E330194 - TRAIL WARFIELD HALEY PARK - TECK SMELTER"
+    },
+    {
+      "disp_name": "E330211 - WILLOW CREEK MINE"
+    },
+    {
+      "disp_name": "E330471 - VERNON 37 AVENUE"
+    },
+    {
+      "disp_name": "E330551 - CHETWYND 51 STREET"
+    },
+    {
+      "disp_name": "E331131 - BW GOLD (PA-110650) PM MONITORING"
+    },
+    {
+      "disp_name": "E331132 - BW GOLD (PA-110650) LOW MET STATION"
+    },
+    {
+      "disp_name": "E331133 - BW GOLD (PA-110650) HIGH MET STATION"
+    },
+    {
+      "disp_name": "E331531 - YALE FISHERY STUDY"
+    },
+    {
+      "disp_name": "E332431 - Skeena Resources PA 111626 Fugitive dust"
+    },
+    {
+      "disp_name": "E332532 - MACNUTT (110529) NP SOURCE EMISSIONS"
+    },
+    {
+      "disp_name": "E332792 - MACNUTT (110570) NP SOURCE EMISSIONS"
+    },
+    {
+      "disp_name": "E334156 - CONUMA QUINTETTE DUSTFALL QD1"
+    },
+    {
+      "disp_name": "E334157 - CONUMA QUINTETTE DUSTFALL QD2"
+    },
+    {
+      "disp_name": "E334158 - CONUMA QUINTETTE DUSTFALL QD3"
+    },
+    {
+      "disp_name": "E334159 - CONUMA QUINTETTE DUSTFALL QD4"
+    },
+    {
+      "disp_name": "E334160 - CONUMA QUINTETTE DUSTFALL QD5"
+    },
+    {
+      "disp_name": "E334161 - CONUMA QUINTETTE DUSTFALL QD6"
+    },
+    {
+      "disp_name": "E334162 - CONUMA QUINTETTE DUSTFALL QD7"
+    },
+    {
+      "disp_name": "E334163 - CONUMA QUINTETTE DUSTFALL QD8"
+    },
+    {
+      "disp_name": "E334171 - ASCOT 110103 PM MONITORING STATION"
+    },
+    {
+      "disp_name": "E334172 - ASCOT 110103 MET STATION"
+    },
+    {
+      "disp_name": "E334504 - PRETIUM RESOURCES 107025 PARTICULATE MATTER MONITOR"
+    },
+    {
+      "disp_name": "E334505 - PRETIUM RESOURCES 107025 VOK MET STATION"
+    },
+    {
+      "disp_name": "E334506 - PRETIUM RESOURCES 107025 BOWSER MET STATION"
+    },
+    {
+      "disp_name": "E334646 - Salmon Arm Landfill Gas COLUMBIA SHUSWAP REGIONAL DISTRICT OC 5479"
+    },
+    {
+      "disp_name": "E334864 - PEACE RIVER COAL PA-17761 PM MONITOR"
+    },
+    {
+      "disp_name": "E334904 - Cenovus Energy Inc."
+    },
+    {
+      "disp_name": "E335100 - UPLAND EXCAVATING LTD. (107689) LFG1-22"
+    },
+    {
+      "disp_name": "E335101 - UPLAND EXCAVATING LTD. (107689) LFG2-22"
+    },
+    {
+      "disp_name": "E335324 - CULTUS LAKE@VOLUNTEER SITE"
+    },
+    {
+      "disp_name": "E335544 - V12 SOUTH OF KITIMAT LNGC FACILITY PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335545 - KHV-1 KITAMAAT VILLAGE PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335546 - KHV-2 KITAMAAT VILLAGE PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335547 - V10B SOUTH OF LNGC FACILITY ALCAN RD PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335548 - MAX NO2 KITIMAT PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335549 - V14 (TEMP) INDUSTRIAL AVE PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335550 - V14 INDUSTRIAL AVE PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335551 - V08 NORTH OF LNGC FACILITY PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335552 - V06 NORTH OF LNGC FACILITY PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335553 - V05 NORTH OF LNGC FACILITY PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335554 - V01 NORTH OF LNGC FACILITY PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335555 - A04 LAKELSE LAKE PASSIVE NO2 MONITOR"
+    },
+    {
+      "disp_name": "E335704 - SKEENA PA-112023 PM MONITORING LOCATION"
+    },
+    {
+      "disp_name": "E336484 - HIGHLAND VALLEY COPPER MINE 1557 SECTION 1.17 FUGITIVE DUST"
+    },
+    {
+      "disp_name": "E336604 - PA 1557 HVC LL DAM STATION 1"
+    },
+    {
+      "disp_name": "E336605 - PA 1557 HVC SHULA FLATS MONITORING STATION"
+    },
+    {
+      "disp_name": "E336607 - PA 1557 HVC REY CREEK RANCH MONITORING STATION"
+    },
+    {
+      "disp_name": "E336608 - PA 1557 HVC LOGAN LAKE MONITORING STATION"
+    },
+    {
+      "disp_name": "E336609 - PA 1557 HVC SPUD LAKE MONITORING STATION"
+    },
+    {
+      "disp_name": "E336610 - PA 1557 HVC MOBILE HOME PARK MONITORING STATION"
+    },
+    {
+      "disp_name": "E336611 - PA 1557 HVC LL DAM STATION 3 MONITORING STATION"
+    },
+    {
+      "disp_name": "E337566 - WASTECH SERVICES LTD ( OC 7577) FUGITIVE LANDFILL GAS"
+    },
+    {
+      "disp_name": "E337664 - ASCOT PA110103 PM MONITOR"
+    },
+    {
+      "disp_name": "E338326 - Fugitive Emissions "
+    },
+    {
+      "disp_name": "E338384 - HD MINING PE 106666 - DECLINE SITE 1"
+    },
+    {
+      "disp_name": "E338385 - HD MINING PE106666 - SHAFT SITE 1"
+    },
+    {
+      "disp_name": "E338386 - HD MINING PE 106666 - CPP SITE 1"
+    },
+    {
+      "disp_name": "E338519 - FUGITIVE LANDFILL GAS"
+    },
+    {
+      "disp_name": "E338624 - LC_01 NE OF DRYER BUILDING"
+    },
+    {
+      "disp_name": "E339444 - KSM FUGITIVE DUST"
+    },
+    {
+      "disp_name": "E340305 - NI-DF01 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL MONITOR"
+    },
+    {
+      "disp_name": "E340306 - NI-DF04 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340307 - NI-DF05 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340308 - NI-DF06 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340309 - NI-DF07 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340310 - NI-DF09A (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340311 - NI-DF10 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340312 - NI-DF11 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340313 - NI-DF02 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "E340544 - SKOOKUMCHUCK MILL NORTH"
+    },
+    {
+      "disp_name": "E340686 - NI-DF12 (PA-105340), COPPER MOUNTAIN MINE DUSTFALL"
+    },
+    {
+      "disp_name": "M101004 - CROFTON"
+    },
+    {
+      "disp_name": "M101005 - SATURNA PIKE"
+    },
+    {
+      "disp_name": "M101110 - SATURNA MET"
+    },
+    {
+      "disp_name": "M102038 - HARMAC PACIFIC MET"
+    },
+    {
+      "disp_name": "M102039 - QUALICUM BEACH"
+    },
+    {
+      "disp_name": "M103335 - PORT ALBERNI MET"
+    },
+    {
+      "disp_name": "M104270 - SQUAMISH"
+    },
+    {
+      "disp_name": "M104271 - HORSESHOE BAY MET"
+    },
+    {
+      "disp_name": "M104273 - LANGDALE FERRY TERMINAL"
+    },
+    {
+      "disp_name": "M106008 - KITIMAT EUROCAN DOCK"
+    },
+    {
+      "disp_name": "M106009 - KITIMAT HAUL ROAD MET"
+    },
+    {
+      "disp_name": "M106010 - KITIMAT WHITESAIL MET"
+    },
+    {
+      "disp_name": "M106037 - PRINCE RUPERT MET -METEOROLOGICAL STATION"
+    },
+    {
+      "disp_name": "M107004 - HOUSTON FIREHALL"
+    },
+    {
+      "disp_name": "M107005 - SMITHERS"
+    },
+    {
+      "disp_name": "M107028 - TERRACE BC ACCESS CENTRE"
+    },
+    {
+      "disp_name": "M109011 - WELLS"
+    },
+    {
+      "disp_name": "M109912 - PRINCE GEORGE PLAZA 400 MET"
+    },
+    {
+      "disp_name": "M109913 - PRINCE GEORGE NORTHWOOD"
+    },
+    {
+      "disp_name": "M109914 - PRINCE GEORGE PULP"
+    },
+    {
+      "disp_name": "M109915 - PRINCE GEORGE JAIL MET"
+    },
+    {
+      "disp_name": "M109940 - PRINCE GEORGE FOREMAN FLATS"
+    },
+    {
+      "disp_name": "M109943 - PRINCE GEORGE LAKEWOOD MET"
+    },
+    {
+      "disp_name": "M109946 - PRINCE GEORGE VAN BIEN"
+    },
+    {
+      "disp_name": "M110510 - PITT MEADOWS"
+    },
+    {
+      "disp_name": "M110511 - SOUTH LANGLEY MET"
+    },
+    {
+      "disp_name": "M110512 - SUMAS"
+    },
+    {
+      "disp_name": "M110513 - SURREY ECHO"
+    },
+    {
+      "disp_name": "M110514 - ANNACIS ISLAND"
+    },
+    {
+      "disp_name": "M110515 - LANGLEY PETERSON"
+    },
+    {
+      "disp_name": "M110516 - CHILLIWACK AIRPORT MET"
+    },
+    {
+      "disp_name": "M110517 - CHILLIWACK AIRPORT A"
+    },
+    {
+      "disp_name": "M111065 - QUESNEL LINDEN"
+    },
+    {
+      "disp_name": "M111068 - GLENDALE"
+    },
+    {
+      "disp_name": "M111073 - QUESNEL CP"
+    },
+    {
+      "disp_name": "M112070 - KELOWNA COLLEGE MET TOWER"
+    },
+    {
+      "disp_name": "M114008 - CELGAR RB"
+    },
+    {
+      "disp_name": "M114009 - CELGAR PULP"
+    },
+    {
+      "disp_name": "M114017 - BRILLIANT"
+    },
+    {
+      "disp_name": "M114018 - CRESTON PC SCHOOL MET"
+    },
+    {
+      "disp_name": "M114216 - NELSON"
+    },
+    {
+      "disp_name": "M114217 - CASTLEGAR MET"
+    },
+    {
+      "disp_name": "M114902 - TRAIL"
+    },
+    {
+      "disp_name": "M115024 - SKOOKUMCHUCK"
+    },
+    {
+      "disp_name": "M116003 - KAMLOOPS BROCKLEHURST MET"
+    },
+    {
+      "disp_name": "M116006 - 100 MILE HOUSE"
+    },
+    {
+      "disp_name": "M120001 - GOLDEN BEAR"
+    },
+    {
+      "disp_name": "Other - Enter below"
+    }
+  ]
+}
