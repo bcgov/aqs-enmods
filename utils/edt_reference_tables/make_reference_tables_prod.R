@@ -62,7 +62,7 @@ AM_OP <- AMs %>% select('Observed Property ID' = customId...8,
                       'Observed Property Descritpion' = description...11,
                       'CAS Number' = casNumber,
                       'Unit Group' = customId...15,
-                      'Default Unit' = customId...19,
+                      'Default Unit' = name...20, #get the unit name not symbol
                       'Supports Unit Conversion' = supportsConversion,
                       'EMS Code'= name...10,
                       'Analysis Type' = analysisType,
@@ -71,6 +71,10 @@ AM_OP <- AMs %>% select('Observed Property ID' = customId...8,
                       'Method Name' = name...4,
                       'Method Description' = description...6,
                       'Method Source' = context)
+
+#rename unit column and split
+AM_OP <- AM_OP %>% dplyr::rename('Unit Name' = 'Default Unit')
+AM_OP <- AM_OP %>% separate('Unit Name', into = c("Unit Code", "Unit Name"), sep = " - ")
 
 AM_OP <- AM_OP[order(AM_OP$`Observed Property ID`),]
 #Table of both AM and OP
