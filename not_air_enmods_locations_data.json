@@ -1114,9 +1114,6 @@
       "disp_name": "E206560 - TOPPING (STONEY) CREEK AT PUMPHOUSE"
     },
     {
-      "disp_name": "E206575 - OBS WELL 293 - FERGUSON LAKE N. KELLY RD."
-    },
-    {
       "disp_name": "E206581 - FRASER RIVER AT HOPE BRIDGE"
     },
     {
@@ -3683,9 +3680,6 @@
     },
     {
       "disp_name": "E269864 - CHEAKAMUS RIVER ABOVE DAISY LAKE FOREST ROAD"
-    },
-    {
-      "disp_name": "E269903 - OBS WELL 378 - PRINCE GEORGE AT 5TH AND OSPIKA"
     },
     {
       "disp_name": "E270003 - COAL MOUNTAIN OPERATIONS PE4750 WEST DITCH"
@@ -11188,21 +11182,6 @@
       "disp_name": "E330911 - OBS WELL 512 - SOUTH OKANAGAN GRASSLANDS PROTECTED AREA"
     },
     {
-      "disp_name": "E330931 - UPPER KLOKON"
-    },
-    {
-      "disp_name": "E330932 - LOWER KLOKON"
-    },
-    {
-      "disp_name": "E330933 - MAINGUY CREEK"
-    },
-    {
-      "disp_name": "E330934 - AUGERS LAKE"
-    },
-    {
-      "disp_name": "E330951 - Soil Treatment Facility"
-    },
-    {
       "disp_name": "E330971 - POST PONDS INFLUENT TO FRON SRF"
     },
     {
@@ -18002,6 +17981,561 @@
     },
     {
       "disp_name": "E340743 - Pinnacle View Dragon Lake South Field 112419"
+    },
+    {
+      "disp_name": "E105000 - PENTICTON STP EFFLUENT"
+    },
+    {
+      "disp_name": "E338984 - EV_DC1_CONSTRUCTION"
+    },
+    {
+      "disp_name": "E340745 - KSM(PE106824)WTP8"
+    },
+    {
+      "disp_name": "E340746 - KSM(PE106824)EWQSC1"
+    },
+    {
+      "disp_name": "E340747 - KSM(PE106824)EWQSC2"
+    },
+    {
+      "disp_name": "E340748 - KSM(PE106824)EWQSC3"
+    },
+    {
+      "disp_name": "E340749 - KSM(PE106824)EWQSC4"
+    },
+    {
+      "disp_name": "E340750 - KSM(PE106824)MC1A-US"
+    },
+    {
+      "disp_name": "E340751 - KSM(PE106824)MC1B"
+    },
+    {
+      "disp_name": "E340752 - KSM(PE106824)NTR2"
+    },
+    {
+      "disp_name": "E340753 - KSM(PE106824)TRC2C"
+    },
+    {
+      "disp_name": "E340754 - KSM(PE106824)TRC2"
+    },
+    {
+      "disp_name": "E340764 - Two River 16-3 Temporary Sources"
+    },
+    {
+      "disp_name": "E340784 - City of Abbotsford (112754) Refuse"
+    },
+    {
+      "disp_name": "E340785 - City of Abbotsford (112754) Leachate from un-lined landfill"
+    },
+    {
+      "disp_name": "E340786 - City of Abbotsford (112754) Leachate from lined landfill"
+    },
+    {
+      "disp_name": "E340787 - City of Abbotsford (112754) Landfill gas"
+    },
+    {
+      "disp_name": "E340788 - City of Abbotsford (112754) Stornwater"
+    },
+    {
+      "disp_name": "E340789 - RE-112524 City of Kimberley WWTP Outfall"
+    },
+    {
+      "disp_name": "E340790 - ST.MARY RIVER UPSTREAM NORTH SIDE"
+    },
+    {
+      "disp_name": "E340791 - ST. MARY RIVER UPSTREAM SOUTH SIDE"
+    },
+    {
+      "disp_name": "E340792 - ST. MARY RIVER EDGE OF IDZ"
+    },
+    {
+      "disp_name": "E340793 - MARK CREEK"
+    },
+    {
+      "disp_name": "E340794 - ST. MARY RIVER DOWNSTREAM NORTH SHORELINE 280 M"
+    },
+    {
+      "disp_name": "E340795 - ST. MARY RIVER DOWNSTREAM NORTH SHORELINE 340 M"
+    },
+    {
+      "disp_name": "E340796 - ST. MARY RIVER DOWNSTREAM NORTH SHORELINE 600 M"
+    },
+    {
+      "disp_name": "E340797 - ST. MARY RIVER DOWNSTREAM SOUTH SHORELINE 600 M"
+    },
+    {
+      "disp_name": "E340804 - City of Abbotsford (112754) Landfill gas management facilities"
+    },
+    {
+      "disp_name": "E340824 - Septimus 8-22 NOx Emissions"
+    },
+    {
+      "disp_name": "E340844 - TAILS"
+    },
+    {
+      "disp_name": "E340845 - SLUD"
+    },
+    {
+      "disp_name": "E340846 - MWTP-IN"
+    },
+    {
+      "disp_name": "E340847 - LTC-3.60"
+    },
+    {
+      "disp_name": "E340848 - TC-3.85"
+    },
+    {
+      "disp_name": "E340849 - TC-5.67"
+    },
+    {
+      "disp_name": "E340850 - KC-2.00"
+    },
+    {
+      "disp_name": "E340851 - EC-7.60"
+    },
+    {
+      "disp_name": "E340852 - EC-5.50"
+    },
+    {
+      "disp_name": "E340853 - EC-4.90"
+    },
+    {
+      "disp_name": "E340854 - EC-0.03"
+    },
+    {
+      "disp_name": "E340855 - CC-9.16"
+    },
+    {
+      "disp_name": "E340856 - CC-6.38"
+    },
+    {
+      "disp_name": "E340857 - CC-1.67"
+    },
+    {
+      "disp_name": "E340858 - CCT-0.20"
+    },
+    {
+      "disp_name": "E340859 - HC-20.9"
+    },
+    {
+      "disp_name": "E340860 - HC-15.4"
+    },
+    {
+      "disp_name": "E340861 - HC-0.00"
+    },
+    {
+      "disp_name": "E340862 - UR-85.6"
+    },
+    {
+      "disp_name": "E340863 - UR-78.6"
+    },
+    {
+      "disp_name": "E340864 - UR-76.8"
+    },
+    {
+      "disp_name": "E340865 - UR-67.0"
+    },
+    {
+      "disp_name": "E340866 - UR-62.1"
+    },
+    {
+      "disp_name": "E340867 - UR-61.4"
+    },
+    {
+      "disp_name": "E340868 - UR-55.3"
+    },
+    {
+      "disp_name": "E340869 - UR-43.9"
+    },
+    {
+      "disp_name": "E340870 - MW17-02A"
+    },
+    {
+      "disp_name": "E340871 - MW17-02B-R"
+    },
+    {
+      "disp_name": "E340872 - MW17-03A"
+    },
+    {
+      "disp_name": "E340873 - MW17-03B"
+    },
+    {
+      "disp_name": "E340874 - MW17-04A"
+    },
+    {
+      "disp_name": "E340875 - MW17-04B"
+    },
+    {
+      "disp_name": "E340876 - MW22-09"
+    },
+    {
+      "disp_name": "E340877 - MW22-10A"
+    },
+    {
+      "disp_name": "E340878 - MW22-11"
+    },
+    {
+      "disp_name": "E340879 - MW22-12"
+    },
+    {
+      "disp_name": "E340880 - MW22-13"
+    },
+    {
+      "disp_name": "E340881 - MW22-14"
+    },
+    {
+      "disp_name": "E340882 - MW22-15"
+    },
+    {
+      "disp_name": "E340883 - BH-PP1-05A"
+    },
+    {
+      "disp_name": "E340884 - BH-2022-WRSF-08"
+    },
+    {
+      "disp_name": "E340885 - BH-PP1-05B"
+    },
+    {
+      "disp_name": "E340886 - G-SP-01B"
+    },
+    {
+      "disp_name": "E340887 - BH-2025-MRSA-02"
+    },
+    {
+      "disp_name": "E340888 - BH-2025-MRSA-03"
+    },
+    {
+      "disp_name": "E340889 - BH-2025-TMSF-01A"
+    },
+    {
+      "disp_name": "E340890 - BH-2025-TMSF-01B"
+    },
+    {
+      "disp_name": "E340891 - BH-2025-TMSF-01C"
+    },
+    {
+      "disp_name": "E340892 - BH-2025-TMSF-02A"
+    },
+    {
+      "disp_name": "E340893 - BH-2025-TMSF-02B"
+    },
+    {
+      "disp_name": "E340894 - BH-2025-TMSF-04A"
+    },
+    {
+      "disp_name": "E340895 - BH-2025-TMSF-04B"
+    },
+    {
+      "disp_name": "E340896 - BH-2025-TMSF-05B"
+    },
+    {
+      "disp_name": "E340897 - BH-2025-TMSF-05C"
+    },
+    {
+      "disp_name": "E340898 - BH-2025-TMSF-06A"
+    },
+    {
+      "disp_name": "E340899 - BH-2025-TMSF-06B"
+    },
+    {
+      "disp_name": "E340900 - BH-2025-TMSF-08A"
+    },
+    {
+      "disp_name": "E340901 - BH-2025-TMSF-08B"
+    },
+    {
+      "disp_name": "E340902 - BH-2025-TMSF-08C"
+    },
+    {
+      "disp_name": "E340903 - BH-2026-TMSF-R"
+    },
+    {
+      "disp_name": "E340904 - BH-2026-TMSF-R B"
+    },
+    {
+      "disp_name": "E340905 - BH-2026-TMSF-R A"
+    },
+    {
+      "disp_name": "E340906 - BH-2026-TMSF-U C"
+    },
+    {
+      "disp_name": "E340907 - BH-2026-TMSF-U B"
+    },
+    {
+      "disp_name": "E340908 - BH-2026-TMSF-U A"
+    },
+    {
+      "disp_name": "E340924 - OW522 CORMORANT ISLAND (CEDAR ST)"
+    },
+    {
+      "disp_name": "E340944 - Passive Landfill Gas Discharge"
+    },
+    {
+      "disp_name": "E340964 - Open Burn Pit"
+    },
+    {
+      "disp_name": "E340968 - KM46 Camp Municipal Wastewater Treatment Plant"
+    },
+    {
+      "disp_name": "E340984 - KSM(PE106824)MTT-TP SUMP"
+    },
+    {
+      "disp_name": "E340985 - KSM(PE106824)MTT-TP MUCK SUMP"
+    },
+    {
+      "disp_name": "E340986 - KSM(PE106824)MTT-SP SUMP"
+    },
+    {
+      "disp_name": "E340987 - KSM(PE106824)MTT-SP MUCK PAD"
+    },
+    {
+      "disp_name": "E340988 - KSM(PE106824)MTT-MP MUCK PAD"
+    },
+    {
+      "disp_name": "E340989 - KSM(PE106824)TWTP6 INFLUENT"
+    },
+    {
+      "disp_name": "E340990 - KSM(PE106824)TWTP8 INFLUENT"
+    },
+    {
+      "disp_name": "E340991 - KSM(PE106824)TWTP4 INFLUENT"
+    },
+    {
+      "disp_name": "E340992 - KSM(PE106824)TDD-1"
+    },
+    {
+      "disp_name": "E340993 - KSM(PE106824)TDD-2"
+    },
+    {
+      "disp_name": "E340994 - KSM(PE106824)TDD-3"
+    },
+    {
+      "disp_name": "E340995 - KSM(PE106824)TDD-4"
+    },
+    {
+      "disp_name": "E340996 - KSM(PE106824)TDD-5"
+    },
+    {
+      "disp_name": "E340997 - KSM(PE106824)SDD-1"
+    },
+    {
+      "disp_name": "E340998 - KSM(PE106824)SDD-2"
+    },
+    {
+      "disp_name": "E340999 - KSM(PE106824)SDD-3"
+    },
+    {
+      "disp_name": "E341000 - KSM(PE106824)SDD-4"
+    },
+    {
+      "disp_name": "E341001 - KSM(PE106824)SDD-5"
+    },
+    {
+      "disp_name": "E341002 - KSM(PE106824)SDD-6"
+    },
+    {
+      "disp_name": "E341003 - KSM(PE106824)MDD-1"
+    },
+    {
+      "disp_name": "E341004 - KSM(PE106824)MDD-2"
+    },
+    {
+      "disp_name": "E341005 - KSM(PE106824)MDD-3"
+    },
+    {
+      "disp_name": "E341006 - KSM(PE106824)MDD-4"
+    },
+    {
+      "disp_name": "E341007 - KSM(PE106824)MDD-5"
+    },
+    {
+      "disp_name": "E341008 - KSM(PE106824)MDD-6"
+    },
+    {
+      "disp_name": "E341009 - KSM(PE106824)MDD-7"
+    },
+    {
+      "disp_name": "E341010 - KSM(PE106824)MDD-8"
+    },
+    {
+      "disp_name": "E341011 - KSM(PE106824)TGW-1"
+    },
+    {
+      "disp_name": "E341012 - KSM(PE106824)TGW-2"
+    },
+    {
+      "disp_name": "E341013 - KSM(PE106824)TGW-3"
+    },
+    {
+      "disp_name": "E341014 - KSM(PE106824)TGW-4"
+    },
+    {
+      "disp_name": "E341015 - KSM(PE106824)TGW-5"
+    },
+    {
+      "disp_name": "E341016 - KSM(PE106824)TGW-6"
+    },
+    {
+      "disp_name": "E341017 - KSM(PE106824)TGW-7"
+    },
+    {
+      "disp_name": "E341018 - KSM(PE106824)SGW-1"
+    },
+    {
+      "disp_name": "E341019 - KSM(PE106824)SGW-2"
+    },
+    {
+      "disp_name": "E341020 - KSM(PE106824)SGW-3"
+    },
+    {
+      "disp_name": "E341021 - KSM(PE106824)SGW-4"
+    },
+    {
+      "disp_name": "E341022 - KSM(PE106824)SGW-5"
+    },
+    {
+      "disp_name": "E341023 - KSM(PE106824)SGW-6"
+    },
+    {
+      "disp_name": "E341024 - KSM(PE106824)SGW-7"
+    },
+    {
+      "disp_name": "E341025 - KSM(PE106824)SGW-8"
+    },
+    {
+      "disp_name": "E341026 - KSM(PE106824)SGW-9"
+    },
+    {
+      "disp_name": "E341027 - KSM(PE106824)SGW-10"
+    },
+    {
+      "disp_name": "E341028 - KSM(PE106824)SGW-11"
+    },
+    {
+      "disp_name": "E341029 - KSM(PE106824)MGW-1"
+    },
+    {
+      "disp_name": "E341030 - KSM(PE106824)MGW-2"
+    },
+    {
+      "disp_name": "E341031 - KSM(PE106824)MGW-3"
+    },
+    {
+      "disp_name": "E341032 - KSM(PE106824)MGW-4"
+    },
+    {
+      "disp_name": "E341033 - KSM(PE106824)MGW-5"
+    },
+    {
+      "disp_name": "E341034 - KSM(PE106824)MGW-6"
+    },
+    {
+      "disp_name": "E341035 - KSM(PE106824)MGW-7"
+    },
+    {
+      "disp_name": "E341036 - KSM(PE106824)MGW-8"
+    },
+    {
+      "disp_name": "E341037 - KSM(PE106824)MGW-9"
+    },
+    {
+      "disp_name": "E341038 - MWR 112760 VC-9.79"
+    },
+    {
+      "disp_name": "E341039 - MWR 112760 VC-8.61"
+    },
+    {
+      "disp_name": "E341040 - MWR 112760 VC-7.97"
+    },
+    {
+      "disp_name": "E341044 - Two Rivers 16-3 Compressor Drivers"
+    },
+    {
+      "disp_name": "E341045 - Two Rivers 16-3 Glycol Reboiler"
+    },
+    {
+      "disp_name": "E341046 - Two Rivers 16-3 Generator Drivers"
+    },
+    {
+      "disp_name": "E341047 - Two Rivers 16-3 Oil Treater Burner"
+    },
+    {
+      "disp_name": "E341048 - Two Rivers 16-3 Fuel Gas Conditioner Reboiler"
+    },
+    {
+      "disp_name": "E341049 - Two Rivers 16-3 Backup Generator Driver"
+    },
+    {
+      "disp_name": "E341050 - Two Rivers 16-3 Low Pressure Flare"
+    },
+    {
+      "disp_name": "E341051 - Two Rivers 16-3 HP Flare Stack"
+    },
+    {
+      "disp_name": "E341052 - Two Rivers 16-3 Temporary Sources"
+    },
+    {
+      "disp_name": "E341053 - Two Rivers 16-3 Accumulated Surface Precip"
+    },
+    {
+      "disp_name": "E341064 - Eskay Metallurgical Lab Dust Collector"
+    },
+    {
+      "disp_name": "E341065 - Eskay Incinerator 4 "
+    },
+    {
+      "disp_name": "E341066 - Eskay Primary Crusher"
+    },
+    {
+      "disp_name": "E341067 -  Eskay Pebble Crusher"
+    },
+    {
+      "disp_name": "E341084 - Eskay Concentrate Dryer Wet Scrubber "
+    },
+    {
+      "disp_name": "E341104 - ALICE LAKE - SB GRAVEL"
+    },
+    {
+      "disp_name": "E341105 - Eskay Concentrate dyer exhaust"
+    },
+    {
+      "disp_name": "E341124 - Birch a-44-I Recycle Compressor Driver (Q-650)"
+    },
+    {
+      "disp_name": "E341144 - SW-5 PE107036"
+    },
+    {
+      "disp_name": "E341145 - IW-1 PE107036"
+    },
+    {
+      "disp_name": "E341146 - DW-1 PE107036"
+    },
+    {
+      "disp_name": "E341166 - Swift Soil Treatment Facility"
+    },
+    {
+      "disp_name": "E341187 - Petronas Burn Approval 2026"
+    },
+    {
+      "disp_name": "E341204 - PCRC 109112 Thermal Oxidizer"
+    },
+    {
+      "disp_name": "E341205 - PCRC 109112 Biofilter system"
+    },
+    {
+      "disp_name": "E341206 - PCRC 109112 Natural Gas Fired Boiler"
+    },
+    {
+      "disp_name": "E341224 - Zulu Aggregates Inc Asphalt Plant"
+    },
+    {
+      "disp_name": "E341244 - HIGHWEST LANDFILL OC 100193 CAPTURED LEACHATE"
+    },
+    {
+      "disp_name": "E341267 - D1"
+    },
+    {
+      "disp_name": "E341268 - D5"
     },
     {
       "disp_name": "Other - Enter below"

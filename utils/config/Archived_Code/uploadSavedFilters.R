@@ -9,11 +9,11 @@ library(readxl)
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-token <- Sys.getenv("api_test_token")
-base_url = Sys.getenv("url_test")
+token <- Sys.getenv("PROD_TOKEN")
+base_url = Sys.getenv("PROD_URL")
 
 #read the sheet with the saved filters you want to upload
-monitoring_groups <- read.csv("./data/EMS_Monitoring_Groups_March_21_2025.csv", stringsAsFactors = F)
+monitoring_groups <- read.csv("./data/EMS_Monitoring_Groups_2026_02_23.csv", stringsAsFactors = F)
 
 #get guids for all locations
 #maximum request is for 1000 locations at a time
@@ -72,7 +72,7 @@ for (i in seq(1, length(list_of_filter))) {
   one_filter <- monitoring_groups %>% filter(NAME == list_of_filter[i]) #get only the data for the ith filter
   locations_in_filter <- lapply(one_filter$GUID, function(x) list(id = x)) #make a list of location guids
   
-  filter_des <- one_filter$DESCRIPTION[1] #get the filter description - i = 107 two descriptions for a single filter name not unique?
+  filter_des <- one_filter$Comments[1] #get the filter description - i = 107 two descriptions for a single filter name not unique?
   
   #Make the new saved filter
   url <- paste0(base_url, "v1/filters/")
