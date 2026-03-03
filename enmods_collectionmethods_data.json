@@ -6,13 +6,13 @@
       "name": "Automated sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump."
     },
     {
-      "customId": "Continuous: Peristaltic Pump",
-      "name": "Continuous sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump."
+      "customId": "Bladder Pump",
+      "identifierOrganization": "30",
+      "name": ""
     },
     {
-      "customId": "DELETE",
-      "identifierOrganization": "AQI-Bill-Chen-Prefinal",
-      "name": "DELETE"
+      "customId": "Continuous: Peristaltic Pump",
+      "name": "Continuous sampling using a peristaltic pump which has a rotating mechanism that creates a vacuum in order to draw liquid into the pump."
     },
     {
       "customId": "Electrofishing",

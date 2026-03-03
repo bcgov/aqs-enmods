@@ -169,9 +169,8 @@ put_object(file = "enmods_labs_data.json",
            acl = "public-read")
 
 # SAMPLING AGENCY ---------------------------------------------------------
-if (FALSE) { #temporary fix to get CoC JSONS back online
 # #reading in EnMoDS config
-samplingAgency <- get_profiles("prod", "sampling_agency") 
+samplingAgency <- get_profiles("prod", "sampling_agencies") 
 
 # #processing data into JSON format
  jsonSamplingAgencyProc <- toJSON(list(items = samplingAgency), pretty = TRUE)
@@ -185,7 +184,7 @@ samplingAgency <- get_profiles("prod", "sampling_agency")
             bucket = "enmods",
             region = "",
             acl = "public-read")
-}
+
 
 # COLLECTION METHODS ------------------------------------------------------
 
