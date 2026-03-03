@@ -76,6 +76,10 @@ AM_OP <- AMs %>% select('Observed Property ID' = customId...8,
 AM_OP <- AM_OP %>% dplyr::rename('Unit Name' = 'Default Unit')
 AM_OP <- AM_OP %>% separate('Unit Name', into = c("Unit Code", "Unit Name"), sep = " - ")
 
+#Remove units of NA
+AM_OP <- AM_OP %>%
+  mutate(across(where(is.character), ~replace(., is.na(.), "")))
+
 AM_OP <- AM_OP[order(AM_OP$`Observed Property ID`),]
 #Table of both AM and OP
 write.csv(AM_OP, "./utils/edt_reference_tables/tables/Observed_Properties_and_Analytical_Methods.csv", row.names = F)
