@@ -254,7 +254,8 @@ WITH core_data AS (
     WHERE
         mloc.locntyp_cd NOT LIKE 'D%' -- needed for all queries
         AND mloc.locntyp_cd NOT LIKE 'P%' 
-        AND smpl.when_created > TIMESTAMP '2026-01-15 17:15:00'
+        AND smpl.when_created > TIMESTAMP '2026-02-27 09:00:00'
+        --AND smpl.when_created > TIMESTAMP '2026-02-26 17:15:00'
         --AND smpl.id = '3515886'
 ),
 sample_data AS (
