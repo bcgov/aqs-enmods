@@ -179,12 +179,13 @@ PR <-fromJSON(rawToChar(PR$content))$domainObjects
 
 PR <- PR %>% select("Code" = customId,
                     "Name" = name,
-                      "Description" = description,
+                      #"Description" = description,
                       "Scope" = scopeStatement,
                       "Type" = type)
 
 PR <- PR %>% mutate(Type = case_when(Type == "STUDY" ~ "Government Monitoring",
                                      Type == "ROUTINE_MONITORING" ~ "Authorization"))
+
 
 
 write.csv(PR, "./utils/edt_reference_tables/tables/Projects.csv", row.names = F)
