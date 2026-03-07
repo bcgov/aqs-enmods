@@ -4,6 +4,12 @@
 #
 #This script should be run once per week as the files are updates once a week on Saturday.
 #add library path here if needed .libpath()
+#This script connects to AQI's S3 bucket and downloads the latest bulk data exports.
+#It then uploads them to a public BC Box repository. The files are large (several GB) 
+#and take awhile to download and upload.
+#
+#This script should be run once per week as the files are updates once a week on Saturday.
+.libPaths("C:/Users/JKROGH/AppData/Local/R/win-library/4.5")
 
 library(aws.s3)
 library(stringr)
@@ -14,15 +20,15 @@ library(jsonlite)
 library(lubridate)
 
 #set working directory
-#setwd("C:/EnMoDS")
+setwd("C:/EnMoDS")
 
 #get the API token from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
 
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AQI_AWS_ACCESS_KEY"),
-           "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AQI_AWS_SECRET_ACCESS_KEY"),
-           "AWS_S3_ENDPOINT" = "s3.amazonaws.com",
-           "AWS_DEFAULT_REGION" = "ca-central-1"
+            "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AQI_AWS_SECRET_ACCESS_KEY"),
+            "AWS_S3_ENDPOINT" = "s3.amazonaws.com",
+            "AWS_DEFAULT_REGION" = "ca-central-1"
 )
 
 #get the date of the files, the files are always run starting on a Friday so get the date of the last Saturday
@@ -45,40 +51,165 @@ ten_five_yr <- paste0("bulk/aqs/", last_saturday, "/", current_year - 9, "0101_t
 hist <- paste0("bulk/aqs/", last_saturday, "/up_to_", current_year - 10, "1231.csv.gz")
 
 #Download the files - if cooking beans make sure to set a timer so you don't boil them dry!
+max_attempts <- 6 #try up to n times to download a file, they seem to fail most of the time
 
-if (!file.exists(paste0(current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"))) {
-  print("Downloading current file")
-  save_object(bucket = "prod-bcmoe-aqs-data-store", object = this_yr, multipart = TRUE, show_progress=TRUE)
-} else {
-  print(paste0(current_year - 1, "0101_to_", last_saturday_end, ".csv.gz already exists!"))
-}
+print("Downloading current file")
+#save_object(bucket = "prod-bcmoe-aqs-data-store", object = this_yr, multipart = TRUE, show_progress=TRUE)
+###
+attempt <- 1
 
-if (!file.exists(paste0(current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz"))) {
-  print("Downloading 2 - 5 year file")
-  save_object(bucket = "prod-bcmoe-aqs-data-store", object = two_five_yr, multipart = TRUE, show_progress=TRUE)
-} else {
-  print(paste0(current_year - 4, "0101_to_", current_year - 2, "1231.csv.gz already exists!"))
+repeat {
+  
+  result <- tryCatch({
+    
+    save_object(
+      bucket = "prod-bcmoe-aqs-data-store",
+      object = this_yr,
+      multipart = TRUE,
+      show_progress = TRUE
+    )
+    
+    TRUE  # success flag
+    
+  }, error = function(e) {
+    message(sprintf("Attempt %d failed: %s", attempt, e$message))
+    NULL
+  })
+  
+  if (!is.null(result)) {
+    message("download succeeded.")
+    break
+  }
+  
+  if (attempt >= max_attempts) {
+    stop("downlaod failed after ", max_attempts, " attempts.")
+  }
+  
+  attempt <- attempt + 1
+  Sys.sleep(2)  # wait 2 seconds before retrying
 }
+###
 
-if (!file.exists(paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"))) {
-  print("Downloading 5 - 10 year file")
-  save_object(bucket = "prod-bcmoe-aqs-data-store", object = ten_five_yr, multipart = TRUE, show_progress=TRUE)
-} else {
-  print(paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz already exists!"))
-}
+print("Downloading 2 - 5 year file")
+#save_object(bucket = "prod-bcmoe-aqs-data-store", object = two_five_yr, multipart = TRUE, show_progress=TRUE)
+###
+attempt <- 1
 
-if (!file.exists(paste0("up_to_", current_year - 10, "1231.csv.gz"))) {
-  print("Downloading Histroic File")
-  save_object(bucket = "prod-bcmoe-aqs-data-store", object = hist, multipart = TRUE, show_progress=TRUE)
-} else {
-  print(paste0("up_to_", current_year - 10, "1231.csv.gz already exists!"))
+repeat {
+  
+  result <- tryCatch({
+    
+    save_object(
+      bucket = "prod-bcmoe-aqs-data-store",
+      object = two_five_yr,
+      multipart = TRUE,
+      show_progress = TRUE
+    )
+    
+    TRUE  # success flag
+    
+  }, error = function(e) {
+    message(sprintf("Attempt %d failed: %s", attempt, e$message))
+    NULL
+  })
+  
+  if (!is.null(result)) {
+    message("download succeeded.")
+    break
+  }
+  
+  if (attempt >= max_attempts) {
+    stop("downlaod failed after ", max_attempts, " attempts.")
+  }
+  
+  attempt <- attempt + 1
+  Sys.sleep(2)  # wait 2 seconds before retrying
 }
+###
+
+print("Downloading 5 - 10 year file")
+#save_object(bucket = "prod-bcmoe-aqs-data-store", object = ten_five_yr, multipart = TRUE, show_progress=TRUE)
+
+###
+attempt <- 1
+
+repeat {
+  
+  result <- tryCatch({
+    
+    save_object(
+      bucket = "prod-bcmoe-aqs-data-store",
+      object = ten_five_yr,
+      multipart = TRUE,
+      show_progress = TRUE
+    )
+    
+    TRUE  # success flag
+    
+  }, error = function(e) {
+    message(sprintf("Attempt %d failed: %s", attempt, e$message))
+    NULL
+  })
+  
+  if (!is.null(result)) {
+    message("download succeeded.")
+    break
+  }
+  
+  if (attempt >= max_attempts) {
+    stop("downlaod failed after ", max_attempts, " attempts.")
+  }
+  
+  attempt <- attempt + 1
+  Sys.sleep(2)  # wait 2 seconds before retrying
+}
+###
+
+print("Downloading Histroic File")
+#save_object(bucket = "prod-bcmoe-aqs-data-store", object = hist, multipart = TRUE, show_progress=TRUE)
+
+###
+
+attempt <- 1
+
+repeat {
+  
+  result <- tryCatch({
+    
+    save_object(
+      bucket = "prod-bcmoe-aqs-data-store",
+      object = hist,
+      multipart = TRUE,
+      show_progress = TRUE
+    )
+    
+    TRUE  # success flag
+    
+  }, error = function(e) {
+    message(sprintf("Attempt %d failed: %s", attempt, e$message))
+    NULL
+  })
+  
+  if (!is.null(result)) {
+    message("download succeeded.")
+    break
+  }
+  
+  if (attempt >= max_attempts) {
+    stop("downlaod failed after ", max_attempts, " attempts.")
+  }
+  
+  attempt <- attempt + 1
+  Sys.sleep(2)  # wait 2 seconds before retrying
+}
+###
+
 
 #Clear system env for AQI AWS
 Sys.unsetenv(c("AWS_ACCESS_KEY_ID",
-               "AWS_SECRET_ACCESS_KEY",
-               "AWS_S3_ENDPOINT",
-               "AWS_DEFAULT_REGION"))
+             "AWS_SECRET_ACCESS_KEY",
+             "AWS_S3_ENDPOINT",
+             "AWS_DEFAULT_REGION"))
 
 
 #Upload to BC Box
@@ -135,17 +266,17 @@ file.remove(paste0(current_year - 9, "0101_to_", current_year - 5, "1231.csv.gz"
 file.remove(paste0("up_to_", current_year - 10, "1231.csv.gz"))
 
 if (FALSE) {
-  #get all file names
-  x<-get_bucket(bucket = "prod-bcmoe-aqs-data-store", max = Inf)
-  
-  file_names = NA
-  
-  for (i in seq(1,length(x))) {
-    file_names[i] <- x[i]$Contents$Key
-  }
-  
-  fn <- as_data_frame(file_names)
-  
-  #get the processed file names
-  file_names_processed <- fn %>% filter(!stringr::str_detect(value, 'raw'))
+#get all file names
+x<-get_bucket(bucket = "prod-bcmoe-aqs-data-store", max = Inf)
+
+file_names = NA
+
+for (i in seq(1,length(x))) {
+  file_names[i] <- x[i]$Contents$Key
+}
+
+fn <- as_data_frame(file_names)
+
+#get the processed file names
+file_names_processed <- fn %>% filter(!stringr::str_detect(value, 'raw'))
 }
