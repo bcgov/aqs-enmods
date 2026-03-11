@@ -12,3 +12,5 @@ all_ams_authorizations.xlsx
 *.wal
 *.duckdb
 *.gz
+data/prod_AQS_Users.csv
+data/AQS_Users.csv
