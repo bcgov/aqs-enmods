@@ -177,6 +177,25 @@ write.csv(TAX, "./utils/edt_reference_tables/tables/Fish_Taxons.csv", row.names 
 PR <- GET(paste0(prodURL, "v1/projects"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
 PR <-fromJSON(rawToChar(PR$content))$domainObjects
 
+#--Projects with Contacts for ALS
+PR_w_contacts <- PR %>% select("Code" = customId,
+                    "Name" = name,
+                    "Description" = description,
+                    "Scope" = scopeStatement,
+                    "Type" = type)
+
+PR_w_contacts <- PR_w_contacts %>% filter(Type == 'STUDY')
+
+PR_w_contacts <-PR_w_contacts %>%
+  separate(Description, into = c("Ministry", "Project_Contact", "Invoice_Contact"), sep = ";\\s*") %>%
+  mutate(
+    Ministry = str_remove(Ministry, "Ministry:\\s*"),
+    Project_Contact = str_remove(Project_Contact, "Project contact:\\s*"),
+    Invoice_Contact = str_remove(Invoice_Contact, "Invoice contact:\\s*")
+  )
+
+write.csv(PR_w_contacts, "./utils/edt_reference_tables/tables/Projects_w_contacts.csv", row.names = F)
+
 PR <- PR %>% select("Code" = customId,
                     "Name" = name,
                       #"Description" = description,
