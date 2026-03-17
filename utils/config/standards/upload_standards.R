@@ -7,16 +7,17 @@ library(stringr)
 #Example of working API calls
 #get the API tokens from your environment file
 readRenviron(paste0(getwd(), "./.Renviron"))
-testToken <- Sys.getenv("TEST_TOKEN")
+#testToken <- Sys.getenv("TEST_TOKEN")
 prodToken <- Sys.getenv("PROD_TOKEN")
-testURL <- Sys.getenv("TEST_URL")
+#testURL <- Sys.getenv("TEST_URL")
 prodURL <- Sys.getenv("PROD_URL")
 
 #Read the standards template from excel
-standards <- read_excel("./utils/config/standards/2025_07_08_EnMoDS_Standards_Template_pilot.xlsx")
+#standards <- read_excel("./utils/config/standards/2025_07_08_EnMoDS_Standards_Template_pilot.xlsx")
+standards <- read_excel("./data/2026-03-13_standards.xlsx")
 
 #need units and OPs guids from AQS
-env = "test"
+env = "prod"
 
 #define token and urls
 update_base_url_token <- function(env) {
@@ -28,12 +29,13 @@ source("./utils/config/api_functions.R")
 #get reference lists from the system
 units <- get_profiles(env, "units")
 units$groupId <- units$unitGroup$id
-untits <- units %>% select("id", "customId", "groupId")
+units <- units %>% select("id", "customId", "groupId","name")
+units <- units %>% separate('name', into = c("Unit_Code", "Unit_Name"), sep = " - ")
 OPs <- get_profiles(env, "observed_properties") %>% select ("id", "customId")
 locs <- get_profiles(env, "locations") %>% select ("id", "customId")
 
 #join units in
-standards <- merge(standards, units, by.x = "Units", by.y = "customId", all.x = T, all.y = F)
+standards <- merge(standards, units, by.x = "Units", by.y = "Unit_Code", all.x = T, all.y = F)
 standards <- standards %>% rename("unit.id" = "id")
 
 #join OP in
@@ -70,9 +72,14 @@ standards$`Applicable To (yyyy-mm-dd)`[is.na(standards$`Applicable To (yyyy-mm-d
 #get list of standards
 standards_ID <- unique(standards$newName)
 
+#add a check for locations with lots of obs
+location_summary <- read.csv("https://coms.api.gov.bc.ca/api/v1/object/e4e1829d-c1a1-4932-b275-de6e423a6d71")
+
+
+standars_obs_check <- merge(standards, location_summary, by.x = 'Location ID', by.y = 'ID')
 #Post standards
 for (i in seq(1, length(standards_ID))) {
-  
+  i=7 #1,2, and 7 are done
   standards_data <- standards %>% filter(newName == standards_ID[i])
   
   locations <- unique(standards_data$loc.id)
@@ -109,7 +116,7 @@ for (i in seq(1, length(standards_ID))) {
   data_body <- list('customId' = standards_ID[i],
                     'name' = unique(standards_data$Name),
                     'description' = unique(standards_data$Description),
-                    'issuingOrganization' = 'Test Standards Import',
+                    'issuingOrganization' = 'BC Ministry of Environment and Parks',
                     'samplingLocations' = list(list('id' = unique(standards_data$loc.id))), #only a single location ever
                     'active' = 'TRUE',
                     'observationStandards' = ops_list,
@@ -117,7 +124,7 @@ for (i in seq(1, length(standards_ID))) {
                                                 'end' = unique(standards_data$`Applicable To (yyyy-mm-dd)`))
   )
   
-  y<-POST(paste0(testURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = data_body, encode = 'json')
+  y<-POST(paste0(prodURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = data_body, encode = 'json')
   
   print(fromJSON(rawToChar(y$content)))
   

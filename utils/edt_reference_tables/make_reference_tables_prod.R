@@ -301,3 +301,10 @@ put_object(file = "./utils/edt_reference_tables/tables/Projects.csv",
            bucket = "enmods",
            region = "",
            acl = "public-read")
+
+put_object(file = "./utils/edt_reference_tables/tables/Projects_w_contacts.csv", 
+           object = "Reference_Lists/Projects_w_contacts.csv",
+           bucket = "enmods",
+           region = "",
+           acl = "public-read")
+
