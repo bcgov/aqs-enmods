@@ -12,6 +12,7 @@ library(httr)
 library(dplyr)
 library(tidyr)
 library(jsonlite)
+library(lubridate)
 
 #get the API token from your environment file
 #readRenviron(paste0(getwd(), "./.Renviron"))
@@ -65,9 +66,11 @@ if (TRUE) {
   #debug
   class(all_locations)
   
-  #clean up the data types for dates
-  all_locations$ESTABLISHED_DATE <- as.Date(all_locations$ESTABLISHED_DATE, format = "%m/%d/%Y")
-  all_locations$LATEST_FIELD_VISIT <- as.Date(all_locations$LATEST_FIELD_VISIT)
+  #clean up the data types for dates old locations are in format month/day/year new ones are year-month-day
+  all_locations$ESTABLISHED_DATE <- as.Date(parse_date_time(
+         all_locations$ESTABLISHED_DATE,
+         orders = c("mdy", "ymd")))
+
   
   #filter to just those locations sampled in the last 5 years or made in the last 3 years
   #remove air stations since those have their own list
@@ -125,7 +128,7 @@ if (TRUE) {
 # LOCATIONS API ---------------------------------------------------------------
 if (FALSE){
 # #reading in EnMoDS config
- locations <- get_profiles("test", "locations") %>% 
+ locations <- get_profiles("prod", "locations") %>% 
    keep(names(.) %in% gen_list_rel_var("samplinglocations"))
 
 #locations$emsDateModified <- lapply(locations$extendedAttributes,)
