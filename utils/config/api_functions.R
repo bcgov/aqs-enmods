@@ -150,6 +150,37 @@ get_profiles <- function(env, data_type) {
   return(temp_profiles)
 }
 
+get_counts_for_url <- function(env, url) {
+  #' Title: get_profiles_for_url
+  #' @description
+  #'  Downloads an AQS profile if the API URL is known
+  #' @param env AQS environment. Takes values "prod" or "test"
+  #' @param url AQS API url to download profile at that URL
+  #' @returns a profile in a data frame/tibble format even if it has pagination
+  #' @import httr jsonlite dplyr
+  #' @importFrom magrittr %>%
+  #' @export
+  #' @examples
+  
+  # url <- str_c(base_url, "v1/extendedattributes/", extended_attributes_ddl_agency, "/dropdownlistitems")
+  # url <- str_c(base_url, "v1/extendedattributes/", extended_attributes_ddl_agency, "/details")
+  
+  url_parameters <- update_base_url_token(env)
+  base_url <- url_parameters[[1]]
+  token <- url_parameters[[2]]
+  
+  data_body <- list()
+  
+  x_temp <- httr::GET(url,
+                      config = c(httr::add_headers(.headers = c("Authorization" = token))),
+                      body = data_body, encode = "json"
+  )
+  
+  total <- jsonlite::fromJSON(rawToChar(x_temp$content))$totalCount
+  
+  return(total)
+}
+
 # DELETE FUNCTIONS -----------------------------------------------------------
 
 del_profiles <- function(env, operation, data_type) {

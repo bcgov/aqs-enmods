@@ -2,6 +2,7 @@ library(httr)
 library(jsonlite)
 library(readxl)
 library(dplyr)
+library(tidyr)
 library(stringr)
 
 #Example of working API calls
@@ -49,10 +50,6 @@ standards <- standards %>% rename("loc.id" = "id")
 #add a check to remove standards that do not have unit id or OP id
 standards <- standards %>% filter(!is.na(OP.id), !is.na(unit.id), !is.na(loc.id))
 
-#standards apply the same list of OPs to every location but because the data from
-#CEEB has different lists of OPs per location we need to make a standard per location
-
-standards$newName <- paste0(standards$`Auth #`, "-", standards$`Location ID`)
 
 #Add applicable from date
 standards$`Applicable From (yyyy-mm-dd)`[!is.na(standards$`Applicable From (yyyy-mm-dd)`)] <-
@@ -69,6 +66,21 @@ standards$`Applicable To (yyyy-mm-dd)`[!is.na(standards$`Applicable To (yyyy-mm-
          "T00:00:00-08:00")
 standards$`Applicable To (yyyy-mm-dd)`[is.na(standards$`Applicable To (yyyy-mm-dd)`)] <- ''
 
+#standards apply the same list of OPs to every location but because the data from
+#CEEB has different lists of OPs per location we need to make a standard per location per date window
+make_date_string <- function(date_from, date_to) {
+  ifelse(
+    date_to == "",
+    paste0(as.Date(date_from)),
+    paste0(as.Date(date_from), "_to_", as.Date(date_to))
+  )
+}
+
+standards$newName <- make_date_string(standards$`Applicable From (yyyy-mm-dd)`, standards$`Applicable To (yyyy-mm-dd)`)
+
+standards$newName <- paste0(standards$`Auth #`, "_", standards$`Location ID`, 
+                            "_", standards$newName)
+
 #get list of standards
 standards_ID <- unique(standards$newName)
 
@@ -79,7 +91,7 @@ location_summary <- read.csv("https://coms.api.gov.bc.ca/api/v1/object/e4e1829d-
 standars_obs_check <- merge(standards, location_summary, by.x = 'Location ID', by.y = 'ID')
 #Post standards
 for (i in seq(1, length(standards_ID))) {
-  i=7 #1,2, and 7 are done
+  #i=10 #1, 2, 7, 8, 9 and 10 are done
   standards_data <- standards %>% filter(newName == standards_ID[i])
   
   locations <- unique(standards_data$loc.id)
@@ -129,14 +141,23 @@ for (i in seq(1, length(standards_ID))) {
   print(fromJSON(rawToChar(y$content)))
   
   #if it already exists use PUT but test the customId first
+  Sys.sleep(60*10)
   
 } #end for loop of unique standards
 
+#Get standards already in the prod
+x <- GET(paste0(prodURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
+standards_guid <- fromJSON(rawToChar(x$content))$domainObjects
+
+#check for those that are already in prod
+standards_not_in_prod <- standards_ID[!(standards_ID %in% standards_guid$customId)]
 
 ### Code to delete all standards to post a fresh copy
-x <- GET(paste0(testURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = list(), encode = 'json')
+x <- GET(paste0(prodURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
 standards_guid <- fromJSON(rawToChar(x$content))$domainObjects$id
 
 for (i in seq(1, length(standards_guid))) {
-  DELETE(paste0(testURL, "v1/standards/", standards_guid[i]), config = c(add_headers(.headers = c('Authorization' = testToken ))), body = list(), encode = 'json')
+  DELETE(paste0(prodURL, "v1/standards/", standards_guid[i]), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
+  Sys.sleep(60*5)
+  print(i)
 }

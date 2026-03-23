@@ -1,3 +1,26 @@
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(httr)
+library(jsonlite)
+
+readRenviron(paste0(getwd(), "./.Renviron"))
+#test_token <- Sys.getenv("TEST_READ_ONLY_TOKEN")
+prod_token <- Sys.getenv("PROD_TOKEN")
+token = prod_token
+#test_url <- Sys.getenv("TEST_URL")
+prod_url <- Sys.getenv("PROD_URL")
+base_url <- prod_url
+
+source("./utils/config/api_functions.R")
+
+update_base_url_token <- function(env) {
+  if (env == "prod") list(prod_url, prod_token) else list(test_url, test_token)
+}
+
+prob_wo <- list()
+k=1
+
 update_field_visit_projects <- function(env, file_address_BCLMN, file_address_CANBC) {
   #' Title: put_profiles
   #' @description
@@ -25,13 +48,19 @@ update_field_visit_projects <- function(env, file_address_BCLMN, file_address_CA
     unique() %>%
     unlist()
 
-  for (req_id in req_ids[2:21]) {
-    # req_id <- req_ids[1]
-
+  for (req_id in req_ids[48:567]) {
+    #req_id <- req_ids[1]
+   
     url <- str_c(base_url, "v2/observations", "?limit=100000&EA_Work Order Number=", as.character(req_id))
 
     # field visit guid being identified
     test_data <- get_profiles_for_url(env, url)
+    
+    if (length(test_data) == 0) {
+      print(paste0("The WO number ", as.character(req_id), " has a problem and is skipped!"))
+      next
+    }
+    
     profile <- test_data %>%
       dplyr::select(fieldVisit) %>%
       unnest(cols = c(fieldVisit)) %>%
@@ -39,7 +68,9 @@ update_field_visit_projects <- function(env, file_address_BCLMN, file_address_CA
       unique()
 
     if (dim(profile)[1] >= 2) {
-      print(str_c("The WO number", as.character(req_id), "has more that one field visit associated. Proceed with caution."))
+      print(str_c("The WO number ", as.character(req_id), " has more that one field visit associated. Proceed with caution."))
+      prob_wo[k] <- as.character(req_id)
+      k = k+1
       next
     }
 
@@ -66,7 +97,7 @@ update_field_visit_projects <- function(env, file_address_BCLMN, file_address_CA
 
       data_body <- list(
         "project" = list(
-          id = "6c26f18f-2297-47e7-b532-64f611b3fd42"
+          id = "e0c8087c-b759-4fa2-8c21-e21ec9281ff4" #BCLMN "6c26f18f-2297-47e7-b532-64f611b3fd42"
         )
       )
 
@@ -79,6 +110,7 @@ update_field_visit_projects <- function(env, file_address_BCLMN, file_address_CA
         .headers =
           c("Authorization" = token)
       )), body = data_body, encode = "json")
+      print(x)
 
       stop_for_status(x, task = str_c("complete put for WO number ", req_id, " at field visit ", profile$id[j]))
 
@@ -161,6 +193,7 @@ update_field_visit_projects <- function(env, file_address_BCLMN, file_address_CA
 
       print(j)
     }
+    print(req_id)
   }
 
   # install.packages("readxl")
@@ -320,8 +353,10 @@ update_field_visit_projects <- function(env, file_address_BCLMN, file_address_CA
   #     }
   #   }
   # }
-
+  print(req_id)
   # return(messages)
   return()
   # }
 }
+
+update_field_visit_projects("prod", "./data/BC-volunteer-lakes-req.csv")
