@@ -27,8 +27,8 @@ jobs:
 
       - name: Run R script
         env:
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+            BC_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            BC_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
             AQI_AWS_ACCESS_KEY: ${{ secrets.AQI_AWS_ACCESS_KEY }}
             AQI_AWS_SECRET_ACCESS_KEY: ${{ secrets.AQI_AWS_SECRET_ACCESS_KEY }}
         run: Rscript utils/AQS_Performance_Logs.R
