@@ -59,6 +59,12 @@ save_object(
   object = all_files[2,]
 )
 
+#Clear system env for AQI AWS
+Sys.unsetenv(c("AWS_ACCESS_KEY_ID",
+               "AWS_SECRET_ACCESS_KEY",
+               "AWS_S3_ENDPOINT",
+               "AWS_DEFAULT_REGION"))
+
 #Upload to BC Box
 #readRenviron(paste0(getwd(), "./.Renviron"))
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
