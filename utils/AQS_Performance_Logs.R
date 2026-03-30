@@ -67,8 +67,8 @@ Sys.unsetenv(c("AWS_ACCESS_KEY_ID",
 
 #Upload to BC Box
 #readRenviron(paste0(getwd(), "./.Renviron"))
-Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AWS_ACCESS_KEY"),
-           "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("AWS_SECRET_ACCESS_KEY"),
+Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("BC_AWS_ACCESS_KEY"),
+           "AWS_SECRET_ACCESS_KEY" =  Sys.getenv("BC_AWS_SECRET_ACCESS_KEY"),
            "AWS_S3_ENDPOINT" = "nrs.objectstore.gov.bc.ca",
            "AWS_DEFAULT_REGION" = "")
 
