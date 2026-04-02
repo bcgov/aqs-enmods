@@ -15,7 +15,8 @@ prodURL <- Sys.getenv("PROD_URL")
 
 #Read the standards template from excel
 #standards <- read_excel("./utils/config/standards/2025_07_08_EnMoDS_Standards_Template_pilot.xlsx")
-standards <- read_excel("./data/2026-03-13_standards.xlsx")
+standards <- read_excel("./data/2026-03-27_EnMoDs_Submission.xlsx")
+#standards <- read_excel("./data/2026-03-13_standards.xlsx")
 
 #need units and OPs guids from AQS
 env = "prod"
@@ -52,6 +53,10 @@ standards <- standards %>% filter(!is.na(OP.id), !is.na(unit.id), !is.na(loc.id)
 
 
 #Add applicable from date
+
+#if date is reading not as string
+standards$`Applicable From (yyyy-mm-dd)` <- as.character(standards$`Applicable From (yyyy-mm-dd)`)
+
 standards$`Applicable From (yyyy-mm-dd)`[!is.na(standards$`Applicable From (yyyy-mm-dd)`)] <-
   paste0(standards$`Applicable From (yyyy-mm-dd)`[!is.na(standards$`Applicable From (yyyy-mm-dd)`)],
          "T00:00:00-08:00")
@@ -61,10 +66,12 @@ standards$`Applicable From (yyyy-mm-dd)`[is.na(standards$`Applicable From (yyyy-
 
 #Add applicable to
 standards$`Applicable To (yyyy-mm-dd)` <- as.character(standards$`Applicable To (yyyy-mm-dd)`)
+
+standards$`Applicable To (yyyy-mm-dd)` <- as.character(standards$`Applicable To (yyyy-mm-dd)`)
 standards$`Applicable To (yyyy-mm-dd)`[!is.na(standards$`Applicable To (yyyy-mm-dd)`)] <-
   paste0(standards$`Applicable To (yyyy-mm-dd)`[!is.na(standards$`Applicable To (yyyy-mm-dd)`)],
          "T00:00:00-08:00")
-standards$`Applicable To (yyyy-mm-dd)`[is.na(standards$`Applicable To (yyyy-mm-dd)`)] <- ''
+standards$`Applicable To (yyyy-mm-dd)`[is.na(standards$`Applicable To (yyyy-mm-dd)`)] <- ""
 
 #standards apply the same list of OPs to every location but because the data from
 #CEEB has different lists of OPs per location we need to make a standard per location per date window
@@ -89,12 +96,19 @@ location_summary <- read.csv("https://coms.api.gov.bc.ca/api/v1/object/e4e1829d-
 
 
 standars_obs_check <- merge(standards, location_summary, by.x = 'Location ID', by.y = 'ID')
+
 #Post standards
-for (i in seq(1, length(standards_ID))) {
+for (i in seq(5, length(standards_ID))) {
   #i=10 #1, 2, 7, 8, 9 and 10 are done
   standards_data <- standards %>% filter(newName == standards_ID[i])
   
+  #
+  standards_data$Maximum <- as.character(standards_data$Maximum)
+  #
+  
   locations <- unique(standards_data$loc.id)
+  
+  print(standards_ID[i])
   
   #define the nested list for observed properties, values and units
   ops_list <- list()
@@ -136,12 +150,18 @@ for (i in seq(1, length(standards_ID))) {
                                                 'end' = unique(standards_data$`Applicable To (yyyy-mm-dd)`))
   )
   
-  y<-POST(paste0(prodURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = data_body, encode = 'json')
+  y<-POST(paste0(prodURL, "v1/standards/"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), 
+          body = data_body, encode = 'json')
   
+ 
   print(fromJSON(rawToChar(y$content)))
   
-  #if it already exists use PUT but test the customId first
-  Sys.sleep(60*10)
+  #pause based on the number of obs being reindex
+  obs_count <- standars_obs_check %>% filter(newName == standards_ID[i])
+  obs_count <- sum(obs_count$OBSERVATION_COUNT)
+  
+  print(paste0('sleeping... for ', obs_count, " obs."))
+  Sys.sleep((60*20/100000)  * obs_count)
   
 } #end for loop of unique standards
 
