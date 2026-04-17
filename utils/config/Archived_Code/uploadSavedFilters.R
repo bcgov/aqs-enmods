@@ -13,7 +13,8 @@ token <- Sys.getenv("PROD_TOKEN")
 base_url = Sys.getenv("PROD_URL")
 
 #read the sheet with the saved filters you want to upload
-monitoring_groups <- read.csv("./data/EMS_Monitoring_Groups_2026_02_23.csv", stringsAsFactors = F)
+#monitoring_groups <- read.csv("./data/EMS_Monitoring_Groups_2026_02_23.csv", stringsAsFactors = F)
+monitoring_groups <- read.csv("C:/Users/jkrogh/Downloads/20260326_FRTP_SW_SQ_AQS_EnMoDS_locations_upload.csv", stringsAsFactors = F)
 
 #get guids for all locations
 #maximum request is for 1000 locations at a time
@@ -64,6 +65,9 @@ locations_not_in_EnMoDS <- monitoring_groups %>% filter(is.na(GUID))
 #filter out any that don't have a guid 
 monitoring_groups <- monitoring_groups %>% filter(!is.na(GUID)) #10,602 
 
+#for a single saved filter
+monitoring_groups$NAME = "b141ad66-2387-45d5-95fb-f336eb698f2a"
+
 #nget the list of saved filters 
 list_of_filter <- unique(monitoring_groups$NAME)
 
@@ -87,3 +91,26 @@ for (i in seq(1, length(list_of_filter))) {
   
   print(paste("uploading saved filter", i))
 }
+
+
+#if adding locations to a saved filter
+#guid of existing saved filter
+url <- paste0(base_url, "v1/filters/b141ad66-2387-45d5-95fb-f336eb698f2a")
+data_body <- list()
+                  
+existing_filter <-GET(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+
+existing_filter_loc_guid <- fromJSON(rawToChar(existing_filter$content))$samplingLocations$id
+
+#list of location guids to add
+new_locations <- monitoring_groups$GUID
+updated_saved_filter_locations <- lapply(c(new_locations, existing_filter_loc_guid), function(x) list(id = x)) 
+
+#PUT
+data_body <- list(
+                  'samplingLocations' =  updated_saved_filter_locations
+)
+
+y<-PUT(url, config = c(add_headers(.headers = c('Authorization' = token))), body = data_body, encode = 'json')
+
+fromJSON(rawToChar(y$content))
