@@ -105,10 +105,14 @@ write.csv(aqs_units, "./utils/edt_reference_tables/tables/Units.csv", row.names 
 #--- Mediums ---
 mediums <- GET(paste0(prodURL, "v1/mediums"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
 mediums <-fromJSON(rawToChar(mediums$content))$domainObjects
-
 mediums <- mediums %>% select("Medium" = customId)
 
-write.csv(mediums, "./utils/edt_reference_tables/tables/Mediums.csv", row.names = F)
+#read file with medium definitions
+medium_def <- read.csv("./utils/edt_reference_tables/tables/2026-04-09_Mediums_and_Descriptions.csv")
+
+joined_medium <- left_join(mediums, medium_def, by = 'Medium')
+
+write.csv(joined_medium, "./utils/edt_reference_tables/tables/Mediums.csv", row.names = F)
 
 #--- collection Methods ---
 CM <- GET(paste0(prodURL, "v1/collectionmethods"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
