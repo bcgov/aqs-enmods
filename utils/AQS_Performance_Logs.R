@@ -46,7 +46,7 @@ file_names <- sapply(bucket_data, function(x) x$Key)
 all_files <- data.frame(Key = file_names, stringsAsFactors = FALSE)
 
 #get only those files that have this date string
-all_files[str_detect(all_files$Key, date_string),]
+all_files <- all_files[str_detect(all_files$Key, date_string),]
 
 #download the files there will only every be two
 save_object(
