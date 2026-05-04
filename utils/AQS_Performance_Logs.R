@@ -7,7 +7,7 @@ library(jsonlite)
 library(lubridate)
 
 #get the API token from your environment file
-#readRenviron(paste0(getwd(), "./.Renviron"))
+readRenviron(paste0(getwd(), "./.Renviron"))
 
 #Connect to AQI's bucket
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AQI_AWS_ACCESS_KEY"),
@@ -47,6 +47,10 @@ all_files <- data.frame(Key = file_names, stringsAsFactors = FALSE)
 
 #get only those files that have this date string
 all_files <- all_files[str_detect(all_files$Key, date_string),]
+
+if (length(all_files) == 0) {
+  stop('no new files from AQI')
+}
 
 #download the files there will only every be two
 save_object(
