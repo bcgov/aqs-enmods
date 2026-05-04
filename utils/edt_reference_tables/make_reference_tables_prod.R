@@ -23,11 +23,11 @@ OPs <-fromJSON(rawToChar(OPs$content))$domainObjects
 #select and rename to make it look nice
 OPs <- tidyr::unnest(OPs, cols = c(unitGroup, defaultUnit), names_repair = "universal")
 
-OPs <- OPs %>% select('Observed Property ID' = customId...2,
-                    'Unit Group' = customId...9,
+OPs <- OPs %>% select('Observed Property ID' = customId...3,
+                    'Unit Group' = customId...10,
                     'Default Unit' = name...15,
                     'Supports Unit Conversion' = supportsConversion,
-                    'EMS Code' = name...4,
+                    'EMS Code' = name...5,
                     'Description' = description,
                     'Result Type' = resultType,
                     'Analysis Type' = analysisType,
@@ -58,13 +58,13 @@ write.csv(AMs_final, "./utils/edt_reference_tables/tables/Analytical_Methods.csv
 
 AMs <- unnest(AMs, cols = c(unitGroup, defaultUnit), names_repair = "universal")
 
-AM_OP <- AMs %>% select('Observed Property ID' = customId...8,
-                      'Observed Property Descritpion' = description...11,
+AM_OP <- AMs %>% select('Observed Property ID' = customId...9,
+                      'Observed Property Descritpion' = description...12,
                       'CAS Number' = casNumber,
-                      'Unit Group' = customId...15,
-                      'Default Unit' = name...20, #get the unit name not symbol
+                      'Unit Group' = customId...16,
+                      'Default Unit' = name...21, #get the unit name not symbol
                       'Supports Unit Conversion' = supportsConversion,
-                      'EMS Code'= name...10,
+                      'EMS Code'= name...11,
                       'Analysis Type' = analysisType,
                       'Result Type' = resultType,
                       'Method ID' = methodId,
