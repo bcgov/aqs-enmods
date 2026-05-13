@@ -29,8 +29,8 @@ current_date <- Sys.Date()
 # Determine the target date to evaluate (ensure we don't look before the start date)
 target_date <- max(start_date, current_date)
 
-# Calculate days to subtract to reach the last Saturday (Saturday = 6 in R's POSIXlt)
-# This logic returns the current day if it is already a Saturday
+# Calculate days to subtract to reach the last saturday (saturday = 6 in R's POSIXlt)
+# This logic returns the current day if it is already a saturday
 days_back <- as.POSIXlt(target_date)$wday - 6
 if (days_back < 0) days_back <- days_back + 7
 
@@ -55,12 +55,12 @@ if (length(all_files) == 0) {
 #download the files there will only every be two
 save_object(
   bucket = "prod-bcmoe-aqs-data-store",
-  object = all_files[1,]
+  object = all_files[1]
 )
 
 save_object(
   bucket = "prod-bcmoe-aqs-data-store",
-  object = all_files[2,]
+  object = all_files[2]
 )
 
 #Clear system env for AQI AWS
