@@ -13,12 +13,16 @@ library(scales)
 library(plotly)
 library(tidyr)
 
+# Data Start Date
+data_start_date <- as.POSIXct("2026-03-05", format = "%Y-%m-%d", tz = "America/Vancouver")
+
 # Null-coalescing operator (not in base R)
 `%||%` <- function(a, b) if (!is.null(a)) a else b
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
-readRenviron(paste0(getwd(), "./.Renviron"))
+# readRenviron(paste0(getwd(), "./.Renviron"))
+readRenviron(file.path(getwd(), ".Renviron"))
 
 # ---- Configuration ----
 url_background <- Sys.getenv("URL_Background")
@@ -39,16 +43,16 @@ file_import <- sprintf(
 )
 
 # ---- Download files ----
-download.file(
-  url = url_background,
-  destfile = file_background,
-  mode = "wb"
+if (!nzchar(url_background)) stop("URL_Background env var is not set.")
+tryCatch(
+  download.file(url = url_background, destfile = file_background, mode = "wb"),
+  error = function(e) stop("Failed to download background file: ", e$message)
 )
 
-download.file(
-  url = url_import,
-  destfile = file_import,
-  mode = "wb"
+if (!nzchar(url_import)) stop("URL_Import env var is not set.")
+tryCatch(
+  download.file(url = url_import, destfile = file_import, mode = "wb"),
+  error = function(e) stop("Failed to download import file: ", e$message)
 )
 
 message("Downloads complete:")
@@ -110,19 +114,23 @@ read_submissions_csv <- function(path) {
 
   df %>%
     mutate(
-      submission_date        = ymd_hms(submission_date, quiet = TRUE, tz = "UTC"),
+      submission_date = as.POSIXct(submission_date,
+        format = "%Y-%m-%dT%H:%M:%OSZ",
+        tz = "UTC"
+      ),
+      # submission_date        = ymd_hms(submission_date, quiet = TRUE, tz = "UTC"),
       submission_status_code = as.character(submission_status_code),
-      submitter_user_id      = as.character(submitter_user_id),
-      submitter_agency_name  = as.character(submitter_agency_name),
-      file_name              = as.character(file_name),
-      original_file_name     = as.character(original_file_name),
-      source_file            = basename(path)
+      submitter_user_id = as.character(submitter_user_id),
+      submitter_agency_name = as.character(submitter_agency_name),
+      file_name = as.character(file_name),
+      original_file_name = as.character(original_file_name),
+      source_file = basename(path)
     ) %>%
     mutate(across(
       c(sample_count, results_count, results_count_old),
       ~ suppressWarnings(as.numeric(.x))
     )) %>%
-    dplyr::filter(submission_date >= as.POSIXct("2026-03-05", format = "%Y-%m-%d", tz = "America/Vancouver"))
+    dplyr::filter(submission_date >= data_start_date)
 }
 
 read_performance_csv <- function(path) {
@@ -138,8 +146,12 @@ read_performance_csv <- function(path) {
 
   df %>%
     mutate(
-      submission_date = ymd_hms(submission_date, quiet = TRUE, tz = "UTC"),
-      source_file     = basename(path)
+      submission_date = as.POSIXct(submission_date,
+        format = "%Y-%m-%dT%H:%M:%OSZ",
+        tz = "UTC"
+      ),
+      # submission_date = ymd_hms(submission_date, quiet = TRUE, tz = "UTC"),
+      source_file = basename(path)
     ) %>%
     mutate(across(
       c(
@@ -148,7 +160,7 @@ read_performance_csv <- function(path) {
       ),
       ~ suppressWarnings(as.numeric(.x))
     )) %>%
-    dplyr::filter(submission_date >= as.POSIXct("2026-03-05", format = "%Y-%m-%d", tz = "America/Vancouver"))
+    dplyr::filter(submission_date >= data_start_date)
 }
 
 read_background_import_csv <- function(path) {
@@ -164,7 +176,11 @@ read_background_import_csv <- function(path) {
 
   df %>%
     mutate(
-      start_date = ymd_hms(startTime, quiet = TRUE, tz = "UTC"),
+      start_date = as.POSIXct(startTime,
+        format = "%Y-%m-%dT%H:%M:%OSZ",
+        tz = "UTC"
+      ),
+      # start_date = ymd_hms(startTime, quiet = TRUE, tz = "UTC"),
       job_count = as.numeric(jobCount),
       source_file = basename(path)
     ) %>%
@@ -173,7 +189,7 @@ read_background_import_csv <- function(path) {
       c(job_count),
       ~ suppressWarnings(as.numeric(.x))
     )) %>%
-    dplyr::filter(start_date >= as.POSIXct("2026-03-05", format = "%Y-%m-%d", tz = "America/Vancouver"))
+    dplyr::filter(start_date >= data_start_date)
 }
 
 # Combine many uploads of the same type
@@ -184,7 +200,7 @@ read_many <- function(paths, read_fn) {
       NULL
     })
   })
-  bind_rows(out) %>% unique()
+  bind_rows(out) %>% dplyr::distinct()
 }
 
 # ---- 2) UI ----
@@ -265,6 +281,11 @@ ui <- page_sidebar(
       "download_joined",
       "Download joined CSV",
       class = "btn btn-outline-primary btn-sm w-100 mb-2"
+    ),
+    downloadButton(
+      "download_report",
+      "Generate Monthly Report (HTML)",
+      class = "btn btn-primary btn-sm w-100 mb-2"
     )
   ),
   layout_columns(
@@ -530,6 +551,8 @@ server <- function(input, output, session) {
 
   raw_submissions <- reactive({
     req(input$files_submissions)
+    req(all(tools::file_ext(input$files_submissions$name) == "csv"))
+    req(all(input$files_submissions$size < 50 * 1024 * 1024)) # 50 MB cap
     df <- read_many(input$files_submissions$datapath, read_submissions_csv)
     if (nrow(df) == 0) {
       stop("No valid rows loaded from submissions file. Check column names.")
@@ -539,6 +562,8 @@ server <- function(input, output, session) {
 
   raw_performance <- reactive({
     req(input$files_performance)
+    req(all(tools::file_ext(input$files_performance$name) == "csv"))
+    req(all(input$files_performance$size < 50 * 1024 * 1024)) # 50 MB cap
     df <- read_many(input$files_performance$datapath, read_performance_csv)
     if (nrow(df) == 0) {
       stop("No valid rows loaded from performance file. Check column names.")
@@ -549,8 +574,10 @@ server <- function(input, output, session) {
 
   raw_background <- reactive({
     req(input$files_background)
+    req(all(tools::file_ext(input$files_background$name) == "csv"))
+    req(all(input$files_background$size < 50 * 1024 * 1024)) # 50 MB cap
     df <- read_many(input$files_background$datapath, read_background_import_csv)
-    print(nrow(df))
+    # print(nrow(df))
     if (nrow(df) == 0) {
       stop("No valid rows loaded from background file. Check column names.")
     }
@@ -559,8 +586,10 @@ server <- function(input, output, session) {
 
   raw_import <- reactive({
     req(input$files_import)
+    req(all(tools::file_ext(input$files_import$name) == "csv"))
+    req(all(input$files_import$size < 50 * 1024 * 1024)) # 50 MB cap
     df <- read_many(input$files_import$datapath, read_background_import_csv)
-    print(nrow(df))
+    # print(nrow(df))
     if (nrow(df) == 0) {
       stop("No valid rows loaded from import file. Check column names.")
     }
@@ -637,7 +666,7 @@ server <- function(input, output, session) {
   )
 
   base_filtered <- reactive({
-    df <- raw_data() %>% dplyr::filter(as.Date(with_tz(submission_date, tz = "America/Vancouver")) >= as.Date("2026-03-05"))
+    df <- raw_data() %>% dplyr::filter(as.Date(with_tz(submission_date, tz = "America/Vancouver"), tz = "America/Vancouver") >= as.Date(data_start_date))
 
     # Date filter
     # Convert the user-selected Date boundaries to POSIXct in Vancouver time so
@@ -658,7 +687,11 @@ server <- function(input, output, session) {
     pat <- str_trim(input$file_pattern %||% "")
     if (nzchar(pat)) {
       df <- df %>%
-        filter(str_detect(file_name, pat) | str_detect(original_file_name, pat))
+        filter(
+          # str_detect(file_name, pat) | str_detect(original_file_name, pat)
+          tryCatch(str_detect(file_name, pat), error = function(e) FALSE) |
+            tryCatch(str_detect(original_file_name, pat), error = function(e) FALSE)
+        )
     }
 
     # Zero-time handling
@@ -1014,7 +1047,7 @@ server <- function(input, output, session) {
 
     # --- Daily counts by agency_group x status ---
     df_day <- df %>%
-      dplyr::mutate(day = as.Date(with_tz(submission_date, tz = "America/Vancouver"))) %>%
+      dplyr::mutate(day = as.Date(with_tz(submission_date, tz = "America/Vancouver"), tz = "America/Vancouver")) %>%
       dplyr::count(day, agency_group, submission_status_code, name = "n") %>%
       tidyr::complete(
         day          = seq(min(day, na.rm = TRUE), max(day, na.rm = TRUE), by = "day"),
@@ -1252,7 +1285,7 @@ server <- function(input, output, session) {
     df %>%
       dplyr::filter(submission_status_code == "SUBMITTED") %>%
       dplyr::mutate(
-        day                   = as.Date(with_tz(submission_date, tz = "America/Vancouver")),
+        day                   = as.Date(with_tz(submission_date, tz = "America/Vancouver"), tz = "America/Vancouver"),
         results_count         = suppressWarnings(as.numeric(results_count)),
         sample_count          = suppressWarnings(as.numeric(sample_count)),
         local_validation_time = suppressWarnings(as.numeric(local_validation_time))
@@ -1272,7 +1305,7 @@ server <- function(input, output, session) {
     df %>%
       dplyr::filter(submission_status_code == "SUBMITTED") %>%
       dplyr::mutate(
-        day               = as.Date(with_tz(submission_date, tz = "America/Vancouver")),
+        day               = as.Date(with_tz(submission_date, tz = "America/Vancouver"), tz = "America/Vancouver"),
         results_count     = suppressWarnings(as.numeric(results_count)),
         sample_count      = suppressWarnings(as.numeric(sample_count)),
         local_import_time = suppressWarnings(as.numeric(local_import_time))
@@ -1305,7 +1338,7 @@ server <- function(input, output, session) {
 
     disc <- df %>%
       dplyr::mutate(
-        day = as.Date(with_tz(submission_date, tz = "America/Vancouver")),
+        day = as.Date(with_tz(submission_date, tz = "America/Vancouver"), tz = "America/Vancouver"),
         discrepancy = dplyr::case_when(
           is.na(results_count) & is.na(results_count_old) ~ FALSE,
           is.na(results_count) | is.na(results_count_old) ~ TRUE,
@@ -1663,10 +1696,15 @@ server <- function(input, output, session) {
   # ---- Daily MLR (minimum 3 submissions per day) ----
   get_daily_coefs <- function(data, response_var, model_name) {
     data %>%
-      dplyr::filter(!is.na(.data[[response_var]]), .data[[response_var]] > 0) %>%
+      dplyr::filter(!is.na(.data[[response_var]]), .data[[response_var]] > 0, sample_count > 0) %>%
       dplyr::group_by(day) %>%
       dplyr::filter(dplyr::n() >= 3) %>% # ✅ enforce >= 3 points per day
       dplyr::group_modify(~ {
+        # # Enforce >= 2 unique values for both predictors
+        # if (dplyr::n_distinct(.x$results_count) < 2 || dplyr::n_distinct(.x$sample_count) < 2) {
+        #   return(tibble::tibble(obs_coef = NA_real_, samp_coef = NA_real_))
+        # }
+
         fit <- lm(
           as.formula(paste(response_var, "~ 0 + results_count + sample_count")),
           data = .x
@@ -1680,6 +1718,7 @@ server <- function(input, output, session) {
         )
       }) %>%
       dplyr::ungroup() %>%
+      dplyr::filter(!is.na(obs_coef), !is.na(samp_coef)) %>% # drop days that failed the uniqueness check
       dplyr::mutate(model = model_name)
   }
 
@@ -1688,7 +1727,7 @@ server <- function(input, output, session) {
     df <- base_filtered() %>%
       dplyr::filter(submission_status_code == "SUBMITTED") %>%
       dplyr::mutate(
-        day = as.Date(with_tz(submission_date, tz = "America/Vancouver")),
+        day = as.Date(with_tz(submission_date, tz = "America/Vancouver"), tz = "America/Vancouver"),
         results_count = as.numeric(results_count),
         sample_count = as.numeric(sample_count),
         val_time = as.numeric(local_validation_time) / 60,
@@ -1984,6 +2023,283 @@ server <- function(input, output, session) {
     filename = function() paste0("joined_filtered_", Sys.Date(), ".csv"),
     content = function(file) {
       readr::write_csv(base_filtered(), file)
+    }
+  )
+
+  # ---- Report: helpers (vectorised so they work in tables) ----
+  fmt_pct <- function(x) ifelse(is.finite(x), sprintf("%.1f%%", x), "—")
+  fmt_int <- function(x) ifelse(is.finite(x), formatC(round(x), big.mark = ",", format = "d"), "—")
+  fmt_min <- function(x) ifelse(is.finite(x), sprintf("%.2f min", x), "—")
+
+  esc_html <- function(x) {
+    x <- as.character(x)
+    x <- gsub("&", "&amp;", x, fixed = TRUE)
+    x <- gsub("<", "&lt;", x, fixed = TRUE)
+    x <- gsub(">", "&gt;", x, fixed = TRUE)
+    x
+  }
+
+  # ---- Report: HTML builder ----
+  generate_report_html <- function(df, df_rej, date_range) {
+    # --- Header metadata ---
+    rep_date <- format(Sys.Date(), "%B %d, %Y")
+    period <- if (!is.null(date_range)) {
+      sprintf(
+        "%s to %s",
+        format(date_range[1], "%B %d, %Y"),
+        format(date_range[2], "%B %d, %Y")
+      )
+    } else {
+      "All available data"
+    }
+
+    # --- Empty-data short-circuit ---
+    if (is.null(df) || nrow(df) == 0) {
+      return(paste0(
+        '<!DOCTYPE html><html><head><meta charset="UTF-8">',
+        "<title>Monthly EnMoDS Data and Issues Summary</title></head>",
+        '<body style="font-family:Calibri,Arial,sans-serif;max-width:8.5in;margin:1in auto;">',
+        "<h1>Monthly EnMoDS Data and Issues Summary</h1>",
+        "<p><b>Report date:</b> ", rep_date, "</p>",
+        "<p><b>Reporting period:</b> ", period, "</p>",
+        "<p><i>No data available for the selected reporting period.</i></p>",
+        "</body></html>"
+      ))
+    }
+
+    total_all <- nrow(df)
+
+    # --- 1.1 KPIs ---
+    n_users <- length(unique(df$submitter_user_id))
+    n_orgs <- length(unique(df$submitter_agency_name))
+
+    pct_validated <- mean(df$submission_status_code == "VALIDATED", na.rm = TRUE) * 100
+    pct_submitted <- mean(df$submission_status_code == "SUBMITTED", na.rm = TRUE) * 100
+
+    if (!is.null(df_rej) && nrow(df_rej) > 0 && total_all > 0) {
+      pct_rej_validated <- sum(df_rej$latest_match_status == "VALIDATED", na.rm = TRUE) / total_all * 100
+      pct_rej_submitted <- sum(df_rej$latest_match_status == "SUBMITTED", na.rm = TRUE) / total_all * 100
+      pct_rej_notsub <- sum(
+        is.na(df_rej$latest_match_status) |
+          !(df_rej$latest_match_status %in% c("SUBMITTED", "VALIDATED")),
+        na.rm = TRUE
+      ) / total_all * 100
+    } else {
+      pct_rej_validated <- pct_rej_submitted <- pct_rej_notsub <- NA_real_
+    }
+
+    df_sub <- df %>% dplyr::filter(submission_status_code == "SUBMITTED")
+    total_obs <- sum(df_sub$results_count, na.rm = TRUE)
+    total_samples <- sum(df_sub$sample_count, na.rm = TRUE)
+    median_obs <- median(df_sub$results_count, na.rm = TRUE)
+
+    # KPI "Submitted: Time per 200 observations" — same calc as dashboard KPI
+    df_t <- df_sub %>%
+      dplyr::filter(!is.na(total_time), !is.na(results_count), results_count > 0)
+    median_t200 <- if (nrow(df_t) > 0) {
+      median((df_t$total_time / df_t$results_count) * 200 / 60, na.rm = TRUE)
+    } else {
+      NA_real_
+    }
+
+    # --- 1.2 AQI / Salus medians (same filter as boxplot: SUBMITTED + results_count >= 25) ---
+    df_t2 <- df_sub %>%
+      dplyr::filter(!is.na(results_count), results_count >= 25) %>%
+      dplyr::mutate(
+        local_validation_time = dplyr::coalesce(as.numeric(local_validation_time), 0),
+        local_import_time = dplyr::coalesce(as.numeric(local_import_time), 0),
+        obs_validation_time = dplyr::coalesce(as.numeric(obs_validation_time), 0),
+        obs_import_time = dplyr::coalesce(as.numeric(obs_import_time), 0),
+        salus_time = local_validation_time + local_import_time,
+        aqi_time = obs_validation_time + obs_import_time,
+        salus_per_200 = (salus_time / results_count) * 200 / 60,
+        aqi_per_200 = (aqi_time / results_count) * 200 / 60
+      )
+
+    median_aqi <- if (nrow(df_t2) > 0) median(df_t2$aqi_per_200, na.rm = TRUE) else NA_real_
+    median_salus <- if (nrow(df_t2) > 0) median(df_t2$salus_per_200, na.rm = TRUE) else NA_real_
+
+    # --- 1.3 Top 10 organisations ---
+    top10 <- df %>%
+      dplyr::group_by(submitter_agency_name) %>%
+      dplyr::summarise(
+        total = dplyr::n(),
+        pct_v = mean(submission_status_code == "VALIDATED", na.rm = TRUE) * 100,
+        pct_s = mean(submission_status_code == "SUBMITTED", na.rm = TRUE) * 100,
+        pct_r = mean(submission_status_code == "REJECTED", na.rm = TRUE) * 100,
+        .groups = "drop"
+      ) %>%
+      dplyr::arrange(dplyr::desc(total)) %>%
+      head(10)
+
+    top10_rows <- if (nrow(top10) > 0) {
+      paste0(
+        "<tr>",
+        "<td>", esc_html(top10$submitter_agency_name), "</td>",
+        "<td class='num'>", fmt_int(top10$total), "</td>",
+        "<td class='num'>", fmt_pct(top10$pct_v), "</td>",
+        "<td class='num'>", fmt_pct(top10$pct_s), "</td>",
+        "<td class='num'>", fmt_pct(top10$pct_r), "</td>",
+        "</tr>",
+        collapse = "\n"
+      )
+    } else {
+      "<tr><td colspan='5'><i>No organisation data available.</i></td></tr>"
+    }
+
+    # --- Assemble HTML ---
+    paste0(
+      '<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Monthly EnMoDS Data and Issues Summary</title>
+<style>
+  body { font-family: Calibri, Arial, sans-serif; color: #222;
+         max-width: 8.5in; margin: 1in auto; padding: 0 0.25in;
+         font-size: 11pt; line-height: 1.4; }
+  h1 { font-size: 20pt; margin: 0 0 12pt 0; color: #1f3864;
+       border-bottom: 2px solid #1f3864; padding-bottom: 6pt; }
+  h2 { font-size: 14pt; margin: 24pt 0 8pt 0; color: #1f3864;
+       border-bottom: 1px solid #aaa; padding-bottom: 3pt; }
+  h3 { font-size: 12pt; margin: 18pt 0 6pt 0; color: #2e5a9e; }
+  table { border-collapse: collapse; width: 100%;
+          margin: 8pt 0 16pt 0; font-size: 10.5pt; }
+  th, td { border: 1px solid #999; padding: 6pt 8pt;
+           text-align: left; vertical-align: top; }
+  th { background: #d9e2f3; font-weight: bold; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .meta-table th { width: 22%; }
+  .kpi-table td:first-child { width: 65%; }
+  .kpi-table td:last-child  { text-align: right;
+                              font-variant-numeric: tabular-nums;
+                              font-weight: 600; }
+  .placeholder { color: #888; font-style: italic; background: #f8f8f8;
+                 padding: 8pt 12pt; border-left: 3px solid #ccc;
+                 margin: 6pt 0; }
+  .note { font-size: 9pt; color: #666; margin-top: -6pt; }
+  @media print {
+    body { margin: 0.5in; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Monthly EnMoDS Data and Issues Summary</h1>
+
+<table class="meta-table">
+  <tr><th>Report date</th><td>', rep_date, "</td></tr>
+  <tr><th>Reporting period</th><td>", period, '</td></tr>
+</table>
+
+<h2>1. EDT Data Import Summary</h2>
+
+<h3>1.1 Key Performance Indicators</h3>
+<table class="kpi-table">
+  <tr><td>Number of unique users</td><td>', fmt_int(n_users), "</td></tr>
+  <tr><td>Number of unique organizations</td><td>", fmt_int(n_orgs), "</td></tr>
+  <tr><td>Total file submissions to EDT</td><td>", fmt_int(total_all), "</td></tr>
+  <tr><td>Validated (%)</td><td>", fmt_pct(pct_validated), "</td></tr>
+  <tr><td>Submitted (%)</td><td>", fmt_pct(pct_submitted), "</td></tr>
+  <tr><td>Rejected and Validated (%)</td><td>", fmt_pct(pct_rej_validated), "</td></tr>
+  <tr><td>Rejected and Submitted (%)</td><td>", fmt_pct(pct_rej_submitted), "</td></tr>
+  <tr><td>Rejected but Not Submitted (%)</td><td>", fmt_pct(pct_rej_notsub), "</td></tr>
+  <tr><td>Submitted: Total observation count</td><td>", fmt_int(total_obs), "</td></tr>
+  <tr><td>Submitted: Total samples count</td><td>", fmt_int(total_samples), "</td></tr>
+  <tr><td>Submitted: Median observation count</td><td>", fmt_int(median_obs), "</td></tr>
+  <tr><td>Submitted: Time per 200 observations</td><td>", fmt_min(median_t200), '</td></tr>
+</table>
+
+<h3>1.2 Time per 200 observations (AQI vs Salus)</h3>
+<p class="note">Median values for SUBMITTED files with results_count &ge; 25.</p>
+<table>
+  <tr><th>Metric</th><th>Value</th></tr>
+  <tr>
+    <td>Submitted: Time per 200 observations (AQI end)</td>
+    <td class="num">', fmt_min(median_aqi), '</td>
+  </tr>
+  <tr>
+    <td>Submitted: Time per 200 observations (Salus end)</td>
+    <td class="num">', fmt_min(median_salus), "</td>
+  </tr>
+</table>
+
+<h3>1.3 Top 10 Organizations by Submission Count</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Organization</th>
+      <th>Total files</th>
+      <th>Validated %</th>
+      <th>Submitted %</th>
+      <th>Rejected %</th>
+    </tr>
+  </thead>
+  <tbody>
+    ", top10_rows, '
+  </tbody>
+</table>
+
+<h2>2. Risks / Issues</h2>
+<div class="placeholder">[Add risks and issues for the reporting period here.]</div>
+
+<h2>3. Milestones</h2>
+<div class="placeholder">[Add milestones for the reporting period here.]</div>
+
+<h2>Appendix: Definitions</h2>
+<table>
+  <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+  <tbody>
+    <tr><td>Number of unique users</td>
+        <td>Distinct submitter user IDs that submitted at least one file during the reporting period.</td></tr>
+    <tr><td>Number of unique organizations</td>
+        <td>Distinct submitter agency names associated with file submissions during the reporting period.</td></tr>
+    <tr><td>Total file submissions to EDT</td>
+        <td>Total number of file submission records (any status) received by the Electronic Data Transfer (EDT) system during the reporting period.</td></tr>
+    <tr><td>Validated (%)</td>
+        <td>Percentage of all submissions in the period whose status code is VALIDATED.</td></tr>
+    <tr><td>Submitted (%)</td>
+        <td>Percentage of all submissions in the period whose status code is SUBMITTED.</td></tr>
+    <tr><td>Rejected and Validated (%)</td>
+        <td>Of all submissions in the period, the percentage that were initially REJECTED and where the same user later submitted a file with a matching/related file name that ultimately reached VALIDATED status.</td></tr>
+    <tr><td>Rejected and Submitted (%)</td>
+        <td>Of all submissions in the period, the percentage that were initially REJECTED and where the same user later submitted a file with a matching/related file name that ultimately reached SUBMITTED status.</td></tr>
+    <tr><td>Rejected but Not Submitted (%)</td>
+        <td>Of all submissions in the period, the percentage that were REJECTED with no later matching submission by the same user reaching SUBMITTED or VALIDATED status.</td></tr>
+    <tr><td>Submitted: Total observation count</td>
+        <td>Sum of <code>results_count</code> across all submissions with status SUBMITTED.</td></tr>
+    <tr><td>Submitted: Total samples count</td>
+        <td>Sum of <code>sample_count</code> across all submissions with status SUBMITTED.</td></tr>
+    <tr><td>Submitted: Median observation count</td>
+        <td>Median of <code>results_count</code> across all submissions with status SUBMITTED.</td></tr>
+    <tr><td>Submitted: Time per 200 observations</td>
+        <td>Median of (<code>total_time</code> &divide; <code>results_count</code>) &times; 200, expressed in minutes, across SUBMITTED files with <code>results_count</code> &gt; 0. Represents the typical end-to-end processing time the system needs to handle 200 observations.</td></tr>
+    <tr><td>Submitted: Time per 200 observations (AQI end)</td>
+        <td>Median of ((<code>obs_validation_time</code> + <code>obs_import_time</code>) &divide; <code>results_count</code>) &times; 200 in minutes, across SUBMITTED files with <code>results_count</code> &ge; 25. Represents the AQI-side processing component of total processing time per 200 observations.</td></tr>
+    <tr><td>Submitted: Time per 200 observations (Salus end)</td>
+        <td>Median of ((<code>local_validation_time</code> + <code>local_import_time</code>) &divide; <code>results_count</code>) &times; 200 in minutes, across SUBMITTED files with <code>results_count</code> &ge; 25. Represents the Salus-side processing component of total processing time per 200 observations.</td></tr>
+    <tr><td>Top 10 Organizations</td>
+        <td>The 10 organizations with the highest total number of file submissions (any status) in the reporting period, sorted in descending order. Validated %, Submitted %, and Rejected % give the per-organization status breakdown of those submissions.</td></tr>
+  </tbody>
+</table>
+
+</body>
+</html>'
+    )
+  }
+
+  # ---- Report: download handler ----
+  output$download_report <- downloadHandler(
+    filename = function() {
+      paste0("Monthly_EnMoDS_Data_and_Issues_Summary_", Sys.Date(), ".html")
+    },
+    content = function(file) {
+      df <- tryCatch(base_filtered(), error = function(e) NULL)
+      df_rej <- tryCatch(rejected_followup(), error = function(e) NULL)
+      html <- generate_report_html(df, df_rej, input$date_range)
+      writeLines(html, file)
     }
   )
 }
