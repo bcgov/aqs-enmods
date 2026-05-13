@@ -86,7 +86,7 @@ put_object(file = paste0("7-days-prod-bcmoe-background-processor-stats.csv"),
            region = "",
            acl = "public-read")
 
-put_object(file = paste0("7-days-prod-bcmoe-background-processor-stats.csv"),
+put_object(file = paste0("7-days-prod-bcmoe-import-processor-stats.csv"),
            #object = paste0("Data_Catalogue/", current_year - 1, "0101_to_", last_saturday_end, ".csv.gz"),
            object = paste0("AQS-Performance-Logs/","7-days-prod-bcmoe-import-processor-stats.csv"),
            bucket = "enmods",
