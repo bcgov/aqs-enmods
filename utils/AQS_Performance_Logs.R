@@ -7,7 +7,7 @@ library(jsonlite)
 library(lubridate)
 
 #get the API token from your environment file
-readRenviron(paste0(getwd(), "./.Renviron"))
+#readRenviron(paste0(getwd(), "./.Renviron"))
 
 #Connect to AQI's bucket
 Sys.setenv("AWS_ACCESS_KEY_ID" =  Sys.getenv("AQI_AWS_ACCESS_KEY"),
