@@ -10,7 +10,7 @@ library(stringr)
 library(tidyr)
 library(aws.s3)
 
-#readRenviron(paste0(getwd(), "./.Renviron"))
+readRenviron(paste0(getwd(), "./.Renviron"))
 #testToken <- Sys.getenv("TEST_TOKEN")
 prodToken <- Sys.getenv("PROD_READ_ONLY_TOKEN")
 #testURL <- Sys.getenv("TEST_URL")
@@ -83,6 +83,21 @@ AM_OP <- AM_OP %>%
 AM_OP <- AM_OP[order(AM_OP$`Observed Property ID`),]
 #Table of both AM and OP
 write.csv(AM_OP, "./utils/edt_reference_tables/tables/Observed_Properties_and_Analytical_Methods.csv", row.names = F)
+
+#---Analytical Groups---
+AGs <- GET(paste0(prodURL, "v1/analyticalgroups"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
+AGs <- fromJSON(rawToChar(AGs$content))$domainObjects
+
+#unnest OPs
+AGs <- as.data.frame(unnest(AGs, cols = c(analyticalGroupItems), names_repair = "universal"))
+AGs <- unnest(AGs, cols = c(observedProperty), names_repair = "universal")
+
+AGs <- AGs %>% select("name...2", "customId", "name...11", "casNumber")
+
+AGs <- AGs %>% rename("Analytical Group Name" = "name...2", "Observed Property ID" = "customId",
+                      "EMS Parameter Code" = "name...11", "CAS Number" = "casNumber")
+
+write.csv(AGs, "./utils/edt_reference_tables/tables/AnalyticalGroups.csv", row.names = F)
 
 #---Units---
 aqs_units <- GET(paste0(prodURL, "v1/units"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
