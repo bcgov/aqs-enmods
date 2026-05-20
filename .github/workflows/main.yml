@@ -1,9 +1,9 @@
 name: Update AQS PROD performance logs
 
 on:
-  #schedule:
-  #  - cron: '23 01 * * 1'  
-  workflow_dispatch:
+  schedule:
+    - cron: '23 01 * * 1'  
+  #workflow_dispatch:
     
 jobs:
   run-r:
