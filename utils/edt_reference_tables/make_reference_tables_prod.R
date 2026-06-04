@@ -97,7 +97,7 @@ AGs <- AGs %>% select("name...2", "customId", "name...11", "casNumber")
 AGs <- AGs %>% rename("Analytical Group Name" = "name...2", "Observed Property ID" = "customId",
                       "EMS Parameter Code" = "name...11", "CAS Number" = "casNumber")
 
-write.csv(AGs, "./utils/edt_reference_tables/tables/AnalyticalGroups.csv", row.names = F)
+write.csv(AGs, "./utils/edt_reference_tables/tables/Analytical_Groups.csv", row.names = F)
 
 #---Units---
 aqs_units <- GET(paste0(prodURL, "v1/units"), config = c(add_headers(.headers = c('Authorization' = prodToken ))), body = list(), encode = 'json')
