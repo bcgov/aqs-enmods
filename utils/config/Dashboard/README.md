@@ -72,20 +72,20 @@ All inputs are uploaded through the sidebar at runtime; nothing is hardcoded to 
 
 | Upload | Required columns |
 |---|---|
-| Submission metadata | `submission_id`, `file_name`, `original_file_name`, `submission_date`, `submitter_user_id`, `submitter_agency_name`, `submission_status_code`, `sample_count`, `results_count`, `results_count_old` |
-| Importer performance | `submission_id`, `submission_date`, `local_validation_time`, `obs_validation_time`, `local_import_time`, `obs_import_time`, `total_time` |
-| AQS background metadata | `startTime`, `jobCount` |
-| AQS import metadata | `startTime`, `jobCount` |
+| Submission metadata | `submission_id`, `file_name`, `original_file_name`, `submission_date`, `submitter_user_id`, `submitter_agency_name`, `submission_status_code`, `sample_count`, `results_count`, `results_count_old` | Same as Openshift EDT table file_submission 
+| Importer performance | `submission_id`, `submission_date`, `local_validation_time`, `obs_validation_time`, `local_import_time`, `obs_import_time`, `total_time` | Same as Openshift EDT table importer_benchmark
+| AQS background metadata | `startTime`, `jobCount` | Will have to generate using AQS API endpoint for background processes
+| AQS import metadata | `startTime`, `jobCount` | Will have to generate using AQS API endpoint for import processes
 
 ### Help Desk mailbox analysis
 
 | Upload | Format | Notes |
 |---|---|---|
-| Help Desk Inbox PST | `.pst` | Incoming mail |
-| Help Desk Sent PST | `.pst` | Outgoing mail |
-| EDT users CSV | `.csv` | `Name`, `Email` columns — all users for whom the helpdesk volumes and response rates are tracked |
-| Sender exclusion CSV | `.csv` | `Name`, `Email` columns — help desk staff / system addresses to exclude from resolved contacts |
-| Name to email translator CSV | `.csv` | `sender_name`, `email` columns — verbatim sender-name → email overrides to raise the inbox match rate |
+| Help Desk Inbox PST | `.pst` | Incoming mail | Exported using date range filters on Helpdesk Outlook
+| Help Desk Sent PST | `.pst` | Outgoing mail | Exported using date range filters on Helpdesk Outlook
+| EDT users CSV | `.csv` | `Name`, `Email` columns — all users for whom the helpdesk volumes and response rates are tracked | Manually maintained file for EDT and other users
+| Sender exclusion CSV | `.csv` | `Name`, `Email` columns — help desk staff / system addresses to exclude from resolved contacts | Manually maintained
+| Name to email translator CSV | `.csv` | `sender_name`, `email` columns — verbatim sender-name → email overrides to raise the inbox match rate | Manually maintained
 
 The Help Desk section only runs once **all five** of its inputs are uploaded and pass file-type validation.
 
